@@ -16,7 +16,7 @@ class AppInitializer: ObservableObject {
         }
         state = .loading
         do {
-            try await Task.sleep(nanoseconds: 1_000_000_000)
+            try await Task.sleep(nanoseconds: 1_000_000)
 
             AppState.shared = AppState(
 

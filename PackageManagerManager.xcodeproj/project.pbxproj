@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,18 @@
 		97ADAC342BEC255E00F5DB84 /* AppInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC332BEC255E00F5DB84 /* AppInitializer.swift */; };
 		97ADAC362BEC255E00F5DB84 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC352BEC255E00F5DB84 /* AppState.swift */; };
 		97ADAC3A2BEC255E00F5DB84 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97ADAC392BEC255E00F5DB84 /* Preview Assets.xcassets */; };
+		97D877F62BEECA8E004F0D24 /* mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D877F32BEECA8E004F0D24 /* mock.swift */; };
+		97D877F82BEECA8E004F0D24 /* XProjElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D877F52BEECA8E004F0D24 /* XProjElements.swift */; };
+		97D877FB2BEED113004F0D24 /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 97D877FA2BEED113004F0D24 /* ParenthesesParser */; };
+		97D877FE2BF416C6004F0D24 /* XProjSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D877FD2BF416C6004F0D24 /* XProjSection.swift */; };
+		97D878002BF416DA004F0D24 /* XProjProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D877FF2BF416DA004F0D24 /* XProjProject.swift */; };
+		97D878022BF41705004F0D24 /* ElementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D878012BF41705004F0D24 /* ElementParser.swift */; };
+		97D878052BF4172E004F0D24 /* XProjSection+parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D878042BF4172E004F0D24 /* XProjSection+parsing.swift */; };
+		97D878072BF4175E004F0D24 /* XProjProject+parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D878062BF4175E004F0D24 /* XProjProject+parsing.swift */; };
+		97D878092BF417A8004F0D24 /* XProjIsa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D878082BF417A8004F0D24 /* XProjIsa.swift */; };
+		97D8780B2BF417BC004F0D24 /* XProjIsa+parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D8780A2BF417BC004F0D24 /* XProjIsa+parsing.swift */; };
+		97D8780D2BF41C56004F0D24 /* XProjId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D8780C2BF41C56004F0D24 /* XProjId.swift */; };
+		97D8780F2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D8780E2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +39,17 @@
 		97ADAC372BEC255E00F5DB84 /* PackageManagerManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PackageManagerManager.entitlements; sourceTree = "<group>"; };
 		97ADAC392BEC255E00F5DB84 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		97ADAC3B2BEC255E00F5DB84 /* README.MD */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.MD; path = ../../README.MD; sourceTree = "<group>"; };
+		97D877F32BEECA8E004F0D24 /* mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mock.swift; sourceTree = "<group>"; };
+		97D877F52BEECA8E004F0D24 /* XProjElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XProjElements.swift; sourceTree = "<group>"; };
+		97D877FD2BF416C6004F0D24 /* XProjSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjSection.swift; sourceTree = "<group>"; };
+		97D877FF2BF416DA004F0D24 /* XProjProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjProject.swift; sourceTree = "<group>"; };
+		97D878012BF41705004F0D24 /* ElementParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementParser.swift; sourceTree = "<group>"; };
+		97D878042BF4172E004F0D24 /* XProjSection+parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XProjSection+parsing.swift"; sourceTree = "<group>"; };
+		97D878062BF4175E004F0D24 /* XProjProject+parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XProjProject+parsing.swift"; sourceTree = "<group>"; };
+		97D878082BF417A8004F0D24 /* XProjIsa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjIsa.swift; sourceTree = "<group>"; };
+		97D8780A2BF417BC004F0D24 /* XProjIsa+parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XProjIsa+parsing.swift"; sourceTree = "<group>"; };
+		97D8780C2BF41C56004F0D24 /* XProjId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjId.swift; sourceTree = "<group>"; };
+		97D8780E2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCSwiftPackageProductDependencyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97D877FB2BEED113004F0D24 /* ParenthesesParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +83,9 @@
 		97ADAC272BEC255C00F5DB84 /* PackageManagerManager */ = {
 			isa = PBXGroup;
 			children = (
+				97D877F32BEECA8E004F0D24 /* mock.swift */,
+				97D878032BF41720004F0D24 /* Parsing */,
+				97D877FC2BF416BB004F0D24 /* Project */,
 				97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */,
 				97ADAC2A2BEC255E00F5DB84 /* Constants */,
 				97ADAC2D2BEC255E00F5DB84 /* App */,
@@ -92,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				97ADAC312BEC255E00F5DB84 /* ContentView.swift */,
+				97D8780E2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -102,6 +130,29 @@
 				97ADAC392BEC255E00F5DB84 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		97D877FC2BF416BB004F0D24 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				97D877FF2BF416DA004F0D24 /* XProjProject.swift */,
+				97D877FD2BF416C6004F0D24 /* XProjSection.swift */,
+				97D877F52BEECA8E004F0D24 /* XProjElements.swift */,
+				97D878082BF417A8004F0D24 /* XProjIsa.swift */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		97D878032BF41720004F0D24 /* Parsing */ = {
+			isa = PBXGroup;
+			children = (
+				97D8780A2BF417BC004F0D24 /* XProjIsa+parsing.swift */,
+				97D878062BF4175E004F0D24 /* XProjProject+parsing.swift */,
+				97D878042BF4172E004F0D24 /* XProjSection+parsing.swift */,
+				97D8780C2BF41C56004F0D24 /* XProjId.swift */,
+				97D878012BF41705004F0D24 /* ElementParser.swift */,
+			);
+			path = Parsing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +171,9 @@
 			dependencies = (
 			);
 			name = PackageManagerManager;
+			packageProductDependencies = (
+				97D877FA2BEED113004F0D24 /* ParenthesesParser */,
+			);
 			productName = PackageManagerManager;
 			productReference = 97ADAC252BEC255C00F5DB84 /* PackageManagerManager.app */;
 			productType = "com.apple.product-type.application";
@@ -148,6 +202,9 @@
 				Base,
 			);
 			mainGroup = 97ADAC1C2BEC255C00F5DB84;
+			packageReferences = (
+				97D877F92BEED113004F0D24 /* XCLocalSwiftPackageReference "../AxelPods/ParenthesesParser" */,
+			);
 			productRefGroup = 97ADAC262BEC255C00F5DB84 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -175,10 +232,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				97ADAC342BEC255E00F5DB84 /* AppInitializer.swift in Sources */,
+				97D877F62BEECA8E004F0D24 /* mock.swift in Sources */,
+				97D8780D2BF41C56004F0D24 /* XProjId.swift in Sources */,
+				97D8780F2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift in Sources */,
 				97ADAC362BEC255E00F5DB84 /* AppState.swift in Sources */,
 				97ADAC2F2BEC255E00F5DB84 /* PackageManagerManagerApp.swift in Sources */,
 				97ADAC292BEC255C00F5DB84 /* LoadableResult.swift in Sources */,
+				97D878002BF416DA004F0D24 /* XProjProject.swift in Sources */,
+				97D878072BF4175E004F0D24 /* XProjProject+parsing.swift in Sources */,
+				97D878092BF417A8004F0D24 /* XProjIsa.swift in Sources */,
+				97D8780B2BF417BC004F0D24 /* XProjIsa+parsing.swift in Sources */,
 				97ADAC322BEC255E00F5DB84 /* ContentView.swift in Sources */,
+				97D878022BF41705004F0D24 /* ElementParser.swift in Sources */,
+				97D878052BF4172E004F0D24 /* XProjSection+parsing.swift in Sources */,
+				97D877F82BEECA8E004F0D24 /* XProjElements.swift in Sources */,
+				97D877FE2BF416C6004F0D24 /* XProjSection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +465,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		97D877F92BEED113004F0D24 /* XCLocalSwiftPackageReference "../AxelPods/ParenthesesParser" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../AxelPods/ParenthesesParser;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		97D877FA2BEED113004F0D24 /* ParenthesesParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ParenthesesParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 97ADAC1D2BEC255C00F5DB84 /* Project object */;
 }

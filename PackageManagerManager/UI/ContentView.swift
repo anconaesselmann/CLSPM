@@ -4,17 +4,49 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @State
+    var packageProductDependencyId = ""
+    @State
+    var packageReferenceId = ""
+
+    @State
+    var project: XProjProject?
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button("do") {
+                project = try? XProjProject(content: mockProject)
+            }
+            Text(packageProductDependencyId)
+            Text(packageReferenceId)
+            if let project = project {
+                ScrollView {
+                    ForEach(project.sections) { section in
+                        Section(section.isa.rawValue) {
+                            ForEach(section.elements, id: \.id) { element in
+                                VStack(alignment: .leading) {
+                                    switch element {
+                                    case let generic as GenericXProjElement:
+                                        Text(element.isa.rawValue)
+                                        Text(element.id.stringValue)
+                                        Text(generic.content)
+                                    case let packageDependency as XCSwiftPackageProductDependency:
+                                        XCSwiftPackageProductDependencyView(element: packageDependency)
+                                    default: EmptyView()
+                                    }
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
+                            }
+                        }
+                    }
+                }
+            }
         }
-        .padding()
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}
