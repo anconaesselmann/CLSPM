@@ -17,6 +17,29 @@ struct XProjProject {
 }
 
 extension XProjProject {
+    func remotePackageReferences(for targetName: String) throws -> [XCRemoteSwiftPackageReference] {
+        guard let remotePackageSection = sections.first(where: { $0.isa == .XCRemoteSwiftPackageReference }) else {
+            throw Error.missingSection(.XCRemoteSwiftPackageReference)
+        }
+        let remotePackageSectionElements = remotePackageSection.elements
+        return remotePackageSectionElements
+            .compactMap { $0 as? XCRemoteSwiftPackageReference }
+    }
+
+    func packageDependency(for packageReferenceId: XProjId) throws -> XCSwiftPackageProductDependency {
+        guard let dependencySection =  sections.first(where: { $0.isa == .XCSwiftPackageProductDependency }) else {
+            throw Error.missingSection(.XCSwiftPackageProductDependency)
+        }
+        let dependencySectionElements = dependencySection.elements
+        guard let dependency = dependencySectionElements
+            .compactMap({ $0 as? XCSwiftPackageProductDependency })
+            .first(where: { $0.package == packageReferenceId }) 
+        else {
+            throw Error.missingElement
+        }
+        return dependency
+    }
+
     func remotePackageRemoved(_ name: String) throws -> Self {
         var content = content
         guard let dependencySection =  sections.first(where: { $0.isa == .XCSwiftPackageProductDependency }) else {
@@ -42,6 +65,8 @@ extension XProjProject {
         let remotePackages = remotePackageSectionElements
             .compactMap { $0 as? XCRemoteSwiftPackageReference }
             .filter { packageIds.contains($0.id) }
+
+//        let remotePackages = remotePackageReferences(for: <#T##String#>)
 
         let remotePackageIds = remotePackages.map { $0.id }
 

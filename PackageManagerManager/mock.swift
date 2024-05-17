@@ -3,23 +3,84 @@
 
 import Foundation
 
+
+// TODO: Clone remote to local
+
+
+// spmm-tools-version: 0.1
+
+//import TargetDescription
+
+let gitHubUrlString = "https://github.com/anconaesselmann/"
+let localBaseDir = "../AxelPods/"
+
+
+
+let targets = [
+//    Target(
+//        name: "Audiosaic Desktop",
+//        dependencies: [
+//            .init(
+//                name: "LoadableView",
+//                version: .upToNextMajorVersion("0.3.9"),
+//                urlBase: gitHubUrlString,
+//                localBase: localBaseDir
+//            )
+//            .useLocal()
+//            // .cloneToLocal()
+//        ]
+//    ),
+//    Target(
+//        name: "Audiosaic",
+//        dependencies: [
+//            Dependency(
+//                name: "LoadableView",
+//                version: .upToNextMajorVersion("0.3.9"),
+//                url: "https://github.com/anconaesselmann/LoadableView",
+//                localDir: "../AxelPods/LoadableView"
+//            )
+//        ]
+//    ),
+    Target(
+        name: "test22",
+        dependencies: [
+//            .init(
+//                name: "LoadableView",
+//                version: .upToNextMajorVersion("0.3.9"),
+//                urlBase: gitHubUrlString,
+//                localBase: localBaseDir
+//            ),
+            .init(
+                name: "CoreDataStored",
+                version: .upToNextMajorVersion("0.0.7"),
+                urlBase: gitHubUrlString,
+                localBase: localBaseDir
+            ),
+        ]
+    )
+]
+
+
 let mockSpmmFile = """
 // spmm-tools-version: 0.1
 
 import TargetDescription
 
+let gitHubUrlString = "https://github.com/anconaesselmann/"
+let localBaseDir = "../AxelPods/"
+
 let targets = [
     Target(
-        name: "Audiosaic Desktop"
+        name: "Audiosaic Desktop",
         dependencies: [
             .init(
                 name: "LoadableView",
-                url: "https://github.com/anconaesselmann/LoadableView",
-                localDir: "../AxelPods/LoadableView"
-                kind: .upToNextMajorVersion,
-                minimumVersion: "10.19.1",
-                useLocal: false
+                version: "0.3.9",
+                urlBase: gitHubUrlString,
+                localBaseDir: localBaseDir
             )
+            .useLocal()
+            // .clone()
         ]
     ),
     Target(
@@ -27,11 +88,10 @@ let targets = [
         dependencies: [
             Dependency(
                 name: "LoadableView",
+                version: "0.3.9",
+                kind: .upToNextMajorVersion,
                 url: "https://github.com/anconaesselmann/LoadableView",
                 localDir: "../AxelPods/LoadableView"
-                kind: .upToNextMajorVersion,
-                minimumVersion: "10.19.1",
-                useLocal: true
             )
         ]
     )

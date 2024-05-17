@@ -7,4 +7,5 @@ struct AppState {
 
     static var shared: AppState!
 
+    let targetManager: TargetManager
 }

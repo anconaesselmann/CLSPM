@@ -27,6 +27,10 @@
 		97B55DD92BF72EE300DDE6A6 /* Elements+parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DD82BF72EE300DDE6A6 /* Elements+parsing.swift */; };
 		97B55DDB2BF72EFB00DDE6A6 /* Array+XProjElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DDA2BF72EFB00DDE6A6 /* Array+XProjElement.swift */; };
 		97B55DDD2BF75D7600DDE6A6 /* PBXNativeTargetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DDC2BF75D7600DDE6A6 /* PBXNativeTargetView.swift */; };
+		97B55DE02BF7F59300DDE6A6 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DDF2BF7F59300DDE6A6 /* Dependency.swift */; };
+		97B55DE22BF7F5A100DDE6A6 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DE12BF7F5A100DDE6A6 /* Target.swift */; };
+		97B55DE42BF7F5B100DDE6A6 /* RemoteVersionBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DE32BF7F5B100DDE6A6 /* RemoteVersionBehavior.swift */; };
+		97B55DE72BF7FE3600DDE6A6 /* TargetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DE62BF7FE3600DDE6A6 /* TargetManager.swift */; };
 		97D877F62BEECA8E004F0D24 /* mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D877F32BEECA8E004F0D24 /* mock.swift */; };
 		97D877F82BEECA8E004F0D24 /* XProjElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D877F52BEECA8E004F0D24 /* XProjElements.swift */; };
 		97D877FB2BEED113004F0D24 /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 97D877FA2BEED113004F0D24 /* ParenthesesParser */; };
@@ -65,6 +69,10 @@
 		97B55DD82BF72EE300DDE6A6 /* Elements+parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Elements+parsing.swift"; sourceTree = "<group>"; };
 		97B55DDA2BF72EFB00DDE6A6 /* Array+XProjElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+XProjElement.swift"; sourceTree = "<group>"; };
 		97B55DDC2BF75D7600DDE6A6 /* PBXNativeTargetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBXNativeTargetView.swift; sourceTree = "<group>"; };
+		97B55DDF2BF7F59300DDE6A6 /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
+		97B55DE12BF7F5A100DDE6A6 /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		97B55DE32BF7F5B100DDE6A6 /* RemoteVersionBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteVersionBehavior.swift; sourceTree = "<group>"; };
+		97B55DE62BF7FE3600DDE6A6 /* TargetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetManager.swift; sourceTree = "<group>"; };
 		97D877F32BEECA8E004F0D24 /* mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mock.swift; sourceTree = "<group>"; };
 		97D877F52BEECA8E004F0D24 /* XProjElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XProjElements.swift; sourceTree = "<group>"; };
 		97D877FD2BF416C6004F0D24 /* XProjSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjSection.swift; sourceTree = "<group>"; };
@@ -124,12 +132,14 @@
 			isa = PBXGroup;
 			children = (
 				97D877F32BEECA8E004F0D24 /* mock.swift */,
+				97B55DDE2BF7F57F00DDE6A6 /* SpmmTools */,
 				97D878032BF41720004F0D24 /* Parsing */,
 				97D877FC2BF416BB004F0D24 /* Project */,
 				97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */,
 				97ADAC2A2BEC255E00F5DB84 /* Constants */,
 				97ADAC2D2BEC255E00F5DB84 /* App */,
 				97ADAC302BEC255E00F5DB84 /* UI */,
+				97B55DE52BF7FE1B00DDE6A6 /* Managers */,
 				97ADAC382BEC255E00F5DB84 /* Preview Content */,
 			);
 			path = PackageManagerManager;
@@ -181,6 +191,24 @@
 				97B55DD42BF72EA000DDE6A6 /* ElementStringProperty.swift */,
 			);
 			path = Properties;
+			sourceTree = "<group>";
+		};
+		97B55DDE2BF7F57F00DDE6A6 /* SpmmTools */ = {
+			isa = PBXGroup;
+			children = (
+				97B55DDF2BF7F59300DDE6A6 /* Dependency.swift */,
+				97B55DE12BF7F5A100DDE6A6 /* Target.swift */,
+				97B55DE32BF7F5B100DDE6A6 /* RemoteVersionBehavior.swift */,
+			);
+			path = SpmmTools;
+			sourceTree = "<group>";
+		};
+		97B55DE52BF7FE1B00DDE6A6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				97B55DE62BF7FE3600DDE6A6 /* TargetManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		97D877FC2BF416BB004F0D24 /* Project */ = {
@@ -286,12 +314,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97B55DE22BF7F5A100DDE6A6 /* Target.swift in Sources */,
 				97ADAC342BEC255E00F5DB84 /* AppInitializer.swift in Sources */,
+				97B55DE72BF7FE3600DDE6A6 /* TargetManager.swift in Sources */,
 				97D877F62BEECA8E004F0D24 /* mock.swift in Sources */,
 				97B55DDB2BF72EFB00DDE6A6 /* Array+XProjElement.swift in Sources */,
 				97D8780D2BF41C56004F0D24 /* XProjId.swift in Sources */,
 				97D8780F2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift in Sources */,
 				97B55DD92BF72EE300DDE6A6 /* Elements+parsing.swift in Sources */,
+				97B55DE02BF7F59300DDE6A6 /* Dependency.swift in Sources */,
 				97ADAC362BEC255E00F5DB84 /* AppState.swift in Sources */,
 				97B55DC82BF72E2300DDE6A6 /* PBXFrameworksBuildPhaseView.swift in Sources */,
 				97B55DD12BF72E8600DDE6A6 /* ElementIdProperty.swift in Sources */,
@@ -308,6 +339,7 @@
 				97B55DDD2BF75D7600DDE6A6 /* PBXNativeTargetView.swift in Sources */,
 				97B55DCC2BF72E4300DDE6A6 /* PBXBuildFileProductRefView.swift in Sources */,
 				97B55DD32BF72E9200DDE6A6 /* ElementIdArrayProperty.swift in Sources */,
+				97B55DE42BF7F5B100DDE6A6 /* RemoteVersionBehavior.swift in Sources */,
 				97D8780B2BF417BC004F0D24 /* XProjIsa+parsing.swift in Sources */,
 				97B55DD52BF72EA000DDE6A6 /* ElementStringProperty.swift in Sources */,
 				97ADAC322BEC255E00F5DB84 /* ContentView.swift in Sources */,

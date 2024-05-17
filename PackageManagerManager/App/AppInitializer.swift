@@ -18,9 +18,13 @@ class AppInitializer: ObservableObject {
         do {
             try await Task.sleep(nanoseconds: 1_000_000)
 
-            AppState.shared = AppState(
+            let targetManager = TargetManager()
+            targetManager.set(targets: targets)
 
+            AppState.shared = AppState(
+                targetManager: targetManager
             )
+            
             state = .success
         } catch {
             state = .failure(error)

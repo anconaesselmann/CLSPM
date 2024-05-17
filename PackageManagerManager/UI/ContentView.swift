@@ -3,28 +3,66 @@
 
 import SwiftUI
 
+class ContentViewModel: ObservableObject {
+    private let targetManager = AppState.shared.targetManager
+
+    @Published
+    var project: XProjProject?
+
+    func update() {
+        let targetNames = targetManager.targets.map { $0.name }
+        // TODO: go target by target
+        guard 
+            let targetName = targetNames.first,
+            let dependencies = targetManager.targets.first?.dependencies
+        else {
+            return
+        }
+        guard var updated = self.project else {
+            return
+        }
+        do {
+            let remotePackageReferences = try project?.remotePackageReferences(for: targetName) ?? []
+            let remoteDependencies = try remotePackageReferences.compactMap { reference in
+                try updated.packageDependency(for: reference.id)
+            }
+            let dependencyNames = Set(dependencies.map { $0.name })
+            let keep = remoteDependencies.filter { dependencyNames.contains($0.productName) }
+                .map { $0.productName }
+            let remove = remoteDependencies.map { $0.productName }.filter { !keep.contains($0) }
+            print("keep: \(keep)")
+            print("remove: \(remove)")
+            for remoteProductName in remove {
+                updated = try updated.remotePackageRemoved(remoteProductName)
+            }
+            self.project = updated
+        } catch {
+            print(error)
+        }
+    }
+
+    func loadProject() {
+        project = try? XProjProject(content: mockProject)
+    }
+}
+
 struct ContentView: View {
 
-    @State
-    var packageProductDependencyId = ""
-    @State
-    var packageReferenceId = ""
-
-    @State
-    var project: XProjProject?
+    @StateObject
+    var vm = ContentViewModel()
 
     var body: some View {
         VStack {
-            Button("do") {
-                project = try? XProjProject(content: mockProject)
+            Button("update") {
+                vm.update()
             }
-            Button("remove") {
-                project = try? project?.remotePackageRemoved("LoadableView")
-            }
-            Text(packageProductDependencyId)
-            Text(packageReferenceId)
-            if let project = project {
+            if let project = vm.project {
                 ScrollView {
+                    Section("Packages") {
+                        ForEach((try? vm.project?.remotePackageReferences(for: "test22")) ?? [], id: \.id) { package in
+                            Text(package.repositoryURL.absoluteString)
+                        }
+                    }.padding()
                     ForEach(project.sections) { section in
                         Section(section.isa.rawValue) {
                             ForEach(section.elements, id: \.id) { element in
@@ -54,6 +92,8 @@ struct ContentView: View {
                     }
                 }
             }
+        }.onAppear {
+            vm.loadProject()
         }
     }
 }
