@@ -11,9 +11,38 @@ protocol ElementProperty {
     var stringValue: String { get }
 }
 
+struct ElementURLProperty: ElementProperty {
+
+    enum Error: Swift.Error {
+        case notAValidUrl
+    }
+
+    let stringValue: String
+
+    let url: URL
+
+    init(_ body: Substring, key: String) throws {
+        let regexString = "\(key)\\s+=\\s+\"(?<urlString>[^;]+)\";"
+        let regex = try Regex<(Substring, urlString: Substring)>(regexString)
+        guard let result = try regex.firstMatch(in: body[body.startIndex..<body.endIndex]) else {
+            throw RegexError.noMatch
+        }
+        let stringValue = String(result.urlString)
+        guard let url = URL(string: stringValue) else {
+            throw Error.notAValidUrl
+        }
+        self.stringValue = stringValue
+        self.url = url
+    }
+}
+
 struct ElementIdProperty: ElementProperty {
 
     let stringValue: String
+
+    var id: XProjId {
+        .init(stringValue: stringValue)
+    }
 
     init(_ body: Substring, key: String) throws {
         let regexString = "\(key)\\s+=\\s+(?<id>[0-9A-F]{24})"

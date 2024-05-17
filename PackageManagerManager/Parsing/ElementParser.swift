@@ -31,18 +31,21 @@ struct ElementParser {
 }
 
 extension XCRemoteSwiftPackageReference {
-
+    init(_ body: Substring, id: XProjId) throws {
+        self.id = id
+        self.repositoryURL = try ElementURLProperty(body, key: "repositoryURL").url
+        self.requirement = .init(
+            kind: try ElementStringProperty(body, key: "kind").stringValue,
+            minimumVersion: try ElementStringProperty(body, key: "minimumVersion").stringValue
+        )
+    }
 }
 
 extension XCSwiftPackageProductDependency {
     init(_ body: Substring, id: XProjId) throws {
-        let packageId = try ElementIdProperty(body, key: "package")
-        let productName = try ElementStringProperty(body, key: "productName")
-        self.init(
-            id: id,
-            package: XProjId(stringValue: packageId.stringValue),
-            productName: productName.stringValue
-        )
+        self.id = id
+        self.package = try ElementIdProperty(body, key: "package").id
+        self.productName = try ElementStringProperty(body, key: "productName").stringValue
     }
 }
 
@@ -70,7 +73,7 @@ extension Array where Element == GenericXProjElement {
                 case .XCConfigurationList:
                     return $0
                 case .XCRemoteSwiftPackageReference:
-                    return $0
+                    return try XCRemoteSwiftPackageReference($0.content, id: $0.id)
                 case .XCSwiftPackageProductDependency:
                     return try XCSwiftPackageProductDependency($0.content, id: $0.id)
                 case .other(_):

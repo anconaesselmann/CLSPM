@@ -30,8 +30,8 @@
             filePath = "PackageManagerManager/Parsing/ElementParser.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "mapToElements()"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,40 +46,10 @@
             filePath = "PackageManagerManager/Parsing/Properties.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "init(_:key:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "4A4E3AC8-4717-4C7D-98DA-8AF369FEFFF2 - 258299661c00205e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PackageManagerManager.IdElementProperty.init(_: Swift.Substring, key: Swift.String) throws -&gt; PackageManagerManager.IdElementProperty"
-                  moduleName = "PackageManagerManager"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/PackageManagerManager/PackageManagerManager/Parsing/Properties.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "22"
-                  endingLineNumber = "22">
-               </Location>
-               <Location
-                  uuid = "4A4E3AC8-4717-4C7D-98DA-8AF369FEFFF2 - e45962f39e61525e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PackageManagerManager.ElementIdProperty.init(_: Swift.Substring, key: Swift.String) throws -&gt; PackageManagerManager.ElementIdProperty"
-                  moduleName = "PackageManagerManager"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/PackageManagerManager/PackageManagerManager/Parsing/Properties.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "22"
-                  endingLineNumber = "22">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -92,40 +62,10 @@
             filePath = "PackageManagerManager/Parsing/Properties.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "init(_:key:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B54B54CE-C240-40BF-B270-98E34AD22D0B - 20b237b5ab8c52f3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PackageManagerManager.ProductNameElementProperty.init(Swift.Substring) throws -&gt; PackageManagerManager.ProductNameElementProperty"
-                  moduleName = "PackageManagerManager"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/PackageManagerManager/PackageManagerManager/Parsing/Properties.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37">
-               </Location>
-               <Location
-                  uuid = "B54B54CE-C240-40BF-B270-98E34AD22D0B - 91ea6b56375f2022"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PackageManagerManager.ElementStringProperty.init(_: Swift.Substring, key: Swift.String) throws -&gt; PackageManagerManager.ElementStringProperty"
-                  moduleName = "PackageManagerManager"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/PackageManagerManager/PackageManagerManager/Parsing/Properties.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

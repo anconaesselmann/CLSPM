@@ -31,8 +31,10 @@ struct ContentView: View {
                                         Text(element.isa.rawValue)
                                         Text(element.id.stringValue)
                                         Text(generic.content)
-                                    case let packageDependency as XCSwiftPackageProductDependency:
-                                        XCSwiftPackageProductDependencyView(element: packageDependency)
+                                    case let element as XCRemoteSwiftPackageReference:
+                                        XCRemoteSwiftPackageReferenceView(element: element)
+                                    case let element as XCSwiftPackageProductDependency:
+                                        XCSwiftPackageProductDependencyView(element: element)
                                     default: EmptyView()
                                     }
                                 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9798B1C12BF71311001A2050 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B1C02BF71311001A2050 /* Properties.swift */; };
+		9798B1C32BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B1C22BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift */; };
 		97ADAC292BEC255C00F5DB84 /* LoadableResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */; };
 		97ADAC2C2BEC255E00F5DB84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97ADAC2B2BEC255E00F5DB84 /* Assets.xcassets */; };
 		97ADAC2F2BEC255E00F5DB84 /* PackageManagerManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC2E2BEC255E00F5DB84 /* PackageManagerManagerApp.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		9798B1C02BF71311001A2050 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
+		9798B1C22BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCRemoteSwiftPackageReferenceView.swift; sourceTree = "<group>"; };
 		97ADAC252BEC255C00F5DB84 /* PackageManagerManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PackageManagerManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableResult.swift; sourceTree = "<group>"; };
 		97ADAC2B2BEC255E00F5DB84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,6 +68,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9798B1C42BF71F50001A2050 /* ElementViews */ = {
+			isa = PBXGroup;
+			children = (
+				97D8780E2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift */,
+				9798B1C22BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift */,
+			);
+			path = ElementViews;
+			sourceTree = "<group>";
+		};
 		97ADAC1C2BEC255C00F5DB84 = {
 			isa = PBXGroup;
 			children = (
@@ -121,7 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				97ADAC312BEC255E00F5DB84 /* ContentView.swift */,
-				97D8780E2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift */,
+				9798B1C42BF71F50001A2050 /* ElementViews */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -242,6 +253,7 @@
 				97ADAC2F2BEC255E00F5DB84 /* PackageManagerManagerApp.swift in Sources */,
 				97ADAC292BEC255C00F5DB84 /* LoadableResult.swift in Sources */,
 				97D878002BF416DA004F0D24 /* XProjProject.swift in Sources */,
+				9798B1C32BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift in Sources */,
 				97D878072BF4175E004F0D24 /* XProjProject+parsing.swift in Sources */,
 				97D878092BF417A8004F0D24 /* XProjIsa.swift in Sources */,
 				97D8780B2BF417BC004F0D24 /* XProjIsa+parsing.swift in Sources */,
