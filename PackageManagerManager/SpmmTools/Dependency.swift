@@ -16,7 +16,7 @@ struct Dependency {
 
     private var isUsingLocal: Bool = false
     private var isCloningToLocal: Bool = false
-    private var remoteUrl: URL?
+    private(set) var remoteUrl: URL?
     private var localDir: URL?
 
     let name: String

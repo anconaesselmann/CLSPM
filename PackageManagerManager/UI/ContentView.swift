@@ -30,10 +30,15 @@ class ContentViewModel: ObservableObject {
             let keep = remoteDependencies.filter { dependencyNames.contains($0.productName) }
                 .map { $0.productName }
             let remove = remoteDependencies.map { $0.productName }.filter { !keep.contains($0) }
+            let add = dependencies.filter { !Set(keep + remove).contains($0.name) }
             print("keep: \(keep)")
             print("remove: \(remove)")
+            print("add: \(add)")
             for remoteProductName in remove {
                 updated = try updated.remotePackageRemoved(remoteProductName)
+            }
+            for remoteDependency in add {
+                updated = try updated.addedDepenency(remoteDependency, to: targetName)
             }
             self.project = updated
         } catch {

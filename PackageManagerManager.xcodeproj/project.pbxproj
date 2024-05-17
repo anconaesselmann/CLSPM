@@ -31,6 +31,7 @@
 		97B55DE22BF7F5A100DDE6A6 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DE12BF7F5A100DDE6A6 /* Target.swift */; };
 		97B55DE42BF7F5B100DDE6A6 /* RemoteVersionBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DE32BF7F5B100DDE6A6 /* RemoteVersionBehavior.swift */; };
 		97B55DE72BF7FE3600DDE6A6 /* TargetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DE62BF7FE3600DDE6A6 /* TargetManager.swift */; };
+		97B55DE92BF8093E00DDE6A6 /* XProjId+parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DE82BF8093E00DDE6A6 /* XProjId+parsing.swift */; };
 		97D877F62BEECA8E004F0D24 /* mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D877F32BEECA8E004F0D24 /* mock.swift */; };
 		97D877F82BEECA8E004F0D24 /* XProjElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D877F52BEECA8E004F0D24 /* XProjElements.swift */; };
 		97D877FB2BEED113004F0D24 /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 97D877FA2BEED113004F0D24 /* ParenthesesParser */; };
@@ -73,6 +74,7 @@
 		97B55DE12BF7F5A100DDE6A6 /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		97B55DE32BF7F5B100DDE6A6 /* RemoteVersionBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteVersionBehavior.swift; sourceTree = "<group>"; };
 		97B55DE62BF7FE3600DDE6A6 /* TargetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetManager.swift; sourceTree = "<group>"; };
+		97B55DE82BF8093E00DDE6A6 /* XProjId+parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XProjId+parsing.swift"; sourceTree = "<group>"; };
 		97D877F32BEECA8E004F0D24 /* mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mock.swift; sourceTree = "<group>"; };
 		97D877F52BEECA8E004F0D24 /* XProjElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XProjElements.swift; sourceTree = "<group>"; };
 		97D877FD2BF416C6004F0D24 /* XProjSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjSection.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				97D878062BF4175E004F0D24 /* XProjProject+parsing.swift */,
 				97D878042BF4172E004F0D24 /* XProjSection+parsing.swift */,
 				97D8780C2BF41C56004F0D24 /* XProjId.swift */,
+				97B55DE82BF8093E00DDE6A6 /* XProjId+parsing.swift */,
 				97D878012BF41705004F0D24 /* ElementParser.swift */,
 				97B55DD82BF72EE300DDE6A6 /* Elements+parsing.swift */,
 				97B55DDA2BF72EFB00DDE6A6 /* Array+XProjElement.swift */,
@@ -325,6 +328,7 @@
 				97B55DE02BF7F59300DDE6A6 /* Dependency.swift in Sources */,
 				97ADAC362BEC255E00F5DB84 /* AppState.swift in Sources */,
 				97B55DC82BF72E2300DDE6A6 /* PBXFrameworksBuildPhaseView.swift in Sources */,
+				97B55DE92BF8093E00DDE6A6 /* XProjId+parsing.swift in Sources */,
 				97B55DD12BF72E8600DDE6A6 /* ElementIdProperty.swift in Sources */,
 				97ADAC2F2BEC255E00F5DB84 /* PackageManagerManagerApp.swift in Sources */,
 				97ADAC292BEC255C00F5DB84 /* LoadableResult.swift in Sources */,

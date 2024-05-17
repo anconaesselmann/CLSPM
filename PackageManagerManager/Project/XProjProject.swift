@@ -10,6 +10,8 @@ struct XProjProject {
         case missingSection(XProjIsa)
         case missingElement
         case missingProperty
+        case missingRemoteUrl
+        case missingVersion
     }
 
     let content: String
@@ -17,6 +19,60 @@ struct XProjProject {
 }
 
 extension XProjProject {
+
+    func sectionRanges(for isa: XProjIsa) throws -> [Range<String.Index>] {
+        var sectionRanges: [Range<String.Index>] = []
+        var currentIndex: String.Index = content.startIndex
+
+        var sectionRange: Range<String.Index> = content.startIndex..<content.endIndex
+
+        while let section = try XProjSection(content: content, currentIndex: &currentIndex, range: &sectionRange) {
+            if section.isa == isa {
+                sectionRanges.append(sectionRange)
+            }
+        }
+        return sectionRanges
+    }
+
+    func addedDepenency(_ dependency: Dependency, to targetName: String) throws -> Self {
+        let remotePackageId = XProjId()
+        guard let repositoryUrl = dependency.remoteUrl?.absoluteString else {
+            throw Error.missingRemoteUrl
+        }
+        guard let version = dependency.version else {
+            throw Error.missingVersion
+        }
+        let remotePackageReferenceBody = """
+
+        \(remotePackageId.stringValue) /* XCRemoteSwiftPackageReference "\(dependency.name)" */ = {
+            isa = XCRemoteSwiftPackageReference;
+            repositoryURL = "\(repositoryUrl)";
+            requirement = {
+                kind = \(version.kind.rawValue);
+                minimumVersion = \(version.versionString);
+            };
+        };
+"""
+        let sectionIsa = XProjIsa.XCRemoteSwiftPackageReference
+        guard let remotePackageSectionRange = try sectionRanges(for: sectionIsa).first else {
+            throw Error.missingSection(sectionIsa)
+        }
+        print(content[remotePackageSectionRange])
+
+        let regexString = "\\/\\* End \(sectionIsa) section \\*\\/"
+        let regex = try Regex(regexString)
+        guard let result = try regex.firstMatch(in: content[remotePackageSectionRange]) else {
+            throw Error.missingSection(sectionIsa)
+        }
+        let endOfSectionBodyIndex = content.index(before: result.range.lowerBound)
+        var contentCopy = content
+        contentCopy.insert(contentsOf: remotePackageReferenceBody, at: endOfSectionBodyIndex)
+        var copy = try XProjProject(content: contentCopy)
+
+        print(copy.content)
+        return copy
+    }
+
     func remotePackageReferences(for targetName: String) throws -> [XCRemoteSwiftPackageReference] {
         guard let remotePackageSection = sections.first(where: { $0.isa == .XCRemoteSwiftPackageReference }) else {
             throw Error.missingSection(.XCRemoteSwiftPackageReference)

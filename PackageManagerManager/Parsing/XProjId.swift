@@ -14,12 +14,10 @@ struct XProjId: Identifiable, Hashable {
         self.stringValue = String(stringValue)
     }
 
-    init?(_ body: Substring, currentIndex: inout String.Index) {
-        let idRegex = /(?<id>[0-9A-F]{24})\s+/
-        guard let result = try? idRegex.firstMatch(in: body[currentIndex..<body.endIndex]) else {
-            return nil
-        }
-        stringValue = String(result.id)
-        currentIndex = result.range.upperBound
+    init() {
+        var uuidString = UUID().uuidString
+        uuidString.removeAll { $0 == "-" }
+        let range = uuidString.startIndex..<uuidString.index(uuidString.startIndex, offsetBy: 24)
+        stringValue = String(uuidString[range])
     }
 }

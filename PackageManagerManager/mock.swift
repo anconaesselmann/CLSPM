@@ -56,6 +56,12 @@ let targets = [
                 urlBase: gitHubUrlString,
                 localBase: localBaseDir
             ),
+            .init(
+                name: "ProgrammaticCoreData",
+                version: .upToNextMajorVersion("0.0.4"),
+                urlBase: gitHubUrlString,
+                localBase: localBaseDir
+            ),
         ]
     )
 ]
