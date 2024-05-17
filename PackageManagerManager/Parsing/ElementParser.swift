@@ -31,22 +31,17 @@ struct ElementParser {
 }
 
 extension XCRemoteSwiftPackageReference {
+
 }
 
 extension XCSwiftPackageProductDependency {
-    init?(_ body: Substring, id: XProjId) {
-        let packageIdRegex = /package\s+=\s+(?<packageId>[0-9A-F]{24})/
-        guard let packageIdResult = try? packageIdRegex.firstMatch(in: body[body.startIndex..<body.endIndex]) else {
-            return nil
-        }
-        let productNameRegex = /productName\s+=\s+(?<productName>[^;]+);/
-        guard let productNameResult = try? productNameRegex.firstMatch(in: body[body.startIndex..<body.endIndex]) else {
-            return nil
-        }
+    init(_ body: Substring, id: XProjId) throws {
+        let packageId = try ElementIdProperty(body, key: "package")
+        let productName = try ElementStringProperty(body, key: "productName")
         self.init(
             id: id,
-            package: XProjId(stringValue: packageIdResult.packageId),
-            productName: String(productNameResult.productName)
+            package: XProjId(stringValue: packageId.stringValue),
+            productName: productName.stringValue
         )
     }
 }
@@ -54,30 +49,35 @@ extension XCSwiftPackageProductDependency {
 extension Array where Element == GenericXProjElement {
     func mapToElements() -> [XProjElement] {
         map {
-            switch $0.isa {
-            case .PBXBuildFile:
-                return $0
-            case .PBXFileReference:
-                return $0
-            case .PBXFrameworksBuildPhase:
-                return $0
-            case .PBXGroup:
-                return $0
-            case .PBXNativeTarget:
-                return $0
-            case .PBXProject:
-                return $0
-            case .PBXResourcesBuildPhase:
-                return $0
-            case .XCBuildConfiguration:
-                return $0
-            case .XCConfigurationList:
-                return $0
-            case .XCRemoteSwiftPackageReference:
-                return $0
-            case .XCSwiftPackageProductDependency:
-                return XCSwiftPackageProductDependency($0.content, id: $0.id) ?? $0
-            case .other(_):
+            do {
+                switch $0.isa {
+                case .PBXBuildFile:
+                    return $0
+                case .PBXFileReference:
+                    return $0
+                case .PBXFrameworksBuildPhase:
+                    return $0
+                case .PBXGroup:
+                    return $0
+                case .PBXNativeTarget:
+                    return $0
+                case .PBXProject:
+                    return $0
+                case .PBXResourcesBuildPhase:
+                    return $0
+                case .XCBuildConfiguration:
+                    return $0
+                case .XCConfigurationList:
+                    return $0
+                case .XCRemoteSwiftPackageReference:
+                    return $0
+                case .XCSwiftPackageProductDependency:
+                    return try XCSwiftPackageProductDependency($0.content, id: $0.id)
+                case .other(_):
+                    return $0
+                }
+            } catch {
+                print(error)
                 return $0
             }
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9798B1C12BF71311001A2050 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B1C02BF71311001A2050 /* Properties.swift */; };
 		97ADAC292BEC255C00F5DB84 /* LoadableResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */; };
 		97ADAC2C2BEC255E00F5DB84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97ADAC2B2BEC255E00F5DB84 /* Assets.xcassets */; };
 		97ADAC2F2BEC255E00F5DB84 /* PackageManagerManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC2E2BEC255E00F5DB84 /* PackageManagerManagerApp.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9798B1C02BF71311001A2050 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		97ADAC252BEC255C00F5DB84 /* PackageManagerManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PackageManagerManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableResult.swift; sourceTree = "<group>"; };
 		97ADAC2B2BEC255E00F5DB84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				97D878042BF4172E004F0D24 /* XProjSection+parsing.swift */,
 				97D8780C2BF41C56004F0D24 /* XProjId.swift */,
 				97D878012BF41705004F0D24 /* ElementParser.swift */,
+				9798B1C02BF71311001A2050 /* Properties.swift */,
 			);
 			path = Parsing;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				97D878072BF4175E004F0D24 /* XProjProject+parsing.swift in Sources */,
 				97D878092BF417A8004F0D24 /* XProjIsa.swift in Sources */,
 				97D8780B2BF417BC004F0D24 /* XProjIsa+parsing.swift in Sources */,
+				9798B1C12BF71311001A2050 /* Properties.swift in Sources */,
 				97ADAC322BEC255E00F5DB84 /* ContentView.swift in Sources */,
 				97D878022BF41705004F0D24 /* ElementParser.swift in Sources */,
 				97D878052BF4172E004F0D24 /* XProjSection+parsing.swift in Sources */,
