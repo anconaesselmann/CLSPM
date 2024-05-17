@@ -51,6 +51,7 @@ struct PBXGroup: XProjElement {
 struct PBXNativeTarget: XProjElement {
     var isa: XProjIsa { .PBXNativeTarget }
     let id: XProjId
+    let packageProductDependencies: [XProjId]
 }
 
 struct PBXProject: XProjElement {

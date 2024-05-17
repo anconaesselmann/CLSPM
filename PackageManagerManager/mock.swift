@@ -3,6 +3,41 @@
 
 import Foundation
 
+let mockSpmmFile = """
+// spmm-tools-version: 0.1
+
+import TargetDescription
+
+let targets = [
+    Target(
+        name: "Audiosaic Desktop"
+        dependencies: [
+            .init(
+                name: "LoadableView",
+                url: "https://github.com/anconaesselmann/LoadableView",
+                localDir: "../AxelPods/LoadableView"
+                kind: .upToNextMajorVersion,
+                minimumVersion: "10.19.1",
+                useLocal: false
+            )
+        ]
+    ),
+    Target(
+        name: "Audiosaic"
+        dependencies: [
+            Dependency(
+                name: "LoadableView",
+                url: "https://github.com/anconaesselmann/LoadableView",
+                localDir: "../AxelPods/LoadableView"
+                kind: .upToNextMajorVersion,
+                minimumVersion: "10.19.1",
+                useLocal: true
+            )
+        ]
+    )
+]
+"""
+
 let mockProject = """
 // !$*UTF8*$!
 {

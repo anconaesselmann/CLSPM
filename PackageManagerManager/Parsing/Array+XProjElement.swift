@@ -23,7 +23,7 @@ extension Array where Element == GenericXProjElement {
                 case .PBXGroup:
                     return $0
                 case .PBXNativeTarget:
-                    return $0
+                    return try PBXNativeTarget($0.content, id: $0.id)
                 case .PBXProject:
                     return try PBXProject($0.content, id: $0.id)
                 case .PBXResourcesBuildPhase:

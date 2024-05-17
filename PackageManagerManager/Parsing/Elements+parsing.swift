@@ -24,6 +24,13 @@ extension PBXFrameworksBuildPhase {
     }
 }
 
+extension PBXNativeTarget {
+    init(_ body: Substring, id: XProjId) throws {
+        self.id = id
+        self.packageProductDependencies = try ElementIdArrayProperty(body, key: "packageProductDependencies").ids
+    }
+}
+
 extension PBXProject {
     init(_ body: Substring, id: XProjId) throws {
         self.id = id

@@ -21,8 +21,7 @@ extension XProjProject {
         else {
             throw Error.noProjectHeader
         }
-        header = content[content.startIndex..<sectionsStartIndex]
+        self.content = content
         self.sections = sections
-        footer = content[sectionsEndIndex..<content.endIndex]
     }
 }

@@ -3,7 +3,7 @@
 
 import Foundation
 
-enum XProjIsa: Identifiable {
+enum XProjIsa: Identifiable, Equatable {
 
     case PBXBuildFile, PBXFileReference, PBXFrameworksBuildPhase, PBXGroup, PBXNativeTarget, PBXProject, PBXResourcesBuildPhase, XCBuildConfiguration, XCConfigurationList, XCRemoteSwiftPackageReference, XCSwiftPackageProductDependency
     case other(String)
