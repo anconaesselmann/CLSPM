@@ -27,10 +27,18 @@ struct ContentView: View {
                             ForEach(section.elements, id: \.id) { element in
                                 VStack(alignment: .leading) {
                                     switch element {
-                                    case let generic as GenericXProjElement:
-                                        Text(element.isa.rawValue)
-                                        Text(element.id.stringValue)
-                                        Text(generic.content)
+//                                    case let generic as GenericXProjElement:
+//                                        Text(element.isa.rawValue)
+//                                        Text(element.id.stringValue)
+//                                        Text(generic.content)
+                                    case let element as PBXBuildFileFileRef:
+                                        PBXBuildFileFileRefView(element: element)
+                                    case let element as PBXBuildFileProductRef:
+                                        PBXBuildFileProductRefView(element: element)
+                                    case let element as PBXFrameworksBuildPhase:
+                                        PBXFrameworksBuildPhaseView(element: element)
+                                    case let element as PBXProject:
+                                        PBXProjectView(element: element)
                                     case let element as XCRemoteSwiftPackageReference:
                                         XCRemoteSwiftPackageReferenceView(element: element)
                                     case let element as XCSwiftPackageProductDependency:

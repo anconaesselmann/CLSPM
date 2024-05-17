@@ -20,9 +20,16 @@ struct GenericXProjElement: XProjElement {
     }
 }
 
-struct PBXBuildFile: XProjElement {
+struct PBXBuildFileFileRef: XProjElement {
     var isa: XProjIsa { .PBXBuildFile }
     let id: XProjId
+    let fileRef: XProjId
+}
+
+struct PBXBuildFileProductRef: XProjElement {
+    var isa: XProjIsa { .PBXBuildFile }
+    let id: XProjId
+    let productRef: XProjId
 }
 
 struct PBXFileReference: XProjElement {
@@ -33,6 +40,7 @@ struct PBXFileReference: XProjElement {
 struct PBXFrameworksBuildPhase: XProjElement {
     var isa: XProjIsa { .PBXFrameworksBuildPhase }
     let id: XProjId
+    var files: [XProjId]
 }
 
 struct PBXGroup: XProjElement {
@@ -48,6 +56,8 @@ struct PBXNativeTarget: XProjElement {
 struct PBXProject: XProjElement {
     var isa: XProjIsa { .PBXProject }
     let id: XProjId
+    var packageReferences: [XProjId]
+    var targets: [XProjId]
 }
 
 struct PBXResourcesBuildPhase: XProjElement {
