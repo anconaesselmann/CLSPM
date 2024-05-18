@@ -44,12 +44,12 @@ let targets = [
     Target(
         name: "test22",
         dependencies: [
-//            .init(
-//                name: "LoadableView",
-//                version: .upToNextMajorVersion("0.3.9"),
-//                urlBase: gitHubUrlString,
-//                localBase: localBaseDir
-//            ),
+            .init(
+                name: "LoadableView",
+                version: .upToNextMajorVersion("0.3.9"),
+                urlBase: gitHubUrlString,
+                localBase: localBaseDir
+            ),
             .init(
                 name: "CoreDataStored",
                 version: .upToNextMajorVersion("0.0.7"),

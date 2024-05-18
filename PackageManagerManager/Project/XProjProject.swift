@@ -21,7 +21,7 @@ struct XProjProject {
 extension XProjProject {
     func remotePackageReferences(for targetName: String) throws -> [XCRemoteSwiftPackageReference] {
         guard let remotePackageSection = sections.first(where: { $0.isa == .XCRemoteSwiftPackageReference }) else {
-            throw Error.missingSection(.XCRemoteSwiftPackageReference)
+            return []
         }
         let remotePackageSectionElements = remotePackageSection.elements
         return remotePackageSectionElements
@@ -63,7 +63,18 @@ extension XProjProject {
 """
         var contentCopy = content
 
-        let endOfRemotePackageSectionBodyIndex = try endOfSectionIndex(for: .XCRemoteSwiftPackageReference, in: contentCopy)
+        let endOfRemotePackageSectionBodyIndex: String.Index
+        do {
+            endOfRemotePackageSectionBodyIndex = try endOfSectionIndex(
+                for: .XCRemoteSwiftPackageReference,
+                in: contentCopy
+            )
+        } catch Error.missingSection(let sectionIsa) {
+            endOfRemotePackageSectionBodyIndex = try createSection(
+                .XCRemoteSwiftPackageReference,
+                in: &contentCopy
+            )
+        }
         contentCopy.insert(contentsOf: remotePackageReferenceBody, at: endOfRemotePackageSectionBodyIndex)
 
         // TODO: One for each target but same packageId
@@ -78,14 +89,27 @@ extension XProjProject {
             productName = \(dependency.name);
         };
 """
-        let endOfDependencySectionBodyIndex = try endOfSectionIndex(for: .XCSwiftPackageProductDependency, in: contentCopy)
+
+        let endOfDependencySectionBodyIndex: String.Index
+        do {
+            endOfDependencySectionBodyIndex = try endOfSectionIndex(
+                for: .XCSwiftPackageProductDependency,
+                in: contentCopy
+            )
+        } catch Error.missingSection(let sectionIsa) {
+            endOfDependencySectionBodyIndex = try createSection(
+                .XCSwiftPackageProductDependency,
+                in: &contentCopy
+            )
+        }
         contentCopy.insert(contentsOf: dependencyBody, at: endOfDependencySectionBodyIndex)
 
         contentCopy = try insertIdAtEndOfArray(
             remotePackageId,
             comment: "XCRemoteSwiftPackageReference \"\(dependency.name)\"",
             withPropertyName: "packageReferences",
-            for: .PBXProject, in: contentCopy
+            for: .PBXProject, 
+            in: contentCopy
         )
 
         // TODO: Make sure we have the right target
@@ -102,7 +126,8 @@ extension XProjProject {
             buildFileId,
             comment: "\(dependency.name) in Frameworks",
             withPropertyName: "files",
-            for: .PBXFrameworksBuildPhase, in: contentCopy
+            for: .PBXFrameworksBuildPhase, 
+            in: contentCopy
         )
 
         let buildFileBody = """
@@ -112,6 +137,7 @@ extension XProjProject {
         let endOfBuildFileSectionBodyIndex = try endOfSectionIndex(for: .PBXBuildFile, in: contentCopy)
         contentCopy.insert(contentsOf: buildFileBody, at: endOfBuildFileSectionBodyIndex)
         let project = try XProjProject(content: contentCopy.replacing("    ", with: "\t"))
+        print(project.content)
         return project
     }
 
@@ -296,5 +322,39 @@ extension XProjProject {
             throw Error.missingSection(sectionIsa)
         }
         return content.index(before: result.range.lowerBound)
+    }
+
+    private func createSection(
+        _ sectionIsa: XProjIsa,
+        after previousSectionIsa: XProjIsa? = nil,
+        in content: inout String
+    ) throws -> String.Index {
+        var currentIndex: String.Index = content.startIndex
+
+        var sectionRange: Range<String.Index> = content.startIndex..<content.endIndex
+
+        while let section = try XProjSection(content: content, currentIndex: &currentIndex, range: &sectionRange) {
+            if
+                let previousSectionIsa = previousSectionIsa,
+                section.isa == previousSectionIsa
+            {
+                break
+            }
+        }
+
+        let emptySectionHeader = """
+
+
+/* Begin \(sectionIsa.rawValue) section */
+"""
+        let emptySectionFooter = """
+
+/* End \(sectionIsa.rawValue) section */
+"""
+        content.insert(
+            contentsOf: emptySectionHeader + emptySectionFooter,
+            at: sectionRange.upperBound
+        )
+        return content.index(sectionRange.upperBound, offsetBy: emptySectionHeader.count)
     }
 }
