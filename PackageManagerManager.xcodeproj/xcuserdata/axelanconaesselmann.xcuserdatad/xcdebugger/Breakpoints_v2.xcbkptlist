@@ -30,8 +30,8 @@
             filePath = "PackageManagerManager/Project/XProjProject.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "addedDepenency(_:to:)"
             landmarkType = "7">
          </BreakpointContent>
