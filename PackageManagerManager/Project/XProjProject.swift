@@ -20,7 +20,7 @@ struct XProjProject {
 
 extension XProjProject {
 
-    func sectionRanges(for isa: XProjIsa) throws -> [Range<String.Index>] {
+    func sectionRanges(for isa: XProjIsa, in content: String) throws -> [Range<String.Index>] {
         var sectionRanges: [Range<String.Index>] = []
         var currentIndex: String.Index = content.startIndex
 
@@ -32,6 +32,40 @@ extension XProjProject {
             }
         }
         return sectionRanges
+    }
+
+    func insertIdAtEndOfArray(_ id: XProjId, comment: String, withPropertyName key: String, for sectionIsa: XProjIsa, in content: String) throws -> String {
+        guard let sectionRange = try sectionRanges(for: sectionIsa, in: content).first else {
+            throw Error.missingSection(sectionIsa)
+        }
+        let regexString = "(?<whiteSpace>[\t| ]+)\(key)\\s+=\\s+\\([^\\)]+"
+        let regex: Regex<(Substring, whiteSpace: Substring)> = try Regex(regexString)
+        guard let result = try regex.firstMatch(in: content[sectionRange]) else {
+            throw Error.missingSection(sectionIsa)
+        }
+        let index = result.range.upperBound
+
+        let arrayElementContent = """
+    \(id.stringValue) /* \(comment) */,
+\(result.whiteSpace)
+"""
+        var contentCopy = content
+        contentCopy.insert(
+            contentsOf: arrayElementContent,
+            at: index)
+        return contentCopy
+    }
+
+    func endOfSectionIndex(for sectionIsa: XProjIsa, in content: String) throws -> String.Index {
+        guard let sectionRange = try sectionRanges(for: sectionIsa, in: content).first else {
+            throw Error.missingSection(sectionIsa)
+        }
+        let regexString = "\\/\\* End \(sectionIsa) section \\*\\/"
+        let regex = try Regex(regexString)
+        guard let result = try regex.firstMatch(in: content[sectionRange]) else {
+            throw Error.missingSection(sectionIsa)
+        }
+        return content.index(before: result.range.lowerBound)
     }
 
     func addedDepenency(_ dependency: Dependency, to targetName: String) throws -> Self {
@@ -53,24 +87,58 @@ extension XProjProject {
             };
         };
 """
-        let sectionIsa = XProjIsa.XCRemoteSwiftPackageReference
-        guard let remotePackageSectionRange = try sectionRanges(for: sectionIsa).first else {
-            throw Error.missingSection(sectionIsa)
-        }
-        print(content[remotePackageSectionRange])
-
-        let regexString = "\\/\\* End \(sectionIsa) section \\*\\/"
-        let regex = try Regex(regexString)
-        guard let result = try regex.firstMatch(in: content[remotePackageSectionRange]) else {
-            throw Error.missingSection(sectionIsa)
-        }
-        let endOfSectionBodyIndex = content.index(before: result.range.lowerBound)
         var contentCopy = content
-        contentCopy.insert(contentsOf: remotePackageReferenceBody, at: endOfSectionBodyIndex)
-        var copy = try XProjProject(content: contentCopy)
 
-        print(copy.content)
-        return copy
+        let endOfRemotePackageSectionBodyIndex = try endOfSectionIndex(for: .XCRemoteSwiftPackageReference, in: contentCopy)
+        contentCopy.insert(contentsOf: remotePackageReferenceBody, at: endOfRemotePackageSectionBodyIndex)
+
+        // TODO: One for each target but same packageId
+        let dependencyId = XProjId()
+
+        // NOTE: Different for local!!!
+        let dependencyBody = """
+
+        \(dependencyId.stringValue) /* \(dependency.name) */ = {
+            isa = XCSwiftPackageProductDependency;
+            package = \(remotePackageId.stringValue) /* XCRemoteSwiftPackageReference "\(dependency.name)" */;
+            productName = \(dependency.name);
+        };
+"""
+        let endOfDependencySectionBodyIndex = try endOfSectionIndex(for: .XCSwiftPackageProductDependency, in: contentCopy)
+        contentCopy.insert(contentsOf: dependencyBody, at: endOfDependencySectionBodyIndex)
+
+        contentCopy = try insertIdAtEndOfArray(
+            remotePackageId,
+            comment: "XCRemoteSwiftPackageReference \"\(dependency.name)\"",
+            withPropertyName: "packageReferences",
+            for: .PBXProject, in: contentCopy
+        )
+
+        // TODO: Make sure we have the right target
+        contentCopy = try insertIdAtEndOfArray(
+            dependencyId,
+            comment: dependency.name,
+            withPropertyName: "packageProductDependencies",
+            for: .PBXNativeTarget, in: contentCopy
+        )
+
+        let buildFileId = XProjId()
+        // TODO: Make sure I am adding to the right framework
+        contentCopy = try insertIdAtEndOfArray(
+            buildFileId,
+            comment: "\(dependency.name) in Frameworks",
+            withPropertyName: "files",
+            for: .PBXFrameworksBuildPhase, in: contentCopy
+        )
+
+        let buildFileBody = """
+
+        \(buildFileId.stringValue) /* \(dependency.name) in Frameworks */ = {isa = PBXBuildFile; productRef = \(dependencyId.stringValue) /* \(dependency.name) */; };
+"""
+        let endOfBuildFileSectionBodyIndex = try endOfSectionIndex(for: .PBXBuildFile, in: contentCopy)
+        contentCopy.insert(contentsOf: buildFileBody, at: endOfBuildFileSectionBodyIndex)
+        let project = try XProjProject(content: contentCopy.replacing("    ", with: "\t"))
+        return project
     }
 
     func remotePackageReferences(for targetName: String) throws -> [XCRemoteSwiftPackageReference] {
@@ -193,7 +261,7 @@ extension XProjProject {
             in: elementRange
         )
         let regexString = "\\s+\(id.stringValue)[^,]+,"
-        guard let result = try Regex(regexString).firstMatch(in: content) else {
+        guard let result = try Regex(regexString).firstMatch(in: content[propertyRange]) else {
             throw Error.missingSection(element.isa)
         }
         let content = content.replacingCharacters(in: result.range, with: "")
