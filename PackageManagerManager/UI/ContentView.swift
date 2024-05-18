@@ -41,6 +41,8 @@ class ContentViewModel: ObservableObject {
                 updated = try updated.addedDepenency(remoteDependency, to: targetName)
             }
             self.project = updated
+
+            try updated.listAllProperties(for: .PBXProject)
         } catch {
             print(error)
         }

@@ -20,6 +20,18 @@ struct GenericXProjElement: XProjElement {
     }
 }
 
+struct XProjProperty {
+    let indentation: String
+    let key: String
+    let value: Any
+}
+
+struct ExpandedXProjElement: XProjElement {
+    let isa: XProjIsa
+    let properties: [XProjProperty]
+    let id: XProjId
+}
+
 struct PBXBuildFileFileRef: XProjElement {
     var isa: XProjIsa { .PBXBuildFile }
     let id: XProjId

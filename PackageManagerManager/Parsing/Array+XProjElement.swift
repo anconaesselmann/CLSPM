@@ -2,6 +2,7 @@
 //
 
 import Foundation
+import ParenthesesParser
 
 extension Array where Element == GenericXProjElement {
     func mapToElements() -> [XProjElement] {
@@ -44,5 +45,96 @@ extension Array where Element == GenericXProjElement {
                 return $0
             }
         }
+    }
+
+    func expand() throws -> [ExpandedXProjElement] {
+        try map { element in
+            guard let elementRange = (try? ParenthesesParser().nextFrame(
+                element.content,
+                from: element.content.startIndex,
+                types: [.braces]
+            ))?.range else {
+                throw XProjProject.Error.unknown
+            }
+
+            var elementContent = element.content[elementRange]
+            elementContent.removeFirst()
+            elementContent.removeLast()
+
+            let explodedElement = ExpandedXProjElement(
+                isa: element.isa,
+                properties: try Self.toXProjProperties(elementContent),
+                id: element.id
+            )
+            return explodedElement
+        }
+    }
+
+    private static func toXProjProperties(_ elementContent: Substring) throws -> [XProjProperty] {
+        var elementContent = elementContent
+        var currentIndex = elementContent.startIndex
+        var endIndex = elementContent.endIndex
+
+        var objectContents: [UUID: [XProjProperty]] = [:]
+
+        while let objectRange = (try? ParenthesesParser().nextFrame(
+            elementContent,
+            from: currentIndex,
+            types: [.braces]
+        ))?.range {
+            var objectContent = elementContent[objectRange].trimmingCharacters(in: .whitespacesAndNewlines)
+            objectContent.removeFirst()
+            objectContent.removeLast()
+            let objectProperties = try Self.toXProjProperties(objectContent[objectContent.startIndex..<objectContent.endIndex])
+            let id = UUID()
+            objectContents[id] = objectProperties
+            elementContent.removeSubrange(objectRange)
+            elementContent.insert(contentsOf: id.uuidString, at: objectRange.lowerBound)
+        }
+
+        var arrayContents: [UUID: [String]] = [:]
+
+        currentIndex = elementContent.startIndex
+        while let arrayRange = (try? ParenthesesParser().nextFrame(
+            elementContent,
+            from: currentIndex,
+            types: [.parentheses]
+        ))?.range {
+            var arrayContent = String(elementContent[arrayRange]).trimmingCharacters(in: .whitespacesAndNewlines)
+            arrayContent.removeFirst()
+            arrayContent.removeLast()
+            let id = UUID()
+            arrayContents[id] = arrayContent.split(separator: ",")
+                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines)}
+                .filter { !$0.isEmpty }
+            elementContent.removeSubrange(arrayRange)
+            elementContent.insert(contentsOf: id.uuidString, at: arrayRange.lowerBound)
+        }
+
+        currentIndex = elementContent.startIndex
+        endIndex = elementContent.endIndex
+
+        let regexString = "(?<whiteSpace>[\\t ]+)(?<propertyName>[^ \\{\\}; \t\n]+)\\s=\\s(?<propertyValue>[^;\\{]+);"
+        let regex: Regex<(Substring, whiteSpace: Substring, propertyName: Substring, propertyValue: Substring)> = try Regex(regexString)
+        var properties: [XProjProperty] = []
+        while let result = try regex.firstMatch(in: elementContent[currentIndex..<endIndex]) {
+            let value: Any
+            let stringValue = String(result.propertyValue)
+            if let id = UUID(uuidString: stringValue) {
+                if let objectValue = objectContents[id] {
+                    value = objectValue
+                } else if let arrayValue = arrayContents[id] {
+                    value = arrayValue
+                } else {
+                    value = id
+                }
+            } else {
+                value = stringValue
+            }
+            let property = XProjProperty(indentation: String(result.whiteSpace), key: String(result.propertyName), value: value)
+            properties.append(property)
+            currentIndex = result.range.upperBound
+        }
+        return properties
     }
 }

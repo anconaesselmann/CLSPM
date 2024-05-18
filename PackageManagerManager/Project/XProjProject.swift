@@ -12,6 +12,7 @@ struct XProjProject {
         case missingProperty
         case missingRemoteUrl
         case missingVersion
+        case unknown
     }
 
     let content: String
@@ -356,5 +357,27 @@ extension XProjProject {
             at: sectionRange.upperBound
         )
         return content.index(sectionRange.upperBound, offsetBy: emptySectionHeader.count)
+    }
+
+    func listAllProperties(for sectionIsa: XProjIsa) throws {
+        let properties = try properties(for: sectionIsa, in: content)
+        print(properties)
+    }
+
+    private func properties(
+        for sectionIsa: XProjIsa,
+        in content: String
+    ) throws -> [ExpandedXProjElement] {
+        guard let sectionRange = try sectionRanges(
+            for: sectionIsa,
+            in: content
+        ).first else {
+            throw Error.missingSection(sectionIsa)
+        }
+        let sectionBody = content[sectionRange]
+        let elements = ElementParser
+            .parse(sectionBody, currentIndex: sectionBody.startIndex)
+
+        return try elements.expand()
     }
 }

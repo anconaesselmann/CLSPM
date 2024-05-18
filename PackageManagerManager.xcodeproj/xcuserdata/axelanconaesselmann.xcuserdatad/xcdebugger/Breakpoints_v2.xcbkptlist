@@ -30,8 +30,8 @@
             filePath = "PackageManagerManager/Project/XProjProject.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "remotePackageRemoved(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -39,16 +39,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B15FAD87-0DCC-49FA-922A-FB973EF85B75"
+            uuid = "2C6BD25A-96FF-4DBD-9B44-F06094111EF8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PackageManagerManager/Project/XProjProject.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "addedDepenency(_:to:)"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
+            landmarkName = "listAllProperties(for:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
