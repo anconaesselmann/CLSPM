@@ -76,7 +76,7 @@ extension Array where Element == GenericXProjElement {
         var endIndex = elementContent.endIndex
 
         var objectContents: [UUID: [XProjProperty]] = [:]
-        var arrayContents: [UUID: [String]] = [:]
+        var arrayContents: [UUID: [Any]] = [:]
 
         while let objectRange = (try? ParenthesesParser().nextFrame(
             elementContent,
@@ -108,6 +108,7 @@ extension Array where Element == GenericXProjElement {
             arrayContents[id] = arrayContent.split(separator: ",")
                 .map { $0.trimmingCharacters(in: .whitespacesAndNewlines)}
                 .filter { !$0.isEmpty }
+                .compactMap { (XProjId($0) ?? $0) }
             elementContent.removeSubrange(arrayRange)
             elementContent.insert(contentsOf: id.uuidString, at: arrayRange.lowerBound)
         }
@@ -134,6 +135,8 @@ extension Array where Element == GenericXProjElement {
                 } else {
                     value = id
                 }
+            } else if let id = XProjId(stringValue) {
+                value = id
             } else {
                 value = stringValue
             }

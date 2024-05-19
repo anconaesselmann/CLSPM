@@ -5,6 +5,7 @@ import Foundation
 
 struct XProjId: Identifiable, Hashable {
     let stringValue: String
+    var comment: String?
 
     var id: String {
         stringValue

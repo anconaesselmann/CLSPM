@@ -360,10 +360,13 @@ extension XProjProject {
     }
 
     func listAllProperties() throws {
+        var all: [ExpandedXProjElement] = []
         for section in self.sections {
             let properties = try properties(for: section.isa, in: content)
-            print(properties)
+//            print(properties)
+            all += properties
         }
+        print(all)
     }
 
     private func properties(
