@@ -39,16 +39,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2C6BD25A-96FF-4DBD-9B44-F06094111EF8"
+            uuid = "EDF40393-55F1-4BAD-9E2E-BF37D81E3205"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PackageManagerManager/Project/XProjProject.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "364"
-            endingLineNumber = "364"
-            landmarkName = "listAllProperties(for:)"
+            startingLineNumber = "365"
+            endingLineNumber = "365"
+            landmarkName = "listAllProperties()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

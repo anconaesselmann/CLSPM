@@ -121,6 +121,8 @@ let mockProject = """
         97069C182BEBDE6B00DDA1FB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97069C172BEBDE6B00DDA1FB /* AppState.swift */; };
         97069C1A2BEBDE6D00DDA1FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97069C192BEBDE6D00DDA1FB /* Assets.xcassets */; };
         97069C1E2BEBDE6D00DDA1FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97069C1D2BEBDE6D00DDA1FB /* Preview Assets.xcassets */; };
+        97069C262BEBDEC200DDA1FB /* LoadableView in Frameworks */ = {isa = PBXBuildFile; productRef = 97069C252BEBDEC200DDA1FB /* LoadableView */; };
+        97ADAC1B2BEC24EA00F5DB84 /* CoreDataStored in Frameworks */ = {isa = PBXBuildFile; productRef = 97ADAC1A2BEC24EA00F5DB84 /* CoreDataStored */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,6 +142,8 @@ let mockProject = """
             isa = PBXFrameworksBuildPhase;
             buildActionMask = 2147483647;
             files = (
+                97ADAC1B2BEC24EA00F5DB84 /* CoreDataStored in Frameworks */,
+                97069C262BEBDEC200DDA1FB /* LoadableView in Frameworks */,
             );
             runOnlyForDeploymentPostprocessing = 0;
         };
@@ -210,6 +214,8 @@ let mockProject = """
             );
             name = test22;
             packageProductDependencies = (
+                97069C252BEBDEC200DDA1FB /* LoadableView */,
+                97ADAC1A2BEC24EA00F5DB84 /* CoreDataStored */,
             );
             productName = test22;
             productReference = 97069C0B2BEBDE6B00DDA1FB /* test22.app */;
@@ -240,6 +246,8 @@ let mockProject = """
             );
             mainGroup = 97069C022BEBDE6B00DDA1FB;
             packageReferences = (
+                97069C242BEBDEC200DDA1FB /* XCRemoteSwiftPackageReference "LoadableView" */,
+                97ADAC192BEC24EA00F5DB84 /* XCRemoteSwiftPackageReference "CoreDataStored" */,
             );
             productRefGroup = 97069C0C2BEBDE6B00DDA1FB /* Products */;
             projectDirPath = "";
@@ -490,6 +498,25 @@ let mockProject = """
             defaultConfigurationName = Release;
         };
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+        97069C242BEBDEC200DDA1FB /* XCRemoteSwiftPackageReference "LoadableView" */ = {
+            isa = XCRemoteSwiftPackageReference;
+            repositoryURL = "https://github.com/anconaesselmann/LoadableView/";
+            requirement = {
+                kind = upToNextMajorVersion;
+                minimumVersion = 0.3.9;
+            };
+        };
+        97ADAC192BEC24EA00F5DB84 /* XCRemoteSwiftPackageReference "CoreDataStored" */ = {
+            isa = XCRemoteSwiftPackageReference;
+            repositoryURL = "https://github.com/anconaesselmann/CoreDataStored";
+            requirement = {
+                kind = upToNextMajorVersion;
+                minimumVersion = 0.0.7;
+            };
+        };
+/* End XCRemoteSwiftPackageReference section */
     };
     rootObject = 97069C032BEBDE6B00DDA1FB /* Project object */;
 }

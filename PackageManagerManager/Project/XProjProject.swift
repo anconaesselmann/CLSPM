@@ -359,9 +359,11 @@ extension XProjProject {
         return content.index(sectionRange.upperBound, offsetBy: emptySectionHeader.count)
     }
 
-    func listAllProperties(for sectionIsa: XProjIsa) throws {
-        let properties = try properties(for: sectionIsa, in: content)
-        print(properties)
+    func listAllProperties() throws {
+        for section in self.sections {
+            let properties = try properties(for: section.isa, in: content)
+            print(properties)
+        }
     }
 
     private func properties(

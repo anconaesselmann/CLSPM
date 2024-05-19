@@ -42,7 +42,7 @@ class ContentViewModel: ObservableObject {
             }
             self.project = updated
 
-            try updated.listAllProperties(for: .PBXProject)
+            try updated.listAllProperties()
         } catch {
             print(error)
         }

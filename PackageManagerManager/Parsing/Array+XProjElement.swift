@@ -76,13 +76,15 @@ extension Array where Element == GenericXProjElement {
         var endIndex = elementContent.endIndex
 
         var objectContents: [UUID: [XProjProperty]] = [:]
+        var arrayContents: [UUID: [String]] = [:]
 
         while let objectRange = (try? ParenthesesParser().nextFrame(
             elementContent,
             from: currentIndex,
             types: [.braces]
         ))?.range {
-            var objectContent = elementContent[objectRange].trimmingCharacters(in: .whitespacesAndNewlines)
+            var objectContent = elementContent[objectRange]
+                .trimmingCharacters(in: .whitespacesAndNewlines)
             objectContent.removeFirst()
             objectContent.removeLast()
             let objectProperties = try Self.toXProjProperties(objectContent[objectContent.startIndex..<objectContent.endIndex])
@@ -92,15 +94,14 @@ extension Array where Element == GenericXProjElement {
             elementContent.insert(contentsOf: id.uuidString, at: objectRange.lowerBound)
         }
 
-        var arrayContents: [UUID: [String]] = [:]
-
         currentIndex = elementContent.startIndex
         while let arrayRange = (try? ParenthesesParser().nextFrame(
             elementContent,
             from: currentIndex,
             types: [.parentheses]
         ))?.range {
-            var arrayContent = String(elementContent[arrayRange]).trimmingCharacters(in: .whitespacesAndNewlines)
+            var arrayContent = elementContent[arrayRange]
+                .trimmingCharacters(in: .whitespacesAndNewlines)
             arrayContent.removeFirst()
             arrayContent.removeLast()
             let id = UUID()
@@ -114,12 +115,17 @@ extension Array where Element == GenericXProjElement {
         currentIndex = elementContent.startIndex
         endIndex = elementContent.endIndex
 
-        let regexString = "(?<whiteSpace>[\\t ]+)(?<propertyName>[^ \\{\\}; \t\n]+)\\s=\\s(?<propertyValue>[^;\\{]+);"
-        let regex: Regex<(Substring, whiteSpace: Substring, propertyName: Substring, propertyValue: Substring)> = try Regex(regexString)
+        let regexString = 
+            "(?<whiteSpace>[\\t ]+)" +
+            "(?<key>[^ \\{\\}; \t\n]+)" +
+            "\\s=\\s" +
+            "(?<value>[^;\\{]+)" +
+            ";"
+        let regex: Regex<(Substring, whiteSpace: Substring, key: Substring, value: Substring)> = try Regex(regexString)
         var properties: [XProjProperty] = []
         while let result = try regex.firstMatch(in: elementContent[currentIndex..<endIndex]) {
             let value: Any
-            let stringValue = String(result.propertyValue)
+            let stringValue = String(result.value)
             if let id = UUID(uuidString: stringValue) {
                 if let objectValue = objectContents[id] {
                     value = objectValue
@@ -131,7 +137,11 @@ extension Array where Element == GenericXProjElement {
             } else {
                 value = stringValue
             }
-            let property = XProjProperty(indentation: String(result.whiteSpace), key: String(result.propertyName), value: value)
+            let property = XProjProperty(
+                indentation: String(result.whiteSpace),
+                key: String(result.key),
+                value: value
+            )
             properties.append(property)
             currentIndex = result.range.upperBound
         }
