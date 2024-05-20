@@ -3,29 +3,6 @@
 
 import Foundation
 
-struct XProjObject {
-    let key: Substring
-    let elements: [Any]
-}
-
-struct XProjArray {
-    let key: Substring
-    let elements: [Any]
-}
-
-struct XProjComment {
-    let comment: Substring
-}
-
-struct XProjRoot {
-    let elements: [Any]
-}
-
-struct XProjSectionComment {
-    let isStart: Bool
-    let isa: XProjIsa
-}
-
 protocol XProjElement {
     var isa: XProjIsa { get }
     var id: XProjId { get }
@@ -51,12 +28,6 @@ struct GenericXProjElement: XProjElement {
         isa = try XProjIsa(elementBody: content)
         self.id = id
     }
-}
-
-struct XProjProperty {
-    let indentation: String
-    let key: String
-    let value: Any
 }
 
 struct ExpandedXProjElement: XProjElement {

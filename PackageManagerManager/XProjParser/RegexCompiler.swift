@@ -3,7 +3,7 @@
 
 import Foundation
 
-final class RegexCompiler {
+final internal class RegexCompiler {
     typealias R = Regex<(Substring, Optional<Substring>, Optional<Substring>, objectWhiteSpace: Optional<Substring>, key: Optional<Substring>, Optional<Substring>, propertyComment: Optional<Substring>, Optional<Substring>, objectStart: Optional<Substring>, arrayStart: Optional<Substring>, Optional<Substring>, whiteSpace: Optional<Substring>, propertyKey: Optional<Substring>, value: Optional<Substring>, Optional<Substring>, rootObjectStart: Optional<Substring>, comment: Optional<Substring>, Optional<Substring>, id: Optional<Substring>, Optional<Substring>, idComment: Optional<Substring>, Optional<Substring>, beginningSectionName: Optional<Substring>, Optional<Substring>, endingSectionName: Optional<Substring>)>
 
     private var _regex: R?

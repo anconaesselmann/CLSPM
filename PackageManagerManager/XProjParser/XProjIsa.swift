@@ -1,18 +1,18 @@
-//  Created by Axel Ancona Esselmann on 5/14/24.
+//  Created by Axel Ancona Esselmann on 5/20/24.
 //
 
 import Foundation
 
-enum XProjIsa: Identifiable, Equatable {
+public enum XProjIsa: Identifiable, Equatable {
 
     case PBXBuildFile, PBXFileReference, PBXFrameworksBuildPhase, PBXGroup, PBXNativeTarget, PBXProject, PBXResourcesBuildPhase, XCBuildConfiguration, XCConfigurationList, XCRemoteSwiftPackageReference, XCSwiftPackageProductDependency
     case other(String)
 
-    var id: String {
+    public var id: String {
         rawValue
     }
 
-    var rawValue: String {
+    public var rawValue: String {
         switch self {
         case .PBXBuildFile:
             return "PBXBuildFile"
@@ -41,7 +41,7 @@ enum XProjIsa: Identifiable, Equatable {
         }
     }
 
-    init(rawValue: String) {
+    public init(rawValue: String) {
         switch rawValue {
         case "PBXBuildFile":
             self = .PBXBuildFile

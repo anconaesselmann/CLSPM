@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		9748A2762BFBCC1F008DF6D6 /* RegexCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9748A2752BFBCC1F008DF6D6 /* RegexCompiler.swift */; };
+		9748A2792BFBD1C8008DF6D6 /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9748A2782BFBD1C8008DF6D6 /* ParenthesesParser */; };
+		9748A27C2BFBD2D6008DF6D6 /* Range+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9748A27B2BFBD2D6008DF6D6 /* Range+Extensions.swift */; };
+		9748A27F2BFBD37A008DF6D6 /* XProjParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9748A27E2BFBD37A008DF6D6 /* XProjParser.swift */; };
+		9748A2822BFBD3D4008DF6D6 /* XProjObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9748A2812BFBD3D4008DF6D6 /* XProjObject.swift */; };
+		9748A2842BFBD3E0008DF6D6 /* XProjArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9748A2832BFBD3E0008DF6D6 /* XProjArray.swift */; };
+		9748A2862BFBD3EB008DF6D6 /* XProjComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9748A2852BFBD3EB008DF6D6 /* XProjComment.swift */; };
+		9748A2882BFBD3F7008DF6D6 /* XProjRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9748A2872BFBD3F7008DF6D6 /* XProjRoot.swift */; };
+		9748A28A2BFBD406008DF6D6 /* XProjSectionComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9748A2892BFBD406008DF6D6 /* XProjSectionComment.swift */; };
+		9748A28C2BFBD427008DF6D6 /* XProjProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9748A28B2BFBD427008DF6D6 /* XProjProperty.swift */; };
+		9748A28E2BFBD469008DF6D6 /* XProjIsa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9748A28D2BFBD469008DF6D6 /* XProjIsa.swift */; };
 		9798B1C32BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B1C22BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift */; };
 		97ADAC292BEC255C00F5DB84 /* LoadableResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */; };
 		97ADAC2C2BEC255E00F5DB84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97ADAC2B2BEC255E00F5DB84 /* Assets.xcassets */; };
@@ -41,7 +51,6 @@
 		97D878022BF41705004F0D24 /* ElementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D878012BF41705004F0D24 /* ElementParser.swift */; };
 		97D878052BF4172E004F0D24 /* XProjSection+parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D878042BF4172E004F0D24 /* XProjSection+parsing.swift */; };
 		97D878072BF4175E004F0D24 /* XProjProject+parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D878062BF4175E004F0D24 /* XProjProject+parsing.swift */; };
-		97D878092BF417A8004F0D24 /* XProjIsa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D878082BF417A8004F0D24 /* XProjIsa.swift */; };
 		97D8780B2BF417BC004F0D24 /* XProjIsa+parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D8780A2BF417BC004F0D24 /* XProjIsa+parsing.swift */; };
 		97D8780D2BF41C56004F0D24 /* XProjId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D8780C2BF41C56004F0D24 /* XProjId.swift */; };
 		97D8780F2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D8780E2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift */; };
@@ -49,6 +58,15 @@
 
 /* Begin PBXFileReference section */
 		9748A2752BFBCC1F008DF6D6 /* RegexCompiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexCompiler.swift; sourceTree = "<group>"; };
+		9748A27B2BFBD2D6008DF6D6 /* Range+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Extensions.swift"; sourceTree = "<group>"; };
+		9748A27E2BFBD37A008DF6D6 /* XProjParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjParser.swift; sourceTree = "<group>"; };
+		9748A2812BFBD3D4008DF6D6 /* XProjObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjObject.swift; sourceTree = "<group>"; };
+		9748A2832BFBD3E0008DF6D6 /* XProjArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjArray.swift; sourceTree = "<group>"; };
+		9748A2852BFBD3EB008DF6D6 /* XProjComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjComment.swift; sourceTree = "<group>"; };
+		9748A2872BFBD3F7008DF6D6 /* XProjRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjRoot.swift; sourceTree = "<group>"; };
+		9748A2892BFBD406008DF6D6 /* XProjSectionComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjSectionComment.swift; sourceTree = "<group>"; };
+		9748A28B2BFBD427008DF6D6 /* XProjProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjProperty.swift; sourceTree = "<group>"; };
+		9748A28D2BFBD469008DF6D6 /* XProjIsa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjIsa.swift; sourceTree = "<group>"; };
 		9798B1C22BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCRemoteSwiftPackageReferenceView.swift; sourceTree = "<group>"; };
 		97ADAC252BEC255C00F5DB84 /* PackageManagerManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PackageManagerManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableResult.swift; sourceTree = "<group>"; };
@@ -84,7 +102,6 @@
 		97D878012BF41705004F0D24 /* ElementParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementParser.swift; sourceTree = "<group>"; };
 		97D878042BF4172E004F0D24 /* XProjSection+parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XProjSection+parsing.swift"; sourceTree = "<group>"; };
 		97D878062BF4175E004F0D24 /* XProjProject+parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XProjProject+parsing.swift"; sourceTree = "<group>"; };
-		97D878082BF417A8004F0D24 /* XProjIsa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjIsa.swift; sourceTree = "<group>"; };
 		97D8780A2BF417BC004F0D24 /* XProjIsa+parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XProjIsa+parsing.swift"; sourceTree = "<group>"; };
 		97D8780C2BF41C56004F0D24 /* XProjId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XProjId.swift; sourceTree = "<group>"; };
 		97D8780E2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCSwiftPackageProductDependencyView.swift; sourceTree = "<group>"; };
@@ -95,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9748A2792BFBD1C8008DF6D6 /* ParenthesesParser in Frameworks */,
 				97D877FB2BEED113004F0D24 /* ParenthesesParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +120,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9748A27A2BFBD2C7008DF6D6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9748A27B2BFBD2D6008DF6D6 /* Range+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9748A27D2BFBD350008DF6D6 /* XProjParser */ = {
+			isa = PBXGroup;
+			children = (
+				9748A27A2BFBD2C7008DF6D6 /* Extensions */,
+				9748A27E2BFBD37A008DF6D6 /* XProjParser.swift */,
+				9748A2802BFBD3CD008DF6D6 /* XProjElements */,
+				9748A28B2BFBD427008DF6D6 /* XProjProperty.swift */,
+				9748A28D2BFBD469008DF6D6 /* XProjIsa.swift */,
+				97D8780C2BF41C56004F0D24 /* XProjId.swift */,
+				9748A2752BFBCC1F008DF6D6 /* RegexCompiler.swift */,
+			);
+			path = XProjParser;
+			sourceTree = "<group>";
+		};
+		9748A2802BFBD3CD008DF6D6 /* XProjElements */ = {
+			isa = PBXGroup;
+			children = (
+				9748A2812BFBD3D4008DF6D6 /* XProjObject.swift */,
+				9748A2832BFBD3E0008DF6D6 /* XProjArray.swift */,
+				9748A2852BFBD3EB008DF6D6 /* XProjComment.swift */,
+				9748A2872BFBD3F7008DF6D6 /* XProjRoot.swift */,
+				9748A2892BFBD406008DF6D6 /* XProjSectionComment.swift */,
+			);
+			path = XProjElements;
+			sourceTree = "<group>";
+		};
 		9798B1C42BF71F50001A2050 /* ElementViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				97D877F32BEECA8E004F0D24 /* mock.swift */,
+				9748A27D2BFBD350008DF6D6 /* XProjParser */,
 				97B55DDE2BF7F57F00DDE6A6 /* SpmmTools */,
 				97D878032BF41720004F0D24 /* Parsing */,
 				97D877FC2BF416BB004F0D24 /* Project */,
@@ -221,7 +274,6 @@
 				97D877FF2BF416DA004F0D24 /* XProjProject.swift */,
 				97D877FD2BF416C6004F0D24 /* XProjSection.swift */,
 				97D877F52BEECA8E004F0D24 /* XProjElements.swift */,
-				97D878082BF417A8004F0D24 /* XProjIsa.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -232,14 +284,12 @@
 				97D8780A2BF417BC004F0D24 /* XProjIsa+parsing.swift */,
 				97D878062BF4175E004F0D24 /* XProjProject+parsing.swift */,
 				97D878042BF4172E004F0D24 /* XProjSection+parsing.swift */,
-				97D8780C2BF41C56004F0D24 /* XProjId.swift */,
 				97B55DE82BF8093E00DDE6A6 /* XProjId+parsing.swift */,
 				97D878012BF41705004F0D24 /* ElementParser.swift */,
 				97B55DD82BF72EE300DDE6A6 /* Elements+parsing.swift */,
 				97B55DDA2BF72EFB00DDE6A6 /* Array+XProjElement.swift */,
 				97B55DD62BF72EAC00DDE6A6 /* RegexError.swift */,
 				97B55DCD2BF72E6E00DDE6A6 /* Properties */,
-				9748A2752BFBCC1F008DF6D6 /* RegexCompiler.swift */,
 			);
 			path = Parsing;
 			sourceTree = "<group>";
@@ -262,6 +312,7 @@
 			name = PackageManagerManager;
 			packageProductDependencies = (
 				97D877FA2BEED113004F0D24 /* ParenthesesParser */,
+				9748A2782BFBD1C8008DF6D6 /* ParenthesesParser */,
 			);
 			productName = PackageManagerManager;
 			productReference = 97ADAC252BEC255C00F5DB84 /* PackageManagerManager.app */;
@@ -292,7 +343,7 @@
 			);
 			mainGroup = 97ADAC1C2BEC255C00F5DB84;
 			packageReferences = (
-				97D877F92BEED113004F0D24 /* XCLocalSwiftPackageReference "../AxelPods/ParenthesesParser" */,
+				9748A2772BFBD1C8008DF6D6 /* XCLocalSwiftPackageReference "../AxelPods/ParenthesesParser" */,
 			);
 			productRefGroup = 97ADAC262BEC255C00F5DB84 /* Products */;
 			projectDirPath = "";
@@ -330,19 +381,24 @@
 				97B55DD92BF72EE300DDE6A6 /* Elements+parsing.swift in Sources */,
 				97B55DE02BF7F59300DDE6A6 /* Dependency.swift in Sources */,
 				97ADAC362BEC255E00F5DB84 /* AppState.swift in Sources */,
+				9748A2882BFBD3F7008DF6D6 /* XProjRoot.swift in Sources */,
+				9748A2822BFBD3D4008DF6D6 /* XProjObject.swift in Sources */,
+				9748A2862BFBD3EB008DF6D6 /* XProjComment.swift in Sources */,
 				97B55DC82BF72E2300DDE6A6 /* PBXFrameworksBuildPhaseView.swift in Sources */,
 				97B55DE92BF8093E00DDE6A6 /* XProjId+parsing.swift in Sources */,
 				97B55DD12BF72E8600DDE6A6 /* ElementIdProperty.swift in Sources */,
 				97ADAC2F2BEC255E00F5DB84 /* PackageManagerManagerApp.swift in Sources */,
 				97ADAC292BEC255C00F5DB84 /* LoadableResult.swift in Sources */,
 				97D878002BF416DA004F0D24 /* XProjProject.swift in Sources */,
+				9748A28C2BFBD427008DF6D6 /* XProjProperty.swift in Sources */,
 				97B55DCA2BF72E3200DDE6A6 /* PBXBuildFileFileRefView.swift in Sources */,
+				9748A27C2BFBD2D6008DF6D6 /* Range+Extensions.swift in Sources */,
 				9798B1C32BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift in Sources */,
 				97D878072BF4175E004F0D24 /* XProjProject+parsing.swift in Sources */,
+				9748A28A2BFBD406008DF6D6 /* XProjSectionComment.swift in Sources */,
 				97B55DC62BF72E1300DDE6A6 /* PBXProjectView.swift in Sources */,
 				97B55DD72BF72EAC00DDE6A6 /* RegexError.swift in Sources */,
 				97B55DCF2BF72E7900DDE6A6 /* ElementURLProperty.swift in Sources */,
-				97D878092BF417A8004F0D24 /* XProjIsa.swift in Sources */,
 				97B55DDD2BF75D7600DDE6A6 /* PBXNativeTargetView.swift in Sources */,
 				97B55DCC2BF72E4300DDE6A6 /* PBXBuildFileProductRefView.swift in Sources */,
 				97B55DD32BF72E9200DDE6A6 /* ElementIdArrayProperty.swift in Sources */,
@@ -351,10 +407,13 @@
 				97B55DD52BF72EA000DDE6A6 /* ElementStringProperty.swift in Sources */,
 				97ADAC322BEC255E00F5DB84 /* ContentView.swift in Sources */,
 				97D878022BF41705004F0D24 /* ElementParser.swift in Sources */,
+				9748A28E2BFBD469008DF6D6 /* XProjIsa.swift in Sources */,
 				97D878052BF4172E004F0D24 /* XProjSection+parsing.swift in Sources */,
+				9748A2842BFBD3E0008DF6D6 /* XProjArray.swift in Sources */,
 				97D877F82BEECA8E004F0D24 /* XProjElements.swift in Sources */,
 				9748A2762BFBCC1F008DF6D6 /* RegexCompiler.swift in Sources */,
 				97D877FE2BF416C6004F0D24 /* XProjSection.swift in Sources */,
+				9748A27F2BFBD37A008DF6D6 /* XProjParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,13 +634,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		97D877F92BEED113004F0D24 /* XCLocalSwiftPackageReference "../AxelPods/ParenthesesParser" */ = {
+		9748A2772BFBD1C8008DF6D6 /* XCLocalSwiftPackageReference "../AxelPods/ParenthesesParser" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../AxelPods/ParenthesesParser;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9748A2782BFBD1C8008DF6D6 /* ParenthesesParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ParenthesesParser;
+		};
 		97D877FA2BEED113004F0D24 /* ParenthesesParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ParenthesesParser;

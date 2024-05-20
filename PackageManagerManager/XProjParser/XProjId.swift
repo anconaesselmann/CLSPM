@@ -3,22 +3,22 @@
 
 import Foundation
 
-struct XProjId: Identifiable, Hashable {
-    let stringValue: String
-    var comment: String?
+public struct XProjId: Identifiable, Hashable {
+    public let stringValue: String
+    public var comment: String?
 
-    var id: String {
+    public var id: String {
         stringValue
     }
 
-    init(stringValue: any StringProtocol, comment: (any StringProtocol)? = nil) {
+    public init(stringValue: any StringProtocol, comment: (any StringProtocol)? = nil) {
         self.stringValue = String(stringValue)
         if let comment = comment {
             self.comment = String(comment)
         }
     }
 
-    init() {
+    public init() {
         var uuidString = UUID().uuidString
         uuidString.removeAll { $0 == "-" }
         let range = uuidString.startIndex..<uuidString.index(uuidString.startIndex, offsetBy: 24)
