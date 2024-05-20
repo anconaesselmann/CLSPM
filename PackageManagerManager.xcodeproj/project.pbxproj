@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9748A2762BFBCC1F008DF6D6 /* RegexCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9748A2752BFBCC1F008DF6D6 /* RegexCompiler.swift */; };
 		9798B1C32BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B1C22BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift */; };
 		97ADAC292BEC255C00F5DB84 /* LoadableResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */; };
 		97ADAC2C2BEC255E00F5DB84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97ADAC2B2BEC255E00F5DB84 /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9748A2752BFBCC1F008DF6D6 /* RegexCompiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexCompiler.swift; sourceTree = "<group>"; };
 		9798B1C22BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCRemoteSwiftPackageReferenceView.swift; sourceTree = "<group>"; };
 		97ADAC252BEC255C00F5DB84 /* PackageManagerManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PackageManagerManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableResult.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				97B55DDA2BF72EFB00DDE6A6 /* Array+XProjElement.swift */,
 				97B55DD62BF72EAC00DDE6A6 /* RegexError.swift */,
 				97B55DCD2BF72E6E00DDE6A6 /* Properties */,
+				9748A2752BFBCC1F008DF6D6 /* RegexCompiler.swift */,
 			);
 			path = Parsing;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				97D878022BF41705004F0D24 /* ElementParser.swift in Sources */,
 				97D878052BF4172E004F0D24 /* XProjSection+parsing.swift in Sources */,
 				97D877F82BEECA8E004F0D24 /* XProjElements.swift in Sources */,
+				9748A2762BFBCC1F008DF6D6 /* RegexCompiler.swift in Sources */,
 				97D877FE2BF416C6004F0D24 /* XProjSection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

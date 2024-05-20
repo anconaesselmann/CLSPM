@@ -3,9 +3,42 @@
 
 import Foundation
 
+struct XProjObject {
+    let key: Substring
+    let elements: [Any]
+}
+
+struct XProjArray {
+    let key: Substring
+    let elements: [Any]
+}
+
+struct XProjComment {
+    let comment: Substring
+}
+
+struct XProjRoot {
+    let elements: [Any]
+}
+
+struct XProjSectionComment {
+    let isStart: Bool
+    let isa: XProjIsa
+}
+
 protocol XProjElement {
     var isa: XProjIsa { get }
     var id: XProjId { get }
+}
+
+extension Bool {
+    init?(verbose stringValue: any StringProtocol) {
+        switch String(stringValue) {
+        case "YES": self = true
+        case "NO":  self = false
+        default: return nil
+        }
+    }
 }
 
 struct GenericXProjElement: XProjElement {

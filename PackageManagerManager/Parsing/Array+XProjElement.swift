@@ -116,12 +116,12 @@ extension Array where Element == GenericXProjElement {
         currentIndex = elementContent.startIndex
         endIndex = elementContent.endIndex
 
-        let regexString = 
-            "(?<whiteSpace>[\\t ]+)" +
-            "(?<key>[^ \\{\\}; \t\n]+)" +
-            "\\s=\\s" +
-            "(?<value>[^;\\{]+)" +
-            ";"
+            let regexString =
+                "(?<whiteSpace>[\\t ]+)" +
+                "(?<key>[^ \\{\\}; \t\n]+)" +
+                "\\s=\\s" +
+                "(?<value>[^;\\{]+)" +
+                ";"
         let regex: Regex<(Substring, whiteSpace: Substring, key: Substring, value: Substring)> = try Regex(regexString)
         var properties: [XProjProperty] = []
         while let result = try regex.firstMatch(in: elementContent[currentIndex..<endIndex]) {

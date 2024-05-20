@@ -11,8 +11,11 @@ struct XProjId: Identifiable, Hashable {
         stringValue
     }
 
-    init(stringValue: any StringProtocol) {
+    init(stringValue: any StringProtocol, comment: (any StringProtocol)? = nil) {
         self.stringValue = String(stringValue)
+        if let comment = comment {
+            self.comment = String(comment)
+        }
     }
 
     init() {
