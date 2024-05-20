@@ -3,6 +3,7 @@
 
 import Foundation
 import ParenthesesParser
+import XProjParser
 
 struct XProjProject {
     enum Error: Swift.Error {

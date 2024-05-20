@@ -30,24 +30,82 @@
             filePath = "PackageManagerManager/Project/XProjProject.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "remotePackageRemoved(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CE21BCBF-CE8E-4BB6-B652-B58DAFD92D8E - d378ce52284dfdc0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PackageManagerManager.XProjProject.remotePackageRemoved(Swift.String) throws -&gt; PackageManagerManager.XProjProject"
+                  moduleName = "PackageManagerManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/PackageManagerManager/PackageManagerManager/Project/XProjProject.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168">
+               </Location>
+               <Location
+                  uuid = "CE21BCBF-CE8E-4BB6-B652-B58DAFD92D8E - c1d3f0797afc558"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #8 (PackageManagerManager.XProjElement) -&gt; Swift.Optional&lt;PackageManagerManager.XCRemoteSwiftPackageReference&gt; in PackageManagerManager.XProjProject.remotePackageRemoved(Swift.String) throws -&gt; PackageManagerManager.XProjProject"
+                  moduleName = "PackageManagerManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/PackageManagerManager/PackageManagerManager/Project/XProjProject.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168">
+               </Location>
+               <Location
+                  uuid = "CE21BCBF-CE8E-4BB6-B652-B58DAFD92D8E - d378ce52284dfe21"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PackageManagerManager.XProjProject.remotePackageRemoved(Swift.String) throws -&gt; PackageManagerManager.XProjProject"
+                  moduleName = "PackageManagerManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/PackageManagerManager/PackageManagerManager/Project/XProjProject.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "169"
+                  endingLineNumber = "169">
+               </Location>
+               <Location
+                  uuid = "CE21BCBF-CE8E-4BB6-B652-B58DAFD92D8E - c1d3f0797afc6b9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #8 (PackageManagerManager.XProjElement) -&gt; Swift.Optional&lt;PackageManagerManager.XCRemoteSwiftPackageReference&gt; in PackageManagerManager.XProjProject.remotePackageRemoved(Swift.String) throws -&gt; PackageManagerManager.XProjProject"
+                  moduleName = "PackageManagerManager"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/PackageManagerManager/PackageManagerManager/Project/XProjProject.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "169"
+                  endingLineNumber = "169">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E915D741-D2FB-4B8C-8007-80E3B3D108C1"
+            uuid = "AEF8C0C0-A978-4A5F-8000-55E0FC199FC0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PackageManagerManager/Project/XProjProject.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "369"
-            endingLineNumber = "369"
+            startingLineNumber = "367"
+            endingLineNumber = "367"
             landmarkName = "listAllProperties()"
             landmarkType = "7">
          </BreakpointContent>

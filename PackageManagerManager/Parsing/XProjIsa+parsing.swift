@@ -2,6 +2,7 @@
 //
 
 import Foundation
+import XProjParser
 
 extension XProjIsa {
 

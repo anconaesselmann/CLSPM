@@ -3,6 +3,7 @@
 
 import Foundation
 import ParenthesesParser
+import XProjParser
 
 struct ElementParser {
     static func parse(_ body: Substring, currentIndex: String.Index) -> [GenericXProjElement] {

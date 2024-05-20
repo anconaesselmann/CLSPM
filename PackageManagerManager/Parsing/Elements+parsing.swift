@@ -2,6 +2,7 @@
 //
 
 import Foundation
+import XProjParser
 
 extension PBXBuildFileFileRef {
     init(_ body: Substring, id: XProjId) throws {

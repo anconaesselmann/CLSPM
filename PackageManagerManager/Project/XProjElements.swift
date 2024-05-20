@@ -2,20 +2,11 @@
 //
 
 import Foundation
+import XProjParser
 
 protocol XProjElement {
     var isa: XProjIsa { get }
     var id: XProjId { get }
-}
-
-extension Bool {
-    init?(verbose stringValue: any StringProtocol) {
-        switch String(stringValue) {
-        case "YES": self = true
-        case "NO":  self = false
-        default: return nil
-        }
-    }
 }
 
 struct GenericXProjElement: XProjElement {

@@ -3,6 +3,7 @@
 
 import Foundation
 import ParenthesesParser
+import XProjParser
 
 extension Array where Element == GenericXProjElement {
     func mapToElements() -> [XProjElement] {
