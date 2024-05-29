@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		970655852BFBFB3F00414BCC /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970655842BFBFB3F00414BCC /* ContentViewModel.swift */; };
 		970655882BFC097800414BCC /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 970655872BFC097800414BCC /* ParenthesesParser */; };
-		9729F1692C070E9C00C39506 /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9729F1682C070E9C00C39506 /* ParenthesesParser */; };
 		9748A2792BFBD1C8008DF6D6 /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9748A2782BFBD1C8008DF6D6 /* ParenthesesParser */; };
 		9748A2912BFBD794008DF6D6 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9748A2902BFBD794008DF6D6 /* XProjParser */; };
 		97ADAC292BEC255C00F5DB84 /* LoadableResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */; };
@@ -54,7 +53,6 @@
 				970655882BFC097800414BCC /* ParenthesesParser in Frameworks */,
 				9748A2792BFBD1C8008DF6D6 /* ParenthesesParser in Frameworks */,
 				9748A2912BFBD794008DF6D6 /* XProjParser in Frameworks */,
-				9729F1692C070E9C00C39506 /* ParenthesesParser in Frameworks */,
 				97D877FB2BEED113004F0D24 /* ParenthesesParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,7 +167,6 @@
 				9748A2782BFBD1C8008DF6D6 /* ParenthesesParser */,
 				9748A2902BFBD794008DF6D6 /* XProjParser */,
 				970655872BFC097800414BCC /* ParenthesesParser */,
-				9729F1682C070E9C00C39506 /* ParenthesesParser */,
 			);
 			productName = PackageManagerManager;
 			productReference = 97ADAC252BEC255C00F5DB84 /* PackageManagerManager.app */;
@@ -201,7 +198,6 @@
 			mainGroup = 97ADAC1C2BEC255C00F5DB84;
 			packageReferences = (
 				9748A28F2BFBD794008DF6D6 /* XCLocalSwiftPackageReference "../AxelPods/XProjParser" */,
-				9729F1672C070E9C00C39506 /* XCRemoteSwiftPackageReference "ParenthesesParser" */,
 			);
 			productRefGroup = 97ADAC262BEC255C00F5DB84 /* Products */;
 			projectDirPath = "";
@@ -466,25 +462,9 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		9729F1672C070E9C00C39506 /* XCRemoteSwiftPackageReference "ParenthesesParser" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/anconaesselmann/ParenthesesParser";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.2;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
 		970655872BFC097800414BCC /* ParenthesesParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = ParenthesesParser;
-		};
-		9729F1682C070E9C00C39506 /* ParenthesesParser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9729F1672C070E9C00C39506 /* XCRemoteSwiftPackageReference "ParenthesesParser" */;
 			productName = ParenthesesParser;
 		};
 		9748A2782BFBD1C8008DF6D6 /* ParenthesesParser */ = {
