@@ -15,12 +15,6 @@ extension XProjProject {
             sectionRanges.append(sectionRange)
             sections.append(section)
         }
-        guard
-            let sectionsStartIndex = sectionRanges.first?.lowerBound,
-            let sectionsEndIndex = sectionRanges.last?.upperBound
-        else {
-            throw Error.noProjectHeader
-        }
         self.content = content
         self.sections = sections
     }

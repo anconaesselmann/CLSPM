@@ -23,73 +23,141 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CE21BCBF-CE8E-4BB6-B652-B58DAFD92D8E"
+            uuid = "7268DA71-B500-46CA-B197-7A9DC021EAD4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../AxelPods/XProjParser/Sources/XProjParser/XProjElements/XProjRoot.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "removedSubranges(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "484138D2-F9E4-4017-B2BF-B24146491AB6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PackageManagerManager/Project/XProjProject.swift"
+            filePath = "../AxelPods/XProjParser/Sources/XProjParser/XProjParser.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "remotePackageRemoved(_:)"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "parse(content:range:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9E93E4E7-A9D9-4DB7-AA96-FE2BF3AC29D9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../AxelPods/XProjParser/Sources/XProjParser/XProjParser.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "parse(content:range:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "974FC513-33FA-4C03-87DC-1B5979ADCEEC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../AxelPods/XProjParser/Sources/XProjParser/Extensions/Range+Extensions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "clipedBounds(for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A1636146-2B64-4EC6-BF87-C673D1708F24"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../AxelPods/XProjParser/Sources/XProjParser/Extensions/Range+Extensions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "clipedBounds(for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D3ADF761-470D-449E-AC5C-0F109107238D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../AxelPods/XProjParser/Sources/XProjParser/Extensions/Range+Extensions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "clipedBounds(for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ECF2535C-BF51-4DCA-AEE0-B6DA428D95A9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../AxelPods/XProjParser/Sources/XProjParser/XProjElements/XProjRoot.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "sectionRanges(for:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "CE21BCBF-CE8E-4BB6-B652-B58DAFD92D8E - d378ce52284dfdc0"
+                  uuid = "ECF2535C-BF51-4DCA-AEE0-B6DA428D95A9 - aa01697233527ebf"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "PackageManagerManager.XProjProject.remotePackageRemoved(Swift.String) throws -&gt; PackageManagerManager.XProjProject"
+                  symbolName = "XProjParser.XProjRoot.sectionRanges(for: XProjParser.XProjIsa) throws -&gt; (outer: Swift.Range&lt;Swift.String.Index&gt;, inner: Swift.Range&lt;Swift.String.Index&gt;)"
                   moduleName = "PackageManagerManager"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/PackageManagerManager/PackageManagerManager/Project/XProjProject.swift"
+                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/AxelPods/XProjParser/Sources/XProjParser/XProjElements/XProjRoot.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "168"
-                  endingLineNumber = "168">
+                  startingLineNumber = "61"
+                  endingLineNumber = "61">
                </Location>
                <Location
-                  uuid = "CE21BCBF-CE8E-4BB6-B652-B58DAFD92D8E - c1d3f0797afc558"
+                  uuid = "ECF2535C-BF51-4DCA-AEE0-B6DA428D95A9 - aa01697233527ebf"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #8 (PackageManagerManager.XProjElement) -&gt; Swift.Optional&lt;PackageManagerManager.XCRemoteSwiftPackageReference&gt; in PackageManagerManager.XProjProject.remotePackageRemoved(Swift.String) throws -&gt; PackageManagerManager.XProjProject"
+                  symbolName = "XProjParser.XProjRoot.sectionRanges(for: XProjParser.XProjIsa) throws -&gt; (outer: Swift.Range&lt;Swift.String.Index&gt;, inner: Swift.Range&lt;Swift.String.Index&gt;)"
                   moduleName = "PackageManagerManager"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/PackageManagerManager/PackageManagerManager/Project/XProjProject.swift"
+                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/AxelPods/XProjParser/Sources/XProjParser/XProjElements/XProjRoot.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "168"
-                  endingLineNumber = "168">
-               </Location>
-               <Location
-                  uuid = "CE21BCBF-CE8E-4BB6-B652-B58DAFD92D8E - d378ce52284dfe21"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PackageManagerManager.XProjProject.remotePackageRemoved(Swift.String) throws -&gt; PackageManagerManager.XProjProject"
-                  moduleName = "PackageManagerManager"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/PackageManagerManager/PackageManagerManager/Project/XProjProject.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "169"
-                  endingLineNumber = "169">
-               </Location>
-               <Location
-                  uuid = "CE21BCBF-CE8E-4BB6-B652-B58DAFD92D8E - c1d3f0797afc6b9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #8 (PackageManagerManager.XProjElement) -&gt; Swift.Optional&lt;PackageManagerManager.XCRemoteSwiftPackageReference&gt; in PackageManagerManager.XProjProject.remotePackageRemoved(Swift.String) throws -&gt; PackageManagerManager.XProjProject"
-                  moduleName = "PackageManagerManager"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/axelanconaesselmann/Documents/SwiftIOS/PackageManagerManager/PackageManagerManager/Project/XProjProject.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "169"
-                  endingLineNumber = "169">
+                  startingLineNumber = "61"
+                  endingLineNumber = "61">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -97,16 +165,96 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AEF8C0C0-A978-4A5F-8000-55E0FC199FC0"
+            uuid = "BB71DD83-9D8A-4452-B334-0E98E395F67D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PackageManagerManager/Project/XProjProject.swift"
+            filePath = "../AxelPods/XProjParser/Sources/XProjParser/XProjElements/XProjRoot+Packages.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
-            landmarkName = "listAllProperties()"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "asString(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "43EB6444-5521-41AE-A878-46C3BEECB9F1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PackageManagerManager/UI/ContentViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "addAndRemoveTest22()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E70FCCC6-B4BD-4512-9AA1-5E389789140D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PackageManagerManager/UI/ContentViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "addAndRemoveTest22()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "58462C66-EFF8-4C3D-9A90-F43EF6F67A86"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../AxelPods/XProjParser/Sources/XProjParser/XProjParser.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "parse(content:range:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DE75A518-E52C-4613-AB33-70ADDEC2193E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../AxelPods/XProjParser/Sources/XProjParser/XProjParser.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "parse(arrayContent:range:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0A85908E-3DCB-49A8-8420-94AB6B5086E6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../AxelPods/XProjParser/Sources/XProjParser/XProjParser.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "parse(arrayContent:range:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

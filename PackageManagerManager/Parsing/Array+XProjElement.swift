@@ -36,6 +36,8 @@ extension Array where Element == GenericXProjElement {
                     return $0
                 case .XCRemoteSwiftPackageReference:
                     return try XCRemoteSwiftPackageReference($0.content, id: $0.id)
+                case .XCLocalSwiftPackageReference:
+                    return $0
                 case .XCSwiftPackageProductDependency:
                     return try XCSwiftPackageProductDependency($0.content, id: $0.id)
                 case .other(_):
@@ -142,9 +144,10 @@ extension Array where Element == GenericXProjElement {
                 value = stringValue
             }
             let property = XProjProperty(
-                indentation: String(result.whiteSpace),
-                key: String(result.key),
-                value: value
+                indentation: result.whiteSpace,
+                key: result.key,
+                value: value, 
+                range: result.range
             )
             properties.append(property)
             currentIndex = result.range.upperBound

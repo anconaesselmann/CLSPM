@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		970655832BFBDCE700414BCC /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 970655822BFBDCE700414BCC /* ParenthesesParser */; };
+		970655852BFBFB3F00414BCC /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970655842BFBFB3F00414BCC /* ContentViewModel.swift */; };
+		970655882BFC097800414BCC /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 970655872BFC097800414BCC /* ParenthesesParser */; };
 		9748A2792BFBD1C8008DF6D6 /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9748A2782BFBD1C8008DF6D6 /* ParenthesesParser */; };
 		9748A2912BFBD794008DF6D6 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9748A2902BFBD794008DF6D6 /* XProjParser */; };
 		9798B1C32BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798B1C22BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift */; };
@@ -45,9 +46,11 @@
 		97D878072BF4175E004F0D24 /* XProjProject+parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D878062BF4175E004F0D24 /* XProjProject+parsing.swift */; };
 		97D8780B2BF417BC004F0D24 /* XProjIsa+parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D8780A2BF417BC004F0D24 /* XProjIsa+parsing.swift */; };
 		97D8780F2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D8780E2BF42171004F0D24 /* XCSwiftPackageProductDependencyView.swift */; };
+		97E47CAB2C06D8500096DC46 /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 97E47CAA2C06D8500096DC46 /* ParenthesesParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		970655842BFBFB3F00414BCC /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		9798B1C22BF71F40001A2050 /* XCRemoteSwiftPackageReferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCRemoteSwiftPackageReferenceView.swift; sourceTree = "<group>"; };
 		97ADAC252BEC255C00F5DB84 /* PackageManagerManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PackageManagerManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableResult.swift; sourceTree = "<group>"; };
@@ -92,9 +95,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				970655832BFBDCE700414BCC /* ParenthesesParser in Frameworks */,
+				970655882BFC097800414BCC /* ParenthesesParser in Frameworks */,
 				9748A2792BFBD1C8008DF6D6 /* ParenthesesParser in Frameworks */,
 				9748A2912BFBD794008DF6D6 /* XProjParser in Frameworks */,
+				97E47CAB2C06D8500096DC46 /* ParenthesesParser in Frameworks */,
 				97D877FB2BEED113004F0D24 /* ParenthesesParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				97ADAC312BEC255E00F5DB84 /* ContentView.swift */,
+				970655842BFBFB3F00414BCC /* ContentViewModel.swift */,
 				9798B1C42BF71F50001A2050 /* ElementViews */,
 			);
 			path = UI;
@@ -261,7 +266,8 @@
 				97D877FA2BEED113004F0D24 /* ParenthesesParser */,
 				9748A2782BFBD1C8008DF6D6 /* ParenthesesParser */,
 				9748A2902BFBD794008DF6D6 /* XProjParser */,
-				970655822BFBDCE700414BCC /* ParenthesesParser */,
+				970655872BFC097800414BCC /* ParenthesesParser */,
+				97E47CAA2C06D8500096DC46 /* ParenthesesParser */,
 			);
 			productName = PackageManagerManager;
 			productReference = 97ADAC252BEC255C00F5DB84 /* PackageManagerManager.app */;
@@ -293,7 +299,7 @@
 			mainGroup = 97ADAC1C2BEC255C00F5DB84;
 			packageReferences = (
 				9748A28F2BFBD794008DF6D6 /* XCLocalSwiftPackageReference "../AxelPods/XProjParser" */,
-				970655812BFBDCE700414BCC /* XCRemoteSwiftPackageReference "ParenthesesParser" */,
+				97E47CA92C06D8500096DC46 /* XCRemoteSwiftPackageReference "ParenthesesParser" */,
 			);
 			productRefGroup = 97ADAC262BEC255C00F5DB84 /* Products */;
 			projectDirPath = "";
@@ -350,6 +356,7 @@
 				97B55DD52BF72EA000DDE6A6 /* ElementStringProperty.swift in Sources */,
 				97ADAC322BEC255E00F5DB84 /* ContentView.swift in Sources */,
 				97D878022BF41705004F0D24 /* ElementParser.swift in Sources */,
+				970655852BFBFB3F00414BCC /* ContentViewModel.swift in Sources */,
 				97D878052BF4172E004F0D24 /* XProjSection+parsing.swift in Sources */,
 				97D877F82BEECA8E004F0D24 /* XProjElements.swift in Sources */,
 				97D877FE2BF416C6004F0D24 /* XProjSection.swift in Sources */,
@@ -580,20 +587,19 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		970655812BFBDCE700414BCC /* XCRemoteSwiftPackageReference "ParenthesesParser" */ = {
+		97E47CA92C06D8500096DC46 /* XCRemoteSwiftPackageReference "ParenthesesParser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/anconaesselmann/ParenthesesParser";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.1;
+				minimumVersion = 0.0.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		970655822BFBDCE700414BCC /* ParenthesesParser */ = {
+		970655872BFC097800414BCC /* ParenthesesParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 970655812BFBDCE700414BCC /* XCRemoteSwiftPackageReference "ParenthesesParser" */;
 			productName = ParenthesesParser;
 		};
 		9748A2782BFBD1C8008DF6D6 /* ParenthesesParser */ = {
@@ -606,6 +612,11 @@
 		};
 		97D877FA2BEED113004F0D24 /* ParenthesesParser */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = ParenthesesParser;
+		};
+		97E47CAA2C06D8500096DC46 /* ParenthesesParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97E47CA92C06D8500096DC46 /* XCRemoteSwiftPackageReference "ParenthesesParser" */;
 			productName = ParenthesesParser;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -16,8 +16,8 @@ extension XProjIsa {
         guard let result = try regex.firstMatch(in: elementBody) else {
             throw Error.invalid
         }
-        let isaString = String(result.isa)
-        self.init(rawValue: isaString)
+        let isaString = result.isa
+        self.init(isaString)
     }
 
     init?(header: Substring) {
@@ -26,7 +26,7 @@ extension XProjIsa {
         guard let result = try? regex.firstMatch(in: header) else {
             return nil
         }
-        let isaString = String(result.isa)
-        self.init(rawValue: isaString)
+        let isaString = result.isa
+        self.init(isaString)
     }
 }
