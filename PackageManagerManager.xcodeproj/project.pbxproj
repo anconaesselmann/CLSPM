@@ -3,14 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		970655852BFBFB3F00414BCC /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970655842BFBFB3F00414BCC /* ContentViewModel.swift */; };
-		970655882BFC097800414BCC /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 970655872BFC097800414BCC /* ParenthesesParser */; };
-		9748A2792BFBD1C8008DF6D6 /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9748A2782BFBD1C8008DF6D6 /* ParenthesesParser */; };
-		9748A2912BFBD794008DF6D6 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9748A2902BFBD794008DF6D6 /* XProjParser */; };
 		97ADAC292BEC255C00F5DB84 /* LoadableResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */; };
 		97ADAC2C2BEC255E00F5DB84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97ADAC2B2BEC255E00F5DB84 /* Assets.xcassets */; };
 		97ADAC2F2BEC255E00F5DB84 /* PackageManagerManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC2E2BEC255E00F5DB84 /* PackageManagerManagerApp.swift */; };
@@ -23,7 +20,6 @@
 		97B55DE42BF7F5B100DDE6A6 /* RemoteVersionBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DE32BF7F5B100DDE6A6 /* RemoteVersionBehavior.swift */; };
 		97B55DE72BF7FE3600DDE6A6 /* TargetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B55DE62BF7FE3600DDE6A6 /* TargetManager.swift */; };
 		97D877F62BEECA8E004F0D24 /* mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D877F32BEECA8E004F0D24 /* mock.swift */; };
-		97D877FB2BEED113004F0D24 /* ParenthesesParser in Frameworks */ = {isa = PBXBuildFile; productRef = 97D877FA2BEED113004F0D24 /* ParenthesesParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,10 +46,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				970655882BFC097800414BCC /* ParenthesesParser in Frameworks */,
-				9748A2792BFBD1C8008DF6D6 /* ParenthesesParser in Frameworks */,
-				9748A2912BFBD794008DF6D6 /* XProjParser in Frameworks */,
-				97D877FB2BEED113004F0D24 /* ParenthesesParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,12 +154,6 @@
 			dependencies = (
 			);
 			name = PackageManagerManager;
-			packageProductDependencies = (
-				97D877FA2BEED113004F0D24 /* ParenthesesParser */,
-				9748A2782BFBD1C8008DF6D6 /* ParenthesesParser */,
-				9748A2902BFBD794008DF6D6 /* XProjParser */,
-				970655872BFC097800414BCC /* ParenthesesParser */,
-			);
 			productName = PackageManagerManager;
 			productReference = 97ADAC252BEC255C00F5DB84 /* PackageManagerManager.app */;
 			productType = "com.apple.product-type.application";
@@ -197,7 +183,6 @@
 			);
 			mainGroup = 97ADAC1C2BEC255C00F5DB84;
 			packageReferences = (
-				9748A28F2BFBD794008DF6D6 /* XCLocalSwiftPackageReference "../AxelPods/XProjParser" */,
 			);
 			productRefGroup = 97ADAC262BEC255C00F5DB84 /* Products */;
 			projectDirPath = "";
@@ -454,32 +439,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		9748A28F2BFBD794008DF6D6 /* XCLocalSwiftPackageReference "../AxelPods/XProjParser" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../AxelPods/XProjParser;
-		};
-/* End XCLocalSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		970655872BFC097800414BCC /* ParenthesesParser */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ParenthesesParser;
-		};
-		9748A2782BFBD1C8008DF6D6 /* ParenthesesParser */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ParenthesesParser;
-		};
-		9748A2902BFBD794008DF6D6 /* XProjParser */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = XProjParser;
-		};
-		97D877FA2BEED113004F0D24 /* ParenthesesParser */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ParenthesesParser;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 97ADAC1D2BEC255C00F5DB84 /* Project object */;
 }
