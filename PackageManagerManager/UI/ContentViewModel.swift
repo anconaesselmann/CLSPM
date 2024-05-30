@@ -70,26 +70,26 @@ class ContentViewModel: ObservableObject {
     func addAndRemoveTest22() throws {
         let mock = mockProject
         let added = try addPackagesToTest22(content: mock)
-        print(added)
+        print(added.replacing("    ", with: "\t"))
         let removed = try removePackagesFromTest22(content: added)
-        print(removed)
+        print(removed.replacing("    ", with: "\t"))
         print(mock == removed)
     }
 
     func multipProject() throws {
         let mock = multiTargetMockProject
         let removed = try removePackagesFromMultiTargetProject(content: mock)
-        print(removed)
+        print(removed.replacing("    ", with: "\t"))
         let added = try addPackagesToMultiTargetProject(content: removed)
-        print(added)
+        print(added.replacing("    ", with: "\t"))
     }
 
     func local() throws {
         let mock = mockProjectLocal
         let removed = try removePackagesFromLocal(content: mock)
-        print(removed)
+        print(removed.replacing("    ", with: "\t"))
         let added = try addPackagesToLocal(content: removed)
-        print(added)
+        print(added.replacing("    ", with: "\t"))
     }
 
     func removePackagesFromMultiTargetProject(content: String) throws -> String {
@@ -176,7 +176,7 @@ class ContentViewModel: ObservableObject {
 
     func doSomething() throws {
 //        try addAndRemoveTest22()
-        try multipProject()
+//        try multipProject()
         try local()
     }
 

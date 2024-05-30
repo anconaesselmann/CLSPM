@@ -3266,7 +3266,7 @@ let multiTargetMockProject = """
                 CURRENT_PROJECT_VERSION = 11;
                 DEAD_CODE_STRIPPING = YES;
                 DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-                DEVELOPMENT_ASSET_PATHS = "\"MacOSAudiosaic/Preview Content\"";
+                DEVELOPMENT_ASSET_PATHS = "\\"MacOSAudiosaic/Preview Content\\"";
                 DEVELOPMENT_TEAM = D7MN23CD5F;
                 ENABLE_HARDENED_RUNTIME = YES;
                 ENABLE_PREVIEWS = YES;
@@ -3282,7 +3282,7 @@ let multiTargetMockProject = """
                 MACOSX_DEPLOYMENT_TARGET = 14.0;
                 MARKETING_VERSION = 1.0.0;
                 OTHER_LDFLAGS = (
-                    "\"-Wl,-no_warn_duplicate_libraries\"",
+                    "\\"-Wl,-no_warn_duplicate_libraries\\"",
                     "-ObjC",
                 );
                 PRODUCT_BUNDLE_IDENTIFIER = com.anconaesselmann.Audiosaic;
@@ -3304,7 +3304,7 @@ let multiTargetMockProject = """
                 COMBINE_HIDPI_IMAGES = YES;
                 CURRENT_PROJECT_VERSION = 11;
                 DEAD_CODE_STRIPPING = YES;
-                DEVELOPMENT_ASSET_PATHS = "\"MacOSAudiosaic/Preview Content\"";
+                DEVELOPMENT_ASSET_PATHS = "\\"MacOSAudiosaic/Preview Content\\"";
                 DEVELOPMENT_TEAM = D7MN23CD5F;
                 ENABLE_HARDENED_RUNTIME = YES;
                 ENABLE_PREVIEWS = YES;
@@ -3320,7 +3320,7 @@ let multiTargetMockProject = """
                 MACOSX_DEPLOYMENT_TARGET = 14.0;
                 MARKETING_VERSION = 1.0.0;
                 OTHER_LDFLAGS = (
-                    "\"-Wl,-no_warn_duplicate_libraries\"",
+                    "\\"-Wl,-no_warn_duplicate_libraries\\"",
                     "-ObjC",
                 );
                 PRODUCT_BUNDLE_IDENTIFIER = com.anconaesselmann.Audiosaic;
@@ -3460,7 +3460,7 @@ let multiTargetMockProject = """
                 CODE_SIGN_STYLE = Automatic;
                 CURRENT_PROJECT_VERSION = 11;
                 DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-                DEVELOPMENT_ASSET_PATHS = "\"Audiosaic/Preview Content\"";
+                DEVELOPMENT_ASSET_PATHS = "\\"Audiosaic/Preview Content\\"";
                 DEVELOPMENT_TEAM = D7MN23CD5F;
                 ENABLE_PREVIEWS = YES;
                 GENERATE_INFOPLIST_FILE = YES;
@@ -3480,7 +3480,7 @@ let multiTargetMockProject = """
                 MARKETING_VERSION = 1.0.0;
                 OTHER_LDFLAGS = (
                     "-ObjC",
-                    "\"-Wl,-no_warn_duplicate_libraries\"",
+                    "\\"-Wl,-no_warn_duplicate_libraries\\"",
                 );
                 PRODUCT_BUNDLE_IDENTIFIER = com.anconaesselmann.Audiosaic;
                 PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3501,7 +3501,7 @@ let multiTargetMockProject = """
                 CODE_SIGN_ENTITLEMENTS = Audiosaic/Audiosaic.entitlements;
                 CODE_SIGN_STYLE = Automatic;
                 CURRENT_PROJECT_VERSION = 11;
-                DEVELOPMENT_ASSET_PATHS = "\"Audiosaic/Preview Content\"";
+                DEVELOPMENT_ASSET_PATHS = "\\"Audiosaic/Preview Content\\"";
                 DEVELOPMENT_TEAM = D7MN23CD5F;
                 ENABLE_PREVIEWS = YES;
                 GENERATE_INFOPLIST_FILE = YES;
@@ -3521,7 +3521,7 @@ let multiTargetMockProject = """
                 MARKETING_VERSION = 1.0.0;
                 OTHER_LDFLAGS = (
                     "-ObjC",
-                    "\"-Wl,-no_warn_duplicate_libraries\"",
+                    "\\"-Wl,-no_warn_duplicate_libraries\\"",
                 );
                 PRODUCT_BUNDLE_IDENTIFIER = com.anconaesselmann.Audiosaic;
                 PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3902,6 +3902,7 @@ let mockProjectLocal = """
 /* Begin PBXBuildFile section */
         970655852BFBFB3F00414BCC /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970655842BFBFB3F00414BCC /* ContentViewModel.swift */; };
         9729F17F2C07EBA700C39506 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9729F17E2C07EBA700C39506 /* XProjParser */; };
+        977D31CD2C07F56C00F08EDA /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977D31CC2C07F56C00F08EDA /* Dependencies.swift */; };
         97ADAC292BEC255C00F5DB84 /* LoadableResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */; };
         97ADAC2C2BEC255E00F5DB84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97ADAC2B2BEC255E00F5DB84 /* Assets.xcassets */; };
         97ADAC2F2BEC255E00F5DB84 /* PackageManagerManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97ADAC2E2BEC255E00F5DB84 /* PackageManagerManagerApp.swift */; };
@@ -3918,6 +3919,7 @@ let mockProjectLocal = """
 
 /* Begin PBXFileReference section */
         970655842BFBFB3F00414BCC /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+        977D31CC2C07F56C00F08EDA /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
         97ADAC252BEC255C00F5DB84 /* PackageManagerManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PackageManagerManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
         97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableResult.swift; sourceTree = "<group>"; };
         97ADAC2B2BEC255E00F5DB84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -3967,6 +3969,7 @@ let mockProjectLocal = """
             isa = PBXGroup;
             children = (
                 97D877F32BEECA8E004F0D24 /* mock.swift */,
+                977D31CC2C07F56C00F08EDA /* Dependencies.swift */,
                 97B55DDE2BF7F57F00DDE6A6 /* SpmmTools */,
                 97ADAC282BEC255C00F5DB84 /* LoadableResult.swift */,
                 97ADAC2A2BEC255E00F5DB84 /* Constants */,
@@ -4109,6 +4112,7 @@ let mockProjectLocal = """
             isa = PBXSourcesBuildPhase;
             buildActionMask = 2147483647;
             files = (
+                977D31CD2C07F56C00F08EDA /* Dependencies.swift in Sources */,
                 97B55DE22BF7F5A100DDE6A6 /* Target.swift in Sources */,
                 97ADAC342BEC255E00F5DB84 /* AppInitializer.swift in Sources */,
                 97B55DE72BF7FE3600DDE6A6 /* TargetManager.swift in Sources */,
@@ -4248,7 +4252,7 @@ let mockProjectLocal = """
                 CODE_SIGN_ENTITLEMENTS = PackageManagerManager/App/PackageManagerManager.entitlements;
                 CODE_SIGN_STYLE = Automatic;
                 CURRENT_PROJECT_VERSION = 1;
-                DEVELOPMENT_ASSET_PATHS = "\"PackageManagerManager/Preview Content\"";
+                DEVELOPMENT_ASSET_PATHS = "\\"PackageManagerManager/Preview Content\\"";
                 DEVELOPMENT_TEAM = D7MN23CD5F;
                 ENABLE_HARDENED_RUNTIME = YES;
                 ENABLE_PREVIEWS = YES;
@@ -4286,7 +4290,7 @@ let mockProjectLocal = """
                 CODE_SIGN_ENTITLEMENTS = PackageManagerManager/App/PackageManagerManager.entitlements;
                 CODE_SIGN_STYLE = Automatic;
                 CURRENT_PROJECT_VERSION = 1;
-                DEVELOPMENT_ASSET_PATHS = "\"PackageManagerManager/Preview Content\"";
+                DEVELOPMENT_ASSET_PATHS = "\\"PackageManagerManager/Preview Content\\"";
                 DEVELOPMENT_TEAM = D7MN23CD5F;
                 ENABLE_HARDENED_RUNTIME = YES;
                 ENABLE_PREVIEWS = YES;
