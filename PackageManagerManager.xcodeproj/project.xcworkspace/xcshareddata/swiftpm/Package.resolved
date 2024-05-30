@@ -1,0 +1,15 @@
+{
+  "originHash" : "0e32aab65fc9204b16d501677765b48f5986cf0b1485ca89062e340bef3abacd",
+  "pins" : [
+    {
+      "identity" : "parenthesesparser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anconaesselmann/ParenthesesParser",
+      "state" : {
+        "revision" : "7d788173a22bd2598aceeffa2eee93ddc65f87e7",
+        "version" : "0.0.2"
+      }
+    }
+  ],
+  "version" : 3
+}

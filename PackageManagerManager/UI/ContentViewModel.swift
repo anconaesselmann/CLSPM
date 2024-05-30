@@ -7,28 +7,49 @@ import XProjParser
 class ContentViewModel: ObservableObject {
     private let targetManager = AppState.shared.targetManager
 
+    func addPackagesToLocal(content: String) throws -> String {
+        try XProjParser()
+            .parse(content: content)
+            .root()
+            .addPackages(
+                in: content,
+                (
+                    Dependencies.xProjParser,
+                    isLocal: true,
+                    targetName: "PackageManagerManager"
+                )
+            )
+    }
+
+    func removePackagesFromLocal(content: String) throws -> String {
+        try XProjParser()
+            .parse(content: content)
+            .root()
+            .removeRemotePackages(
+                in: content,
+                (packageName: "XProjParser", relativePath: nil, targetName: "PackageManagerManager")
+            )
+    }
+
     func addPackagesToTest22(content: String) throws -> String {
         try XProjParser()
             .parse(content: content)
             .root()
-            .addRemotePackages(
+            .addPackages(
                 in: content,
                 (
-                    packageName: "LoadableView",
-                    url: "https://github.com/anconaesselmann/LoadableView/",
-                    version: "0.3.9",
+                    Dependencies.loadableView,
+                    isLocal: false,
                     targetName: "test22"
                 ),
                 (
-                    packageName: "CoreDataStored",
-                    url: "https://github.com/anconaesselmann/CoreDataStored/",
-                    version: "0.0.7",
+                    Dependencies.coreDataStored,
+                    isLocal: false,
                     targetName: "test22"
                 ),
                 (
-                    packageName: "ProgrammaticCoreData",
-                    url: "https://github.com/anconaesselmann/ProgrammaticCoreData/",
-                    version: "0.0.4",
+                    Dependencies.programmaticCoreData,
+                    isLocal: false,
                     targetName: "test22"
                 )
             )
@@ -60,6 +81,14 @@ class ContentViewModel: ObservableObject {
         let removed = try removePackagesFromMultiTargetProject(content: mock)
         print(removed)
         let added = try addPackagesToMultiTargetProject(content: removed)
+        print(added)
+    }
+
+    func local() throws {
+        let mock = mockProjectLocal
+        let removed = try removePackagesFromLocal(content: mock)
+        print(removed)
+        let added = try addPackagesToLocal(content: removed)
         print(added)
     }
 
@@ -110,42 +139,36 @@ class ContentViewModel: ObservableObject {
         try XProjParser()
             .parse(content: content)
             .root()
-            .addRemotePackages(
+            .addPackages(
                 in: content,
                 (
-                    packageName: "LoadableView",
-                    url: "https://github.com/anconaesselmann/LoadableView/",
-                    version: "0.3.9",
+                    Dependencies.loadableView,
+                    isLocal: true,
                     targetName: "\"Audiosaic Desktop\""
                 ),
                 (
-                    packageName: "LoadableView",
-                    url: "https://github.com/anconaesselmann/LoadableView/",
-                    version: "0.3.9",
+                    Dependencies.loadableView,
+                    isLocal: true,
                     targetName: "Audiosaic"
                 ),
                 (
-                    packageName: "CoreDataStored",
-                    url: "https://github.com/anconaesselmann/CoreDataStored/",
-                    version: "0.0.7",
+                    Dependencies.coreDataStored,
+                    isLocal: false,
                     targetName: "\"Audiosaic Desktop\""
                 ),
                 (
-                    packageName: "CoreDataStored",
-                    url: "https://github.com/anconaesselmann/CoreDataStored/",
-                    version: "0.0.7",
+                    Dependencies.coreDataStored,
+                    isLocal: false,
                     targetName: "Audiosaic"
                 ),
                 (
-                    packageName: "ProgrammaticCoreData",
-                    url: "https://github.com/anconaesselmann/ProgrammaticCoreData/",
-                    version: "0.0.4",
+                    Dependencies.programmaticCoreData,
+                    isLocal: false,
                     targetName: "\"Audiosaic Desktop\""
                 ),
                 (
-                    packageName: "ProgrammaticCoreData",
-                    url: "https://github.com/anconaesselmann/ProgrammaticCoreData/",
-                    version: "0.0.4",
+                    Dependencies.programmaticCoreData,
+                    isLocal: false,
                     targetName: "Audiosaic"
                 )
             )
@@ -154,6 +177,7 @@ class ContentViewModel: ObservableObject {
     func doSomething() throws {
 //        try addAndRemoveTest22()
         try multipProject()
+        try local()
     }
 
     func update() {
