@@ -1,8 +1,3 @@
-## PackageManagerManagerApp
-
-## Author
-
-Axel Ancona Esselmann
-
-## License
-
+```
+make build
+```

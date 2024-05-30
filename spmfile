@@ -1,0 +1,24 @@
+{
+	"targets": [
+		{
+			"name": "SPMM",
+			"dependencies": [
+				"XProjParser", "ArgumentParser"
+			]
+		}
+	],
+	"dependencies": [
+		{
+			"name": "XProjParser",
+			"url": "https://github.com/anconaesselmann/XProjParser",
+			"version": "0.0.2",
+			"local_path": "../AxelPods/XProjParser",
+			"use_local": false
+		},
+		{
+			"name": "ArgumentParser",
+			"url": "https://github.com/apple/swift-argument-parser",
+			"version": "1.4.0"
+		}
+	]
+}

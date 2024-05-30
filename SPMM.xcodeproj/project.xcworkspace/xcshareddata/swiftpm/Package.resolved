@@ -1,0 +1,33 @@
+{
+  "originHash" : "cd620ccd067f1bf3e1b7dd4aedd7701eba9efd315919127c2480e8cb4d210745",
+  "pins" : [
+    {
+      "identity" : "parenthesesparser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anconaesselmann/ParenthesesParser",
+      "state" : {
+        "revision" : "7d788173a22bd2598aceeffa2eee93ddc65f87e7",
+        "version" : "0.0.2"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser.git",
+      "state" : {
+        "revision" : "0fbc8848e389af3bb55c182bc19ca9d5dc2f255b",
+        "version" : "1.4.0"
+      }
+    },
+    {
+      "identity" : "xprojparser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anconaesselmann/XProjParser",
+      "state" : {
+        "revision" : "bfed69f89bba4df91c25d80191c055c4aa88781d",
+        "version" : "0.0.2"
+      }
+    }
+  ],
+  "version" : 3
+}
