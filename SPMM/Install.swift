@@ -92,14 +92,13 @@ struct Install: ParsableCommand {
             .parse(content: projContent)
             .root()
             .removePackages(in: projContent, remove)
-        print("Removed:")
-        print(removedContent)
-
         let addedContent = try XProjParser()
             .parse(content: removedContent)
             .root()
             .addPackages(in: removedContent, add)
-        print("Added:")
-        print(addedContent)
+        let url = URL(fileURLWithPath: projFileDir)
+        try addedContent.write(to: url, atomically: true, encoding: .utf8)
+        let result = shell("xcodebuild -resolvePackageDependencies")
+        print(result)
     }
 }

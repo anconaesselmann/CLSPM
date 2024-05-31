@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A40C24871CF46308F57E416 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 211DAA6E7A5448698A8C32AC /* XProjParser */; };
+		4D2A21DB63C8449A890C4825 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8C83675167EE4BB097C108F5 /* ArgumentParser */; };
+		972453BF2C0957210069A162 /* shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972453BE2C0957210069A162 /* shell.swift */; };
 		97E7B2432C09117A00E33740 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2422C09117A00E33740 /* main.swift */; };
-		97E7B2622C0920EE00E33740 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 97E7B2612C0920EE00E33740 /* ArgumentParser */; };
-		97E7B2652C09216E00E33740 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 97E7B2642C09216E00E33740 /* XProjParser */; };
 		97E7B2672C092CD600E33740 /* Install.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2662C092CD600E33740 /* Install.swift */; };
 		97E7B2692C093B9600E33740 /* Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2682C093B9600E33740 /* Init.swift */; };
 		97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		972453BE2C0957210069A162 /* shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shell.swift; sourceTree = "<group>"; };
 		97E7B23F2C09117A00E33740 /* SPMM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SPMM; sourceTree = BUILT_PRODUCTS_DIR; };
 		97E7B2422C09117A00E33740 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		97E7B2662C092CD600E33740 /* Install.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Install.swift; sourceTree = "<group>"; };
@@ -40,8 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97E7B2622C0920EE00E33740 /* ArgumentParser in Frameworks */,
-				97E7B2652C09216E00E33740 /* XProjParser in Frameworks */,
+				3A40C24871CF46308F57E416 /* XProjParser in Frameworks */,
+				4D2A21DB63C8449A890C4825 /* ArgumentParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 				97E7B2662C092CD600E33740 /* Install.swift */,
 				97E7B2682C093B9600E33740 /* Init.swift */,
 				97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */,
+				972453BE2C0957210069A162 /* shell.swift */,
 			);
 			path = SPMM;
 			sourceTree = "<group>";
@@ -92,8 +95,8 @@
 			);
 			name = SPMM;
 			packageProductDependencies = (
-				97E7B2612C0920EE00E33740 /* ArgumentParser */,
-				97E7B2642C09216E00E33740 /* XProjParser */,
+				211DAA6E7A5448698A8C32AC /* XProjParser */,
+				8C83675167EE4BB097C108F5 /* ArgumentParser */,
 			);
 			productName = SPMM;
 			productReference = 97E7B23F2C09117A00E33740 /* SPMM */;
@@ -124,8 +127,8 @@
 			);
 			mainGroup = 97E7B2362C09117A00E33740;
 			packageReferences = (
-				97E7B2602C0920EE00E33740 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
-				97E7B2632C09216E00E33740 /* XCRemoteSwiftPackageReference "XProjParser" */,
+				618C33B425704B1D8406A107 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				801D4A4B9E6D47C3AA643492 /* XCLocalSwiftPackageReference "../AxelPods/XProjParser" */,
 			);
 			productRefGroup = 97E7B2402C09117A00E33740 /* Products */;
 			projectDirPath = "";
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97E7B2692C093B9600E33740 /* Init.swift in Sources */,
+				972453BF2C0957210069A162 /* shell.swift in Sources */,
 				97E7B2432C09117A00E33740 /* main.swift in Sources */,
 				97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */,
 				97E7B2672C092CD600E33740 /* Install.swift in Sources */,
@@ -316,35 +320,33 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		801D4A4B9E6D47C3AA643492 /* XCLocalSwiftPackageReference "../AxelPods/XProjParser" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../AxelPods/XProjParser;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
-		97E7B2602C0920EE00E33740 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+		618C33B425704B1D8406A107 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			repositoryURL = "https://github.com/apple/swift-argument-parser";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.4.0;
 			};
 		};
-		97E7B2632C09216E00E33740 /* XCRemoteSwiftPackageReference "XProjParser" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/anconaesselmann/XProjParser";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		97E7B2612C0920EE00E33740 /* ArgumentParser */ = {
+		211DAA6E7A5448698A8C32AC /* XProjParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 97E7B2602C0920EE00E33740 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
-			productName = ArgumentParser;
-		};
-		97E7B2642C09216E00E33740 /* XProjParser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 97E7B2632C09216E00E33740 /* XCRemoteSwiftPackageReference "XProjParser" */;
 			productName = XProjParser;
+		};
+		8C83675167EE4BB097C108F5 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 618C33B425704B1D8406A107 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
