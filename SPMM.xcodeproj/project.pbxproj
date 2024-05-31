@@ -12,8 +12,8 @@
 		97E7B2672C092CD600E33740 /* Install.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2662C092CD600E33740 /* Install.swift */; };
 		97E7B2692C093B9600E33740 /* Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2682C093B9600E33740 /* Init.swift */; };
 		97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */; };
-		E7E116731CE049209FAFCC17 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = CF688B5818254701B5248F45 /* XProjParser */; };
-		FB318DB8968C489EA23DBE15 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 53C26F83097C40FAA6007EC7 /* ArgumentParser */; };
+		F879AFDD744E4066A96FD531 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = E048885B849FC3D1C50EB9A4 /* XProjParser */; };
+		21A91C35A6174C3C9FAE3E0E /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 277ACE67A28C3351045A382B /* ArgumentParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,8 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7E116731CE049209FAFCC17 /* XProjParser in Frameworks */,
-				FB318DB8968C489EA23DBE15 /* ArgumentParser in Frameworks */,
+				F879AFDD744E4066A96FD531 /* XProjParser in Frameworks */,
+				21A91C35A6174C3C9FAE3E0E /* ArgumentParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,8 +95,8 @@
 			);
 			name = SPMM;
 			packageProductDependencies = (
-				CF688B5818254701B5248F45 /* XProjParser */,
-				53C26F83097C40FAA6007EC7 /* ArgumentParser */,
+				E048885B849FC3D1C50EB9A4 /* XProjParser */,
+				277ACE67A28C3351045A382B /* ArgumentParser */,
 			);
 			productName = SPMM;
 			productReference = 97E7B23F2C09117A00E33740 /* SPMM */;
@@ -127,8 +127,8 @@
 			);
 			mainGroup = 97E7B2362C09117A00E33740;
 			packageReferences = (
-				DF3393AFAB0E434DA920D9DC /* XCRemoteSwiftPackageReference "ArgumentParser" */,
-				1AB3B61292594819A747F1E0 /* XCRemoteSwiftPackageReference "XProjParser" */,
+				A8944E3C89889AE95AFBBC35 /* XCRemoteSwiftPackageReference "ArgumentParser" */,
+				49DBC14141740BC85B941561 /* XCLocalSwiftPackageReference "../AxelPods/XProjParser" */,
 			);
 			productRefGroup = 97E7B2402C09117A00E33740 /* Products */;
 			projectDirPath = "";
@@ -320,16 +320,15 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		1AB3B61292594819A747F1E0 /* XCRemoteSwiftPackageReference "XProjParser" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/anconaesselmann/XProjParser";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.2;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		49DBC14141740BC85B941561 /* XCLocalSwiftPackageReference "../AxelPods/XProjParser" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../AxelPods/XProjParser;
 		};
-		DF3393AFAB0E434DA920D9DC /* XCRemoteSwiftPackageReference "ArgumentParser" */ = {
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A8944E3C89889AE95AFBBC35 /* XCRemoteSwiftPackageReference "ArgumentParser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser";
 			requirement = {
@@ -340,14 +339,13 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CF688B5818254701B5248F45 /* XProjParser */ = {
+		E048885B849FC3D1C50EB9A4 /* XProjParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1AB3B61292594819A747F1E0 /* XCRemoteSwiftPackageReference "XProjParser" */;
 			productName = XProjParser;
 		};
-		53C26F83097C40FAA6007EC7 /* ArgumentParser */ = {
+		277ACE67A28C3351045A382B /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DF3393AFAB0E434DA920D9DC /* XCRemoteSwiftPackageReference "ArgumentParser" */;
+			package = A8944E3C89889AE95AFBBC35 /* XCRemoteSwiftPackageReference "ArgumentParser" */;
 			productName = ArgumentParser;
 		};
 /* End XCSwiftPackageProductDependency section */

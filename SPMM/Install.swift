@@ -23,8 +23,6 @@ struct Install: ParsableCommand {
         }
         let spmFileDir = spmfile ?? "\(currentPath)/spmfile"
 
-
-
         guard let spmFileData = FileManager.default.contents(atPath: spmFileDir) else {
             throw Error.couldNotOpenFile(spmFileDir)
         }
@@ -42,6 +40,9 @@ struct Install: ParsableCommand {
         }
         let dependencies = spmFileJson.dependencies.reduce(into: [String: JsonSpmDependency]()) {
             $0[$1.name] = $1
+        }
+        let targetIds = spmFileJson.targets.reduce(into: [String: UUID]()) {
+            $0[$1.name] = $1.id ?? UUID()
         }
         let targets = spmFileJson.targets
             .reduce(into: [String: [JsonSpmDependency]]()) {
@@ -61,9 +62,16 @@ struct Install: ParsableCommand {
         }
         let add: [(dependency: XProjDependency, isLocal: Bool, targetName: String)] = try targets.flatMap { (target, values) in
             try values.map { value -> (dependency: XProjDependency, isLocal: Bool, targetName: String) in
+                let targetId = targetIds[target] ?? UUID()
+                let dependencyId = value.id ?? UUID()
+                let start = targetId.uuidString.startIndex
+                let center = targetId.uuidString.index(start, offsetBy: 8)
+                let end = targetId.uuidString.endIndex
+                let id = UUID(uuidString: String(targetId.uuidString[start..<center]) + String(dependencyId.uuidString[center..<end]))! // ?? UUID()
                 if let url = value.url, let version = value.version, let localPath = value.localPath {
                     return (
                         dependency: XProjDependency(
+                            id: id,
                             name: value.name,
                             url: url,
                             version: version,
@@ -75,6 +83,7 @@ struct Install: ParsableCommand {
                 } else if let url = value.url, let version = value.version {
                     return (
                         dependency: XProjDependency(
+                            id: id,
                             name: value.name,
                             url: url,
                             version: version
@@ -85,6 +94,7 @@ struct Install: ParsableCommand {
                 } else if let localPath = value.localPath {
                     return (
                         dependency: XProjDependency(
+                            id: id,
                             name: value.name,
                             localPath: localPath
                         ),

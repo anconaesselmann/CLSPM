@@ -4,11 +4,13 @@
 import Foundation
 
 struct JsonSpmTarget: Codable {
+    let id: UUID?
     let name: String
     let dependencies: [String]
 }
 
 struct JsonSpmDependency: Codable {
+    let id: UUID?
     let name: String
     let url: String?
     let version: String?
