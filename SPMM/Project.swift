@@ -47,6 +47,15 @@ struct Project {
         return self
     }
 
+    func targets() throws -> [(id: XProjId, name: String)] {
+        try root().elements(withIsa: .PBXNativeTarget).map { object in
+            (
+                id: XProjId(stringValue: object.key),
+                name: try object.string(for: "name")
+            )
+        }
+    }
+
     private func root() throws -> XProjRoot {
         try XProjParser()
             .parse(content: content)

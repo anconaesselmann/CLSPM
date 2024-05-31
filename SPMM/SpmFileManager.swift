@@ -6,23 +6,33 @@ import XProjParser
 
 struct SpmFileManager {
 
+    private let fileManager = FileManager.default
+
     enum Error: Swift.Error {
         case invalidSpmFile
         case couldNotOpenFile(String)
+        case fileDoesNotExist(String)
     }
 
-    func targets(in spmfile: String?, isVerbose verbose: Bool) throws -> [String: (id: UUID, dependencies: [JsonSpmDependency])] {
+    func spmFile(in spmfile: String?, isVerbose verbose: Bool) throws -> JsonSpmFile {
         if let spmfile = spmfile {
             vPrint("Using spm file \"\(spmfile)\"", verbose)
         }
         let spmFileDir = try spmfile ?? (try spmfileDir())
-        guard let spmFileData = FileManager.default.contents(atPath: spmFileDir) else {
+        guard fileManager.fileExists(atPath: spmFileDir) else {
+            throw Error.fileDoesNotExist(spmFileDir)
+        }
+        guard let spmFileData = fileManager.contents(atPath: spmFileDir) else {
             throw Error.couldNotOpenFile(spmFileDir)
         }
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
-        let spmFileJson = try decoder.decode(JsonSpmFile.self, from: spmFileData)
+        return try decoder.decode(JsonSpmFile.self, from: spmFileData)
+    }
+
+    func targets(in spmfile: String?, isVerbose verbose: Bool) throws -> [String: (id: UUID, dependencies: [JsonSpmDependency])] {
+        let spmFileJson = try spmFile(in: spmfile, isVerbose: verbose)
 
         let dependencies = spmFileJson.dependencies.reduce(into: [String: JsonSpmDependency]()) {
             $0[$1.name] = $1
@@ -102,8 +112,19 @@ struct SpmFileManager {
         }
     }
 
+    func save(_ spfJson: JsonSpmFile, to spmfile: String?, isVerbose verbose: Bool) throws {
+        let dir = try spmfile ?? (try spmfileDir())
+        vPrint("Saving spm file \"\(dir)\"", verbose)
+        let url = URL(fileURLWithPath: dir)
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        encoder.outputFormatting = .prettyPrinted
+        try encoder.encode(spfJson)
+            .write(to: url)
+    }
+
     private func spmfileDir() throws -> String {
-        let currentPath = FileManager.default.currentDirectoryPath
+        let currentPath = fileManager.currentDirectoryPath
         return "\(currentPath)/spmfile"
     }
 }

@@ -18,7 +18,7 @@ struct Install: ParsableCommand {
 
     @Flag(
         name: .shortAndLong,
-        help: "Show extra logging for debugging purposes"
+        help: "Show extra logging"
     )
     private var verbose: Bool = false
 
