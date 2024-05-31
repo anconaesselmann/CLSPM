@@ -30,3 +30,7 @@ SPMM init // Not yet implemented
 
 
 // TODO
+
+
+## TODO:
+[ ] Create a master version file to keep dependency versions synchronized across multiple projects
