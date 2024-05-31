@@ -8,10 +8,9 @@ For [SPM](https://www.swift.org/documentation/package-manager/) packages and for
 
 Use make to compile and install SPMM:
 
-1) Compile SPMM and move it to /usr/local/bin
-```
-make build
-```
+1) Compile and install
+
+`make build` will compile SPMM and move it to /usr/local/bin
 
 2) Reload your `PATH` variable or restart `Terminal`/`iTerm`...
 
