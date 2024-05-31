@@ -67,7 +67,7 @@ struct Install: ParsableCommand {
                 let start = targetId.uuidString.startIndex
                 let center = targetId.uuidString.index(start, offsetBy: 8)
                 let end = targetId.uuidString.endIndex
-                let id = UUID(uuidString: String(targetId.uuidString[start..<center]) + String(dependencyId.uuidString[center..<end]))! // ?? UUID()
+                let id = UUID(uuidString: String(targetId.uuidString[start..<center]) + String(dependencyId.uuidString[center..<end])) ?? UUID()
                 if let url = value.url, let version = value.version, let localPath = value.localPath {
                     return (
                         dependency: XProjDependency(
