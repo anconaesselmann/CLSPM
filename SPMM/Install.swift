@@ -9,13 +9,21 @@ struct Install: ParsableCommand {
 
     public static let configuration = CommandConfiguration(abstract: "Generate a blog post banner from the given input")
 
+    @Option(name: .shortAndLong, help: "The path to a custom spmfile")
+    private var spmfile: String?
+
     func run() throws {
         let currentPath = FileManager.default.currentDirectoryPath
         guard let projectName = currentPath.split(separator: "/").last else {
             return
         }
 
-        let spmFileDir = "\(currentPath)/spmfile"
+        if let spmfile = spmfile {
+            print("Using spm file \"\(spmfile)\"")
+        }
+        let spmFileDir = spmfile ?? "\(currentPath)/spmfile"
+
+
 
         guard let spmFileData = FileManager.default.contents(atPath: spmFileDir) else {
             throw Error.couldNotOpenFile(spmFileDir)
