@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97044C7E2C0A3DE700D7424A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7D2C0A3DE700D7424A /* Project.swift */; };
+		97044C802C0A41E700D7424A /* supporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7F2C0A41E700D7424A /* supporting.swift */; };
 		972453BF2C0957210069A162 /* shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972453BE2C0957210069A162 /* shell.swift */; };
+		9761EE672C0A3A950073AB3E /* SpmFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE662C0A3A950073AB3E /* SpmFileManager.swift */; };
 		97E7B2432C09117A00E33740 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2422C09117A00E33740 /* main.swift */; };
 		97E7B2672C092CD600E33740 /* Install.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2662C092CD600E33740 /* Install.swift */; };
 		97E7B2692C093B9600E33740 /* Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2682C093B9600E33740 /* Init.swift */; };
@@ -29,7 +32,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		97044C7D2C0A3DE700D7424A /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		97044C7F2C0A41E700D7424A /* supporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = supporting.swift; sourceTree = "<group>"; };
 		972453BE2C0957210069A162 /* shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shell.swift; sourceTree = "<group>"; };
+		9761EE662C0A3A950073AB3E /* SpmFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpmFileManager.swift; sourceTree = "<group>"; };
 		97E7B23F2C09117A00E33740 /* SPMM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SPMM; sourceTree = BUILT_PRODUCTS_DIR; };
 		97E7B2422C09117A00E33740 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		97E7B2662C092CD600E33740 /* Install.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Install.swift; sourceTree = "<group>"; };
@@ -74,6 +80,9 @@
 				97E7B2682C093B9600E33740 /* Init.swift */,
 				97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */,
 				972453BE2C0957210069A162 /* shell.swift */,
+				97044C7D2C0A3DE700D7424A /* Project.swift */,
+				9761EE662C0A3A950073AB3E /* SpmFileManager.swift */,
+				97044C7F2C0A41E700D7424A /* supporting.swift */,
 			);
 			path = SPMM;
 			sourceTree = "<group>";
@@ -145,9 +154,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				97E7B2692C093B9600E33740 /* Init.swift in Sources */,
+				9761EE672C0A3A950073AB3E /* SpmFileManager.swift in Sources */,
 				972453BF2C0957210069A162 /* shell.swift in Sources */,
 				97E7B2432C09117A00E33740 /* main.swift in Sources */,
 				97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */,
+				97044C7E2C0A3DE700D7424A /* Project.swift in Sources */,
+				97044C802C0A41E700D7424A /* supporting.swift in Sources */,
 				97E7B2672C092CD600E33740 /* Install.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

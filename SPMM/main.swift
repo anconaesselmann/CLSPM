@@ -16,11 +16,4 @@ struct SPMM: ParsableCommand {
     init() { }
 }
 
-enum Error: Swift.Error {
-    case couldNotOpenFile(String)
-    case couldNotReadFile(String)
-    case invalidSpmFile
-    case invalidProjectFileDir
-}
-
 SPMM.main()
