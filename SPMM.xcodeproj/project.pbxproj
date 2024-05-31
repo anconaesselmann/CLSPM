@@ -128,7 +128,7 @@
 			mainGroup = 97E7B2362C09117A00E33740;
 			packageReferences = (
 				8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "ArgumentParser" */,
-				5F0539CADC1F8DA8502468E7 /* XCLocalSwiftPackageReference "../AxelPods/XProjParser" */,
+				7E8642058AD8F1CDAC9350F5 /* XCRemoteSwiftPackageReference "XProjParser" */,
 			);
 			productRefGroup = 97E7B2402C09117A00E33740 /* Products */;
 			projectDirPath = "";
@@ -320,14 +320,15 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		5F0539CADC1F8DA8502468E7 /* XCLocalSwiftPackageReference "../AxelPods/XProjParser" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../AxelPods/XProjParser;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
+		7E8642058AD8F1CDAC9350F5 /* XCRemoteSwiftPackageReference "XProjParser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/anconaesselmann/XProjParser";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.4;
+			};
+		};
 		8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "ArgumentParser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser";
@@ -341,6 +342,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		13E5A14C8AD8F1CDAC9350F5 /* XProjParser */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 7E8642058AD8F1CDAC9350F5 /* XCRemoteSwiftPackageReference "XProjParser" */;
 			productName = XProjParser;
 		};
 		13E5A14C8AF0BCD2BC0C742A /* ArgumentParser */ = {
