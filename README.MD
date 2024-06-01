@@ -19,7 +19,7 @@ Use make to compile and install SPMM:
 ### Generating an `spmfile`
 
 ```
-SPMM init // Not yet implemented
+SPMM init
 ```
 
 ### Adding dependencies to an `spmfile`
