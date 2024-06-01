@@ -102,7 +102,7 @@ struct SpmFileManager {
                             name: value.name,
                             localPath: localPath
                         ),
-                        isLocal: value.useLocal ?? false,
+                        isLocal: true,
                         targetName: targetName
                     )
                 } else {
@@ -118,7 +118,7 @@ struct SpmFileManager {
         let url = URL(fileURLWithPath: dir)
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
-        encoder.outputFormatting = .prettyPrinted
+        encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
         try encoder.encode(spfJson)
             .write(to: url)
     }
