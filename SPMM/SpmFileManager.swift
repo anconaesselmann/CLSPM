@@ -105,6 +105,24 @@ struct SpmFileManager {
                         isLocal: true,
                         targetName: targetName
                     )
+                } else if let useLocal = value.useLocal, useLocal == true {
+                    return (
+                        dependency: XProjDependency(
+                            id: id,
+                            name: value.name
+                        ),
+                        isLocal: true,
+                        targetName: targetName
+                    )
+                } else if value.useLocal == nil, value.url == nil, value.version == nil {
+                    return (
+                        dependency: XProjDependency(
+                            id: id,
+                            name: value.name
+                        ),
+                        isLocal: true,
+                        targetName: targetName
+                    )
                 } else {
                     print("Dependency with missing entries:")
                     print(value.name)

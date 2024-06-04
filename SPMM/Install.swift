@@ -39,4 +39,3 @@ struct Install: ParsableCommand {
             .reloadPackages()
     }
 }
-

@@ -43,6 +43,9 @@ struct Project {
         , verbose: Bool
     ) throws -> Self {
         var copy = self
+        let localRoot = try ConfigManager()
+            .combinedConfigFile()
+            .localRoot
         if verbose {
             print("Adding:")
             let targets: [String: [String]] = add.reduce(into: [:]) {
@@ -50,6 +53,15 @@ struct Project {
             }
             for (targetName, dependencies) in targets.sorted(by: { $0.key < $1.key }) {
                 print("\(targetName): \(dependencies.joined(separator: ","))")
+            }
+        }
+        var add = add
+        if let localRoot = localRoot {
+            for index in 0..<add.count {
+                let element = add[index]
+                if element.isLocal, !element.dependency.hasLocalPath {
+                    add[index].dependency = add[index].dependency.withLocalRoot(localRoot)
+                }
             }
         }
         copy.content = try root()
