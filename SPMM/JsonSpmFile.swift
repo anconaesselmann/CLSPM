@@ -15,7 +15,7 @@ struct JsonSpmDependency: Codable {
     let url: String?
     let version: String?
     let localPath: String?
-    let useLocal: Bool?
+    var useLocal: Bool?
 }
 
 struct JsonSpmFile: Codable {
