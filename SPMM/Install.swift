@@ -37,10 +37,11 @@ struct Install: ParsableCommand {
         vPrint("Targets: \(targets.keys.joined(separator: ", "))", verbose)
 
         if !local.isEmpty {
-            vPrint("Override to use local packages: \(local.sorted { $0 < $1 }.joined(separator: ", "))", verbose)
+            vPrint("Override to use local packages", verbose)
             targets = targets.reduce(into: [:]) {
-                var dependencies = $1.value
-                $0[$1.key] = (
+                let dependencies = $1.value
+                let targetName = $1.key
+                $0[targetName] = (
                     id: dependencies.id,
                     dependencies: dependencies.dependencies.map {
                         guard local.contains($0.name) else {
@@ -48,6 +49,7 @@ struct Install: ParsableCommand {
                         }
                         var copy = $0
                         copy.useLocal = true
+                        vPrint("\tUsing local package: \(targetName) - \($0.name)", verbose)
                         return copy
                     }
                 )
