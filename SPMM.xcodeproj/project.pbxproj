@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0ED594007E8642058AD8F1CD /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED594008AD8F1CDAC9350F5 /* XProjParser */; };
-		0ED594008A0245878AF0BCD2 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED594008AF0BCD2BC0C742A /* ArgumentParser */; };
 		97044C7E2C0A3DE700D7424A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7D2C0A3DE700D7424A /* Project.swift */; };
 		97044C802C0A41E700D7424A /* supporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7F2C0A41E700D7424A /* supporting.swift */; };
 		972453BF2C0957210069A162 /* shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972453BE2C0957210069A162 /* shell.swift */; };
@@ -22,6 +20,8 @@
 		97E7B2672C092CD600E33740 /* Install.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2662C092CD600E33740 /* Install.swift */; };
 		97E7B2692C093B9600E33740 /* Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2682C093B9600E33740 /* Init.swift */; };
 		97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */; };
+		0ED594007E8642058AD8F1CD /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED594008AD8F1CDAC9350F5 /* XProjParser */; };
+		0ED594008A0245878AF0BCD2 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED594008AF0BCD2BC0C742A /* ArgumentParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -151,7 +151,7 @@
 			);
 			mainGroup = 97E7B2362C09117A00E33740;
 			packageReferences = (
-				8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "ArgumentParser" */,
 				7E8642058AD8F1CDAC9350F5 /* XCRemoteSwiftPackageReference "XProjParser" */,
 			);
 			productRefGroup = 97E7B2402C09117A00E33740 /* Products */;
@@ -361,7 +361,7 @@
 				minimumVersion = 0.0.7;
 			};
 		};
-		8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+		8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "ArgumentParser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser";
 			requirement = {
@@ -379,7 +379,7 @@
 		};
 		0ED594008AF0BCD2BC0C742A /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			package = 8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "ArgumentParser" */;
 			productName = ArgumentParser;
 		};
 /* End XCSwiftPackageProductDependency section */
