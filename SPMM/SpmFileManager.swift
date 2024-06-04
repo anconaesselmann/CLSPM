@@ -106,6 +106,11 @@ struct SpmFileManager {
                         targetName: targetName
                     )
                 } else {
+                    print("Dependency with missing entries:")
+                    print(value.name)
+                    print("URL: ", value.url ?? "none")
+                    print("Version: ", value.version ?? "none")
+                    print("Local: ", value.localPath ?? "none")
                     throw Error.invalidSpmFile
                 }
             }

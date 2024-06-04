@@ -33,6 +33,7 @@ struct Init: ParsableCommand {
             .reduce(into: [:]) {
                 $0[$1.name] = $1
             }.values
+            .sorted { $0.name < $1.name }
 
         let targetNames = targets.map { $0.name }
 
@@ -70,7 +71,7 @@ struct Init: ParsableCommand {
                         url: $0.url,
                         version: $0.version,
                         localPath: $0.local,
-                        useLocal: nil
+                        useLocal: ($0.url == nil && $0.local != nil) ? true : nil
                     )
                 }
             )

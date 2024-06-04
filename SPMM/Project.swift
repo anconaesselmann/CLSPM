@@ -18,17 +18,43 @@ struct Project {
         content = try Self.projectContent()
     }
 
-    func removed(_ remove: [(packageName: String, relativePath: String?, targetName: String)]) throws -> Self {
+    func removed(
+        _ remove: [(packageName: String, relativePath: String?, targetName: String)]
+        , verbose: Bool
+    ) throws -> Self {
         var copy = self
+        if verbose {
+            print("Removing:")
+            let targets: [String: [String]] = remove.reduce(into: [:]) {
+                $0[$1.targetName] = ($0[$1.targetName] ?? []) + [$1.packageName]
+            }
+            for (targetName, dependencies) in targets.sorted(by: { $0.key < $1.key }) {
+                print("\(targetName): \(dependencies.joined(separator: ","))")
+            }
+        }
         copy.content = try root()
             .removePackages(in: copy.content, remove)
+        print("Packages removed")
         return copy
     }
 
-    func added(_ add: [(dependency: XProjDependency, isLocal: Bool, targetName: String)]) throws -> Self {
+    func added(
+        _ add: [(dependency: XProjDependency, isLocal: Bool, targetName: String)]
+        , verbose: Bool
+    ) throws -> Self {
         var copy = self
+        if verbose {
+            print("Adding:")
+            let targets: [String: [String]] = add.reduce(into: [:]) {
+                $0[$1.targetName] = ($0[$1.targetName] ?? []) + [$1.dependency.name]
+            }
+            for (targetName, dependencies) in targets.sorted(by: { $0.key < $1.key }) {
+                print("\(targetName): \(dependencies.joined(separator: ","))")
+            }
+        }
         copy.content = try root()
             .addPackages(in: copy.content, add)
+        print("Packages added")
         return copy
     }
 
@@ -101,12 +127,13 @@ struct Project {
             guard let targetName = targetNames[targetId] else {
                 return
             }
-            $0[targetName] = try dependencies.compactMap {
-                let name = try $0.string(for: "productName")
+            let combined: [String: (name: String, url: String?, version: String?, local: String?)] = try dependencies.reduce(into: [:]) {
+                let name = try $1.string(for: "productName")
                 var url: String?
                 var version: String?
                 var localPath: String?
-                if let packageId = try? $0.id(for: "package"), let package = remotePackages[packageId] {
+                let previous = $0[name]
+                if let packageId = try? $1.id(for: "package"), let package = remotePackages[packageId] {
                     if let packageUrl = try? package.string(for: "repositoryURL") {
                         url = String(packageUrl[packageUrl.index(after: packageUrl.startIndex)..<packageUrl.index(before: packageUrl.endIndex)])
                     }
@@ -118,17 +145,21 @@ struct Project {
                     }
                 }
                 if
-                    let localPackage = localPackages[name], 
-                    let path = try? localPackage.string(for: "relativePath")
+                    let localPackage = localPackages[name],
+                    let path = try? localPackage
+                        .string(for: "relativePath")
                 {
                     localPath = path
                 }
-                return (
+                $0[name] = (
                     name: name,
-                    url: url,
-                    version: version,
-                    local: localPath
+                    url: url ?? previous?.url,
+                    version: version ?? previous?.version,
+                    local: localPath ?? previous?.local
                 )
+            }
+            $0[targetName] = combined.values.sorted {
+                $0.name < $1.name
             }
         }
         return packages

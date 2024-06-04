@@ -32,10 +32,9 @@ struct Install: ParsableCommand {
 
         let remove = try manager.packagesToRemove(in: targets)
         let add = try manager.packagesToAdd(in: targets)
-
         try Project()
-            .removed(remove)
-            .added(add)
+            .removed(remove, verbose: verbose)
+            .added(add, verbose: verbose)
             .save()
             .reloadPackages()
     }

@@ -1,7 +1,7 @@
 {
 	"targets": [
 		{
-			"id": "13E5A14C-2E30-4D42-BD66-CDA2D8697E5A",
+			"id": "0ED59400-3C2F-4C93-9E07-A73D244AB0A6",
 			"name": "SPMM",
 			"dependencies": [
 				"XProjParser", "ArgumentParser"
@@ -13,7 +13,7 @@
 			"id": "33D5A837-7E86-4205-8AD8-F1CDAC9350F5",
 			"name": "XProjParser",
 			"url": "https://github.com/anconaesselmann/XProjParser",
-			"version": "0.0.4",
+			"version": "0.0.7",
 			"local_path": "../AxelPods/XProjParser",
 			"use_local": false
 		},
