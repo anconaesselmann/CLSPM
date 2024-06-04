@@ -34,3 +34,6 @@ SPMM init
 
 ## TODO:
 [ ] Create a master version file to keep dependency versions synchronized across multiple projects
+
+Note on executing the install command on a project that has not been run before:
+- The command will likely show an error because the derived data folder for the project has not been created by Xcode. If the project builds without issues this error can be ignored.
