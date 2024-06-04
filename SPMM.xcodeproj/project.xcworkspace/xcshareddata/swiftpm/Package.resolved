@@ -1,5 +1,5 @@
 {
-  "originHash" : "87426ae575d76a462ea85d03be932837f77c7cefb2507ede4c98fffc31c2f0a7",
+  "originHash" : "96f4c7d633c8a13fe73d71630f498d8b914a61f9b24687d497310562a82111ac",
   "pins" : [
     {
       "identity" : "parenthesesparser",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "0fbc8848e389af3bb55c182bc19ca9d5dc2f255b",
         "version" : "1.4.0"
+      }
+    },
+    {
+      "identity" : "xprojparser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anconaesselmann/XProjParser",
+      "state" : {
+        "revision" : "b79370ed31851ae0f02c39788c4da084fceeccc2",
+        "version" : "0.0.7"
       }
     }
   ],
