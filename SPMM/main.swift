@@ -10,7 +10,8 @@ struct SPMM: ParsableCommand {
         subcommands: [
             Install.self,
             Init.self,
-            Config.self
+            Config.self,
+            DependencyCache.self
         ]
     )
 

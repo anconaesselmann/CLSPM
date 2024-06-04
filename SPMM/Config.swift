@@ -2,8 +2,6 @@
 //
 
 import Foundation
-
-import Foundation
 import ArgumentParser
 
 struct Config: ParsableCommand {
