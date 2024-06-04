@@ -6,6 +6,10 @@ import ArgumentParser
 
 struct Install: ParsableCommand {
 
+    enum Error: Swift.Error {
+        case invalidLocalOverrides([String])
+    }
+
     public static let configuration = CommandConfiguration(
         abstract: "Install dependencies from an spmfile"
     )
@@ -36,7 +40,9 @@ struct Install: ParsableCommand {
 
         vPrint("Targets: \(targets.keys.joined(separator: ", "))", verbose)
 
+        var local = Set(local)
         if !local.isEmpty {
+            var notUsed = local
             vPrint("Override to use local packages", verbose)
             targets = targets.reduce(into: [:]) {
                 let dependencies = $1.value
@@ -49,10 +55,14 @@ struct Install: ParsableCommand {
                         }
                         var copy = $0
                         copy.useLocal = true
+                        notUsed.remove($0.name)
                         vPrint("\tUsing local package: \(targetName) - \($0.name)", verbose)
                         return copy
                     }
                 )
+            }
+            if !notUsed.isEmpty {
+                throw Error.invalidLocalOverrides(notUsed.sorted())
             }
         }
 
