@@ -22,3 +22,17 @@ struct JsonSpmFile: Codable {
     var targets: [JsonSpmTarget]
     var dependencies: [JsonSpmDependency]?
 }
+
+extension JsonSpmFile {
+    var microCompatible: Bool {
+        let namesOfTargetsWithDependencies = Set(
+            targets
+                .filter { !$0.dependencies.isEmpty}
+                .map { $0.name }
+        )
+        guard namesOfTargetsWithDependencies.count == 1, let target = namesOfTargetsWithDependencies.first else {
+            return false
+        }
+        return !target.hasSuffix("Tests")
+    }
+}

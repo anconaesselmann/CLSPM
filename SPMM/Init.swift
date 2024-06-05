@@ -57,6 +57,12 @@ struct Init: ParsableCommand {
     )
     private var globalDependencies: Bool = false
 
+    @Flag(
+        name: .shortAndLong,
+        help: "For projects that have only one none-test target a plaintext spmfile that has a comma-separated list of dependencies can be created."
+    )
+    private var microSpmfile: Bool = false
+
     func run() throws {
         let project = try Project()
         let root = try project.root()
@@ -196,6 +202,6 @@ struct Init: ParsableCommand {
                 dependencies: spmFileDependencies
             )
         }
-        try manager.save(jsonSpmFile, to: spmfile, isVerbose: verbose)
+        try manager.save(jsonSpmFile, to: spmfile, microSpmfile: microSpmfile, isVerbose: verbose)
     }
 }

@@ -14,6 +14,7 @@ struct SpmFileManager {
         case couldNotOpenFile(String)
         case fileDoesNotExist(String)
         case invalidUserInput
+        case notMicroSpmfileCompatible
     }
 
     func spmFile(in spmfile: String?, isVerbose verbose: Bool) throws -> JsonSpmFile {
@@ -30,7 +31,34 @@ struct SpmFileManager {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
-        return try decoder.decode(JsonSpmFile.self, from: spmFileData)
+        do {
+            return try decoder.decode(JsonSpmFile.self, from: spmFileData)
+        } catch {
+            guard let string = String(data: spmFileData, encoding: .utf8) else {
+                throw Error.invalidSpmFile
+            }
+            let dependencyNames = string
+                .split(separator: ",")
+                .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
+            for dependencyName in dependencyNames {
+                if dependencyName.contains(/[^a-zA-Z0-9]/) {
+                    throw Error.invalidSpmFile
+                }
+            }
+            let project = try Project()
+            let root = try project.root()
+            let targets = try project.targets(in: root)
+                .filter {
+                    !$0.name.hasSuffix("Tests")
+                }
+            guard targets.count == 1, let target = targets.first else {
+                throw Error.invalidSpmFile
+            }
+            return JsonSpmFile(targets: [
+                JsonSpmTarget(id: UUID(), name: target.name, dependencies: dependencyNames)
+            ])
+        }
+
     }
 
     func targets(in spmfile: String?, isVerbose verbose: Bool) async throws -> [String: (id: UUID, dependencies: [JsonSpmDependency])] {
@@ -191,15 +219,31 @@ struct SpmFileManager {
         }
     }
 
-    func save(_ spfJson: JsonSpmFile, to spmfile: String?, isVerbose verbose: Bool) throws {
+    func save(_ jsonFile: JsonSpmFile, to spmfile: String?, microSpmfile: Bool, isVerbose verbose: Bool) throws {
         let dir = try spmfile ?? (try spmfileDir())
         vPrint("Saving spm file \"\(dir)\"", verbose)
         let url = URL(fileURLWithPath: dir)
-        let encoder = JSONEncoder()
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
-        try encoder.encode(spfJson)
-            .write(to: url)
+        if microSpmfile {
+            guard jsonFile.microCompatible else {
+                throw Error.notMicroSpmfileCompatible
+            }
+            guard let target = jsonFile.targets
+                .first(where: { !$0.name.hasSuffix("Tests")} )
+            else {
+                throw Error.notMicroSpmfileCompatible
+            }
+            guard let data = target.dependencies.joined(separator: ", ").data(using: .utf8) else {
+                throw Error.notMicroSpmfileCompatible
+            }
+            try data
+                .write(to: url)
+        } else {
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
+            try encoder.encode(jsonFile)
+                .write(to: url)
+        }
     }
 
     private func spmfileDir() throws -> String {
