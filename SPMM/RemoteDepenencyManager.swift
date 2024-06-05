@@ -16,7 +16,27 @@ class RemoteDepenencyManager {
         case githubOrg(url: String, name: String)
     }
 
-    var orgs: [String] = []
+    var orgs: [String] {
+        get {
+            do {
+                let config = try ConfigManager().configFile(global: true)
+                return config.orgs ?? []
+            } catch {
+                print(error)
+                return []
+            }
+        }
+        set {
+            let manager = ConfigManager()
+            do {
+                var config = try manager.configFile(global: true)
+                config.orgs = newValue.sorted()
+                try manager.save(config, global: true)
+            } catch {
+                print(error)
+            }
+        }
+    }
 
     func resolve(
         name: String,
@@ -24,6 +44,9 @@ class RemoteDepenencyManager {
     ) async throws -> JsonSpmDependency? {
         guard !orgs.isEmpty else {
             return nil
+        }
+        if !orgs.isEmpty {
+            vPrint("Resolving using orgs \(orgs.joined(separator: ", "))", verbose)
         }
         for org in orgs {
             do {
