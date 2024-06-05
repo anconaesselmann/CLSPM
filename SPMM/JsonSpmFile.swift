@@ -30,9 +30,13 @@ extension JsonSpmFile {
                 .filter { !$0.dependencies.isEmpty}
                 .map { $0.name }
         )
-        guard namesOfTargetsWithDependencies.count == 1, let target = namesOfTargetsWithDependencies.first else {
+        guard namesOfTargetsWithDependencies.count <= 1 else {
             return false
         }
-        return !target.hasSuffix("Tests")
+        if let target = namesOfTargetsWithDependencies.first {
+            return !target.hasSuffix("Tests")
+        } else {
+            return true
+        }
     }
 }

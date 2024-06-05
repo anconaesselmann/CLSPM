@@ -225,14 +225,17 @@ struct SpmFileManager {
         let url = URL(fileURLWithPath: dir)
         if microSpmfile {
             guard jsonFile.microCompatible else {
+                vPrint("Incompatible targets", verbose)
                 throw Error.notMicroSpmfileCompatible
             }
             guard let target = jsonFile.targets
                 .first(where: { !$0.name.hasSuffix("Tests")} )
             else {
+                vPrint("No none-test targets", verbose)
                 throw Error.notMicroSpmfileCompatible
             }
             guard let data = target.dependencies.joined(separator: ", ").data(using: .utf8) else {
+                vPrint("Could not save micro spmfile", verbose)
                 throw Error.notMicroSpmfileCompatible
             }
             try data
