@@ -7,11 +7,13 @@ import XProjParser
 struct SpmFileManager {
 
     private let fileManager = FileManager.default
+    let remoteManager = RemoteDepenencyManager()
 
     enum Error: Swift.Error {
         case invalidSpmFile
         case couldNotOpenFile(String)
         case fileDoesNotExist(String)
+        case invalidUserInput
     }
 
     func spmFile(in spmfile: String?, isVerbose verbose: Bool) throws -> JsonSpmFile {
@@ -64,42 +66,25 @@ struct SpmFileManager {
                     dependencies[dependencyName] = resolvedDependency
                     vPrint("\t\(dependencyName) resolved", verbose)
                 } else {
-                    print("Could not resolve dependency \(dependencyName)")
-                    print("Enter the url for a repository where the \(dependencyName) dependency can be found:")
-                    guard let urlString = readLine() else {
-                        fatalError()
+                    let new: JsonSpmDependency
+                    if let resolved = try await remoteManager.resolve(name: dependencyName, verbose: verbose) {
+                        new = resolved
+                    } else {
+                        print("Could not resolve dependency \(dependencyName)")
+                        print("Either:")
+                        print("\t - Enter the url for the repository")
+                        print("\t\t(Optional: For none github repositories or to specify a speciffic version append a")
+                        print("\t\t release tag name to the repository url separated by a space.)")
+                        print("\t - Enter the github user/organization that should be used to resolve dependencies")
+                        guard let line = readLine() else {
+                            throw Error.invalidUserInput
+                        }
+                        new = try await remoteManager.resolve(
+                            input: line,
+                            name: dependencyName,
+                            verbose: verbose
+                        )
                     }
-                    guard 
-                        let result = try /github\.com[\/|:](?<org>[^\/]+)\/(?<dependency>[^\/\s\.]+)/
-                            .firstMatch(in: urlString)
-                    else {
-                        fatalError()
-                    }
-                    let org = String(result.output.org)
-                    let dependencyName = String(result.output.dependency)
-
-                    guard let releasesUrl = URL(string: "https://api.github.com/repos/\(org)/\(dependencyName)/releases") else {
-                        fatalError()
-                    }
-
-                    let (data, _) = try await URLSession.shared.data(from: releasesUrl)
-
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    decoder.dateDecodingStrategy = .iso8601
-                    let releases = try decoder.decode([GithubRelease].self, from: data)
-                        .filter { $0.draft == false && $0.prerelease == false}
-                    guard let latestVersion = releases.first?.tagName else {
-                        fatalError()
-                    }
-                    vPrint("\tUsing latest release version: \(latestVersion)", verbose)
-                    let new = JsonSpmDependency(
-                        id: UUID(),
-                        name: dependencyName,
-                        url: urlString,
-                        version: latestVersion,
-                        localPath: nil
-                    )
                     dependencies[dependencyName] = new
                     vPrint("\t\(dependencyName) resolved", verbose)
                     dependenciesFile.dependencies = (dependenciesFile.dependencies + [new])
