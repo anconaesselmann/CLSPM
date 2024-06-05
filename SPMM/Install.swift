@@ -4,7 +4,7 @@
 import Foundation
 import ArgumentParser
 
-struct Install: ParsableCommand {
+struct Install: AsyncParsableCommand {
 
     enum Error: Swift.Error {
         case invalidLocalOverrides([String])
@@ -44,11 +44,11 @@ struct Install: ParsableCommand {
     )
     private var packageCacheDir: String?
 
-    func run() throws {
+    func run() async throws {
         vPrint("Installing packages from spmfile", verbose)
 
         let manager = SpmFileManager()
-        var targets = try manager.targets(in: spmfile, isVerbose: verbose)
+        var targets = try await manager.targets(in: spmfile, isVerbose: verbose)
 
         vPrint("Targets: \(targets.keys.joined(separator: ", "))", verbose)
 

@@ -19,7 +19,8 @@
 		979962CB2C0FBDFC00782E40 /* DependencyCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962CA2C0FBDFC00782E40 /* DependencyCache.swift */; };
 		979962CD2C0FBF9D00782E40 /* DependenciesFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962CC2C0FBF9D00782E40 /* DependenciesFile.swift */; };
 		979966D52C10E10300782E40 /* PackageLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979966D42C10E10300782E40 /* PackageLocation.swift */; };
-		97E7B2432C09117A00E33740 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2422C09117A00E33740 /* main.swift */; };
+		979967182C10FB1800782E40 /* GithubRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979967172C10FB1800782E40 /* GithubRelease.swift */; };
+		97E7B2432C09117A00E33740 /* SPMM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2422C09117A00E33740 /* SPMM.swift */; };
 		97E7B2672C092CD600E33740 /* Install.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2662C092CD600E33740 /* Install.swift */; };
 		97E7B2692C093B9600E33740 /* Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2682C093B9600E33740 /* Init.swift */; };
 		97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */; };
@@ -48,8 +49,9 @@
 		979962CA2C0FBDFC00782E40 /* DependencyCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyCache.swift; sourceTree = "<group>"; };
 		979962CC2C0FBF9D00782E40 /* DependenciesFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependenciesFile.swift; sourceTree = "<group>"; };
 		979966D42C10E10300782E40 /* PackageLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageLocation.swift; sourceTree = "<group>"; };
+		979967172C10FB1800782E40 /* GithubRelease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRelease.swift; sourceTree = "<group>"; };
 		97E7B23F2C09117A00E33740 /* SPMM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SPMM; sourceTree = BUILT_PRODUCTS_DIR; };
-		97E7B2422C09117A00E33740 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		97E7B2422C09117A00E33740 /* SPMM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPMM.swift; sourceTree = "<group>"; };
 		97E7B2662C092CD600E33740 /* Install.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Install.swift; sourceTree = "<group>"; };
 		97E7B2682C093B9600E33740 /* Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Init.swift; sourceTree = "<group>"; };
 		97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonSpmFile.swift; sourceTree = "<group>"; };
@@ -87,7 +89,7 @@
 		97E7B2412C09117A00E33740 /* SPMM */ = {
 			isa = PBXGroup;
 			children = (
-				97E7B2422C09117A00E33740 /* main.swift */,
+				97E7B2422C09117A00E33740 /* SPMM.swift */,
 				97E7B2662C092CD600E33740 /* Install.swift */,
 				97E7B2682C093B9600E33740 /* Init.swift */,
 				979962C42C0F84C200782E40 /* Config.swift */,
@@ -101,6 +103,7 @@
 				979962C82C0FA77300782E40 /* ConfigFile.swift */,
 				979962CC2C0FBF9D00782E40 /* DependenciesFile.swift */,
 				979966D42C10E10300782E40 /* PackageLocation.swift */,
+				979967172C10FB1800782E40 /* GithubRelease.swift */,
 			);
 			path = SPMM;
 			sourceTree = "<group>";
@@ -178,13 +181,14 @@
 				9761EE672C0A3A950073AB3E /* SpmFileManager.swift in Sources */,
 				979962C72C0F952100782E40 /* ConfigManager.swift in Sources */,
 				972453BF2C0957210069A162 /* shell.swift in Sources */,
-				97E7B2432C09117A00E33740 /* main.swift in Sources */,
+				97E7B2432C09117A00E33740 /* SPMM.swift in Sources */,
 				97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */,
 				97044C7E2C0A3DE700D7424A /* Project.swift in Sources */,
 				97044C802C0A41E700D7424A /* supporting.swift in Sources */,
 				979962CD2C0FBF9D00782E40 /* DependenciesFile.swift in Sources */,
 				979962CB2C0FBDFC00782E40 /* DependencyCache.swift in Sources */,
 				97E7B2672C092CD600E33740 /* Install.swift in Sources */,
+				979967182C10FB1800782E40 /* GithubRelease.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

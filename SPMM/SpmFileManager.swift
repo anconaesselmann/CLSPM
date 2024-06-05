@@ -31,11 +31,82 @@ struct SpmFileManager {
         return try decoder.decode(JsonSpmFile.self, from: spmFileData)
     }
 
-    func targets(in spmfile: String?, isVerbose verbose: Bool) throws -> [String: (id: UUID, dependencies: [JsonSpmDependency])] {
+    func targets(in spmfile: String?, isVerbose verbose: Bool) async throws -> [String: (id: UUID, dependencies: [JsonSpmDependency])] {
         let spmFileJson = try spmFile(in: spmfile, isVerbose: verbose)
 
-        let dependencies = (spmFileJson.dependencies ?? []).reduce(into: [String: JsonSpmDependency]()) {
-            $0[$1.name] = $1
+        let dependencyNamesUsedByTargets: Set<String> = spmFileJson.targets.reduce(into: []) {
+            let targetName = $1.name
+            $0 = $0.union(Set($1.dependencies))
+        }
+        let resolvedDependencyNames = Set((spmFileJson.dependencies ?? []).map { $0.name })
+        let uresolvedDependencyNames = dependencyNamesUsedByTargets.subtracting(resolvedDependencyNames)
+
+        var dependencies: [String: JsonSpmDependency] = (spmFileJson.dependencies ?? [])
+            .reduce(into: [:]) {
+                $0[$1.name] = $1
+            }
+
+        if !uresolvedDependencyNames.isEmpty {
+            let configManager = ConfigManager()
+            var dependenciesFile = try configManager.dependenciesFile()
+            let globalDependencies: [String: JsonSpmDependency] = dependenciesFile
+                .dependencies.reduce(into: [:]) {
+                    $0[$1.name] = $1
+                }
+            vPrint("Unresolved dependencies", verbose)
+            let sorted = uresolvedDependencyNames.sorted()
+            for dependencyName in sorted {
+                vPrint("\t\(dependencyName)", verbose)
+            }
+            vPrint("Resolving global dependencies", verbose)
+            for dependencyName in sorted {
+                if let resolvedDependency = globalDependencies[dependencyName] {
+                    dependencies[dependencyName] = resolvedDependency
+                    vPrint("\t\(dependencyName) resolved", verbose)
+                } else {
+                    print("Could not resolve dependency \(dependencyName)")
+                    print("Enter the url for a repository where the \(dependencyName) dependency can be found:")
+                    guard let urlString = readLine() else {
+                        fatalError()
+                    }
+                    guard 
+                        let result = try /github\.com[\/|:](?<org>[^\/]+)\/(?<dependency>[^\/\s\.]+)/
+                            .firstMatch(in: urlString)
+                    else {
+                        fatalError()
+                    }
+                    let org = String(result.output.org)
+                    let dependencyName = String(result.output.dependency)
+
+                    guard let releasesUrl = URL(string: "https://api.github.com/repos/\(org)/\(dependencyName)/releases") else {
+                        fatalError()
+                    }
+
+                    let (data, _) = try await URLSession.shared.data(from: releasesUrl)
+
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    decoder.dateDecodingStrategy = .iso8601
+                    let releases = try decoder.decode([GithubRelease].self, from: data)
+                        .filter { $0.draft == false && $0.prerelease == false}
+                    guard let latestVersion = releases.first?.tagName else {
+                        fatalError()
+                    }
+                    vPrint("\tUsing latest release version: \(latestVersion)", verbose)
+                    let new = JsonSpmDependency(
+                        id: UUID(),
+                        name: dependencyName,
+                        url: urlString,
+                        version: latestVersion,
+                        localPath: nil
+                    )
+                    dependencies[dependencyName] = new
+                    vPrint("\t\(dependencyName) resolved", verbose)
+                    dependenciesFile.dependencies = (dependenciesFile.dependencies + [new])
+                        .sorted { $0.name < $1.name }
+                    try configManager.save(dependenciesFile)
+                }
+            }
         }
 
         let targetIds: [String: UUID] = spmFileJson.targets.reduce(into: [:]) {
