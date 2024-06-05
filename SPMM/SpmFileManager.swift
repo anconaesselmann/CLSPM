@@ -34,7 +34,7 @@ struct SpmFileManager {
     func targets(in spmfile: String?, isVerbose verbose: Bool) throws -> [String: (id: UUID, dependencies: [JsonSpmDependency])] {
         let spmFileJson = try spmFile(in: spmfile, isVerbose: verbose)
 
-        let dependencies = spmFileJson.dependencies.reduce(into: [String: JsonSpmDependency]()) {
+        let dependencies = (spmFileJson.dependencies ?? []).reduce(into: [String: JsonSpmDependency]()) {
             $0[$1.name] = $1
         }
 

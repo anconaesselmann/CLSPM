@@ -20,5 +20,5 @@ struct JsonSpmDependency: Codable {
 
 struct JsonSpmFile: Codable {
     var targets: [JsonSpmTarget]
-    var dependencies: [JsonSpmDependency]
+    var dependencies: [JsonSpmDependency]?
 }

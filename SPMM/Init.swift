@@ -51,6 +51,12 @@ struct Init: ParsableCommand {
     )
     private var noTestTargets: Bool = false
 
+    @Flag(
+        name: .shortAndLong,
+        help: "Does not add dependencies to the spmfile. On install dependencies are resolved from a global list of dependencies. For existing spmfiles --global-dependencies does not remove dependencies."
+    )
+    private var globalDependencies: Bool = false
+
     func run() throws {
         let project = try Project()
         let root = try project.root()
@@ -167,15 +173,9 @@ struct Init: ParsableCommand {
             jsonSpmFile.targets = (jsonSpmFile.targets + missingTargets)
                 .sorted { $0.name < $1.name}
         } catch SpmFileManager.Error.fileDoesNotExist {
-            jsonSpmFile = JsonSpmFile(
-                targets: targetNames.map { targetName in
-                    JsonSpmTarget(
-                        id: UUID(),
-                        name: targetName,
-                        dependencies: targetDependencies[targetName]?.map { $0.name } ?? []
-                    )
-                },
-                dependencies: dependencies.map {
+            let spmFileDependencies: [JsonSpmDependency]? = globalDependencies
+                ? nil
+                : dependencies.map {
                     JsonSpmDependency(
                         id: UUID(),
                         name: $0.name,
@@ -185,6 +185,15 @@ struct Init: ParsableCommand {
                         useLocal: ($0.url == nil && $0.local != nil) ? true : nil
                     )
                 }
+            jsonSpmFile = JsonSpmFile(
+                targets: targetNames.map { targetName in
+                    JsonSpmTarget(
+                        id: UUID(),
+                        name: targetName,
+                        dependencies: targetDependencies[targetName]?.map { $0.name } ?? []
+                    )
+                },
+                dependencies: spmFileDependencies
             )
         }
         try manager.save(jsonSpmFile, to: spmfile, isVerbose: verbose)

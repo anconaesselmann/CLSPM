@@ -45,7 +45,7 @@ struct DependencyCache: ParsableCommand {
             .dependencies
             .reduce(into: [:]) { $0[$1.name] = $1 }
 
-        let combined: [String: JsonSpmDependency] = spmFile.dependencies
+        let combined: [String: JsonSpmDependency] = (spmFile.dependencies ?? [])
             .reduce(into: cachedDependencies) {
                 let name = $1.name
                 let dependency = $1
