@@ -8,7 +8,7 @@ import XProjParser
 struct Init: ParsableCommand {
 
     enum Error: Swift.Error {
-        case invalidCachedDependencies([String])
+        case couldNotResolveDependencyNames([String])
     }
 
     public static let configuration = CommandConfiguration(
@@ -51,7 +51,11 @@ struct Init: ParsableCommand {
         let targets = try project.targets(in: root)
         var targetDependencies = try project.dependencies(in: root, verbose: verbose)
         let cached = Set(cached)
+
+        let targetNames = targets.map { $0.name }
+
         if !cached.isEmpty {
+            vPrint("Resolving dependencies \(cached.sorted().joined(separator: ", "))", verbose)
             let configManager = ConfigManager()
             let cachedDependencies = try configManager
                 .dependenciesFile().dependencies
@@ -61,7 +65,7 @@ struct Init: ParsableCommand {
             let used = Set(cachedDependencies.map { $0.name })
             let notUsed = cached.subtracting(used)
             guard notUsed.isEmpty else {
-                throw Error.invalidCachedDependencies(notUsed.sorted())
+                throw Error.couldNotResolveDependencyNames(notUsed.sorted())
             }
             for var (targetName, dependencies) in targetDependencies {
                 if let target = target {
@@ -71,7 +75,7 @@ struct Init: ParsableCommand {
                     }
                 } else {
                     if targetName.hasSuffix("Tests") {
-                        vPrint("Ignoring \(targetName). To add cached dependencies to test files provied the target name with --target", verbose)
+                        vPrint("Ignoring \(targetName). To add cached dependencies to test files first run `install` for all none-test targets and re-run `init` with the option --target and the test target's name", verbose)
                         continue
                     }
                 }
@@ -82,15 +86,19 @@ struct Init: ParsableCommand {
                         version: cachedDependency.version,
                         local: cachedDependency.localPath
                     )
-                    if let index = dependencies.firstIndex(where: { cached.contains($0.name) }) {
-                        vPrint("Overwriting dependency \(newValue.name) from cache in \(targetName)", verbose)
+                    if let index = dependencies.firstIndex(where: { $0.name == newValue.name }) {
+                        vPrint("\tOverwriting dependency \(newValue.name) from cache in \(targetName)", verbose)
                         dependencies[index] = newValue
                     } else {
-                        vPrint("Using cached dependency \(newValue.name) in \(targetName)", verbose)
+                        vPrint("\tUsing cached dependency \(newValue.name) in \(targetName)", verbose)
                         dependencies.append(newValue)
                     }
                 }
                 targetDependencies[targetName] = dependencies
+                vPrint("All dependencies in \(targetName):", verbose)
+                for dependency in dependencies {
+                    vPrint("\t\(dependency.name)", verbose)
+                }
             }
         }
 
@@ -101,9 +109,10 @@ struct Init: ParsableCommand {
             }.values
             .sorted { $0.name < $1.name }
 
-        let targetNames = targets.map { $0.name }
-
-        vPrint("Targets in project: \(targetNames.joined(separator: ", "))", verbose)
+        vPrint("Dependencies across all targets:", verbose)
+        for dependency in dependencies {
+            vPrint("\t\(dependency.name)", verbose)
+        }
 
         let manager = SpmFileManager()
         var jsonSpmFile: JsonSpmFile

@@ -40,7 +40,7 @@ struct Install: ParsableCommand {
 
         vPrint("Targets: \(targets.keys.joined(separator: ", "))", verbose)
 
-        var local = Set(local)
+        let local = Set(local)
         if !local.isEmpty {
             var notUsed = local
             vPrint("Override to use local packages", verbose)

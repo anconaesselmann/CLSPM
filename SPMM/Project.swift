@@ -79,8 +79,10 @@ struct Project {
     }
 
     @discardableResult
-    func reloadPackages() -> Self {
-        let result = shell("xcodebuild -resolvePackageDependencies")
+    func reloadPackages() throws -> Self {
+        let manager = ConfigManager()
+        let packagesPath = try manager.packagesDir()
+        let result = shell("xcodebuild -resolvePackageDependencies -clonedSourcePackagesDirPath .swiftpmm/packages")
         print(result)
         return self
     }

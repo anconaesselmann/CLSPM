@@ -123,4 +123,9 @@ class ConfigManager {
         let exists = FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
         return exists && isDirectory.boolValue
     }
+
+    func packagesDir() throws -> String {
+        let swiftpmmDir = try swiftPmmDirUrl(global: false)
+        return "\(swiftpmmDir)/packages"
+    }
 }
