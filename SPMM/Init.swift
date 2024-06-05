@@ -45,6 +45,12 @@ struct Init: ParsableCommand {
     )
     private var force: Bool = false
 
+    @Flag(
+        name: .shortAndLong,
+        help: "Creates an spmfile without test targets"
+    )
+    private var noTestTargets: Bool = false
+
     func run() throws {
         let project = try Project()
         let root = try project.root()
@@ -52,7 +58,12 @@ struct Init: ParsableCommand {
         var targetDependencies = try project.dependencies(in: root, verbose: verbose)
         let cached = Set(cached)
 
-        let targetNames = targets.map { $0.name }
+        var targetNames = targets.map { $0.name }
+        if noTestTargets {
+            let ignored = targetNames.filter { $0.hasSuffix("Tests") }
+            vPrint("Ignoring targets \(ignored.joined(separator: ", "))", verbose)
+            targetNames = targetNames.filter { !$0.hasSuffix("Tests") }
+        }
 
         if !cached.isEmpty {
             vPrint("Resolving dependencies \(cached.sorted().joined(separator: ", "))", verbose)
@@ -75,8 +86,15 @@ struct Init: ParsableCommand {
                     }
                 } else {
                     if targetName.hasSuffix("Tests") {
-                        vPrint("Ignoring \(targetName). To add cached dependencies to test files first run `install` for all none-test targets and re-run `init` with the option --target and the test target's name", verbose)
+                        if noTestTargets {
+                            vPrint("Ignoring target \(targetName)", verbose)
+                            targetDependencies.removeValue(forKey: targetName)
+                        } else {
+                            vPrint("Ignoring \(targetName). To add cached dependencies to test files first run `install` for all none-test targets and re-run `init` with the option --target and the test target's name", verbose)
+                        }
                         continue
+                    } else {
+                        vPrint("Dependencies for target \(targetName):", verbose)
                     }
                 }
                 for cachedDependency in cachedDependencies {

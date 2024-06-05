@@ -39,8 +39,8 @@ struct Project {
     }
 
     func added(
-        _ add: [(dependency: XProjDependency, isLocal: Bool, targetName: String)]
-        , verbose: Bool
+        _ add: [(dependency: XProjDependency, isLocal: Bool, targetName: String)],
+        verbose: Bool
     ) throws -> Self {
         var copy = self
         let localRoot = try ConfigManager()
@@ -79,10 +79,19 @@ struct Project {
     }
 
     @discardableResult
-    func reloadPackages() throws -> Self {
+    func reloadPackages(_ location: PackageLocation) throws -> Self {
         let manager = ConfigManager()
-        let packagesPath = try manager.packagesDir()
-        let result = shell("xcodebuild -resolvePackageDependencies -clonedSourcePackagesDirPath .swiftpmm/packages")
+        let clonedSourcePacagesOption: String
+        switch location {
+        case .defaultLocation:
+            clonedSourcePacagesOption = ""
+        case .spmmDerivedData:
+            let packagesPath = try manager.packagesDir()
+            clonedSourcePacagesOption = " -clonedSourcePackagesDirPath .swiftpmm/DerivedData/packages"
+        case .custom(let location):
+            clonedSourcePacagesOption = " -clonedSourcePackagesDirPath \(location)"
+        }
+        let result = shell("xcodebuild -resolvePackageDependencies\(clonedSourcePacagesOption)")
         print(result)
         return self
     }

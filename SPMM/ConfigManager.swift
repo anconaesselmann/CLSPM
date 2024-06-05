@@ -126,6 +126,10 @@ class ConfigManager {
 
     func packagesDir() throws -> String {
         let swiftpmmDir = try swiftPmmDirUrl(global: false)
-        return "\(swiftpmmDir)/packages"
+        let dir = swiftpmmDir.appending(path: "DerivedData")
+        if !directoryExistsAtPath(dir.path()) {
+            try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: false)
+        }
+        return "\(dir)/packages"
     }
 }

@@ -32,6 +32,18 @@ struct Install: ParsableCommand {
     )
     private var verbose: Bool = false
 
+    @Flag(
+        name: .long,
+        help: "Packages are cloned to a local DerivedData directory inside .swiftspmm"
+    )
+    private var cloneToSpmmDir: Bool = false
+
+    @Option(
+        name: .long,
+        help: "Location remote packages get cloned to"
+    )
+    private var packageCacheDir: String?
+
     func run() throws {
         vPrint("Installing packages from spmfile", verbose)
 
@@ -65,6 +77,14 @@ struct Install: ParsableCommand {
                 throw Error.invalidLocalOverrides(notUsed.sorted())
             }
         }
+        let location: PackageLocation
+        if let packageCacheDir = packageCacheDir {
+            location = .custom(packageCacheDir)
+        } else if cloneToSpmmDir {
+            location = .spmmDerivedData
+        } else {
+            location = .defaultLocation
+        }
 
         let remove = try manager.packagesToRemove(in: targets)
         let add = try manager.packagesToAdd(in: targets)
@@ -72,6 +92,6 @@ struct Install: ParsableCommand {
             .removed(remove, verbose: verbose)
             .added(add, verbose: verbose)
             .save()
-            .reloadPackages()
+            .reloadPackages(location)
     }
 }
