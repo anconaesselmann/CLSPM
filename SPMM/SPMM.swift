@@ -17,12 +17,4 @@ struct SPMM: AsyncParsableCommand {
     )
 
     init() { }
-
-//    func run() throws {
-//        var config = Config()
-//        config.localRoot = "../AxelPods"
-//        config.global = true
-//        config.verbose = true
-//        try config.run()
-//    }
 }

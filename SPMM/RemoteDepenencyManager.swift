@@ -118,6 +118,13 @@ class RemoteDepenencyManager {
             let org = String(result.output.org)
             orgs.append(org)
             return .githubOrg(url: "https://github.com/\(org)", name: name)
+        } else if
+            let result = try /^\s*(?<org>[a-zA-A0-9\-]+)\s*$/
+                .firstMatch(in: line)
+        {
+            let org = String(result.output.org)
+            orgs.append(org)
+            return .githubOrg(url: "https://github.com/\(org)", name: name)
         } else {
             throw Error.invalidInput
         }
