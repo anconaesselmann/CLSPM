@@ -19,6 +19,8 @@ final class InitTests: XCTestCase {
 
     override func tearDownWithError() throws {
         sut = nil
+        try FileManager.test_cleanup()
+        VPrintTestObserver.test_cleanup()
     }
 
     func emptyMicroSpmFileCreatedExample() throws {

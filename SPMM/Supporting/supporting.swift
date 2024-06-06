@@ -14,6 +14,10 @@ class VPrintTestObserver {
     static func test_setup() {
         shared = VPrintTestObserver()
     }
+
+    static func test_cleanup() {
+        shared = VPrintTestObserver()
+    }
 }
 #endif
 

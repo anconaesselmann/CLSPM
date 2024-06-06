@@ -39,6 +39,13 @@ class FileManager {
         try FileManager.default.createDirectory(at: currentUrl, withIntermediateDirectories: true)
     }
 
+    static func test_cleanup() throws {
+        let uuid = UUID(uuidString: "4bfcdd0e-df3c-48df-b58e-1828a1189160")!
+        let testDir = "/private/tmp/\(uuid.uuidString)"
+        let testUrl = URL(filePath: testDir, directoryHint: .isDirectory)
+        try FileManager.default.removeItem(at: testUrl)
+    }
+
     func copy(from bundle: Bundle, _ testName: String, in dir: String, name: String) throws {
         let parts = testName.split(separator: ".")
         guard
