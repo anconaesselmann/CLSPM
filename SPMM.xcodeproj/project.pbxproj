@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0ED594007E8642058AD8F1CD /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED594008AD8F1CDAC9350F5 /* XProjParser */; };
-		0ED594008A0245878AF0BCD2 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED594008AF0BCD2BC0C742A /* ArgumentParser */; };
 		97044C7E2C0A3DE700D7424A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7D2C0A3DE700D7424A /* Project.swift */; };
 		97044C802C0A41E700D7424A /* supporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7F2C0A41E700D7424A /* supporting.swift */; };
 		972453BF2C0957210069A162 /* shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972453BE2C0957210069A162 /* shell.swift */; };
@@ -21,10 +19,13 @@
 		979966D52C10E10300782E40 /* PackageLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979966D42C10E10300782E40 /* PackageLocation.swift */; };
 		979967182C10FB1800782E40 /* GithubRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979967172C10FB1800782E40 /* GithubRelease.swift */; };
 		9799671A2C1105D400782E40 /* RemoteDepenencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979967192C1105D400782E40 /* RemoteDepenencyManager.swift */; };
+		979967DF2C1178AA00782E40 /* Bool+StringInitialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979967DE2C1178AA00782E40 /* Bool+StringInitialization.swift */; };
 		97E7B2432C09117A00E33740 /* SPMM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2422C09117A00E33740 /* SPMM.swift */; };
 		97E7B2672C092CD600E33740 /* Install.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2662C092CD600E33740 /* Install.swift */; };
 		97E7B2692C093B9600E33740 /* Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2682C093B9600E33740 /* Init.swift */; };
 		97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */; };
+		0ED594007E8642058AD8F1CD /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED594008AD8F1CDAC9350F5 /* XProjParser */; };
+		0ED594008A0245878AF0BCD2 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED594008AF0BCD2BC0C742A /* ArgumentParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +53,7 @@
 		979966D42C10E10300782E40 /* PackageLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageLocation.swift; sourceTree = "<group>"; };
 		979967172C10FB1800782E40 /* GithubRelease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRelease.swift; sourceTree = "<group>"; };
 		979967192C1105D400782E40 /* RemoteDepenencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDepenencyManager.swift; sourceTree = "<group>"; };
+		979967DE2C1178AA00782E40 /* Bool+StringInitialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+StringInitialization.swift"; sourceTree = "<group>"; };
 		97E7B23F2C09117A00E33740 /* SPMM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SPMM; sourceTree = BUILT_PRODUCTS_DIR; };
 		97E7B2422C09117A00E33740 /* SPMM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPMM.swift; sourceTree = "<group>"; };
 		97E7B2662C092CD600E33740 /* Install.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Install.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				979966D42C10E10300782E40 /* PackageLocation.swift */,
 				979967172C10FB1800782E40 /* GithubRelease.swift */,
 				979967192C1105D400782E40 /* RemoteDepenencyManager.swift */,
+				979967DE2C1178AA00782E40 /* Bool+StringInitialization.swift */,
 			);
 			path = SPMM;
 			sourceTree = "<group>";
@@ -160,7 +163,7 @@
 			);
 			mainGroup = 97E7B2362C09117A00E33740;
 			packageReferences = (
-				8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "ArgumentParser" */,
 				7E8642058AD8F1CDAC9350F5 /* XCRemoteSwiftPackageReference "XProjParser" */,
 			);
 			productRefGroup = 97E7B2402C09117A00E33740 /* Products */;
@@ -184,6 +187,7 @@
 				9761EE672C0A3A950073AB3E /* SpmFileManager.swift in Sources */,
 				979962C72C0F952100782E40 /* ConfigManager.swift in Sources */,
 				972453BF2C0957210069A162 /* shell.swift in Sources */,
+				979967DF2C1178AA00782E40 /* Bool+StringInitialization.swift in Sources */,
 				97E7B2432C09117A00E33740 /* SPMM.swift in Sources */,
 				97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */,
 				9799671A2C1105D400782E40 /* RemoteDepenencyManager.swift in Sources */,
@@ -373,7 +377,7 @@
 				minimumVersion = 0.0.7;
 			};
 		};
-		8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+		8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "ArgumentParser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser";
 			requirement = {
@@ -391,7 +395,7 @@
 		};
 		0ED594008AF0BCD2BC0C742A /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			package = 8A0245878AF0BCD2BC0C742A /* XCRemoteSwiftPackageReference "ArgumentParser" */;
 			productName = ArgumentParser;
 		};
 /* End XCSwiftPackageProductDependency section */

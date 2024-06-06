@@ -118,7 +118,7 @@ class ConfigManager {
         try data.write(to: url)
     }
 
-    fileprivate func directoryExistsAtPath(_ path: String) -> Bool {
+    func directoryExistsAtPath(_ path: String) -> Bool {
         var isDirectory : ObjCBool = true
         let exists = FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
         return exists && isDirectory.boolValue

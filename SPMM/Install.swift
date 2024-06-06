@@ -8,6 +8,8 @@ struct Install: AsyncParsableCommand {
 
     enum Error: Swift.Error {
         case invalidLocalOverrides([String])
+        case invalidUserInput
+        case invalidDirectoryPath(String)
     }
 
     public static let configuration = CommandConfiguration(
@@ -88,6 +90,32 @@ struct Install: AsyncParsableCommand {
 
         let remove = try manager.packagesToRemove(in: targets)
         let add = try manager.packagesToAdd(in: targets)
+        let namesOfLocalPackagesMissingLocalPaths = add
+            .filter { $0.isLocal && !$0.dependency.hasLocalPath }
+            .map { $0.dependency.name }
+        if !namesOfLocalPackagesMissingLocalPaths.isEmpty {
+            let configManager = ConfigManager()
+            let localRoot = try configManager
+                .combinedConfigFile()
+                .localRoot
+            if localRoot == nil {
+                print("The following packages do not have a local path:")
+                for packageName in namesOfLocalPackagesMissingLocalPaths {
+                    print("\t\(packageName)")
+                }
+                print("Enter a common local path:")
+                guard let path = readLine() else {
+                    throw Error.invalidUserInput
+                }
+                guard configManager.directoryExistsAtPath(path) else {
+                    throw Error.invalidDirectoryPath(path)
+                }
+                print("Use \(path) for all projects (y/n)")
+                let response = readLine() ?? "n"
+                let global = Bool(extendedMeaningString: response)
+                try configManager.setLocalRoot(path, global: global)
+            }
+        }
         try Project()
             .removed(remove, verbose: verbose)
             .added(add, verbose: verbose)
