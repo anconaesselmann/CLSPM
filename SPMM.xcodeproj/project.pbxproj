@@ -37,6 +37,7 @@
 		972437CD2C12427F0011C5AE /* InitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972437CC2C12427F0011C5AE /* InitTests.swift */; };
 		972438322C1247940011C5AE /* MyAppProject.test in Resources */ = {isa = PBXBuildFile; fileRef = 972438312C1247940011C5AE /* MyAppProject.test */; };
 		972438762C1252460011C5AE /* Init+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972438752C1252460011C5AE /* Init+Tests.swift */; };
+		972438792C12600F0011C5AE /* XCTAssertEqual+fileContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972438782C12600F0011C5AE /* XCTAssertEqual+fileContent.swift */; };
 		972453BF2C0957210069A162 /* shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972453BE2C0957210069A162 /* shell.swift */; };
 		9761EE672C0A3A950073AB3E /* SpmFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE662C0A3A950073AB3E /* SpmFileManager.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
@@ -81,6 +82,7 @@
 		972437CC2C12427F0011C5AE /* InitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitTests.swift; sourceTree = "<group>"; };
 		972438312C1247940011C5AE /* MyAppProject.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject.test; sourceTree = "<group>"; };
 		972438752C1252460011C5AE /* Init+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Init+Tests.swift"; sourceTree = "<group>"; };
+		972438782C12600F0011C5AE /* XCTAssertEqual+fileContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTAssertEqual+fileContent.swift"; sourceTree = "<group>"; };
 		972453BE2C0957210069A162 /* shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shell.swift; sourceTree = "<group>"; };
 		9761EE662C0A3A950073AB3E /* SpmFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpmFileManager.swift; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		972437AF2C12354E0011C5AE /* SwiftPackageManagerCliToolsTests */ = {
 			isa = PBXGroup;
 			children = (
+				972438772C125FF60011C5AE /* Assertions */,
 				972437B02C12354E0011C5AE /* InstallTests.swift */,
 				972437CE2C1243DE0011C5AE /* InitTests */,
 			);
@@ -158,6 +161,14 @@
 				972438752C1252460011C5AE /* Init+Tests.swift */,
 			);
 			path = supporting;
+			sourceTree = "<group>";
+		};
+		972438772C125FF60011C5AE /* Assertions */ = {
+			isa = PBXGroup;
+			children = (
+				972438782C12600F0011C5AE /* XCTAssertEqual+fileContent.swift */,
+			);
+			path = Assertions;
 			sourceTree = "<group>";
 		};
 		979967E02C11814200782E40 /* Commands */ = {
@@ -376,6 +387,7 @@
 				972437BE2C1235940011C5AE /* ConfigManager.swift in Sources */,
 				972437BF2C1235940011C5AE /* Bool+StringInitialization.swift in Sources */,
 				972437C02C1235940011C5AE /* Add.swift in Sources */,
+				972438792C12600F0011C5AE /* XCTAssertEqual+fileContent.swift in Sources */,
 				972437CD2C12427F0011C5AE /* InitTests.swift in Sources */,
 				972437C12C1235940011C5AE /* GithubRelease.swift in Sources */,
 				972438762C1252460011C5AE /* Init+Tests.swift in Sources */,
