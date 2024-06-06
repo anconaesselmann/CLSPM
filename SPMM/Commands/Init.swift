@@ -19,7 +19,7 @@ struct Init: ParsableCommand {
         name: .shortAndLong,
         help: "The path to a custom spmfile"
     )
-    private var spmfile: String?
+    var spmfile: String?
 
     @Option(
         name: .shortAndLong,
@@ -37,31 +37,31 @@ struct Init: ParsableCommand {
         name: .shortAndLong,
         help: "Show extra logging"
     )
-    private var verbose: Bool = false
+    var verbose: Bool = false
 
     @Flag(
         name: .shortAndLong,
         help: "Force reinitialization of all targets"
     )
-    private var force: Bool = false
+    var force: Bool = false
 
     @Flag(
         name: .shortAndLong,
         help: "Creates an spmfile without test targets"
     )
-    private var noTestTargets: Bool = false
+    var noTestTargets: Bool = false
 
     @Flag(
         name: .shortAndLong,
         help: "Does not add dependencies to the spmfile. On install dependencies are resolved from a global list of dependencies. For existing spmfiles --global-dependencies does not remove dependencies."
     )
-    private var globalDependencies: Bool = false
+    var globalDependencies: Bool = false
 
     @Flag(
         name: .shortAndLong,
         help: "For projects that have only one none-test target a plaintext spmfile that has a comma-separated list of dependencies can be created."
     )
-    private var microSpmfile: Bool = false
+    var microSpmfile: Bool = false
 
     func run() throws {
         let project = try Project()
@@ -141,8 +141,12 @@ struct Init: ParsableCommand {
             .sorted { $0.name < $1.name }
 
         vPrint("Dependencies across all targets:", verbose)
-        for dependency in dependencies {
-            vPrint("\t\(dependency.name)", verbose)
+        if dependencies.isEmpty {
+            vPrint("\tnone", verbose)
+        } else {
+            for dependency in dependencies {
+                vPrint("\t\(dependency.name)", verbose)
+            }
         }
 
         let manager = SpmFileManager()

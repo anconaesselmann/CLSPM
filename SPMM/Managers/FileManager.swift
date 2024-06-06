@@ -12,17 +12,23 @@ class FileManager {
     #endif
 
     #if DEBUG
+
+    enum TestError: Swift.Error {
+        case fileNotIndBundle(String)
+        case couldReadFile(String)
+        case invalidFileName(String)
+    }
     init(test_home home: URL, test_current current: String) {
         homeDirectoryForCurrentUser = home
         currentDirectoryPath = current
     }
-    static func test_setup() throws {
+    static func test_setup(current: String? = nil) throws {
         let uuid = UUID(uuidString: "4bfcdd0e-df3c-48df-b58e-1828a1189160")!
         let testDir = "/private/tmp/\(uuid.uuidString)"
         let testUrl = URL(filePath: testDir, directoryHint: .isDirectory)
         let homeString = "\(testDir)/home"
         let homeUrl = URL(fileURLWithPath: homeString)
-        let currentString = "\(testDir)/current"
+        let currentString = "\(testDir)/\(current ?? "current")"
         let currentUrl = URL(fileURLWithPath: currentString)
         FileManager.default = FileManager(
             test_home: homeUrl,
@@ -31,6 +37,31 @@ class FileManager {
         try? FileManager.default.removeItem(at: testUrl)
         try FileManager.default.createDirectory(at: homeUrl, withIntermediateDirectories: true)
         try FileManager.default.createDirectory(at: currentUrl, withIntermediateDirectories: true)
+    }
+
+    func copy(from bundle: Bundle, _ testName: String, in dir: String, name: String) throws {
+        let parts = testName.split(separator: ".")
+        guard
+            parts.count == 2,
+            let originalFileName = parts.first,
+            let originalFileExtension = parts.last
+        else {
+            throw TestError.invalidFileName(testName)
+        }
+        guard let url = bundle.url(forResource: String(originalFileName), withExtension: String(originalFileExtension)) else {
+            throw TestError.fileNotIndBundle(testName)
+        }
+        let data = try Data(contentsOf: url)
+
+        var copyUrl = URL(fileURLWithPath: currentDirectoryPath)
+        let dirComponents = dir.split(separator: "/")
+        for path in dirComponents {
+            copyUrl.append(path: path)
+        }
+        try? _fileManager.createDirectory(at: copyUrl, withIntermediateDirectories: true)
+        copyUrl.append(path: name)
+        try data.write(to: copyUrl)
+        print(copyUrl)
     }
     #endif
 
@@ -47,6 +78,10 @@ class FileManager {
 
     private(set)
     var currentDirectoryPath: String
+
+    var currentDirectory: URL {
+        URL(fileURLWithPath: currentDirectoryPath)
+    }
 
     func createDirectory(
         at url: URL,

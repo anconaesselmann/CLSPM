@@ -3,12 +3,13 @@
 
 import XCTest
 
-final class SwiftPackageManagerCliToolsTests: XCTestCase {
+final class InstallTests: XCTestCase {
 
     var sut: Install!
 
     override func setUpWithError() throws {
         try FileManager.test_setup()
+        VPrintTestObserver.test_setup()
         sut = Install()
     }
 
@@ -17,6 +18,10 @@ final class SwiftPackageManagerCliToolsTests: XCTestCase {
     }
 
     func testExample() throws {
-        
+        do {
+            try sut.run()
+        } catch {
+            print(error)
+        }
     }
 }
