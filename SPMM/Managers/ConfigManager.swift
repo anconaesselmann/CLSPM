@@ -1,7 +1,3 @@
-//
-//  ConfigManager.swift
-//  SPMM
-//
 //  Created by Axel Ancona Esselmann on 6/4/24.
 //
 
