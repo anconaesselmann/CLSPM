@@ -114,7 +114,8 @@ struct Project {
         let targetNames: [XProjId: String] = try targets.reduce(into: [:]) {
             $0[XProjId(stringValue: $1.key)] = String(try $1.stringValue(for: "name"))
         }
-        output.send("Targets found: \(targetNames.values.sorted().joined(separator: ", "))", verbose)
+        output.send("Targets found:", .verbose)
+        output.send("\t\(targetNames.values.sorted().joined(separator: ", "))", .verbose)
         let dependencies: [XProjId: XProjObject] = root.elements(withIsa: .XCSwiftPackageProductDependency)
             .reduce(into: [:]) {
                 $0[XProjId(stringValue: $1.key)] = $1

@@ -20,14 +20,31 @@ class ConsoleOutput: OutputKind {
 
 class Output {
 
+    enum Granularity: Int, Hashable {
+        case normal
+        case verbose
+        case debug
+    }
+
+    var granularity: Set<Granularity> = [.normal]
+
     var output: OutputKind = ConsoleOutput()
 
     static var shared = Output()
 
-    func send(_ content: String, _ isVerbose: Bool) {
+    func verboseFlagIsSet(_ isVerbose: Bool) {
         if isVerbose {
-            self.send(content)
+            granularity = [.normal, .verbose]
+        } else {
+            granularity.remove(.verbose)
         }
+    }
+
+    func send(_ content: String, _ granularity: Granularity = .normal) {
+        guard self.granularity.contains(granularity) else {
+            return
+        }
+        self.send(content)
     }
 
     func send(_ content: String) {

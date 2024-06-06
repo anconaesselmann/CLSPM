@@ -18,9 +18,9 @@ struct SpmFileManager {
         case notMicroSpmfileCompatible
     }
 
-    func spmFile(in spmfile: String?, isVerbose verbose: Bool) throws -> JsonSpmFile {
+    func spmFile(in spmfile: String?) throws -> JsonSpmFile {
         if let spmfile = spmfile {
-            output.send("Using spm file \"\(spmfile)\"", verbose)
+            output.send("Using spmfile \"\(spmfile)\"", .verbose)
         }
         let spmFileDir = try spmfile ?? (try spmfileDir())
         guard fileManager.fileExists(atPath: spmFileDir) else {
@@ -62,8 +62,8 @@ struct SpmFileManager {
 
     }
 
-    func targets(in spmfile: String?, isVerbose verbose: Bool) async throws -> [String: Target] {
-        let spmFileJson = try spmFile(in: spmfile, isVerbose: verbose)
+    func targets(in spmfile: String?) async throws -> [String: Target] {
+        let spmFileJson = try spmFile(in: spmfile)
 
         let dependencyNamesUsedByTargets: Set<String> = spmFileJson.targets.reduce(into: []) {
             $0 = $0.union(Set($1.dependencies))
@@ -83,19 +83,19 @@ struct SpmFileManager {
                 .dependencies.reduce(into: [:]) {
                     $0[$1.name] = $1
                 }
-            output.send("Unresolved dependencies", verbose)
+            output.send("Unresolved dependencies", .verbose)
             let sorted = uresolvedDependencyNames.sorted()
             for dependencyName in sorted {
-                output.send("\t\(dependencyName)", verbose)
+                output.send("\t\(dependencyName)", .verbose)
             }
-            output.send("Resolving global dependencies", verbose)
+            output.send("Resolving global dependencies", .verbose)
             for dependencyName in sorted {
                 if let resolvedDependency = globalDependencies[dependencyName] {
                     dependencies[dependencyName] = resolvedDependency
-                    output.send("\t\(dependencyName) resolved", verbose)
+                    output.send("\t\(dependencyName) resolved", .verbose)
                 } else {
                     let new: JsonSpmDependency
-                    if let resolved = try await remoteManager.resolve(name: dependencyName, verbose: verbose) {
+                    if let resolved = try await remoteManager.resolve(name: dependencyName) {
                         new = resolved
                     } else {
                         output.send("Could not resolve dependency \(dependencyName)")
@@ -109,12 +109,11 @@ struct SpmFileManager {
                         }
                         new = try await remoteManager.resolve(
                             input: line,
-                            name: dependencyName,
-                            verbose: verbose
+                            name: dependencyName
                         )
                     }
                     dependencies[dependencyName] = new
-                    output.send("\t\(dependencyName) resolved", verbose)
+                    output.send("\t\(dependencyName) resolved", .verbose)
                     dependenciesFile.dependencies = (dependenciesFile.dependencies + [new])
                         .sorted { $0.name < $1.name }
                     try configManager.save(dependenciesFile)
@@ -219,23 +218,24 @@ struct SpmFileManager {
         }
     }
 
-    func save(_ jsonFile: JsonSpmFile, to spmfile: String?, microSpmfile: Bool, isVerbose verbose: Bool) throws {
+    func save(_ jsonFile: JsonSpmFile, to spmfile: String?, microSpmfile: Bool) throws {
         let dir = try spmfile ?? (try spmfileDir())
-        output.send("Saving spm file \"\(dir)\"", verbose)
+        output.send("Saving spm file:", .verbose)
+        output.send("\t\(dir)", .verbose)
         let url = URL(fileURLWithPath: dir)
         if microSpmfile {
             guard jsonFile.microCompatible else {
-                output.send("Incompatible targets", verbose)
+                output.send("Incompatible targets", .verbose)
                 throw Error.notMicroSpmfileCompatible
             }
             guard let target = jsonFile.targets
                 .first(where: { !$0.name.hasSuffix("Tests")} )
             else {
-                output.send("No none-test targets", verbose)
+                output.send("No none-test targets", .verbose)
                 throw Error.notMicroSpmfileCompatible
             }
             guard let data = target.dependencies.joined(separator: ", ").data(using: .utf8) else {
-                output.send("Could not save micro spmfile", verbose)
+                output.send("Could not save micro spmfile", .verbose)
                 throw Error.notMicroSpmfileCompatible
             }
             try data

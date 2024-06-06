@@ -30,8 +30,10 @@ struct Config: ParsableCommand {
 
     func run() throws {
         let output = Output.shared
+        output.verboseFlagIsSet(verbose)
+        
         let manager = ConfigManager()
-        output.send("Setting configurations", verbose)
+        output.send("Setting configurations", .verbose)
         try manager.setLocalRoot(localRoot, global: global)
     }
 }

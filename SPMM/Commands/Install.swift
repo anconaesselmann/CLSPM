@@ -49,12 +49,13 @@ struct Install: AsyncParsableCommand {
     func run() async throws {
         let manager = SpmFileManager()
         let output = Output.shared
+        output.verboseFlagIsSet(verbose)
 
-        output.send("Installing packages from spmfile", verbose)
+        output.send("Installing packages from spmfile", .verbose)
 
-        var targets = try await manager.targets(in: spmfile, isVerbose: verbose)
+        var targets = try await manager.targets(in: spmfile)
 
-        output.send("Targets: \(targets.names.joined(separator: ", "))", verbose)
+        output.send("Targets: \(targets.names.joined(separator: ", "))", .verbose)
 
         try useLocalDependencies(Set(local), for: &targets)
 
@@ -107,17 +108,17 @@ struct Install: AsyncParsableCommand {
         let output = Output.shared
         if !dependencyNamesToUseLocal.isEmpty {
             var found: Set<String> = []
-            output.send("Override to use local packages", verbose)
+            output.send("Override to use local packages", .verbose)
             targets = targets.reduce(into: [:]) {
                 var (targetName, target) = $1
                 let foundInTarget = target.useLocal(for: dependencyNamesToUseLocal)
                 if foundInTarget.isEmpty {
-                    output.send("Target \(targetName) had no local dependencies", verbose)
+                    output.send("Target \(targetName) had no local dependencies", .verbose)
                 } else {
                     found = found.union(foundInTarget)
-                    output.send("Using local dependencies in \(targetName):", verbose)
+                    output.send("Using local dependencies in \(targetName):", .verbose)
                     for dependencyName in found.sorted() {
-                        output.send("\t\(dependencyName)", verbose)
+                        output.send("\t\(dependencyName)", .verbose)
                     }
                 }
                 $0[targetName] = target

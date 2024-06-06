@@ -20,7 +20,7 @@ final class InitTests: XCTestCase {
         try FileManager.test_setup(current: "MyApp")
         fileManager = FileManager.default
         Output.test_setup()
-        sut = Init().test_setup()
+        sut = Init().setup_testing()
     }
 
     override func tearDownWithError() throws {
@@ -38,7 +38,7 @@ final class InitTests: XCTestCase {
 
         try sut.run()
 
-        print(try Output.text())
+//        print(try Output.text())
 
         try XCTAssertEqual(spmFileDir, "")
     }

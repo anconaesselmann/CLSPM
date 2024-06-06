@@ -65,6 +65,8 @@ struct Init: ParsableCommand {
 
     func run() throws {
         let output = Output.shared
+        output.verboseFlagIsSet(verbose)
+        
         let project = try Project()
         let root = try project.root()
         let targets = try project.targets(in: root)
@@ -74,12 +76,13 @@ struct Init: ParsableCommand {
         var targetNames = targets.map { $0.name }
         if noTestTargets {
             let ignored = targetNames.filter { $0.hasSuffix("Tests") }
-            output.send("Ignoring targets \(ignored.joined(separator: ", "))", verbose)
+            output.send("Ignoring targets:", .verbose)
+            output.send("\t\(ignored.joined(separator: ", "))", .verbose)
             targetNames = targetNames.filter { !$0.hasSuffix("Tests") }
         }
 
         if !cached.isEmpty {
-            output.send("Resolving dependencies \(cached.sorted().joined(separator: ", "))", verbose)
+            output.send("Resolving dependencies \(cached.sorted().joined(separator: ", "))", .verbose)
             let configManager = ConfigManager()
             let cachedDependencies = try configManager
                 .dependenciesFile().dependencies
@@ -95,20 +98,20 @@ struct Init: ParsableCommand {
                 var dependencies = dependencies
                 if let target = target {
                     if targetName != target {
-                        output.send("Ignoring target \(targetName)", verbose)
+                        output.send("Ignoring target \(targetName)", .verbose)
                         continue
                     }
                 } else {
                     if targetName.hasSuffix("Tests") {
                         if noTestTargets {
-                            output.send("Ignoring target \(targetName)", verbose)
+                            output.send("Ignoring target \(targetName)", .verbose)
                             targetDependencies.removeValue(forKey: targetName)
                         } else {
-                            output.send("Ignoring \(targetName). To add cached dependencies to test files first run `install` for all none-test targets and re-run `init` with the option --target and the test target's name", verbose)
+                            output.send("Ignoring \(targetName). To add cached dependencies to test files first run `install` for all none-test targets and re-run `init` with the option --target and the test target's name", .verbose)
                         }
                         continue
                     } else {
-                        output.send("Dependencies for target \(targetName):", verbose)
+                        output.send("Dependencies for target \(targetName):", .verbose)
                     }
                 }
                 for cachedDependency in cachedDependencies {
@@ -119,17 +122,17 @@ struct Init: ParsableCommand {
                         local: cachedDependency.localPath
                     )
                     if let index = dependencies.firstIndex(where: { $0.name == newValue.name }) {
-                        output.send("\tOverwriting dependency \(newValue.name) from cache in \(targetName)", verbose)
+                        output.send("\tOverwriting dependency \(newValue.name) from cache in \(targetName)", .verbose)
                         dependencies[index] = newValue
                     } else {
-                        output.send("\tUsing cached dependency \(newValue.name) in \(targetName)", verbose)
+                        output.send("\tUsing cached dependency \(newValue.name) in \(targetName)", .verbose)
                         dependencies.append(newValue)
                     }
                 }
                 targetDependencies[targetName] = dependencies
-                output.send("All dependencies in \(targetName):", verbose)
+                output.send("All dependencies in \(targetName):", .verbose)
                 for dependency in dependencies {
-                    output.send("\t\(dependency.name)", verbose)
+                    output.send("\t\(dependency.name)", .verbose)
                 }
             }
         }
@@ -141,12 +144,12 @@ struct Init: ParsableCommand {
             }.values
             .sorted { $0.name < $1.name }
 
-        output.send("Dependencies across all targets:", verbose)
+        output.send("Dependencies across all targets:", .verbose)
         if dependencies.isEmpty {
-            output.send("\tnone", verbose)
+            output.send("\tnone", .verbose)
         } else {
             for dependency in dependencies {
-                output.send("\t\(dependency.name)", verbose)
+                output.send("\t\(dependency.name)", .verbose)
             }
         }
 
@@ -156,7 +159,7 @@ struct Init: ParsableCommand {
             if force {
                 throw SpmFileManager.Error.fileDoesNotExist("")
             }
-            jsonSpmFile = try manager.spmFile(in: spmfile, isVerbose: verbose)
+            jsonSpmFile = try manager.spmFile(in: spmfile)
             let existingTargetNames = jsonSpmFile.targets.map { $0.name }
             let missingTargets = Set(targetNames)
                 .subtracting(Set(existingTargetNames))
@@ -167,20 +170,20 @@ struct Init: ParsableCommand {
                         dependencies: targetDependencies[targetName]?.map { $0.name } ?? []
                     )
                 }
-            output.send("Initializing targets:", verbose)
+            output.send("Initializing targets:", .verbose)
             if verbose {
                 if !missingTargets.isEmpty {
-                    output.send("\t\(missingTargets.map { $0.name }.joined(separator: ", "))", verbose)
+                    output.send("\t\(missingTargets.map { $0.name }.joined(separator: ", "))", .verbose)
                 } else {
-                    output.send("\tNo new targets", verbose)
+                    output.send("\tNo new targets", .verbose)
                 }
             }
             if !jsonSpmFile.targets.isEmpty {
-                output.send("The following targets have not been updated:", verbose)
+                output.send("The following targets have not been updated:", .verbose)
                 if verbose {
-                    output.send("\t\(jsonSpmFile.targets.map { $0.name }.joined(separator: ", "))", verbose)
+                    output.send("\t\(jsonSpmFile.targets.map { $0.name }.joined(separator: ", "))", .verbose)
                 }
-                output.send("To reinitialize all targets pass the -f flag", verbose)
+                output.send("To reinitialize all targets pass the -f flag", .verbose)
             }
             jsonSpmFile.targets = (jsonSpmFile.targets + missingTargets)
                 .sorted { $0.name < $1.name}
@@ -208,6 +211,6 @@ struct Init: ParsableCommand {
                 dependencies: spmFileDependencies
             )
         }
-        try manager.save(jsonSpmFile, to: spmfile, microSpmfile: microSpmfile, isVerbose: verbose)
+        try manager.save(jsonSpmFile, to: spmfile, microSpmfile: microSpmfile)
     }
 }

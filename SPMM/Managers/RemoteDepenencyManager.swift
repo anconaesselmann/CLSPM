@@ -40,24 +40,21 @@ class RemoteDepenencyManager {
         }
     }
 
-    func resolve(
-        name: String,
-        verbose: Bool
-    ) async throws -> JsonSpmDependency? {
+    func resolve(name: String) async throws -> JsonSpmDependency? {
         guard !orgs.isEmpty else {
             return nil
         }
         if !orgs.isEmpty {
-            output.send("Resolving using orgs \(orgs.joined(separator: ", "))", verbose)
+            output.send("Resolving using orgs \(orgs.joined(separator: ", "))", .verbose)
         }
         for org in orgs {
             do {
                 let version = try await fetchVersion(for: org, dependencyName: name)
                 let orgUrl = "https://github.com/\(org)"
                 let url = "\(orgUrl)/\(name)"
-                output.send("Found depenency at \(orgUrl):", verbose)
-                output.send("\tUrl: \(url)", verbose)
-                output.send("\tversion: \(version)", verbose)
+                output.send("Found depenency at \(orgUrl):", .verbose)
+                output.send("\tUrl: \(url)", .verbose)
+                output.send("\tversion: \(version)", .verbose)
                 return JsonSpmDependency(
                     id: UUID(),
                     name: name,
@@ -74,15 +71,14 @@ class RemoteDepenencyManager {
 
     func resolve(
         input line: String,
-        name: String,
-        verbose: Bool
+        name: String
     ) async throws -> JsonSpmDependency {
         let input = try await parseUserInput(line, name: name)
         switch input {
         case .dependency(url: let url, version: let version):
-            output.send("Found depenency:", verbose)
-            output.send("\tUrl: \(url)", verbose)
-            output.send("\tversion: \(version)", verbose)
+            output.send("Found depenency:", .verbose)
+            output.send("\tUrl: \(url)", .verbose)
+            output.send("\tversion: \(version)", .verbose)
             return JsonSpmDependency(
                 id: UUID(),
                 name: name,
@@ -91,7 +87,7 @@ class RemoteDepenencyManager {
                 localPath: nil
             )
         case .githubOrg(url: let url, name: let name):
-            return try await resolve(input: url + "/\(name)", name: name, verbose: verbose)
+            return try await resolve(input: url + "/\(name)", name: name)
         }
     }
 

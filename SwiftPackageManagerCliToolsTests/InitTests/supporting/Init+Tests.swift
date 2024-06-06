@@ -4,7 +4,7 @@
 import Foundation
 
 extension Init {
-    func test_setup() -> Self {
+    func setup_testing() -> Self {
         var copy = self
         copy.spmfile = nil
         copy.cached = []
