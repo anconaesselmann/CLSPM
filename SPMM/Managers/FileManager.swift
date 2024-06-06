@@ -46,7 +46,12 @@ class FileManager {
         try FileManager.default.removeItem(at: testUrl)
     }
 
-    func copy(from bundle: Bundle, _ testName: String, to dir: String) throws {
+    enum RootDirectory {
+        case home
+        case current
+    }
+
+    func copy(from bundle: Bundle, _ testName: String, to dir: String, in root: RootDirectory = .current) throws {
         let parts = testName.split(separator: ".")
         guard
             parts.count == 2,
@@ -60,7 +65,13 @@ class FileManager {
         }
         let data = try Data(contentsOf: url)
 
-        var copyUrl = URL(fileURLWithPath: currentDirectoryPath)
+        var copyUrl: URL
+        switch root {
+        case .home:
+            copyUrl = homeDirectoryForCurrentUser
+        case .current:
+            copyUrl = URL(fileURLWithPath: currentDirectoryPath)
+        }
         var dirComponents = dir.split(separator: "/")
         let name = dirComponents.removeLast()
         for path in dirComponents {

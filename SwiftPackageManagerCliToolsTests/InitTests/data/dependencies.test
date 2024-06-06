@@ -1,0 +1,16 @@
+{
+  "dependencies" : [
+    {
+      "id" : "AA39C307-0F4C-4482-916E-23D715D7BE8A",
+      "name" : "LoadableView",
+      "url" : "https://github.com/anconaesselmann/LoadableView",
+      "version" : "0.3.9"
+    },
+    {
+      "id" : "8918A5F9-4693-4285-A10B-D702E877E9B4",
+      "name" : "DebugSwiftUI",
+      "url" : "https://github.com/anconaesselmann/DebugSwiftUI",
+      "version" : "0.0.1"
+    }
+  ]
+}

@@ -205,7 +205,7 @@ struct Init: ParsableCommand {
                     JsonSpmTarget(
                         id: UUID(),
                         name: targetName,
-                        dependencies: targetDependencies[targetName]?.map { $0.name } ?? []
+                        dependencies: (targetDependencies[targetName]?.map { $0.name } ?? []).sorted()
                     )
                 },
                 dependencies: spmFileDependencies
