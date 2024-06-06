@@ -12,7 +12,8 @@ struct SPMM: AsyncParsableCommand {
             Install.self,
             Init.self,
             Config.self,
-            DependencyCache.self
+            DependencyCache.self,
+            Add.self
         ]
     )
 
