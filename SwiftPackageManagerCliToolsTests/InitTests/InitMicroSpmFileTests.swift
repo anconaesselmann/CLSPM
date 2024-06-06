@@ -23,6 +23,7 @@ final class InitMicroSpmFileTests: XCTestCase {
         sut = Init().setup_testing()
 //        sut.verbose = true
         sut.microSpmfile = true
+        try moveProjectFile()
     }
 
     override func tearDownWithError() throws {
@@ -32,8 +33,6 @@ final class InitMicroSpmFileTests: XCTestCase {
     }
 
     func testEmptyMicroSpmFileCreatedExample() throws {
-        try moveProjectFile()
-
         try sut.run()
 
 //        print(try Output.text())
@@ -42,7 +41,6 @@ final class InitMicroSpmFileTests: XCTestCase {
     }
 
     func testMicroSpmFileWithOneCachedDependencyExample() throws {
-        try moveProjectFile()
         try moveDependenciesFile()
 
         sut.cached = ["LoadableView"]
@@ -55,7 +53,6 @@ final class InitMicroSpmFileTests: XCTestCase {
     }
 
     func testMicroSpmFileWithTwoCachedDependencyExample() throws {
-        try moveProjectFile()
         try moveDependenciesFile()
 
         sut.cached = ["LoadableView", "DebugSwiftUI"]

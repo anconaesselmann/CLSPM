@@ -22,6 +22,7 @@ final class InitSpmFileTests: XCTestCase {
         Output.test_setup()
         sut = Init().setup_testing()
         sut.verbose = true
+        try moveProjectFile()
     }
 
     override func tearDownWithError() throws {
@@ -30,7 +31,6 @@ final class InitSpmFileTests: XCTestCase {
     }
 
     func testEmptySpmFileCreatedExample() throws {
-        try moveProjectFile()
         try moveLocalConfigFile()
 
         try sut.run()
