@@ -11,7 +11,7 @@ extension Init {
         copy.target = nil
         copy.verbose = false
         copy.force = false
-        copy.noTestTargets = false
+        copy.testTargets = false
         copy.globalDependencies = false
         copy.microSpmfile = false
         return copy

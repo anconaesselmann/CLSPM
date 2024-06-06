@@ -241,10 +241,7 @@ struct SpmFileManager {
             try data
                 .write(to: url)
         } else {
-            let encoder = JSONEncoder()
-            encoder.keyEncodingStrategy = .convertToSnakeCase
-            encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
-            try encoder.encode(jsonFile)
+            try Self.encoder.encode(jsonFile)
                 .write(to: url)
         }
     }
@@ -252,5 +249,12 @@ struct SpmFileManager {
     private func spmfileDir() throws -> String {
         let currentPath = fileManager.currentDirectoryPath
         return "\(currentPath)/spmfile"
+    }
+
+    static var encoder: JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
+        return encoder
     }
 }

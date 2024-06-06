@@ -3,7 +3,7 @@
 
 import XCTest
 
-final class InitTests: XCTestCase {
+final class InitMicroSpmFileTests: XCTestCase {
 
     var sut: Init!
 
@@ -21,20 +21,18 @@ final class InitTests: XCTestCase {
         fileManager = FileManager.default
         Output.test_setup()
         sut = Init().setup_testing()
+//        sut.verbose = true
+        sut.microSpmfile = true
     }
 
     override func tearDownWithError() throws {
         sut = nil
-//        try FileManager.test_cleanup()
+        try FileManager.test_cleanup()
         fileManager = nil
     }
 
     func testEmptyMicroSpmFileCreatedExample() throws {
         try moveProjectFile()
-
-//        sut.verbose = true
-        sut.noTestTargets = true
-        sut.microSpmfile = true
 
         try sut.run()
 
@@ -47,14 +45,11 @@ final class InitTests: XCTestCase {
         try moveProjectFile()
         try moveDependenciesFile()
 
-//        sut.verbose = true
-        sut.noTestTargets = true
-        sut.microSpmfile = true
         sut.cached = ["LoadableView"]
 
         try sut.run()
 
-        print(try Output.text())
+//        print(try Output.text())
 
         try XCTAssertEqual(spmFileDir, "LoadableView")
     }
@@ -63,14 +58,11 @@ final class InitTests: XCTestCase {
         try moveProjectFile()
         try moveDependenciesFile()
 
-//        sut.verbose = true
-        sut.noTestTargets = true
-        sut.microSpmfile = true
         sut.cached = ["LoadableView", "DebugSwiftUI"]
 
         try sut.run()
 
-        print(try Output.text())
+//        print(try Output.text())
 
         try XCTAssertEqual(spmFileDir, "DebugSwiftUI, LoadableView")
     }

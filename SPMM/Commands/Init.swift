@@ -49,7 +49,7 @@ struct Init: ParsableCommand {
         name: .shortAndLong,
         help: "Creates an spmfile without test targets"
     )
-    var noTestTargets: Bool = false
+    var testTargets: Bool = false
 
     @Flag(
         name: .shortAndLong,
@@ -72,9 +72,10 @@ struct Init: ParsableCommand {
         let targets = try project.targets(in: root)
         var targetDependencies = try project.dependencies(in: root, verbose: verbose)
         let cached = Set(cached)
+        let configManager = ConfigManager()
 
         var targetNames = targets.map { $0.name }
-        if noTestTargets {
+        if !testTargets {
             let ignored = targetNames.filter { $0.hasSuffix("Tests") }
             output.send("Ignoring targets:", .verbose)
             output.send("\t\(ignored.joined(separator: ", "))", .verbose)
@@ -83,7 +84,6 @@ struct Init: ParsableCommand {
 
         if !cached.isEmpty {
             output.send("Resolving dependencies \(cached.sorted().joined(separator: ", "))", .verbose)
-            let configManager = ConfigManager()
             let cachedDependencies = try configManager
                 .dependenciesFile().dependencies
                 .filter {
@@ -103,7 +103,7 @@ struct Init: ParsableCommand {
                     }
                 } else {
                     if targetName.hasSuffix("Tests") {
-                        if noTestTargets {
+                        if !testTargets {
                             output.send("Ignoring target \(targetName)", .verbose)
                             targetDependencies.removeValue(forKey: targetName)
                         } else {
@@ -152,6 +152,9 @@ struct Init: ParsableCommand {
                 output.send("\t\(dependency.name)", .verbose)
             }
         }
+        var configFile = try configManager.combinedConfigFile()
+        var targetIds: [String: UUID] = configFile.targetIds ?? [:]
+        var newTargetIds: [String: UUID] = [:]
 
         let manager = SpmFileManager()
         var jsonSpmFile: JsonSpmFile
@@ -164,8 +167,15 @@ struct Init: ParsableCommand {
             let missingTargets = Set(targetNames)
                 .subtracting(Set(existingTargetNames))
                 .map { targetName in
-                    JsonSpmTarget(
-                        id: UUID(),
+                    let targetId: UUID
+                    if let existing = targetIds[targetName] {
+                        targetId = existing
+                    } else {
+                        targetId = UUID()
+                        newTargetIds[targetName] = targetId
+                    }
+                    return JsonSpmTarget(
+                        id: targetId,
                         name: targetName,
                         dependencies: targetDependencies[targetName]?.map { $0.name } ?? []
                     )
@@ -202,14 +212,29 @@ struct Init: ParsableCommand {
                 }
             jsonSpmFile = JsonSpmFile(
                 targets: targetNames.map { targetName in
-                    JsonSpmTarget(
-                        id: UUID(),
+                    let targetId: UUID
+                    if let existing = targetIds[targetName] {
+                        targetId = existing
+                    } else {
+                        targetId = UUID()
+                        newTargetIds[targetName] = targetId
+                    }
+                    return JsonSpmTarget(
+                        id: targetId,
                         name: targetName,
                         dependencies: (targetDependencies[targetName]?.map { $0.name } ?? []).sorted()
                     )
                 },
                 dependencies: spmFileDependencies
             )
+        }
+        if !newTargetIds.isEmpty {
+            var localConfigFile = try configManager.configFile(global: false)
+            var existing = localConfigFile.targetIds ?? [:]
+            localConfigFile.targetIds = newTargetIds.reduce(into: existing) {
+                $0[$1.key] = $1.value
+            }
+            try configManager.save(localConfigFile, global: false)
         }
         try manager.save(jsonSpmFile, to: spmfile, microSpmfile: microSpmfile)
     }

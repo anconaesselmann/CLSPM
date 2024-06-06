@@ -32,7 +32,7 @@
 		972437C82C1235990011C5AE /* JsonSpmTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979967E72C11823A00782E40 /* JsonSpmTarget.swift */; };
 		972437CA2C123D400011C5AE /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972437C92C123D400011C5AE /* FileManager.swift */; };
 		972437CB2C123D4D0011C5AE /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972437C92C123D400011C5AE /* FileManager.swift */; };
-		972437CD2C12427F0011C5AE /* InitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972437CC2C12427F0011C5AE /* InitTests.swift */; };
+		972437CD2C12427F0011C5AE /* InitMicroSpmFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972437CC2C12427F0011C5AE /* InitMicroSpmFileTests.swift */; };
 		972438322C1247940011C5AE /* MyAppProject.test in Resources */ = {isa = PBXBuildFile; fileRef = 972438312C1247940011C5AE /* MyAppProject.test */; };
 		972438762C1252460011C5AE /* Init+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972438752C1252460011C5AE /* Init+Tests.swift */; };
 		972438792C12600F0011C5AE /* XCTAssertEqual+fileContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972438782C12600F0011C5AE /* XCTAssertEqual+fileContent.swift */; };
@@ -40,6 +40,8 @@
 		9724387D2C12640F0011C5AE /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9724387B2C12625B0011C5AE /* Output.swift */; };
 		972438802C1267AB0011C5AE /* TestOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9724387F2C1267AB0011C5AE /* TestOutput.swift */; };
 		972438852C1273D30011C5AE /* dependencies.test in Resources */ = {isa = PBXBuildFile; fileRef = 972438842C1273D30011C5AE /* dependencies.test */; };
+		972438872C12796E0011C5AE /* InitSpmFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972438862C12796E0011C5AE /* InitSpmFileTests.swift */; };
+		972438892C1280230011C5AE /* config.test in Resources */ = {isa = PBXBuildFile; fileRef = 972438882C1280230011C5AE /* config.test */; };
 		972453BF2C0957210069A162 /* shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972453BE2C0957210069A162 /* shell.swift */; };
 		9761EE672C0A3A950073AB3E /* SpmFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE662C0A3A950073AB3E /* SpmFileManager.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
@@ -80,13 +82,15 @@
 		972437AE2C12354E0011C5AE /* SwiftPackageManagerCliToolsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftPackageManagerCliToolsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		972437B02C12354E0011C5AE /* InstallTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallTests.swift; sourceTree = "<group>"; };
 		972437C92C123D400011C5AE /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
-		972437CC2C12427F0011C5AE /* InitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitTests.swift; sourceTree = "<group>"; };
+		972437CC2C12427F0011C5AE /* InitMicroSpmFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitMicroSpmFileTests.swift; sourceTree = "<group>"; };
 		972438312C1247940011C5AE /* MyAppProject.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject.test; sourceTree = "<group>"; };
 		972438752C1252460011C5AE /* Init+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Init+Tests.swift"; sourceTree = "<group>"; };
 		972438782C12600F0011C5AE /* XCTAssertEqual+fileContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTAssertEqual+fileContent.swift"; sourceTree = "<group>"; };
 		9724387B2C12625B0011C5AE /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
 		9724387F2C1267AB0011C5AE /* TestOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestOutput.swift; sourceTree = "<group>"; };
 		972438842C1273D30011C5AE /* dependencies.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dependencies.test; sourceTree = "<group>"; };
+		972438862C12796E0011C5AE /* InitSpmFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitSpmFileTests.swift; sourceTree = "<group>"; };
+		972438882C1280230011C5AE /* config.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.test; sourceTree = "<group>"; };
 		972453BE2C0957210069A162 /* shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shell.swift; sourceTree = "<group>"; };
 		9761EE662C0A3A950073AB3E /* SpmFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpmFileManager.swift; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -146,7 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				972438742C1252350011C5AE /* supporting */,
-				972437CC2C12427F0011C5AE /* InitTests.swift */,
+				972437CC2C12427F0011C5AE /* InitMicroSpmFileTests.swift */,
+				972438862C12796E0011C5AE /* InitSpmFileTests.swift */,
 				972438302C12477C0011C5AE /* data */,
 			);
 			path = InitTests;
@@ -157,6 +162,7 @@
 			children = (
 				972438842C1273D30011C5AE /* dependencies.test */,
 				972438312C1247940011C5AE /* MyAppProject.test */,
+				972438882C1280230011C5AE /* config.test */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -381,6 +387,7 @@
 			files = (
 				972438852C1273D30011C5AE /* dependencies.test in Resources */,
 				972438322C1247940011C5AE /* MyAppProject.test in Resources */,
+				972438892C1280230011C5AE /* config.test in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,13 +411,14 @@
 				972437C02C1235940011C5AE /* Add.swift in Sources */,
 				972438792C12600F0011C5AE /* XCTAssertEqual+fileContent.swift in Sources */,
 				9724387D2C12640F0011C5AE /* Output.swift in Sources */,
-				972437CD2C12427F0011C5AE /* InitTests.swift in Sources */,
+				972437CD2C12427F0011C5AE /* InitMicroSpmFileTests.swift in Sources */,
 				972437C12C1235940011C5AE /* GithubRelease.swift in Sources */,
 				972438762C1252460011C5AE /* Init+Tests.swift in Sources */,
 				972437C22C1235940011C5AE /* DependencyCache.swift in Sources */,
 				972437C32C1235940011C5AE /* Install.swift in Sources */,
 				972437C42C1235940011C5AE /* Config.swift in Sources */,
 				972437C52C1235940011C5AE /* RemoteDepenencyManager.swift in Sources */,
+				972438872C12796E0011C5AE /* InitSpmFileTests.swift in Sources */,
 				972437C62C1235990011C5AE /* JsonSpmFile.swift in Sources */,
 				972437C72C1235990011C5AE /* JsonSpmDependency.swift in Sources */,
 				972438802C1267AB0011C5AE /* TestOutput.swift in Sources */,
