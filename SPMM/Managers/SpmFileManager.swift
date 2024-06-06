@@ -61,7 +61,7 @@ struct SpmFileManager {
 
     }
 
-    func targets(in spmfile: String?, isVerbose verbose: Bool) async throws -> [String: (id: UUID, dependencies: [JsonSpmDependency])] {
+    func targets(in spmfile: String?, isVerbose verbose: Bool) async throws -> [String: Target] {
         let spmFileJson = try spmFile(in: spmfile, isVerbose: verbose)
 
         let dependencyNamesUsedByTargets: Set<String> = spmFileJson.targets.reduce(into: []) {
@@ -126,15 +126,15 @@ struct SpmFileManager {
         }
 
         return spmFileJson.targets
-            .reduce(into: [String: (id: UUID, dependencies: [JsonSpmDependency])]()) {
+            .reduce(into: [String: Target]()) {
                 let depencencies = $1.dependencies.compactMap { dependencyName in
                     dependencies[dependencyName]
                 }
-                $0[$1.name] = (id: targetIds[$1.name] ?? UUID(), dependencies: depencencies)
+                $0[$1.name] = Target(id: targetIds[$1.name], dependencies: depencencies)
             }
     }
 
-    func packagesToRemove(in targets: [String: (id: UUID, dependencies: [JsonSpmDependency])]) throws -> [(packageName: String, relativePath: String?, targetName: String)] {
+    func packagesToRemove(in targets: [String: Target]) throws -> [(packageName: String, relativePath: String?, targetName: String)] {
         targets.flatMap { (targetName, target) in
             target.dependencies.map {
                 (
@@ -146,7 +146,7 @@ struct SpmFileManager {
         }
     }
 
-    func packagesToAdd(in targets: [String: (id: UUID, dependencies: [JsonSpmDependency])]) throws -> [(dependency: XProjDependency, isLocal: Bool, targetName: String)] {
+    func packagesToAdd(in targets: [String: Target]) throws -> [(dependency: XProjDependency, isLocal: Bool, targetName: String)] {
         try targets.flatMap { (targetName, target) in
             try target.dependencies.map { value -> (dependency: XProjDependency, isLocal: Bool, targetName: String) in
                 let targetId = target.id

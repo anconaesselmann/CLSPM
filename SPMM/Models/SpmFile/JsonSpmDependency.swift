@@ -11,3 +11,11 @@ struct JsonSpmDependency: Codable {
     let localPath: String?
     var useLocal: Bool?
 }
+
+extension JsonSpmDependency {
+    func usingLocal() -> Self {
+        var copy = self
+        copy.useLocal = true
+        return copy
+    }
+}

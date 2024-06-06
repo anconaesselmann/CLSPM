@@ -47,60 +47,36 @@ struct Install: AsyncParsableCommand {
     private var packageCacheDir: String?
 
     func run() async throws {
+        let manager = SpmFileManager()
+
         vPrint("Installing packages from spmfile", verbose)
 
-        let manager = SpmFileManager()
         var targets = try await manager.targets(in: spmfile, isVerbose: verbose)
 
-        vPrint("Targets: \(targets.keys.joined(separator: ", "))", verbose)
+        vPrint("Targets: \(targets.names.joined(separator: ", "))", verbose)
 
-        let local = Set(local)
-        if !local.isEmpty {
-            var notUsed = local
-            vPrint("Override to use local packages", verbose)
-            targets = targets.reduce(into: [:]) {
-                let dependencies = $1.value
-                let targetName = $1.key
-                $0[targetName] = (
-                    id: dependencies.id,
-                    dependencies: dependencies.dependencies.map {
-                        guard local.contains($0.name) else {
-                            return $0
-                        }
-                        var copy = $0
-                        copy.useLocal = true
-                        notUsed.remove($0.name)
-                        vPrint("\tUsing local package: \(targetName) - \($0.name)", verbose)
-                        return copy
-                    }
-                )
-            }
-            if !notUsed.isEmpty {
-                throw Error.invalidLocalOverrides(notUsed.sorted())
-            }
-        }
-        let location: PackageLocation
-        if let packageCacheDir = packageCacheDir {
-            location = .custom(packageCacheDir)
-        } else if cloneToSpmmDir {
-            location = .spmmDerivedData
-        } else {
-            location = .defaultLocation
-        }
+        try useLocalDependencies(Set(local), for: &targets)
+
+        let location = PackageLocation(
+            packageCacheDir: packageCacheDir,
+            cloneToSpmmDir: cloneToSpmmDir
+        )
 
         let remove = try manager.packagesToRemove(in: targets)
         let add = try manager.packagesToAdd(in: targets)
-        let namesOfLocalPackagesMissingLocalPaths = add
+
+        let packagesNeedingToResolveLocalPath = add
             .filter { $0.isLocal && !$0.dependency.hasLocalPath }
             .map { $0.dependency.name }
-        if !namesOfLocalPackagesMissingLocalPaths.isEmpty {
+
+        if !packagesNeedingToResolveLocalPath.isEmpty {
             let configManager = ConfigManager()
             let localRoot = try configManager
                 .combinedConfigFile()
                 .localRoot
             if localRoot == nil {
                 print("The following packages do not have a local path:")
-                for packageName in namesOfLocalPackagesMissingLocalPaths {
+                for packageName in packagesNeedingToResolveLocalPath {
                     print("\t\(packageName)")
                 }
                 print("Enter a common local path:")
@@ -121,5 +97,33 @@ struct Install: AsyncParsableCommand {
             .added(add, verbose: verbose)
             .save()
             .reloadPackages(location)
+    }
+
+    func useLocalDependencies(
+        _ dependencyNamesToUseLocal: Set<String>,
+        for targets: inout [String : Target]
+    ) throws {
+        if !dependencyNamesToUseLocal.isEmpty {
+            var found: Set<String> = []
+            vPrint("Override to use local packages", verbose)
+            targets = targets.reduce(into: [:]) {
+                var (targetName, target) = $1
+                let foundInTarget = target.useLocal(for: dependencyNamesToUseLocal)
+                if foundInTarget.isEmpty {
+                    vPrint("Target \(targetName) had no local dependencies", verbose)
+                } else {
+                    found = found.union(foundInTarget)
+                    vPrint("Using local dependencies in \(targetName):", verbose)
+                    for dependencyName in found.sorted() {
+                        vPrint("\t\(dependencyName)", verbose)
+                    }
+                }
+                $0[targetName] = target
+            }
+            let notFound = dependencyNamesToUseLocal.subtracting(found)
+            if !notFound.isEmpty {
+                throw Error.invalidLocalOverrides(notFound.sorted())
+            }
+        }
     }
 }
