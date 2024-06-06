@@ -65,7 +65,6 @@ struct SpmFileManager {
         let spmFileJson = try spmFile(in: spmfile, isVerbose: verbose)
 
         let dependencyNamesUsedByTargets: Set<String> = spmFileJson.targets.reduce(into: []) {
-            let targetName = $1.name
             $0 = $0.union(Set($1.dependencies))
         }
         let resolvedDependencyNames = Set((spmFileJson.dependencies ?? []).map { $0.name })

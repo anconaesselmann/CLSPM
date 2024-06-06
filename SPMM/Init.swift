@@ -90,7 +90,8 @@ struct Init: ParsableCommand {
             guard notUsed.isEmpty else {
                 throw Error.couldNotResolveDependencyNames(notUsed.sorted())
             }
-            for var (targetName, dependencies) in targetDependencies {
+            for (targetName, dependencies) in targetDependencies {
+                var dependencies = dependencies
                 if let target = target {
                     if targetName != target {
                         vPrint("Ignoring target \(targetName)", verbose)
