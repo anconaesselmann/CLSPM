@@ -36,6 +36,7 @@
 		972437CB2C123D4D0011C5AE /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972437C92C123D400011C5AE /* FileManager.swift */; };
 		972437CD2C12427F0011C5AE /* InitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972437CC2C12427F0011C5AE /* InitTests.swift */; };
 		972438322C1247940011C5AE /* MyAppProject.test in Resources */ = {isa = PBXBuildFile; fileRef = 972438312C1247940011C5AE /* MyAppProject.test */; };
+		972438762C1252460011C5AE /* Init+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972438752C1252460011C5AE /* Init+Tests.swift */; };
 		972453BF2C0957210069A162 /* shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972453BE2C0957210069A162 /* shell.swift */; };
 		9761EE672C0A3A950073AB3E /* SpmFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE662C0A3A950073AB3E /* SpmFileManager.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
@@ -79,6 +80,7 @@
 		972437C92C123D400011C5AE /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		972437CC2C12427F0011C5AE /* InitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitTests.swift; sourceTree = "<group>"; };
 		972438312C1247940011C5AE /* MyAppProject.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject.test; sourceTree = "<group>"; };
+		972438752C1252460011C5AE /* Init+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Init+Tests.swift"; sourceTree = "<group>"; };
 		972453BE2C0957210069A162 /* shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shell.swift; sourceTree = "<group>"; };
 		9761EE662C0A3A950073AB3E /* SpmFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpmFileManager.swift; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		972437CE2C1243DE0011C5AE /* InitTests */ = {
 			isa = PBXGroup;
 			children = (
+				972438742C1252350011C5AE /* supporting */,
 				972437CC2C12427F0011C5AE /* InitTests.swift */,
 				972438302C12477C0011C5AE /* data */,
 			);
@@ -147,6 +150,14 @@
 				972438312C1247940011C5AE /* MyAppProject.test */,
 			);
 			path = data;
+			sourceTree = "<group>";
+		};
+		972438742C1252350011C5AE /* supporting */ = {
+			isa = PBXGroup;
+			children = (
+				972438752C1252460011C5AE /* Init+Tests.swift */,
+			);
+			path = supporting;
 			sourceTree = "<group>";
 		};
 		979967E02C11814200782E40 /* Commands */ = {
@@ -367,6 +378,7 @@
 				972437C02C1235940011C5AE /* Add.swift in Sources */,
 				972437CD2C12427F0011C5AE /* InitTests.swift in Sources */,
 				972437C12C1235940011C5AE /* GithubRelease.swift in Sources */,
+				972438762C1252460011C5AE /* Init+Tests.swift in Sources */,
 				972437C22C1235940011C5AE /* DependencyCache.swift in Sources */,
 				972437C32C1235940011C5AE /* Install.swift in Sources */,
 				972437C42C1235940011C5AE /* Config.swift in Sources */,

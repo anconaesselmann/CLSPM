@@ -14,7 +14,7 @@ final class InitTests: XCTestCase {
     override func setUpWithError() throws {
         try FileManager.test_setup(current: "MyApp")
         VPrintTestObserver.test_setup()
-        sut = Init()
+        sut = Init().test_setup()
     }
 
     override func tearDownWithError() throws {
@@ -30,14 +30,8 @@ final class InitTests: XCTestCase {
                 in: "MyApp.xcodeproj",
                 name: "project.pbxproj"
             )
-            sut.spmfile = nil
-            sut.cached = []
-            sut.target = nil
             sut.verbose = true
-            sut.force = false
             sut.noTestTargets = true
-            sut.globalDependencies = false
-            sut.microSpmfile = true
             try sut.run()
         } catch {
             print(error)
