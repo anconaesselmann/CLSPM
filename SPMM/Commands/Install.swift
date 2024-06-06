@@ -48,12 +48,13 @@ struct Install: AsyncParsableCommand {
 
     func run() async throws {
         let manager = SpmFileManager()
+        let output = Output.shared
 
-        vPrint("Installing packages from spmfile", verbose)
+        output.send("Installing packages from spmfile", verbose)
 
         var targets = try await manager.targets(in: spmfile, isVerbose: verbose)
 
-        vPrint("Targets: \(targets.names.joined(separator: ", "))", verbose)
+        output.send("Targets: \(targets.names.joined(separator: ", "))", verbose)
 
         try useLocalDependencies(Set(local), for: &targets)
 
@@ -75,18 +76,18 @@ struct Install: AsyncParsableCommand {
                 .combinedConfigFile()
                 .localRoot
             if localRoot == nil {
-                print("The following packages do not have a local path:")
+                output.send("The following packages do not have a local path:")
                 for packageName in packagesNeedingToResolveLocalPath {
-                    print("\t\(packageName)")
+                    output.send("\t\(packageName)")
                 }
-                print("Enter a common local path:")
+                output.send("Enter a common local path:")
                 guard let path = readLine() else {
                     throw Error.invalidUserInput
                 }
                 guard configManager.directoryExistsAtPath(path) else {
                     throw Error.invalidDirectoryPath(path)
                 }
-                print("Use \(path) for all projects (y/n)")
+                output.send("Use \(path) for all projects (y/n)")
                 let response = readLine() ?? "n"
                 let global = Bool(extendedMeaningString: response)
                 try configManager.setLocalRoot(path, global: global)
@@ -103,19 +104,20 @@ struct Install: AsyncParsableCommand {
         _ dependencyNamesToUseLocal: Set<String>,
         for targets: inout [String : Target]
     ) throws {
+        let output = Output.shared
         if !dependencyNamesToUseLocal.isEmpty {
             var found: Set<String> = []
-            vPrint("Override to use local packages", verbose)
+            output.send("Override to use local packages", verbose)
             targets = targets.reduce(into: [:]) {
                 var (targetName, target) = $1
                 let foundInTarget = target.useLocal(for: dependencyNamesToUseLocal)
                 if foundInTarget.isEmpty {
-                    vPrint("Target \(targetName) had no local dependencies", verbose)
+                    output.send("Target \(targetName) had no local dependencies", verbose)
                 } else {
                     found = found.union(foundInTarget)
-                    vPrint("Using local dependencies in \(targetName):", verbose)
+                    output.send("Using local dependencies in \(targetName):", verbose)
                     for dependencyName in found.sorted() {
-                        vPrint("\t\(dependencyName)", verbose)
+                        output.send("\t\(dependencyName)", verbose)
                     }
                 }
                 $0[targetName] = target

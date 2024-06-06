@@ -10,9 +10,7 @@
 		0ED594007E8642058AD8F1CD /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED594008AD8F1CDAC9350F5 /* XProjParser */; };
 		0ED594008A0245878AF0BCD2 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED594008AF0BCD2BC0C742A /* ArgumentParser */; };
 		97044C7E2C0A3DE700D7424A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7D2C0A3DE700D7424A /* Project.swift */; };
-		97044C802C0A41E700D7424A /* supporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7F2C0A41E700D7424A /* supporting.swift */; };
 		972437B12C12354E0011C5AE /* InstallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972437B02C12354E0011C5AE /* InstallTests.swift */; };
-		972437B52C1235860011C5AE /* supporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7F2C0A41E700D7424A /* supporting.swift */; };
 		972437B62C1235860011C5AE /* shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972453BE2C0957210069A162 /* shell.swift */; };
 		972437B72C1235940011C5AE /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7D2C0A3DE700D7424A /* Project.swift */; };
 		972437B82C1235940011C5AE /* SpmFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE662C0A3A950073AB3E /* SpmFileManager.swift */; };
@@ -38,6 +36,9 @@
 		972438322C1247940011C5AE /* MyAppProject.test in Resources */ = {isa = PBXBuildFile; fileRef = 972438312C1247940011C5AE /* MyAppProject.test */; };
 		972438762C1252460011C5AE /* Init+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972438752C1252460011C5AE /* Init+Tests.swift */; };
 		972438792C12600F0011C5AE /* XCTAssertEqual+fileContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972438782C12600F0011C5AE /* XCTAssertEqual+fileContent.swift */; };
+		9724387C2C12625B0011C5AE /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9724387B2C12625B0011C5AE /* Output.swift */; };
+		9724387D2C12640F0011C5AE /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9724387B2C12625B0011C5AE /* Output.swift */; };
+		972438802C1267AB0011C5AE /* TestOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9724387F2C1267AB0011C5AE /* TestOutput.swift */; };
 		972453BF2C0957210069A162 /* shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972453BE2C0957210069A162 /* shell.swift */; };
 		9761EE672C0A3A950073AB3E /* SpmFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE662C0A3A950073AB3E /* SpmFileManager.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
@@ -75,7 +76,6 @@
 
 /* Begin PBXFileReference section */
 		97044C7D2C0A3DE700D7424A /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		97044C7F2C0A41E700D7424A /* supporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = supporting.swift; sourceTree = "<group>"; };
 		972437AE2C12354E0011C5AE /* SwiftPackageManagerCliToolsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftPackageManagerCliToolsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		972437B02C12354E0011C5AE /* InstallTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallTests.swift; sourceTree = "<group>"; };
 		972437C92C123D400011C5AE /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
@@ -83,6 +83,8 @@
 		972438312C1247940011C5AE /* MyAppProject.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject.test; sourceTree = "<group>"; };
 		972438752C1252460011C5AE /* Init+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Init+Tests.swift"; sourceTree = "<group>"; };
 		972438782C12600F0011C5AE /* XCTAssertEqual+fileContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTAssertEqual+fileContent.swift"; sourceTree = "<group>"; };
+		9724387B2C12625B0011C5AE /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
+		9724387F2C1267AB0011C5AE /* TestOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestOutput.swift; sourceTree = "<group>"; };
 		972453BE2C0957210069A162 /* shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shell.swift; sourceTree = "<group>"; };
 		9761EE662C0A3A950073AB3E /* SpmFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpmFileManager.swift; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				972438772C125FF60011C5AE /* Assertions */,
 				972437B02C12354E0011C5AE /* InstallTests.swift */,
+				9724387E2C1267A30011C5AE /* Supporting */,
 				972437CE2C1243DE0011C5AE /* InitTests */,
 			);
 			path = SwiftPackageManagerCliToolsTests;
@@ -169,6 +172,14 @@
 				972438782C12600F0011C5AE /* XCTAssertEqual+fileContent.swift */,
 			);
 			path = Assertions;
+			sourceTree = "<group>";
+		};
+		9724387E2C1267A30011C5AE /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				9724387F2C1267AB0011C5AE /* TestOutput.swift */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 		979967E02C11814200782E40 /* Commands */ = {
@@ -212,7 +223,6 @@
 			isa = PBXGroup;
 			children = (
 				972453BE2C0957210069A162 /* shell.swift */,
-				97044C7F2C0A41E700D7424A /* supporting.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -229,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				97E7B2422C09117A00E33740 /* SpmmMain.swift */,
+				9724387B2C12625B0011C5AE /* Output.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -388,6 +399,7 @@
 				972437BF2C1235940011C5AE /* Bool+StringInitialization.swift in Sources */,
 				972437C02C1235940011C5AE /* Add.swift in Sources */,
 				972438792C12600F0011C5AE /* XCTAssertEqual+fileContent.swift in Sources */,
+				9724387D2C12640F0011C5AE /* Output.swift in Sources */,
 				972437CD2C12427F0011C5AE /* InitTests.swift in Sources */,
 				972437C12C1235940011C5AE /* GithubRelease.swift in Sources */,
 				972438762C1252460011C5AE /* Init+Tests.swift in Sources */,
@@ -395,9 +407,9 @@
 				972437C32C1235940011C5AE /* Install.swift in Sources */,
 				972437C42C1235940011C5AE /* Config.swift in Sources */,
 				972437C52C1235940011C5AE /* RemoteDepenencyManager.swift in Sources */,
-				972437B52C1235860011C5AE /* supporting.swift in Sources */,
 				972437C62C1235990011C5AE /* JsonSpmFile.swift in Sources */,
 				972437C72C1235990011C5AE /* JsonSpmDependency.swift in Sources */,
+				972438802C1267AB0011C5AE /* TestOutput.swift in Sources */,
 				972437C82C1235990011C5AE /* JsonSpmTarget.swift in Sources */,
 				972437B62C1235860011C5AE /* shell.swift in Sources */,
 				972437B12C12354E0011C5AE /* InstallTests.swift in Sources */,
@@ -422,7 +434,7 @@
 				97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */,
 				9799671A2C1105D400782E40 /* RemoteDepenencyManager.swift in Sources */,
 				97044C7E2C0A3DE700D7424A /* Project.swift in Sources */,
-				97044C802C0A41E700D7424A /* supporting.swift in Sources */,
+				9724387C2C12625B0011C5AE /* Output.swift in Sources */,
 				9799682D2C121EF200782E40 /* Add.swift in Sources */,
 				979967EA2C11825200782E40 /* JsonSpmDependency.swift in Sources */,
 				979962CD2C0FBF9D00782E40 /* DependenciesFile.swift in Sources */,

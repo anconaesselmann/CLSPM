@@ -13,6 +13,7 @@ struct Project {
     }
 
     var content: String
+    let output = Output.shared
 
     init() throws {
         content = try Self.projectContent()
@@ -24,17 +25,17 @@ struct Project {
     ) throws -> Self {
         var copy = self
         if verbose {
-            print("Removing:")
+            output.send("Removing:")
             let targets: [String: [String]] = remove.reduce(into: [:]) {
                 $0[$1.targetName] = ($0[$1.targetName] ?? []) + [$1.packageName]
             }
             for (targetName, dependencies) in targets.sorted(by: { $0.key < $1.key }) {
-                print("\(targetName): \(dependencies.joined(separator: ","))")
+                output.send("\(targetName): \(dependencies.joined(separator: ","))")
             }
         }
         copy.content = try root()
             .removePackages(in: copy.content, remove)
-        print("Packages removed")
+        output.send("Packages removed")
         return copy
     }
 
@@ -47,12 +48,12 @@ struct Project {
             .combinedConfigFile()
             .localRoot
         if verbose {
-            print("Adding:")
+            output.send("Adding:")
             let targets: [String: [String]] = add.reduce(into: [:]) {
                 $0[$1.targetName] = ($0[$1.targetName] ?? []) + [$1.dependency.name]
             }
             for (targetName, dependencies) in targets.sorted(by: { $0.key < $1.key }) {
-                print("\(targetName): \(dependencies.joined(separator: ","))")
+                output.send("\(targetName): \(dependencies.joined(separator: ","))")
             }
         }
         var add = add
@@ -66,7 +67,7 @@ struct Project {
         }
         copy.content = try root()
             .addPackages(in: copy.content, add)
-        print("Packages added")
+        output.send("Packages added")
         return copy
     }
 
@@ -92,7 +93,7 @@ struct Project {
             clonedSourcePacagesOption = " -clonedSourcePackagesDirPath \(location)"
         }
         let result = shell("xcodebuild -resolvePackageDependencies\(clonedSourcePacagesOption)")
-        print(result)
+        output.send(result)
         return self
     }
 
@@ -107,12 +108,13 @@ struct Project {
     }
 
     func dependencies(in root: XProjRoot? = nil, verbose: Bool) throws -> [String: [(name: String, url: String?, version: String?, local: String?)]] {
+        let output = Output.shared
         let root = try (root ?? (try self.root()))
         let targets = root.elements(withIsa: .PBXNativeTarget)
         let targetNames: [XProjId: String] = try targets.reduce(into: [:]) {
             $0[XProjId(stringValue: $1.key)] = String(try $1.stringValue(for: "name"))
         }
-        vPrint("Targets found: \(targetNames.values.sorted().joined(separator: ", "))", verbose)
+        output.send("Targets found: \(targetNames.values.sorted().joined(separator: ", "))", verbose)
         let dependencies: [XProjId: XProjObject] = root.elements(withIsa: .XCSwiftPackageProductDependency)
             .reduce(into: [:]) {
                 $0[XProjId(stringValue: $1.key)] = $1

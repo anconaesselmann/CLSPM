@@ -69,7 +69,6 @@ class FileManager {
         try? _fileManager.createDirectory(at: copyUrl, withIntermediateDirectories: true)
         copyUrl.append(path: name)
         try data.write(to: copyUrl)
-        print(copyUrl)
     }
     #endif
 

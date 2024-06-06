@@ -64,6 +64,7 @@ struct Init: ParsableCommand {
     var microSpmfile: Bool = false
 
     func run() throws {
+        let output = Output.shared
         let project = try Project()
         let root = try project.root()
         let targets = try project.targets(in: root)
@@ -73,12 +74,12 @@ struct Init: ParsableCommand {
         var targetNames = targets.map { $0.name }
         if noTestTargets {
             let ignored = targetNames.filter { $0.hasSuffix("Tests") }
-            vPrint("Ignoring targets \(ignored.joined(separator: ", "))", verbose)
+            output.send("Ignoring targets \(ignored.joined(separator: ", "))", verbose)
             targetNames = targetNames.filter { !$0.hasSuffix("Tests") }
         }
 
         if !cached.isEmpty {
-            vPrint("Resolving dependencies \(cached.sorted().joined(separator: ", "))", verbose)
+            output.send("Resolving dependencies \(cached.sorted().joined(separator: ", "))", verbose)
             let configManager = ConfigManager()
             let cachedDependencies = try configManager
                 .dependenciesFile().dependencies
@@ -94,20 +95,20 @@ struct Init: ParsableCommand {
                 var dependencies = dependencies
                 if let target = target {
                     if targetName != target {
-                        vPrint("Ignoring target \(targetName)", verbose)
+                        output.send("Ignoring target \(targetName)", verbose)
                         continue
                     }
                 } else {
                     if targetName.hasSuffix("Tests") {
                         if noTestTargets {
-                            vPrint("Ignoring target \(targetName)", verbose)
+                            output.send("Ignoring target \(targetName)", verbose)
                             targetDependencies.removeValue(forKey: targetName)
                         } else {
-                            vPrint("Ignoring \(targetName). To add cached dependencies to test files first run `install` for all none-test targets and re-run `init` with the option --target and the test target's name", verbose)
+                            output.send("Ignoring \(targetName). To add cached dependencies to test files first run `install` for all none-test targets and re-run `init` with the option --target and the test target's name", verbose)
                         }
                         continue
                     } else {
-                        vPrint("Dependencies for target \(targetName):", verbose)
+                        output.send("Dependencies for target \(targetName):", verbose)
                     }
                 }
                 for cachedDependency in cachedDependencies {
@@ -118,17 +119,17 @@ struct Init: ParsableCommand {
                         local: cachedDependency.localPath
                     )
                     if let index = dependencies.firstIndex(where: { $0.name == newValue.name }) {
-                        vPrint("\tOverwriting dependency \(newValue.name) from cache in \(targetName)", verbose)
+                        output.send("\tOverwriting dependency \(newValue.name) from cache in \(targetName)", verbose)
                         dependencies[index] = newValue
                     } else {
-                        vPrint("\tUsing cached dependency \(newValue.name) in \(targetName)", verbose)
+                        output.send("\tUsing cached dependency \(newValue.name) in \(targetName)", verbose)
                         dependencies.append(newValue)
                     }
                 }
                 targetDependencies[targetName] = dependencies
-                vPrint("All dependencies in \(targetName):", verbose)
+                output.send("All dependencies in \(targetName):", verbose)
                 for dependency in dependencies {
-                    vPrint("\t\(dependency.name)", verbose)
+                    output.send("\t\(dependency.name)", verbose)
                 }
             }
         }
@@ -140,12 +141,12 @@ struct Init: ParsableCommand {
             }.values
             .sorted { $0.name < $1.name }
 
-        vPrint("Dependencies across all targets:", verbose)
+        output.send("Dependencies across all targets:", verbose)
         if dependencies.isEmpty {
-            vPrint("\tnone", verbose)
+            output.send("\tnone", verbose)
         } else {
             for dependency in dependencies {
-                vPrint("\t\(dependency.name)", verbose)
+                output.send("\t\(dependency.name)", verbose)
             }
         }
 
@@ -166,20 +167,20 @@ struct Init: ParsableCommand {
                         dependencies: targetDependencies[targetName]?.map { $0.name } ?? []
                     )
                 }
-            vPrint("Initializing targets:", verbose)
+            output.send("Initializing targets:", verbose)
             if verbose {
                 if !missingTargets.isEmpty {
-                    vPrint("\t\(missingTargets.map { $0.name }.joined(separator: ", "))", verbose)
+                    output.send("\t\(missingTargets.map { $0.name }.joined(separator: ", "))", verbose)
                 } else {
-                    vPrint("\tNo new targets", verbose)
+                    output.send("\tNo new targets", verbose)
                 }
             }
             if !jsonSpmFile.targets.isEmpty {
-                vPrint("The following targets have not been updated:", verbose)
+                output.send("The following targets have not been updated:", verbose)
                 if verbose {
-                    vPrint("\t\(jsonSpmFile.targets.map { $0.name }.joined(separator: ", "))", verbose)
+                    output.send("\t\(jsonSpmFile.targets.map { $0.name }.joined(separator: ", "))", verbose)
                 }
-                vPrint("To reinitialize all targets pass the -f flag", verbose)
+                output.send("To reinitialize all targets pass the -f flag", verbose)
             }
             jsonSpmFile.targets = (jsonSpmFile.targets + missingTargets)
                 .sorted { $0.name < $1.name}

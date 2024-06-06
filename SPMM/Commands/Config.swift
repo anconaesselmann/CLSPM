@@ -29,8 +29,9 @@ struct Config: ParsableCommand {
     var global: Bool = false
 
     func run() throws {
+        let output = Output.shared
         let manager = ConfigManager()
-        vPrint("Setting configurations", verbose)
+        output.send("Setting configurations", verbose)
         try manager.setLocalRoot(localRoot, global: global)
     }
 }

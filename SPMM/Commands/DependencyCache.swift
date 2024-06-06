@@ -33,10 +33,11 @@ struct DependencyCache: ParsableCommand {
     var spmfile: String?
 
     func run() throws {
+        let output = Output.shared
         let dependencyNames = Set(dependencyName)
         let configManager = ConfigManager()
         let spmFileManager = SpmFileManager()
-        vPrint("Adding dependencies to cache at \(try configManager.dependenciesUrl())", verbose)
+        output.send("Adding dependencies to cache at \(try configManager.dependenciesUrl())", verbose)
         let spmFile = try spmFileManager.spmFile(in: spmfile, isVerbose: verbose)
         var dependenciesFile = try configManager.dependenciesFile()
         var notUsed = dependencyNames
@@ -52,7 +53,7 @@ struct DependencyCache: ParsableCommand {
                 if dependencyNames.isEmpty || dependencyNames.contains(name) {
                     $0[name] = dependency
                     notUsed.remove(name)
-                    vPrint("\tcaching \(name)", verbose)
+                    output.send("\tcaching \(name)", verbose)
                 }
             }
         if !notUsed.isEmpty {
@@ -62,10 +63,10 @@ struct DependencyCache: ParsableCommand {
             $0.name < $1.name
         }
         try configManager.save(dependenciesFile)
-        vPrint("All cached dependencies:", verbose)
+        output.send("All cached dependencies:", verbose)
         if verbose {
             for dependency in dependenciesFile.dependencies {
-                vPrint("\t\(dependency.name)", verbose)
+                output.send("\t\(dependency.name)", verbose)
             }
         }
     }

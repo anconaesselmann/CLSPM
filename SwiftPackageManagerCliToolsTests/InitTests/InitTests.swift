@@ -19,7 +19,7 @@ final class InitTests: XCTestCase {
     override func setUpWithError() throws {
         try FileManager.test_setup(current: "MyApp")
         fileManager = FileManager.default
-        VPrintTestObserver.test_setup()
+        Output.test_setup()
         sut = Init().test_setup()
     }
 
@@ -27,18 +27,18 @@ final class InitTests: XCTestCase {
         sut = nil
         try FileManager.test_cleanup()
         fileManager = nil
-        VPrintTestObserver.test_cleanup()
     }
 
-    func emptyMicroSpmFileCreatedExample() throws {
+    func testEmptyMicroSpmFileCreatedExample() throws {
         try moveProjectFile()
 
         sut.verbose = true
         sut.noTestTargets = true
+        sut.microSpmfile = true
 
         try sut.run()
 
-//        print(VPrintTestObserver.shared.output)
+        print(try Output.text())
 
         try XCTAssertEqual(spmFileDir, "")
     }

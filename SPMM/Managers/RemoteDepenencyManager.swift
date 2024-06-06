@@ -5,6 +5,8 @@ import Foundation
 
 class RemoteDepenencyManager {
 
+    private let output = Output.shared
+
     enum Error: Swift.Error {
         case noReleaseVersionFound
         case invalidUrl
@@ -46,16 +48,16 @@ class RemoteDepenencyManager {
             return nil
         }
         if !orgs.isEmpty {
-            vPrint("Resolving using orgs \(orgs.joined(separator: ", "))", verbose)
+            output.send("Resolving using orgs \(orgs.joined(separator: ", "))", verbose)
         }
         for org in orgs {
             do {
                 let version = try await fetchVersion(for: org, dependencyName: name)
                 let orgUrl = "https://github.com/\(org)"
                 let url = "\(orgUrl)/\(name)"
-                vPrint("Found depenency at \(orgUrl):", verbose)
-                vPrint("\tUrl: \(url)", verbose)
-                vPrint("\tversion: \(version)", verbose)
+                output.send("Found depenency at \(orgUrl):", verbose)
+                output.send("\tUrl: \(url)", verbose)
+                output.send("\tversion: \(version)", verbose)
                 return JsonSpmDependency(
                     id: UUID(),
                     name: name,
@@ -78,9 +80,9 @@ class RemoteDepenencyManager {
         let input = try await parseUserInput(line, name: name)
         switch input {
         case .dependency(url: let url, version: let version):
-            vPrint("Found depenency:", verbose)
-            vPrint("\tUrl: \(url)", verbose)
-            vPrint("\tversion: \(version)", verbose)
+            output.send("Found depenency:", verbose)
+            output.send("\tUrl: \(url)", verbose)
+            output.send("\tversion: \(version)", verbose)
             return JsonSpmDependency(
                 id: UUID(),
                 name: name,

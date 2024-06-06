@@ -6,8 +6,9 @@ import XProjParser
 
 struct SpmFileManager {
 
+    private let output = Output.shared
     private let fileManager = FileManager.default
-    let remoteManager = RemoteDepenencyManager()
+    private let remoteManager = RemoteDepenencyManager()
 
     enum Error: Swift.Error {
         case invalidSpmFile
@@ -19,7 +20,7 @@ struct SpmFileManager {
 
     func spmFile(in spmfile: String?, isVerbose verbose: Bool) throws -> JsonSpmFile {
         if let spmfile = spmfile {
-            vPrint("Using spm file \"\(spmfile)\"", verbose)
+            output.send("Using spm file \"\(spmfile)\"", verbose)
         }
         let spmFileDir = try spmfile ?? (try spmfileDir())
         guard fileManager.fileExists(atPath: spmFileDir) else {
@@ -82,27 +83,27 @@ struct SpmFileManager {
                 .dependencies.reduce(into: [:]) {
                     $0[$1.name] = $1
                 }
-            vPrint("Unresolved dependencies", verbose)
+            output.send("Unresolved dependencies", verbose)
             let sorted = uresolvedDependencyNames.sorted()
             for dependencyName in sorted {
-                vPrint("\t\(dependencyName)", verbose)
+                output.send("\t\(dependencyName)", verbose)
             }
-            vPrint("Resolving global dependencies", verbose)
+            output.send("Resolving global dependencies", verbose)
             for dependencyName in sorted {
                 if let resolvedDependency = globalDependencies[dependencyName] {
                     dependencies[dependencyName] = resolvedDependency
-                    vPrint("\t\(dependencyName) resolved", verbose)
+                    output.send("\t\(dependencyName) resolved", verbose)
                 } else {
                     let new: JsonSpmDependency
                     if let resolved = try await remoteManager.resolve(name: dependencyName, verbose: verbose) {
                         new = resolved
                     } else {
-                        print("Could not resolve dependency \(dependencyName)")
-                        print("Either:")
-                        print("\t - Enter the url for the repository")
-                        print("\t\t(Optional: For none github repositories or to specify a speciffic version append a")
-                        print("\t\t release tag name to the repository url separated by a space.)")
-                        print("\t - Enter the github user/organization that should be used to resolve dependencies")
+                        output.send("Could not resolve dependency \(dependencyName)")
+                        output.send("Either:")
+                        output.send("\t - Enter the url for the repository")
+                        output.send("\t\t(Optional: For none github repositories or to specify a speciffic version append a")
+                        output.send("\t\t release tag name to the repository url separated by a space.)")
+                        output.send("\t - Enter the github user/organization that should be used to resolve dependencies")
                         guard let line = readLine() else {
                             throw Error.invalidUserInput
                         }
@@ -113,7 +114,7 @@ struct SpmFileManager {
                         )
                     }
                     dependencies[dependencyName] = new
-                    vPrint("\t\(dependencyName) resolved", verbose)
+                    output.send("\t\(dependencyName) resolved", verbose)
                     dependenciesFile.dependencies = (dependenciesFile.dependencies + [new])
                         .sorted { $0.name < $1.name }
                     try configManager.save(dependenciesFile)
@@ -207,11 +208,11 @@ struct SpmFileManager {
                         targetName: targetName
                     )
                 } else {
-                    print("Dependency with missing entries:")
-                    print(value.name)
-                    print("URL: ", value.url ?? "none")
-                    print("Version: ", value.version ?? "none")
-                    print("Local: ", value.localPath ?? "none")
+                    output.send("Dependency with missing entries:")
+                    output.send(value.name)
+                    output.send("URL: \(value.url ?? "none")")
+                    output.send("Version: \(value.version ?? "none")")
+                    output.send("Local: \(value.localPath ?? "none")")
                     throw Error.invalidSpmFile
                 }
             }
@@ -220,21 +221,21 @@ struct SpmFileManager {
 
     func save(_ jsonFile: JsonSpmFile, to spmfile: String?, microSpmfile: Bool, isVerbose verbose: Bool) throws {
         let dir = try spmfile ?? (try spmfileDir())
-        vPrint("Saving spm file \"\(dir)\"", verbose)
+        output.send("Saving spm file \"\(dir)\"", verbose)
         let url = URL(fileURLWithPath: dir)
         if microSpmfile {
             guard jsonFile.microCompatible else {
-                vPrint("Incompatible targets", verbose)
+                output.send("Incompatible targets", verbose)
                 throw Error.notMicroSpmfileCompatible
             }
             guard let target = jsonFile.targets
                 .first(where: { !$0.name.hasSuffix("Tests")} )
             else {
-                vPrint("No none-test targets", verbose)
+                output.send("No none-test targets", verbose)
                 throw Error.notMicroSpmfileCompatible
             }
             guard let data = target.dependencies.joined(separator: ", ").data(using: .utf8) else {
-                vPrint("Could not save micro spmfile", verbose)
+                output.send("Could not save micro spmfile", verbose)
                 throw Error.notMicroSpmfileCompatible
             }
             try data
