@@ -9,26 +9,32 @@ class MyApp {
 
     static var fileManager = FileManager.default
 
-    static let noDependencies = JsonSpmFile(
-        targets: [
-            JsonSpmTarget(
-                id: UUID(uuidString: "9D6FC795-45A9-457C-919F-D8CE20A9DFDA")!,
-                name: "MyApp",
-                dependencies: []
-            )
-        ],
-        dependencies: []
-    )
+    private static func noDependencies() -> JsonSpmFile {
+        JsonSpmFile(
+            targets: [
+                JsonSpmTarget(
+                    id: UUID(uuidString: "9D6FC795-45A9-457C-919F-D8CE20A9DFDA")!,
+                    name: "MyApp",
+                    dependencies: []
+                )
+            ],
+            dependencies: []
+        )
+    }
 
-    static func application(with dependencies: [String]) -> JsonSpmFile {
+    static func application(with dependencies: [String], globalDependencies: Bool = false) -> JsonSpmFile {
         let sorted = dependencies.sorted()
-        var copy = Self.noDependencies
+        var copy = Self.noDependencies()
         for i in 0..<copy.targets.count {
             copy.targets[i].dependencies = sorted
         }
-        copy.dependencies = sorted.compactMap {
-            self.dependencies[$0]
-        }.sorted { $0.name < $1.name }
+        if globalDependencies {
+            copy.dependencies = nil
+        } else {
+            copy.dependencies = sorted.compactMap {
+                self.dependencies[$0]
+            }.sorted { $0.name < $1.name }
+        }
         return copy
     }
 
