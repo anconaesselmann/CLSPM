@@ -82,14 +82,20 @@ struct Init: ParsableCommand {
             targetNames = targetNames.filter { !$0.hasSuffix("Tests") }
         }
 
+        let cachedDependencies = try configManager
+            .dependenciesFile().dependencies
+
+        let chachedDependencyIds: [String: UUID] = cachedDependencies.reduce(into: [:]) {
+            $0[$1.name] = $1.id ?? UUID()
+        }
+
         if !cached.isEmpty {
             output.send("Resolving dependencies \(cached.sorted().joined(separator: ", "))", .verbose)
-            let cachedDependencies = try configManager
-                .dependenciesFile().dependencies
+            let filteredCachedDependencies = cachedDependencies
                 .filter {
                     cached.contains($0.name)
                 }
-            let used = Set(cachedDependencies.map { $0.name })
+            let used = Set(filteredCachedDependencies.map { $0.name })
             let notUsed = cached.subtracting(used)
             guard notUsed.isEmpty else {
                 throw Error.couldNotResolveDependencyNames(notUsed.sorted())
@@ -114,7 +120,7 @@ struct Init: ParsableCommand {
                         output.send("Dependencies for target \(targetName):", .verbose)
                     }
                 }
-                for cachedDependency in cachedDependencies {
+                for cachedDependency in filteredCachedDependencies {
                     if let index = dependencies.firstIndex(where: { $0.name == cachedDependency.name }) {
                         output.send("\tOverwriting dependency \(cachedDependency.name) from cache in \(targetName)", .verbose)
                         dependencies[index] = cachedDependency
@@ -137,6 +143,13 @@ struct Init: ParsableCommand {
                 $0[$1.name] = $1
             }.values
             .sorted { $0.name < $1.name }
+            .map {
+                var copy = $0
+                if let id = chachedDependencyIds[copy.name] {
+                    copy.id = id
+                }
+                return copy
+            }
 
         output.send("Dependencies across all targets:", .verbose)
         if dependencies.isEmpty {

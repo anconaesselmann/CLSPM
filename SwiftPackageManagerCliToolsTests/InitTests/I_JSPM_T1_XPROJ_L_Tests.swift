@@ -3,7 +3,7 @@
 
 import XCTest
 
-final class I_JSPM_T1_L_Tests: XCTestCase {
+final class I_JSPM_T1_XPROJ_L_Tests: XCTestCase {
 
     var sut: Init!
 
@@ -15,7 +15,6 @@ final class I_JSPM_T1_L_Tests: XCTestCase {
         Output.test_setup()
         sut = Init().setup_testing()
         sut.verbose = true
-        try MyApp.moveProjectFile()
     }
 
     override func tearDownWithError() throws {
@@ -24,27 +23,13 @@ final class I_JSPM_T1_L_Tests: XCTestCase {
         try FileManager.test_cleanup()
     }
 
-    // MARK: - I-JSPM-T1-LD0
-    func testEmptySpmFileCreatedExample() throws {
-        try MyApp.moveLocalConfigFile()
-
-        try sut.run()
-
-        try XCTAssertEqual(
-            fileManager.spmFileDir,
-            MyApp.application(with: []),
-            encoder: SpmFileManager.encoder
-        )
-    }
-
-    // MARK: - I-JSPM-T1-LD1
+    // MARK: - I-JSPM-T1-XPROJ-LD1
     func testSpmFileWithOneCachedDependencyExample() throws {
+        try MyApp.moveProjectFile(1)
         try MyApp.moveLocalConfigFile()
-        try MyApp.moveProjectFile()
         try MyApp.moveDependenciesFile()
 
         let dependencies = ["LoadableView"]
-        sut.cached = dependencies
 
         try sut.run()
 
@@ -55,14 +40,13 @@ final class I_JSPM_T1_L_Tests: XCTestCase {
         )
     }
 
-    // MARK: - I-JSPM-T1-LD2
+    // MARK: - I-JSPM-T1-XPROJ-LD2
     func testSpmFileWithTwoCachedDependencyExample() throws {
+        try MyApp.moveProjectFile(2)
         try MyApp.moveLocalConfigFile()
-        try MyApp.moveProjectFile()
         try MyApp.moveDependenciesFile()
 
         let dependencies = ["LoadableView", "DebugSwiftUI"]
-        sut.cached = dependencies
 
         try sut.run()
 

@@ -3,7 +3,7 @@
 
 import XCTest
 
-final class I_JSPM_T1_G_Tests: XCTestCase {
+final class I_JSPM_T1_DEP_L_Tests: XCTestCase {
 
     var sut: Init!
 
@@ -15,7 +15,6 @@ final class I_JSPM_T1_G_Tests: XCTestCase {
         Output.test_setup()
         sut = Init().setup_testing()
         sut.verbose = true
-        sut.globalDependencies = true
         try MyApp.moveProjectFile()
     }
 
@@ -25,7 +24,7 @@ final class I_JSPM_T1_G_Tests: XCTestCase {
         try FileManager.test_cleanup()
     }
 
-    // MARK: - I-JSPM-T1-GD0
+    // MARK: - I-JSPM-T1-DEP-LD0
     func testEmptySpmFileCreatedExample() throws {
         try MyApp.moveLocalConfigFile()
 
@@ -33,12 +32,12 @@ final class I_JSPM_T1_G_Tests: XCTestCase {
 
         try XCTAssertEqual(
             fileManager.spmFileDir,
-            MyApp.application(with: [], globalDependencies: true),
+            MyApp.application(with: []),
             encoder: SpmFileManager.encoder
         )
     }
 
-    // MARK: - I-JSPM-T1-GD1
+    // MARK: - I-JSPM-T1-DEP-LD1
     func testSpmFileWithOneCachedDependencyExample() throws {
         try MyApp.moveLocalConfigFile()
         try MyApp.moveProjectFile()
@@ -51,12 +50,12 @@ final class I_JSPM_T1_G_Tests: XCTestCase {
 
         try XCTAssertEqual(
             fileManager.spmFileDir,
-            MyApp.application(with: dependencies, globalDependencies: true),
+            MyApp.application(with: dependencies),
             encoder: SpmFileManager.encoder
         )
     }
 
-    // MARK: - I-JSPM-T1-GD2
+    // MARK: - I-JSPM-T1-DEP-LD2
     func testSpmFileWithTwoCachedDependencyExample() throws {
         try MyApp.moveLocalConfigFile()
         try MyApp.moveProjectFile()
@@ -69,7 +68,7 @@ final class I_JSPM_T1_G_Tests: XCTestCase {
 
         try XCTAssertEqual(
             fileManager.spmFileDir,
-            MyApp.application(with: dependencies, globalDependencies: true),
+            MyApp.application(with: dependencies),
             encoder: SpmFileManager.encoder
         )
     }

@@ -4,7 +4,7 @@
 import Foundation
 
 struct JsonSpmDependency: Codable {
-    let id: UUID?
+    var id: UUID?
     let name: String
     let url: String?
     let version: String?
