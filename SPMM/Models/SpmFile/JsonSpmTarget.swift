@@ -6,5 +6,5 @@ import Foundation
 struct JsonSpmTarget: Codable {
     let id: UUID?
     let name: String
-    let dependencies: [String]
+    var dependencies: [String]
 }

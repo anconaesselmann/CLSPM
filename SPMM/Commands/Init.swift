@@ -115,18 +115,12 @@ struct Init: ParsableCommand {
                     }
                 }
                 for cachedDependency in cachedDependencies {
-                    let newValue = (
-                        name: cachedDependency.name,
-                        url: cachedDependency.url,
-                        version: cachedDependency.version,
-                        local: cachedDependency.localPath
-                    )
-                    if let index = dependencies.firstIndex(where: { $0.name == newValue.name }) {
-                        output.send("\tOverwriting dependency \(newValue.name) from cache in \(targetName)", .verbose)
-                        dependencies[index] = newValue
+                    if let index = dependencies.firstIndex(where: { $0.name == cachedDependency.name }) {
+                        output.send("\tOverwriting dependency \(cachedDependency.name) from cache in \(targetName)", .verbose)
+                        dependencies[index] = cachedDependency
                     } else {
-                        output.send("\tUsing cached dependency \(newValue.name) in \(targetName)", .verbose)
-                        dependencies.append(newValue)
+                        output.send("\tUsing cached dependency \(cachedDependency.name) in \(targetName)", .verbose)
+                        dependencies.append(cachedDependency)
                     }
                 }
                 targetDependencies[targetName] = dependencies
@@ -152,8 +146,8 @@ struct Init: ParsableCommand {
                 output.send("\t\(dependency.name)", .verbose)
             }
         }
-        var configFile = try configManager.combinedConfigFile()
-        var targetIds: [String: UUID] = configFile.targetIds ?? [:]
+        let configFile = try configManager.combinedConfigFile()
+        let targetIds: [String: UUID] = configFile.targetIds ?? [:]
         var newTargetIds: [String: UUID] = [:]
 
         let manager = SpmFileManager()
@@ -200,16 +194,7 @@ struct Init: ParsableCommand {
         } catch SpmFileManager.Error.fileDoesNotExist {
             let spmFileDependencies: [JsonSpmDependency]? = globalDependencies
                 ? nil
-                : dependencies.map {
-                    JsonSpmDependency(
-                        id: UUID(),
-                        name: $0.name,
-                        url: $0.url,
-                        version: $0.version,
-                        localPath: $0.local,
-                        useLocal: ($0.url == nil && $0.local != nil) ? true : nil
-                    )
-                }
+                : dependencies
             jsonSpmFile = JsonSpmFile(
                 targets: targetNames.map { targetName in
                     let targetId: UUID
@@ -230,7 +215,7 @@ struct Init: ParsableCommand {
         }
         if !newTargetIds.isEmpty {
             var localConfigFile = try configManager.configFile(global: false)
-            var existing = localConfigFile.targetIds ?? [:]
+            let existing = localConfigFile.targetIds ?? [:]
             localConfigFile.targetIds = newTargetIds.reduce(into: existing) {
                 $0[$1.key] = $1.value
             }

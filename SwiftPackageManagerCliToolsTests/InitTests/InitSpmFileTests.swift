@@ -35,4 +35,38 @@ final class InitSpmFileTests: XCTestCase {
             encoder: SpmFileManager.encoder
         )
     }
+
+    func testSpmFileWithOneCachedDependencyExample() throws {
+        try MyApp.moveLocalConfigFile()
+        try MyApp.moveProjectFile()
+        try MyApp.moveDependenciesFile()
+
+        let dependencies = ["LoadableView"]
+        sut.cached = dependencies
+
+        try sut.run()
+
+        try XCTAssertEqual(
+            fileManager.spmFileDir,
+            MyApp.application(with: ["LoadableView"]),
+            encoder: SpmFileManager.encoder
+        )
+    }
+
+    func testSpmFileWithTwoCachedDependencyExample() throws {
+        try MyApp.moveLocalConfigFile()
+        try MyApp.moveProjectFile()
+        try MyApp.moveDependenciesFile()
+
+        let dependencies = ["LoadableView", "DebugSwiftUI"]
+        sut.cached = dependencies
+
+        try sut.run()
+
+        try XCTAssertEqual(
+            fileManager.spmFileDir,
+            MyApp.application(with: dependencies),
+            encoder: SpmFileManager.encoder
+        )
+    }
 }

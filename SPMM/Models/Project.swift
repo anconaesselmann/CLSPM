@@ -107,7 +107,7 @@ struct Project {
         }
     }
 
-    func dependencies(in root: XProjRoot? = nil, verbose: Bool) throws -> [String: [(name: String, url: String?, version: String?, local: String?)]] {
+    func dependencies(in root: XProjRoot? = nil, verbose: Bool) throws -> [String: [JsonSpmDependency]] {
         let output = Output.shared
         let root = try (root ?? (try self.root()))
         let targets = root.elements(withIsa: .PBXNativeTarget)
@@ -147,13 +147,13 @@ struct Project {
                 $0[String(name)] = $1
             }
 
-        let packages: [String: [(name: String, url: String?, version: String?, local: String?)]]  = try targetPackages.reduce(into: [:]) {
+        let packages: [String: [JsonSpmDependency]]  = try targetPackages.reduce(into: [:]) {
             let targetId = $1.key
             let dependencies = $1.value
             guard let targetName = targetNames[targetId] else {
                 return
             }
-            let combined: [String: (name: String, url: String?, version: String?, local: String?)] = try dependencies.reduce(into: [:]) {
+            let combined: [String: JsonSpmDependency] = try dependencies.reduce(into: [:]) {
                 let name = try $1.string(for: "productName")
                 var url: String?
                 var version: String?
@@ -177,11 +177,16 @@ struct Project {
                 {
                     localPath = path
                 }
-                $0[name] = (
+                let combinedUrl = url ?? previous?.url
+                let combinedLocal = localPath ?? previous?.localPath
+                let useLocal: Bool? = (combinedUrl == nil && combinedLocal != nil) ? true : nil
+                $0[name] = JsonSpmDependency(
+                    id: previous?.id ?? UUID(),
                     name: name,
-                    url: url ?? previous?.url,
+                    url: combinedUrl,
                     version: version ?? previous?.version,
-                    local: localPath ?? previous?.local
+                    localPath: combinedLocal,
+                    useLocal: previous?.useLocal ?? useLocal
                 )
             }
             $0[targetName] = combined.values.sorted {
