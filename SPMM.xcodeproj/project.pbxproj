@@ -50,6 +50,9 @@
 		976A0D882C12DDFA008036D3 /* MyAppProject_d2.test in Resources */ = {isa = PBXBuildFile; fileRef = 976A0D862C12DDF9008036D3 /* MyAppProject_d2.test */; };
 		976A0D8A2C12E032008036D3 /* I_JSPM_T1_XPROJ_L_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0D892C12E032008036D3 /* I_JSPM_T1_XPROJ_L_Tests.swift */; };
 		976A0D8C2C12E52B008036D3 /* I_JSPM_T1_XPROJ_G_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0D8B2C12E52B008036D3 /* I_JSPM_T1_XPROJ_G_Tests.swift */; };
+		976A0D952C12F490008036D3 /* MyAppProject_d2_l.test in Resources */ = {isa = PBXBuildFile; fileRef = 976A0D932C12F490008036D3 /* MyAppProject_d2_l.test */; };
+		976A0D962C12F490008036D3 /* MyAppProject_d1_l.test in Resources */ = {isa = PBXBuildFile; fileRef = 976A0D942C12F490008036D3 /* MyAppProject_d1_l.test */; };
+		976A0D982C1313E7008036D3 /* I_JSPM_T1_XPROJ_DL_L_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0D972C1313E7008036D3 /* I_JSPM_T1_XPROJ_DL_L_Tests.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
 		979962C72C0F952100782E40 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C62C0F952100782E40 /* ConfigManager.swift */; };
 		979962C92C0FA77300782E40 /* ConfigFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C82C0FA77300782E40 /* ConfigFile.swift */; };
@@ -105,6 +108,9 @@
 		976A0D862C12DDF9008036D3 /* MyAppProject_d2.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject_d2.test; sourceTree = "<group>"; };
 		976A0D892C12E032008036D3 /* I_JSPM_T1_XPROJ_L_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = I_JSPM_T1_XPROJ_L_Tests.swift; sourceTree = "<group>"; };
 		976A0D8B2C12E52B008036D3 /* I_JSPM_T1_XPROJ_G_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = I_JSPM_T1_XPROJ_G_Tests.swift; sourceTree = "<group>"; };
+		976A0D932C12F490008036D3 /* MyAppProject_d2_l.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject_d2_l.test; sourceTree = "<group>"; };
+		976A0D942C12F490008036D3 /* MyAppProject_d1_l.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject_d1_l.test; sourceTree = "<group>"; };
+		976A0D972C1313E7008036D3 /* I_JSPM_T1_XPROJ_DL_L_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = I_JSPM_T1_XPROJ_DL_L_Tests.swift; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		979962C62C0F952100782E40 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		979962C82C0FA77300782E40 /* ConfigFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigFile.swift; sourceTree = "<group>"; };
@@ -167,6 +173,7 @@
 				9724388C2C12D58C0011C5AE /* I_JSPM_T1_DEP_G_Tests.swift */,
 				976A0D892C12E032008036D3 /* I_JSPM_T1_XPROJ_L_Tests.swift */,
 				976A0D8B2C12E52B008036D3 /* I_JSPM_T1_XPROJ_G_Tests.swift */,
+				976A0D972C1313E7008036D3 /* I_JSPM_T1_XPROJ_DL_L_Tests.swift */,
 				972438302C12477C0011C5AE /* data */,
 			);
 			path = InitTests;
@@ -179,6 +186,8 @@
 				972438312C1247940011C5AE /* MyAppProject_d0.test */,
 				976A0D852C12DDF9008036D3 /* MyAppProject_d1.test */,
 				976A0D862C12DDF9008036D3 /* MyAppProject_d2.test */,
+				976A0D942C12F490008036D3 /* MyAppProject_d1_l.test */,
+				976A0D932C12F490008036D3 /* MyAppProject_d2_l.test */,
 				972438882C1280230011C5AE /* config.test */,
 				9724388A2C1298B00011C5AE /* MyAppJson.swift */,
 			);
@@ -403,8 +412,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				976A0D952C12F490008036D3 /* MyAppProject_d2_l.test in Resources */,
 				976A0D872C12DDFA008036D3 /* MyAppProject_d1.test in Resources */,
 				972438852C1273D30011C5AE /* dependencies.test in Resources */,
+				976A0D962C12F490008036D3 /* MyAppProject_d1_l.test in Resources */,
 				972438322C1247940011C5AE /* MyAppProject_d0.test in Resources */,
 				976A0D882C12DDFA008036D3 /* MyAppProject_d2.test in Resources */,
 				972438892C1280230011C5AE /* config.test in Resources */,
@@ -448,6 +459,7 @@
 				972438802C1267AB0011C5AE /* TestOutput.swift in Sources */,
 				972437C82C1235990011C5AE /* JsonSpmTarget.swift in Sources */,
 				972437B62C1235860011C5AE /* shell.swift in Sources */,
+				976A0D982C1313E7008036D3 /* I_JSPM_T1_XPROJ_DL_L_Tests.swift in Sources */,
 				972437B12C12354E0011C5AE /* InstallTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

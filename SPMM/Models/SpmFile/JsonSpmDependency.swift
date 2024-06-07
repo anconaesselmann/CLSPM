@@ -6,9 +6,9 @@ import Foundation
 struct JsonSpmDependency: Codable {
     var id: UUID?
     let name: String
-    let url: String?
-    let version: String?
-    let localPath: String?
+    var url: String?
+    var version: String?
+    var localPath: String?
     var useLocal: Bool?
 }
 

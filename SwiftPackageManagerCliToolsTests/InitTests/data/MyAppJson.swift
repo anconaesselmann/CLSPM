@@ -22,7 +22,7 @@ class MyApp {
         )
     }
 
-    static func application(with dependencies: [String], globalDependencies: Bool = false) -> JsonSpmFile {
+    static func application(with dependencies: [String], globalDependencies: Bool = false, local: Set<String> = []) -> JsonSpmFile {
         let sorted = dependencies.sorted()
         var copy = Self.noDependencies()
         for i in 0..<copy.targets.count {
@@ -32,7 +32,17 @@ class MyApp {
             copy.dependencies = nil
         } else {
             copy.dependencies = sorted.compactMap {
-                self.dependencies[$0]
+                guard var dependency = self.dependencies[$0] else {
+                    return nil
+                }
+                if local.contains(dependency.name) {
+                    dependency.useLocal = true
+                    dependency.url = nil
+                    dependency.version = nil
+                } else {
+                    dependency.localPath = nil
+                }
+                return dependency
             }.sorted { $0.name < $1.name }
         }
         return copy
@@ -44,20 +54,20 @@ class MyApp {
             name: "LoadableView",
             url: "https://github.com/anconaesselmann/LoadableView",
             version: "0.3.9",
-            localPath: nil
+            localPath: "../Dependencies/LoadableView"
         ),
         "DebugSwiftUI": JsonSpmDependency(
             id: UUID(uuidString: "8918A5F9-4693-4285-A10B-D702E877E9B4")!,
             name: "DebugSwiftUI",
             url: "https://github.com/anconaesselmann/DebugSwiftUI",
             version: "0.0.1",
-            localPath: nil
+            localPath: "../Dependencies/DebugSwiftUI"
         )
     ]
 
-    static func moveProjectFile(_ dependencyCount: Int = 0) throws {
+    static func moveProjectFile(_ dependencyCount: Int = 0, local: Bool = false) throws {
         try fileManager.copy(
-            from: bundle, "MyAppProject_d\(dependencyCount).test",
+            from: bundle, "MyAppProject_d\(dependencyCount)\(local ? "_l" : "").test",
             to: "MyApp.xcodeproj/project.pbxproj"
         )
     }
