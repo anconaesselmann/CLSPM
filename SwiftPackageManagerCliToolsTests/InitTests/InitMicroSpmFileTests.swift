@@ -7,13 +7,11 @@ final class InitMicroSpmFileTests: XCTestCase {
 
     var sut: Init!
 
-    var fileManager: FileManager!
-
-    private var bundle: Bundle { Bundle(for: Self.self) }
+    var fileManager: TempFileManager!
 
     override func setUpWithError() throws {
-        try FileManager.test_setup(current: "MyApp")
-        fileManager = FileManager.default
+        fileManager = try TempFileManager(current: "MyApp")
+        FileManager.default = fileManager
         Output.test_setup()
         sut = Init().setup_testing()
 //        sut.verbose = true
@@ -24,7 +22,7 @@ final class InitMicroSpmFileTests: XCTestCase {
     override func tearDownWithError() throws {
 //        print(try Output.text())
         sut = nil
-        try FileManager.test_cleanup()
+        try fileManager.cleanup()
     }
 
     func testEmptyMicroSpmFileCreatedExample() throws {

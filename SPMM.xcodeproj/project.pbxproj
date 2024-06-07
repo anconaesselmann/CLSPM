@@ -53,6 +53,9 @@
 		976A0D952C12F490008036D3 /* MyAppProject_d2_l.test in Resources */ = {isa = PBXBuildFile; fileRef = 976A0D932C12F490008036D3 /* MyAppProject_d2_l.test */; };
 		976A0D962C12F490008036D3 /* MyAppProject_d1_l.test in Resources */ = {isa = PBXBuildFile; fileRef = 976A0D942C12F490008036D3 /* MyAppProject_d1_l.test */; };
 		976A0D982C1313E7008036D3 /* I_JSPM_T1_XPROJ_DL_L_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0D972C1313E7008036D3 /* I_JSPM_T1_XPROJ_DL_L_Tests.swift */; };
+		976A0D9D2C138511008036D3 /* FileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0D9C2C138511008036D3 /* FileManagerProtocol.swift */; };
+		976A0D9E2C13852C008036D3 /* FileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0D9C2C138511008036D3 /* FileManagerProtocol.swift */; };
+		976A0DA02C138B84008036D3 /* TempFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0D9F2C138B84008036D3 /* TempFileManager.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
 		979962C72C0F952100782E40 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C62C0F952100782E40 /* ConfigManager.swift */; };
 		979962C92C0FA77300782E40 /* ConfigFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C82C0FA77300782E40 /* ConfigFile.swift */; };
@@ -111,6 +114,8 @@
 		976A0D932C12F490008036D3 /* MyAppProject_d2_l.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject_d2_l.test; sourceTree = "<group>"; };
 		976A0D942C12F490008036D3 /* MyAppProject_d1_l.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject_d1_l.test; sourceTree = "<group>"; };
 		976A0D972C1313E7008036D3 /* I_JSPM_T1_XPROJ_DL_L_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = I_JSPM_T1_XPROJ_DL_L_Tests.swift; sourceTree = "<group>"; };
+		976A0D9C2C138511008036D3 /* FileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerProtocol.swift; sourceTree = "<group>"; };
+		976A0D9F2C138B84008036D3 /* TempFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempFileManager.swift; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		979962C62C0F952100782E40 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		979962C82C0FA77300782E40 /* ConfigFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigFile.swift; sourceTree = "<group>"; };
@@ -214,8 +219,18 @@
 			isa = PBXGroup;
 			children = (
 				9724387F2C1267AB0011C5AE /* TestOutput.swift */,
+				976A0D9F2C138B84008036D3 /* TempFileManager.swift */,
 			);
 			path = Supporting;
+			sourceTree = "<group>";
+		};
+		976A0D9B2C138508008036D3 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				976A0D9C2C138511008036D3 /* FileManagerProtocol.swift */,
+				972437C92C123D400011C5AE /* FileManager.swift */,
+			);
+			path = FileManager;
 			sourceTree = "<group>";
 		};
 		979967E02C11814200782E40 /* Commands */ = {
@@ -247,7 +262,7 @@
 		979967E22C11819F00782E40 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				972437C92C123D400011C5AE /* FileManager.swift */,
+				976A0D9B2C138508008036D3 /* FileManager */,
 				9761EE662C0A3A950073AB3E /* SpmFileManager.swift */,
 				979967192C1105D400782E40 /* RemoteDepenencyManager.swift */,
 				979962C62C0F952100782E40 /* ConfigManager.swift */,
@@ -442,6 +457,7 @@
 				972437BE2C1235940011C5AE /* ConfigManager.swift in Sources */,
 				972437BF2C1235940011C5AE /* Bool+StringInitialization.swift in Sources */,
 				972437C02C1235940011C5AE /* Add.swift in Sources */,
+				976A0DA02C138B84008036D3 /* TempFileManager.swift in Sources */,
 				972438792C12600F0011C5AE /* XCTAssertEqual+fileContent.swift in Sources */,
 				9724387D2C12640F0011C5AE /* Output.swift in Sources */,
 				972437CD2C12427F0011C5AE /* InitMicroSpmFileTests.swift in Sources */,
@@ -458,6 +474,7 @@
 				972437C72C1235990011C5AE /* JsonSpmDependency.swift in Sources */,
 				972438802C1267AB0011C5AE /* TestOutput.swift in Sources */,
 				972437C82C1235990011C5AE /* JsonSpmTarget.swift in Sources */,
+				976A0D9E2C13852C008036D3 /* FileManagerProtocol.swift in Sources */,
 				972437B62C1235860011C5AE /* shell.swift in Sources */,
 				976A0D982C1313E7008036D3 /* I_JSPM_T1_XPROJ_DL_L_Tests.swift in Sources */,
 				972437B12C12354E0011C5AE /* InstallTests.swift in Sources */,
@@ -476,6 +493,7 @@
 				979962C72C0F952100782E40 /* ConfigManager.swift in Sources */,
 				972453BF2C0957210069A162 /* shell.swift in Sources */,
 				972437CA2C123D400011C5AE /* FileManager.swift in Sources */,
+				976A0D9D2C138511008036D3 /* FileManagerProtocol.swift in Sources */,
 				979967DF2C1178AA00782E40 /* Bool+StringInitialization.swift in Sources */,
 				97E7B2432C09117A00E33740 /* SpmmMain.swift in Sources */,
 				9799682F2C12249F00782E40 /* Target.swift in Sources */,

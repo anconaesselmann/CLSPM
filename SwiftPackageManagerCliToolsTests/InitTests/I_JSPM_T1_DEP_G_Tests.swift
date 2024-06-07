@@ -7,11 +7,11 @@ final class I_JSPM_T1_DEP_G_Tests: XCTestCase {
 
     var sut: Init!
 
-    var fileManager: FileManager!
+    var fileManager: TempFileManager!
 
     override func setUpWithError() throws {
-        try FileManager.test_setup(current: "MyApp")
-        fileManager = FileManager.default
+        fileManager = try TempFileManager(current: "MyApp")
+        FileManager.default = fileManager
         Output.test_setup()
         sut = Init().setup_testing()
         sut.verbose = true
@@ -22,7 +22,7 @@ final class I_JSPM_T1_DEP_G_Tests: XCTestCase {
     override func tearDownWithError() throws {
 //        print(try Output.text())
         sut = nil
-        try FileManager.test_cleanup()
+        try fileManager.cleanup()
     }
 
     // MARK: - I-JSPM-T1-DEP-GD0

@@ -7,7 +7,7 @@ class MyApp {
 
     private static var bundle: Bundle { Bundle(for: MyApp.self) }
 
-    static var fileManager = FileManager.default
+    static var fileManager: TempFileManager = FileManager.default as! TempFileManager
 
     private static func noDependencies() -> JsonSpmFile {
         JsonSpmFile(
@@ -89,7 +89,7 @@ class MyApp {
     }
 }
 
-extension FileManager {
+extension FileManagerProtocol {
     var spmFileDir: URL {
         currentDirectory
             .appending(path: "spmfile")
