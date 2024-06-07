@@ -91,6 +91,14 @@ class MyApp {
             in: .current
         )
     }
+
+    func moveSpmFile() throws {
+        try fileManager.copy(
+            from: bundle, "spmfile.test",
+            to: "spmfile",
+            in: .current
+        )
+    }
 }
 
 extension FileManagerProtocol {

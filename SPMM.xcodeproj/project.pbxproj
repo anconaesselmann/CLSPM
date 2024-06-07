@@ -56,6 +56,9 @@
 		976A0D9D2C138511008036D3 /* FileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0D9C2C138511008036D3 /* FileManagerProtocol.swift */; };
 		976A0D9E2C13852C008036D3 /* FileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0D9C2C138511008036D3 /* FileManagerProtocol.swift */; };
 		976A0DA02C138B84008036D3 /* TempFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0D9F2C138B84008036D3 /* TempFileManager.swift */; };
+		976A0DA42C139EE3008036D3 /* Install+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0DA32C139EE3008036D3 /* Install+Tests.swift */; };
+		976A0DA72C13A0BA008036D3 /* spmfile.test in Resources */ = {isa = PBXBuildFile; fileRef = 976A0DA62C13A0BA008036D3 /* spmfile.test */; };
+		976A0DA92C13A63A008036D3 /* XCTestCase+runAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0DA82C13A63A008036D3 /* XCTestCase+runAsyncTest.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
 		979962C72C0F952100782E40 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C62C0F952100782E40 /* ConfigManager.swift */; };
 		979962C92C0FA77300782E40 /* ConfigFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C82C0FA77300782E40 /* ConfigFile.swift */; };
@@ -116,6 +119,9 @@
 		976A0D972C1313E7008036D3 /* I_JSPM_T1_XPROJ_DL_L_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = I_JSPM_T1_XPROJ_DL_L_Tests.swift; sourceTree = "<group>"; };
 		976A0D9C2C138511008036D3 /* FileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerProtocol.swift; sourceTree = "<group>"; };
 		976A0D9F2C138B84008036D3 /* TempFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempFileManager.swift; sourceTree = "<group>"; };
+		976A0DA32C139EE3008036D3 /* Install+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Install+Tests.swift"; sourceTree = "<group>"; };
+		976A0DA62C13A0BA008036D3 /* spmfile.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = spmfile.test; sourceTree = "<group>"; };
+		976A0DA82C13A63A008036D3 /* XCTestCase+runAsyncTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+runAsyncTest.swift"; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		979962C62C0F952100782E40 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		979962C82C0FA77300782E40 /* ConfigFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigFile.swift; sourceTree = "<group>"; };
@@ -161,9 +167,9 @@
 		972437AF2C12354E0011C5AE /* SwiftPackageManagerCliToolsTests */ = {
 			isa = PBXGroup;
 			children = (
-				972438772C125FF60011C5AE /* Assertions */,
-				972437B02C12354E0011C5AE /* InstallTests.swift */,
 				9724387E2C1267A30011C5AE /* Supporting */,
+				972438772C125FF60011C5AE /* Assertions */,
+				976A0DA12C139B08008036D3 /* InstallTests */,
 				972437CE2C1243DE0011C5AE /* InitTests */,
 			);
 			path = SwiftPackageManagerCliToolsTests;
@@ -220,6 +226,7 @@
 			children = (
 				9724387F2C1267AB0011C5AE /* TestOutput.swift */,
 				976A0D9F2C138B84008036D3 /* TempFileManager.swift */,
+				976A0DA82C13A63A008036D3 /* XCTestCase+runAsyncTest.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -231,6 +238,32 @@
 				972437C92C123D400011C5AE /* FileManager.swift */,
 			);
 			path = FileManager;
+			sourceTree = "<group>";
+		};
+		976A0DA12C139B08008036D3 /* InstallTests */ = {
+			isa = PBXGroup;
+			children = (
+				976A0DA22C139ED6008036D3 /* supporting */,
+				972437B02C12354E0011C5AE /* InstallTests.swift */,
+				976A0DA52C13A097008036D3 /* data */,
+			);
+			path = InstallTests;
+			sourceTree = "<group>";
+		};
+		976A0DA22C139ED6008036D3 /* supporting */ = {
+			isa = PBXGroup;
+			children = (
+				976A0DA32C139EE3008036D3 /* Install+Tests.swift */,
+			);
+			path = supporting;
+			sourceTree = "<group>";
+		};
+		976A0DA52C13A097008036D3 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				976A0DA62C13A0BA008036D3 /* spmfile.test */,
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 		979967E02C11814200782E40 /* Commands */ = {
@@ -429,6 +462,7 @@
 			files = (
 				976A0D952C12F490008036D3 /* MyAppProject_d2_l.test in Resources */,
 				976A0D872C12DDFA008036D3 /* MyAppProject_d1.test in Resources */,
+				976A0DA72C13A0BA008036D3 /* spmfile.test in Resources */,
 				972438852C1273D30011C5AE /* dependencies.test in Resources */,
 				976A0D962C12F490008036D3 /* MyAppProject_d1_l.test in Resources */,
 				972438322C1247940011C5AE /* MyAppProject_d0.test in Resources */,
@@ -456,6 +490,7 @@
 				972437CB2C123D4D0011C5AE /* FileManager.swift in Sources */,
 				972437BE2C1235940011C5AE /* ConfigManager.swift in Sources */,
 				972437BF2C1235940011C5AE /* Bool+StringInitialization.swift in Sources */,
+				976A0DA42C139EE3008036D3 /* Install+Tests.swift in Sources */,
 				972437C02C1235940011C5AE /* Add.swift in Sources */,
 				976A0DA02C138B84008036D3 /* TempFileManager.swift in Sources */,
 				972438792C12600F0011C5AE /* XCTAssertEqual+fileContent.swift in Sources */,
@@ -464,6 +499,7 @@
 				972437C12C1235940011C5AE /* GithubRelease.swift in Sources */,
 				972438762C1252460011C5AE /* Init+Tests.swift in Sources */,
 				976A0D8C2C12E52B008036D3 /* I_JSPM_T1_XPROJ_G_Tests.swift in Sources */,
+				976A0DA92C13A63A008036D3 /* XCTestCase+runAsyncTest.swift in Sources */,
 				972437C22C1235940011C5AE /* DependencyCache.swift in Sources */,
 				972437C32C1235940011C5AE /* Install.swift in Sources */,
 				972437C42C1235940011C5AE /* Config.swift in Sources */,

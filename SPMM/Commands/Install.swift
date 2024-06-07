@@ -20,31 +20,31 @@ struct Install: AsyncParsableCommand {
         name: .shortAndLong,
         help: "The path to a custom spmfile"
     )
-    private var spmfile: String?
+    var spmfile: String?
 
     @Option(
         name: .shortAndLong,
         help: "An override list of packages to be used locally"
     )
-    private var local: [String] = []
+    var local: [String] = []
 
     @Flag(
         name: .shortAndLong,
         help: "Show extra logging"
     )
-    private var verbose: Bool = false
+    var verbose: Bool = false
 
     @Flag(
         name: .long,
         help: "Packages are cloned to a local DerivedData directory inside .swiftspmm"
     )
-    private var cloneToSpmmDir: Bool = false
+    var cloneToSpmmDir: Bool = false
 
     @Option(
         name: .long,
         help: "Location remote packages get cloned to"
     )
-    private var packageCacheDir: String?
+    var packageCacheDir: String?
 
     func run() async throws {
         try await self.run(fileManager: FileManager.default)

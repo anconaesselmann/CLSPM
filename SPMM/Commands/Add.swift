@@ -45,7 +45,11 @@ struct Add: AsyncParsableCommand {
     )
     private var globalDependencies: Bool = false
 
-    func run() async throws {
+    func run() throws {
+        try self.run(fileManager: FileManager.default)
+    }
+
+    func run(fileManager: FileManagerProtocol) throws {
 
     }
 }
