@@ -6,9 +6,9 @@
 
 - One target I-JSPM-T1 
 	- [x] 0, 1, 2 dependencies resolved from global dependencies file
-		- [x] dependencies stored in spmfile I-JSPM-T1-DEP-L D0-D2
-		- [x] dependencies not stored in spmfile I-JSPM-T1-DEP-G D0-D2
-	- [x] 1, 2 remote dependencies from xproj file I-JSPM-T1-XPROJ-L D1-D2
+		- [x] dependencies stored in spmfile I-JSPM-T1-DEP-LD0/1/2
+		- [x] dependencies not stored in spmfile I-JSPM-T1-DEP-G0/1/2
+	- [x] 1, 2 remote dependencies from xproj file I-JSPM-T1-XPROJ-L1/2
 	- [ ] 1, 2 local dependencies from xproj file
 	- [ ] mix of local and remote dependencies from xproj file
 
