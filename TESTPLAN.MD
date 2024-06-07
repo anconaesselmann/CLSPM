@@ -11,9 +11,21 @@
 	- [ ] 0, 1, 2 remote dependencies from xproj file
 	- [ ] 0, 1, 2 local dependencies from xproj file
 	- [ ] mix of local and remote dependencies from xproj file
-	
+
+- Multi target
+	- [ ] same as one target
 
 ### CSV spmfile
 
 - One target
-	[x] 0, 1, 2 dependencies resolved from global dependencies file
+	- [x] 0, 1, 2 dependencies resolved from global dependencies file
+		- [x] dependencies stored in spmfile
+		- [ ] dependencies not stored in spmfile
+
+- Multi target
+	- [ ] same as one target
+	- [ ] targets have different dependencies
+
+- Regular and Test target
+	- [ ] same as one target
+	- [ ] targets have different dependencies
