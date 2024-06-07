@@ -5,6 +5,7 @@ import Foundation
 
 class RemoteDepenencyManager {
 
+    private let fileManager: FileManagerProtocol
     private let output = Output.shared
 
     enum Error: Swift.Error {
@@ -21,7 +22,7 @@ class RemoteDepenencyManager {
     var orgs: [String] {
         get {
             do {
-                let config = try ConfigManager().configFile(global: true)
+                let config = try ConfigManager(fileManager: fileManager).configFile(global: true)
                 return config.orgs ?? []
             } catch {
                 print(error)
@@ -29,7 +30,7 @@ class RemoteDepenencyManager {
             }
         }
         set {
-            let manager = ConfigManager()
+            let manager = ConfigManager(fileManager: fileManager)
             do {
                 var config = try manager.configFile(global: true)
                 config.orgs = newValue.sorted()
@@ -38,6 +39,10 @@ class RemoteDepenencyManager {
                 print(error)
             }
         }
+    }
+
+    init(fileManager: FileManagerProtocol) {
+        self.fileManager = fileManager
     }
 
     func resolve(name: String) async throws -> JsonSpmDependency? {

@@ -6,17 +6,18 @@ import XCTest
 final class InitMicroSpmFileTests: XCTestCase {
 
     var sut: Init!
+    var myApp: MyApp!
 
     var fileManager: TempFileManager!
 
     override func setUpWithError() throws {
         fileManager = try TempFileManager(current: "MyApp")
-        FileManager.default = fileManager
+        myApp = MyApp(fileManager)
         Output.test_setup()
         sut = Init().setup_testing()
 //        sut.verbose = true
         sut.microSpmfile = true
-        try MyApp.moveProjectFile()
+        try myApp.moveProjectFile()
     }
 
     override func tearDownWithError() throws {
@@ -26,25 +27,25 @@ final class InitMicroSpmFileTests: XCTestCase {
     }
 
     func testEmptyMicroSpmFileCreatedExample() throws {
-        try sut.run()
-        
+        try sut.run(fileManager: fileManager)
+
         try XCTAssertEqual(fileManager.spmFileDir, "")
     }
 
     func testMicroSpmFileWithOneCachedDependencyExample() throws {
-        try MyApp.moveDependenciesFile()
+        try myApp.moveDependenciesFile()
         sut.cached = ["LoadableView"]
 
-        try sut.run()
+        try sut.run(fileManager: fileManager)
 
         try XCTAssertEqual(fileManager.spmFileDir, "LoadableView")
     }
 
     func testMicroSpmFileWithTwoCachedDependencyExample() throws {
-        try MyApp.moveDependenciesFile()
+        try myApp.moveDependenciesFile()
         sut.cached = ["LoadableView", "DebugSwiftUI"]
         
-        try sut.run()
+        try sut.run(fileManager: fileManager)
 
         try XCTAssertEqual(fileManager.spmFileDir, "DebugSwiftUI, LoadableView")
     }

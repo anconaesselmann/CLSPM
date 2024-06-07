@@ -64,15 +64,19 @@ struct Init: ParsableCommand {
     var microSpmfile: Bool = false
 
     func run() throws {
+        try self.run(fileManager: FileManager.default)
+    }
+
+    func run(fileManager: FileManagerProtocol) throws {
         let output = Output.shared
         output.verboseFlagIsSet(verbose)
-        
-        let project = try Project()
+
+        let project = try Project(fileManager: fileManager)
         let root = try project.root()
         let targets = try project.targets(in: root)
         var targetDependencies = try project.dependencies(in: root, verbose: verbose)
         let cached = Set(cached)
-        let configManager = ConfigManager()
+        let configManager = ConfigManager(fileManager: fileManager)
 
         var targetNames = targets.map { $0.name }
         if !testTargets {
@@ -163,7 +167,7 @@ struct Init: ParsableCommand {
         let targetIds: [String: UUID] = configFile.targetIds ?? [:]
         var newTargetIds: [String: UUID] = [:]
 
-        let manager = SpmFileManager()
+        let manager = SpmFileManager(fileManager: fileManager)
         var jsonSpmFile: JsonSpmFile
         do {
             if force {

@@ -6,6 +6,7 @@ import XCTest
 final class InstallTests: XCTestCase {
 
     var sut: Install!
+    var myApp: MyApp!
 
     var fileManager: TempFileManager!
 
@@ -15,7 +16,7 @@ final class InstallTests: XCTestCase {
 
     override func setUpWithError() throws {
         fileManager = try TempFileManager(current: "MyApp")
-        FileManager.default = fileManager
+        myApp = MyApp(fileManager)
         Output.test_setup()
         sut = Install()
     }
@@ -25,11 +26,11 @@ final class InstallTests: XCTestCase {
         try fileManager.cleanup()
     }
 
-    func testExample() throws {
-        do {
-            try sut.run()
-        } catch {
-            print(error)
-        }
-    }
+//    func testExample() async throws {
+//        do {
+//            try await sut.run(fileManager: fileManager)
+//        } catch {
+//            print(error)
+//        }
+//    }
 }

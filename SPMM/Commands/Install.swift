@@ -47,7 +47,11 @@ struct Install: AsyncParsableCommand {
     private var packageCacheDir: String?
 
     func run() async throws {
-        let manager = SpmFileManager()
+        try await self.run(fileManager: FileManager.default)
+    }
+
+    func run(fileManager: FileManagerProtocol) async throws {
+        let manager = SpmFileManager(fileManager: fileManager)
         let output = Output.shared
         output.verboseFlagIsSet(verbose)
 
@@ -72,7 +76,7 @@ struct Install: AsyncParsableCommand {
             .map { $0.dependency.name }
 
         if !packagesNeedingToResolveLocalPath.isEmpty {
-            let configManager = ConfigManager()
+            let configManager = ConfigManager(fileManager: fileManager)
             let localRoot = try configManager
                 .combinedConfigFile()
                 .localRoot
@@ -94,7 +98,7 @@ struct Install: AsyncParsableCommand {
                 try configManager.setLocalRoot(path, global: global)
             }
         }
-        try Project()
+        try Project(fileManager: fileManager)
             .removed(remove, verbose: verbose)
             .added(add, verbose: verbose)
             .save()

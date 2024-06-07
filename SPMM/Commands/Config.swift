@@ -29,10 +29,14 @@ struct Config: ParsableCommand {
     var global: Bool = false
 
     func run() throws {
+        try self.run(fileManager: FileManager.default)
+    }
+
+    func run(fileManager: FileManagerProtocol) throws {
         let output = Output.shared
         output.verboseFlagIsSet(verbose)
         
-        let manager = ConfigManager()
+        let manager = ConfigManager(fileManager: fileManager)
         output.send("Setting configurations", .verbose)
         try manager.setLocalRoot(localRoot, global: global)
     }

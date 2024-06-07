@@ -15,8 +15,11 @@ struct Project {
     var content: String
     let output = Output.shared
 
-    init() throws {
-        content = try Self.projectContent()
+    private let fileManager: FileManagerProtocol
+
+    init(fileManager: FileManagerProtocol) throws {
+        self.fileManager = fileManager
+        content = try Self.projectContent(fileManager)
     }
 
     func removed(
@@ -44,7 +47,7 @@ struct Project {
         verbose: Bool
     ) throws -> Self {
         var copy = self
-        let localRoot = try ConfigManager()
+        let localRoot = try ConfigManager(fileManager: fileManager)
             .combinedConfigFile()
             .localRoot
         if verbose {
@@ -73,7 +76,7 @@ struct Project {
 
     @discardableResult
     func save() throws -> Self {
-        let projectFileDir = try Self.projectFileDir()
+        let projectFileDir = try Self.projectFileDir(fileManager)
         let url = URL(fileURLWithPath: projectFileDir)
         try content.write(to: url, atomically: true, encoding: .utf8)
         return self
@@ -81,7 +84,7 @@ struct Project {
 
     @discardableResult
     func reloadPackages(_ location: PackageLocation) throws -> Self {
-        let manager = ConfigManager()
+        let manager = ConfigManager(fileManager: fileManager)
         let clonedSourcePacagesOption: String
         switch location {
         case .defaultLocation:
@@ -202,9 +205,9 @@ struct Project {
             .root()
     }
 
-    private static func projectContent() throws -> String {
-        let dir = try projectFileDir()
-        guard let data = FileManager.default.contents(atPath: dir) else {
+    private static func projectContent(_ fileManager: FileManagerProtocol) throws -> String {
+        let dir = try projectFileDir(fileManager)
+        guard let data = fileManager.contents(atPath: dir) else {
             throw Error.couldNotOpenFile(dir)
         }
         guard let content = String(data: data, encoding: .utf8) else {
@@ -213,8 +216,8 @@ struct Project {
         return content
     }
 
-    private static func projectFileDir() throws -> String {
-        let currentPath = FileManager.default.currentDirectoryPath
+    private static func projectFileDir(_ fileManager: FileManagerProtocol) throws -> String {
+        let currentPath = fileManager.currentDirectoryPath
         guard let projectName = currentPath.split(separator: "/").last else {
             throw Error.invalidProjectDir
         }

@@ -6,16 +6,17 @@ import XCTest
 final class I_JSPM_T1_DEP_L_Tests: XCTestCase {
 
     var sut: Init!
+    var myApp: MyApp!
 
     var fileManager: TempFileManager!
 
     override func setUpWithError() throws {
         fileManager = try TempFileManager(current: "MyApp")
-        FileManager.default = fileManager
+        myApp = MyApp(fileManager)
         Output.test_setup()
         sut = Init().setup_testing()
         sut.verbose = true
-        try MyApp.moveProjectFile()
+        try myApp.moveProjectFile()
     }
 
     override func tearDownWithError() throws {
@@ -26,49 +27,49 @@ final class I_JSPM_T1_DEP_L_Tests: XCTestCase {
 
     // MARK: - I-JSPM-T1-DEP-LD0
     func testEmptySpmFileCreatedExample() throws {
-        try MyApp.moveLocalConfigFile()
+        try myApp.moveLocalConfigFile()
 
-        try sut.run()
+        try sut.run(fileManager: fileManager)
 
         try XCTAssertEqual(
             fileManager.spmFileDir,
-            MyApp.application(with: []),
+            myApp.application(with: []),
             encoder: SpmFileManager.encoder
         )
     }
 
     // MARK: - I-JSPM-T1-DEP-LD1
     func testSpmFileWithOneCachedDependencyExample() throws {
-        try MyApp.moveLocalConfigFile()
-        try MyApp.moveProjectFile()
-        try MyApp.moveDependenciesFile()
+        try myApp.moveLocalConfigFile()
+        try myApp.moveProjectFile()
+        try myApp.moveDependenciesFile()
 
         let dependencies = ["LoadableView"]
         sut.cached = dependencies
 
-        try sut.run()
+        try sut.run(fileManager: fileManager)
 
         try XCTAssertEqual(
             fileManager.spmFileDir,
-            MyApp.application(with: dependencies),
+            myApp.application(with: dependencies),
             encoder: SpmFileManager.encoder
         )
     }
 
     // MARK: - I-JSPM-T1-DEP-LD2
     func testSpmFileWithTwoCachedDependencyExample() throws {
-        try MyApp.moveLocalConfigFile()
-        try MyApp.moveProjectFile()
-        try MyApp.moveDependenciesFile()
+        try myApp.moveLocalConfigFile()
+        try myApp.moveProjectFile()
+        try myApp.moveDependenciesFile()
 
         let dependencies = ["LoadableView", "DebugSwiftUI"]
         sut.cached = dependencies
 
-        try sut.run()
+        try sut.run(fileManager: fileManager)
 
         try XCTAssertEqual(
             fileManager.spmFileDir,
-            MyApp.application(with: dependencies),
+            myApp.application(with: dependencies),
             encoder: SpmFileManager.encoder
         )
     }

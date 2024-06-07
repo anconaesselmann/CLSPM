@@ -11,10 +11,14 @@ class TempFileManager: FileManagerProtocol {
 
     var currentDirectoryPath: String
 
+    fileprivate let uuid = UUID(uuidString: "4bfcdd0e-df3c-48df-b58e-1828a1189160")!
+    fileprivate let uniqueId = UUID()
+    fileprivate let testDir: String
+    fileprivate let testUrl: URL
+
     init(home: String? = nil, current: String? = nil) throws {
-        let uuid = UUID(uuidString: "4bfcdd0e-df3c-48df-b58e-1828a1189160")!
-        let testDir = "/private/tmp/\(uuid.uuidString)"
-        let testUrl = URL(filePath: testDir, directoryHint: .isDirectory)
+        testDir = "/private/tmp/\(uuid.uuidString)/\(uniqueId.uuidString)"
+        testUrl = URL(filePath: testDir, directoryHint: .isDirectory)
         let homeString = "\(testDir)/home"
         let homeUrl = URL(fileURLWithPath: homeString)
         let currentString = "\(testDir)/\(current ?? "current")"
@@ -62,9 +66,6 @@ class TempFileManager: FileManagerProtocol {
 
 extension TempFileManager {
     func cleanup() throws {
-        let uuid = UUID(uuidString: "4bfcdd0e-df3c-48df-b58e-1828a1189160")!
-        let testDir = "/private/tmp/\(uuid.uuidString)"
-        let testUrl = URL(filePath: testDir, directoryHint: .isDirectory)
         try removeItem(at: testUrl)
     }
 

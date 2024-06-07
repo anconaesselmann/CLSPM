@@ -33,12 +33,16 @@ struct DependencyCache: ParsableCommand {
     var spmfile: String?
 
     func run() throws {
+        try self.run(fileManager: FileManager.default)
+    }
+
+    func run(fileManager: FileManagerProtocol) throws {
         let output = Output.shared
         output.verboseFlagIsSet(verbose)
-        
+
         let dependencyNames = Set(dependencyName)
-        let configManager = ConfigManager()
-        let spmFileManager = SpmFileManager()
+        let configManager = ConfigManager(fileManager: fileManager)
+        let spmFileManager = SpmFileManager(fileManager: fileManager)
         output.send("Adding dependencies to cache at \(try configManager.dependenciesUrl())", .verbose)
         let spmFile = try spmFileManager.spmFile(in: spmfile)
         var dependenciesFile = try configManager.dependenciesFile()

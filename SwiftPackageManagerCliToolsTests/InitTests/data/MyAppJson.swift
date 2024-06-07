@@ -5,11 +5,15 @@ import Foundation
 
 class MyApp {
 
-    private static var bundle: Bundle { Bundle(for: MyApp.self) }
+    private let fileManager: TempFileManager
 
-    static var fileManager: TempFileManager = FileManager.default as! TempFileManager
+    init(_ fileManager: TempFileManager) {
+        self.fileManager = fileManager
+    }
 
-    private static func noDependencies() -> JsonSpmFile {
+    private var bundle: Bundle { Bundle(for: MyApp.self) }
+
+    private func noDependencies() -> JsonSpmFile {
         JsonSpmFile(
             targets: [
                 JsonSpmTarget(
@@ -22,9 +26,9 @@ class MyApp {
         )
     }
 
-    static func application(with dependencies: [String], globalDependencies: Bool = false, local: Set<String> = []) -> JsonSpmFile {
+    func application(with dependencies: [String], globalDependencies: Bool = false, local: Set<String> = []) -> JsonSpmFile {
         let sorted = dependencies.sorted()
-        var copy = Self.noDependencies()
+        var copy = noDependencies()
         for i in 0..<copy.targets.count {
             copy.targets[i].dependencies = sorted
         }
@@ -48,7 +52,7 @@ class MyApp {
         return copy
     }
 
-    static var dependencies: [String: JsonSpmDependency] = [
+    var dependencies: [String: JsonSpmDependency] = [
         "LoadableView": JsonSpmDependency(
             id: UUID(uuidString: "AA39C307-0F4C-4482-916E-23D715D7BE8A")!,
             name: "LoadableView",
@@ -65,14 +69,14 @@ class MyApp {
         )
     ]
 
-    static func moveProjectFile(_ dependencyCount: Int = 0, local: Bool = false) throws {
+    func moveProjectFile(_ dependencyCount: Int = 0, local: Bool = false) throws {
         try fileManager.copy(
             from: bundle, "MyAppProject_d\(dependencyCount)\(local ? "_l" : "").test",
             to: "MyApp.xcodeproj/project.pbxproj"
         )
     }
 
-    static func moveDependenciesFile() throws {
+    func moveDependenciesFile() throws {
         try fileManager.copy(
             from: bundle, "dependencies.test",
             to: ".swiftpmm/dependencies",
@@ -80,7 +84,7 @@ class MyApp {
         )
     }
 
-    static func moveLocalConfigFile() throws {
+    func moveLocalConfigFile() throws {
         try fileManager.copy(
             from: bundle, "config.test",
             to: ".swiftpmm/config",

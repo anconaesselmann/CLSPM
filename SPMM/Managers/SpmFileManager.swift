@@ -6,16 +6,21 @@ import XProjParser
 
 struct SpmFileManager {
 
-    private let output = Output.shared
-    private let fileManager = FileManager.default
-    private let remoteManager = RemoteDepenencyManager()
-
     enum Error: Swift.Error {
         case invalidSpmFile
         case couldNotOpenFile(String)
         case fileDoesNotExist(String)
         case invalidUserInput
         case notMicroSpmfileCompatible
+    }
+
+    private let output = Output.shared
+    private let fileManager: FileManagerProtocol
+    private let remoteManager: RemoteDepenencyManager
+
+    init(fileManager: FileManagerProtocol) {
+        self.fileManager = fileManager
+        self.remoteManager = RemoteDepenencyManager(fileManager: fileManager)
     }
 
     func spmFile(in spmfile: String?) throws -> JsonSpmFile {
@@ -46,7 +51,7 @@ struct SpmFileManager {
                     throw Error.invalidSpmFile
                 }
             }
-            let project = try Project()
+            let project = try Project(fileManager: fileManager)
             let root = try project.root()
             let targets = try project.targets(in: root)
                 .filter {
@@ -77,7 +82,7 @@ struct SpmFileManager {
             }
 
         if !uresolvedDependencyNames.isEmpty {
-            let configManager = ConfigManager()
+            let configManager = ConfigManager(fileManager: fileManager)
             var dependenciesFile = try configManager.dependenciesFile()
             let globalDependencies: [String: JsonSpmDependency] = dependenciesFile
                 .dependencies.reduce(into: [:]) {

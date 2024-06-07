@@ -4,17 +4,23 @@
 import Foundation
 
 class ConfigManager {
+
+    private let fileManager: FileManagerProtocol
+
+    init(fileManager: FileManagerProtocol) {
+        self.fileManager = fileManager
+    }
+
     func swiftPmmDirUrl(global: Bool) throws -> URL {
         let base: URL
         if global {
-            base = FileManager.default.homeDirectoryForCurrentUser
+            base = fileManager.homeDirectoryForCurrentUser
         } else {
-            let fileManager = FileManager.default
             base = URL(fileURLWithPath: fileManager.currentDirectoryPath)
         }
         let dir = base.appending(path: ".swiftpmm")
         if !directoryExistsAtPath(dir.path()) {
-            try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: false)
+            try fileManager.createDirectory(at: dir, withIntermediateDirectories: false)
         }
         return dir
     }
@@ -26,10 +32,10 @@ class ConfigManager {
         let spmmDir = try swiftPmmDirUrl(global: isGlobal)
         let defaultsDir = spmmDir.appending(path: "config")
         var config: ConfigFile
-        if !FileManager.default.fileExists(atPath: defaultsDir.path()) {
+        if !fileManager.fileExists(atPath: defaultsDir.path()) {
             config = ConfigFile()
             let contents = try encoder.encode(config)
-            FileManager.default.createFile(atPath: defaultsDir.path(), contents: contents)
+            fileManager.createFile(atPath: defaultsDir.path(), contents: contents)
         }
         return defaultsDir
     }
@@ -40,7 +46,7 @@ class ConfigManager {
 
         let defaultsUrl = try defaultsUrl(global: isGlobal)
 
-        if let data = FileManager.default.contents(atPath: defaultsUrl.path()) {
+        if let data = fileManager.contents(atPath: defaultsUrl.path()) {
             return try decoder.decode(ConfigFile.self, from: data)
         } else {
             return ConfigFile()
@@ -83,10 +89,10 @@ class ConfigManager {
         let spmmDir = try swiftPmmDirUrl(global: true)
         let defaultsDir = spmmDir.appending(path: "dependencies")
         var dependencies: DependenciesFile
-        if !FileManager.default.fileExists(atPath: defaultsDir.path()) {
+        if !fileManager.fileExists(atPath: defaultsDir.path()) {
             dependencies = DependenciesFile()
             let contents = try encoder.encode(dependencies)
-            FileManager.default.createFile(atPath: defaultsDir.path(), contents: contents)
+            fileManager.createFile(atPath: defaultsDir.path(), contents: contents)
         }
         return defaultsDir
     }
@@ -97,7 +103,7 @@ class ConfigManager {
 
         let url = try dependenciesUrl()
 
-        if let data = FileManager.default.contents(atPath: url.path()) {
+        if let data = fileManager.contents(atPath: url.path()) {
             return try decoder.decode(DependenciesFile.self, from: data)
         } else {
             return DependenciesFile()
@@ -116,7 +122,7 @@ class ConfigManager {
 
     func directoryExistsAtPath(_ path: String) -> Bool {
         var isDirectory : ObjCBool = true
-        let exists = FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory)
+        let exists = fileManager.fileExists(atPath: path, isDirectory: &isDirectory)
         return exists && isDirectory.boolValue
     }
 
@@ -124,7 +130,7 @@ class ConfigManager {
         let swiftpmmDir = try swiftPmmDirUrl(global: false)
         let dir = swiftpmmDir.appending(path: "DerivedData")
         if !directoryExistsAtPath(dir.path()) {
-            try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: false)
+            try fileManager.createDirectory(at: dir, withIntermediateDirectories: false)
         }
         return "\(dir)/packages"
     }
