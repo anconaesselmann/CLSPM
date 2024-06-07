@@ -4,10 +4,10 @@
 
 ### JSON spmfile
 
-- One target
+- One target I-JSPM-T1 
 	- [x] 0, 1, 2 dependencies resolved from global dependencies file
-		- [x] dependencies stored in spmfile
-		- [ ] dependencies not stored in spmfile
+		- [x] dependencies stored in spmfile I-JSPM-T1-L D0-D2
+		- [x] dependencies not stored in spmfile I-JSPM-T1-G D0-D2
 	- [ ] 0, 1, 2 remote dependencies from xproj file
 	- [ ] 0, 1, 2 local dependencies from xproj file
 	- [ ] mix of local and remote dependencies from xproj file
