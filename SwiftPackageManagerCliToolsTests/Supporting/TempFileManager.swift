@@ -73,6 +73,7 @@ extension TempFileManager {
         case fileNotIndBundle(String)
         case couldReadFile(String)
         case invalidFileName(String)
+        case invalidData
     }
 
     enum RootDirectory {
@@ -89,11 +90,27 @@ extension TempFileManager {
         else {
             throw TestError.invalidFileName(testName)
         }
-        guard let url = bundle.url(forResource: String(originalFileName), withExtension: String(originalFileExtension)) else {
+        guard let urlInBundle = bundle.url(forResource: String(originalFileName), withExtension: String(originalFileExtension)) else {
             throw TestError.fileNotIndBundle(testName)
         }
-        let data = try Data(contentsOf: url)
+        let data = try Data(contentsOf: urlInBundle)
+        let copyUrl = url(dir: dir, in: root)
+        try data.write(to: copyUrl)
+    }
 
+    func copy(
+        _ content: String,
+        to dir: String,
+        in root: RootDirectory = .current
+    ) throws {
+        guard let data = content.data(using: .utf8) else {
+            throw TestError.invalidData
+        }
+        let copyUrl = url(dir: dir, in: root)
+        try data.write(to: copyUrl)
+    }
+
+    private func url(dir: String, in root: RootDirectory) -> URL {
         var copyUrl: URL
         switch root {
         case .home:
@@ -107,7 +124,8 @@ extension TempFileManager {
             copyUrl.append(path: path)
         }
         try? _fileManager.createDirectory(at: copyUrl, withIntermediateDirectories: true)
+
         copyUrl.append(path: name)
-        try data.write(to: copyUrl)
+        return copyUrl
     }
 }

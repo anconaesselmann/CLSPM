@@ -10,7 +10,9 @@
 		0ED594007E8642058AD8F1CD /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED594008AD8F1CDAC9350F5 /* XProjParser */; };
 		0ED594008A0245878AF0BCD2 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED594008AF0BCD2BC0C742A /* ArgumentParser */; };
 		97044C7E2C0A3DE700D7424A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7D2C0A3DE700D7424A /* Project.swift */; };
-		972437B12C12354E0011C5AE /* InstallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972437B02C12354E0011C5AE /* InstallTests.swift */; };
+		97192AB72C13C99400287B03 /* FileManagerProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97192AB62C13C99400287B03 /* FileManagerProtocol+Extensions.swift */; };
+		97192AB92C13C9BA00287B03 /* ProjectInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97192AB82C13C9BA00287B03 /* ProjectInspector.swift */; };
+		972437B12C12354E0011C5AE /* INST_CSPM_T1_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972437B02C12354E0011C5AE /* INST_CSPM_T1_Tests.swift */; };
 		972437B62C1235860011C5AE /* shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972453BE2C0957210069A162 /* shell.swift */; };
 		972437B72C1235940011C5AE /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7D2C0A3DE700D7424A /* Project.swift */; };
 		972437B82C1235940011C5AE /* SpmFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE662C0A3A950073AB3E /* SpmFileManager.swift */; };
@@ -57,7 +59,6 @@
 		976A0D9E2C13852C008036D3 /* FileManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0D9C2C138511008036D3 /* FileManagerProtocol.swift */; };
 		976A0DA02C138B84008036D3 /* TempFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0D9F2C138B84008036D3 /* TempFileManager.swift */; };
 		976A0DA42C139EE3008036D3 /* Install+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0DA32C139EE3008036D3 /* Install+Tests.swift */; };
-		976A0DA72C13A0BA008036D3 /* spmfile.test in Resources */ = {isa = PBXBuildFile; fileRef = 976A0DA62C13A0BA008036D3 /* spmfile.test */; };
 		976A0DA92C13A63A008036D3 /* XCTestCase+runAsyncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976A0DA82C13A63A008036D3 /* XCTestCase+runAsyncTest.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
 		979962C72C0F952100782E40 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C62C0F952100782E40 /* ConfigManager.swift */; };
@@ -94,8 +95,10 @@
 
 /* Begin PBXFileReference section */
 		97044C7D2C0A3DE700D7424A /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		97192AB62C13C99400287B03 /* FileManagerProtocol+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManagerProtocol+Extensions.swift"; sourceTree = "<group>"; };
+		97192AB82C13C9BA00287B03 /* ProjectInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInspector.swift; sourceTree = "<group>"; };
 		972437AE2C12354E0011C5AE /* SwiftPackageManagerCliToolsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftPackageManagerCliToolsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		972437B02C12354E0011C5AE /* InstallTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallTests.swift; sourceTree = "<group>"; };
+		972437B02C12354E0011C5AE /* INST_CSPM_T1_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INST_CSPM_T1_Tests.swift; sourceTree = "<group>"; };
 		972437C92C123D400011C5AE /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		972437CC2C12427F0011C5AE /* InitMicroSpmFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitMicroSpmFileTests.swift; sourceTree = "<group>"; };
 		972438312C1247940011C5AE /* MyAppProject_d0.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject_d0.test; sourceTree = "<group>"; };
@@ -120,7 +123,6 @@
 		976A0D9C2C138511008036D3 /* FileManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerProtocol.swift; sourceTree = "<group>"; };
 		976A0D9F2C138B84008036D3 /* TempFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempFileManager.swift; sourceTree = "<group>"; };
 		976A0DA32C139EE3008036D3 /* Install+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Install+Tests.swift"; sourceTree = "<group>"; };
-		976A0DA62C13A0BA008036D3 /* spmfile.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = spmfile.test; sourceTree = "<group>"; };
 		976A0DA82C13A63A008036D3 /* XCTestCase+runAsyncTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+runAsyncTest.swift"; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		979962C62C0F952100782E40 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
@@ -227,6 +229,8 @@
 				9724387F2C1267AB0011C5AE /* TestOutput.swift */,
 				976A0D9F2C138B84008036D3 /* TempFileManager.swift */,
 				976A0DA82C13A63A008036D3 /* XCTestCase+runAsyncTest.swift */,
+				97192AB62C13C99400287B03 /* FileManagerProtocol+Extensions.swift */,
+				97192AB82C13C9BA00287B03 /* ProjectInspector.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -244,7 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				976A0DA22C139ED6008036D3 /* supporting */,
-				972437B02C12354E0011C5AE /* InstallTests.swift */,
+				972437B02C12354E0011C5AE /* INST_CSPM_T1_Tests.swift */,
 				976A0DA52C13A097008036D3 /* data */,
 			);
 			path = InstallTests;
@@ -261,7 +265,6 @@
 		976A0DA52C13A097008036D3 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				976A0DA62C13A0BA008036D3 /* spmfile.test */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -462,7 +465,6 @@
 			files = (
 				976A0D952C12F490008036D3 /* MyAppProject_d2_l.test in Resources */,
 				976A0D872C12DDFA008036D3 /* MyAppProject_d1.test in Resources */,
-				976A0DA72C13A0BA008036D3 /* spmfile.test in Resources */,
 				972438852C1273D30011C5AE /* dependencies.test in Resources */,
 				976A0D962C12F490008036D3 /* MyAppProject_d1_l.test in Resources */,
 				972438322C1247940011C5AE /* MyAppProject_d0.test in Resources */,
@@ -498,12 +500,14 @@
 				972437CD2C12427F0011C5AE /* InitMicroSpmFileTests.swift in Sources */,
 				972437C12C1235940011C5AE /* GithubRelease.swift in Sources */,
 				972438762C1252460011C5AE /* Init+Tests.swift in Sources */,
+				97192AB72C13C99400287B03 /* FileManagerProtocol+Extensions.swift in Sources */,
 				976A0D8C2C12E52B008036D3 /* I_JSPM_T1_XPROJ_G_Tests.swift in Sources */,
 				976A0DA92C13A63A008036D3 /* XCTestCase+runAsyncTest.swift in Sources */,
 				972437C22C1235940011C5AE /* DependencyCache.swift in Sources */,
 				972437C32C1235940011C5AE /* Install.swift in Sources */,
 				972437C42C1235940011C5AE /* Config.swift in Sources */,
 				9724388B2C1298B00011C5AE /* MyAppJson.swift in Sources */,
+				97192AB92C13C9BA00287B03 /* ProjectInspector.swift in Sources */,
 				972437C52C1235940011C5AE /* RemoteDepenencyManager.swift in Sources */,
 				972438872C12796E0011C5AE /* I_JSPM_T1_DEP_L_Tests.swift in Sources */,
 				972437C62C1235990011C5AE /* JsonSpmFile.swift in Sources */,
@@ -513,7 +517,7 @@
 				976A0D9E2C13852C008036D3 /* FileManagerProtocol.swift in Sources */,
 				972437B62C1235860011C5AE /* shell.swift in Sources */,
 				976A0D982C1313E7008036D3 /* I_JSPM_T1_XPROJ_DL_L_Tests.swift in Sources */,
-				972437B12C12354E0011C5AE /* InstallTests.swift in Sources */,
+				972437B12C12354E0011C5AE /* INST_CSPM_T1_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

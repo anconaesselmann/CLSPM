@@ -110,6 +110,10 @@ struct Project {
         }
     }
 
+    func noneTestTargets(in root: XProjRoot? = nil) throws -> [(id: XProjId, name: String)] {
+        try targets(in: root).filter { !$0.name.hasSuffix("Tests") }
+    }
+
     func dependencies(in root: XProjRoot? = nil, verbose: Bool) throws -> [String: [JsonSpmDependency]] {
         let output = Output.shared
         let root = try (root ?? (try self.root()))

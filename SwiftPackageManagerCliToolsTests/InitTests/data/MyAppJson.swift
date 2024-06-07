@@ -92,18 +92,11 @@ class MyApp {
         )
     }
 
-    func moveSpmFile() throws {
+    func moveCsvSpmFile(with dependencies: [String]) throws {
         try fileManager.copy(
-            from: bundle, "spmfile.test",
+            dependencies.sorted().joined(separator: ", "),
             to: "spmfile",
             in: .current
         )
-    }
-}
-
-extension FileManagerProtocol {
-    var spmFileDir: URL {
-        currentDirectory
-            .appending(path: "spmfile")
     }
 }

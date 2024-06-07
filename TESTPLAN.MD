@@ -25,8 +25,6 @@
 
 - One target
 	- [x] 0, 1, 2 dependencies resolved from global dependencies file
-		- [x] dependencies stored in spmfile
-		- [ ] dependencies not stored in spmfile
 
 - Multi target
 	- [ ] same as one target
@@ -35,3 +33,17 @@
 - Regular and Test target
 	- [ ] same as one target
 	- [ ] targets have different dependencies
+
+## install command
+
+### JSON spmfile
+
+- One target INST-JSPM-T1 
+    - [ ] 1, 2 dependencies resolved from global dependencies file
+        - [ ] dependencies stored in spmfile INST-JSPM-T1-LD0/1/2
+        - [ ] dependencies not stored in spmfile INST-JSPM-T1-G0/1/2
+
+### CSV spmfile
+
+- One target INST-CSPM-T1 
+    - [x] 1, 2 dependencies resolved from global dependencies file INST-CSPM-T1-D1/2
