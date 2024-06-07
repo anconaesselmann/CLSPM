@@ -11,11 +11,6 @@ final class InitMicroSpmFileTests: XCTestCase {
 
     private var bundle: Bundle { Bundle(for: Self.self) }
 
-    private var spmFileDir: URL {
-        fileManager.currentDirectory
-            .appending(path: "spmfile")
-    }
-
     override func setUpWithError() throws {
         try FileManager.test_setup(current: "MyApp")
         fileManager = FileManager.default
@@ -23,59 +18,36 @@ final class InitMicroSpmFileTests: XCTestCase {
         sut = Init().setup_testing()
 //        sut.verbose = true
         sut.microSpmfile = true
-        try moveProjectFile()
+        try MyApp.moveProjectFile()
     }
 
     override func tearDownWithError() throws {
+//        print(try Output.text())
         sut = nil
         try FileManager.test_cleanup()
-        fileManager = nil
     }
 
     func testEmptyMicroSpmFileCreatedExample() throws {
         try sut.run()
-
-//        print(try Output.text())
-
-        try XCTAssertEqual(spmFileDir, "")
+        
+        try XCTAssertEqual(fileManager.spmFileDir, "")
     }
 
     func testMicroSpmFileWithOneCachedDependencyExample() throws {
-        try moveDependenciesFile()
-
+        try MyApp.moveDependenciesFile()
         sut.cached = ["LoadableView"]
 
         try sut.run()
 
-//        print(try Output.text())
-
-        try XCTAssertEqual(spmFileDir, "LoadableView")
+        try XCTAssertEqual(fileManager.spmFileDir, "LoadableView")
     }
 
     func testMicroSpmFileWithTwoCachedDependencyExample() throws {
-        try moveDependenciesFile()
-
+        try MyApp.moveDependenciesFile()
         sut.cached = ["LoadableView", "DebugSwiftUI"]
-
+        
         try sut.run()
 
-//        print(try Output.text())
-
-        try XCTAssertEqual(spmFileDir, "DebugSwiftUI, LoadableView")
-    }
-
-    private func moveProjectFile() throws {
-        try fileManager.copy(
-            from: bundle, "MyAppProject.test",
-            to: "MyApp.xcodeproj/project.pbxproj"
-        )
-    }
-
-    private func moveDependenciesFile() throws {
-        try fileManager.copy(
-            from: bundle, "dependencies.test",
-            to: ".swiftpmm/dependencies",
-            in: .home
-        )
+        try XCTAssertEqual(fileManager.spmFileDir, "DebugSwiftUI, LoadableView")
     }
 }

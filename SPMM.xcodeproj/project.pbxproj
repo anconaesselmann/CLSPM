@@ -42,6 +42,7 @@
 		972438852C1273D30011C5AE /* dependencies.test in Resources */ = {isa = PBXBuildFile; fileRef = 972438842C1273D30011C5AE /* dependencies.test */; };
 		972438872C12796E0011C5AE /* InitSpmFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972438862C12796E0011C5AE /* InitSpmFileTests.swift */; };
 		972438892C1280230011C5AE /* config.test in Resources */ = {isa = PBXBuildFile; fileRef = 972438882C1280230011C5AE /* config.test */; };
+		9724388B2C1298B00011C5AE /* MyAppJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9724388A2C1298B00011C5AE /* MyAppJson.swift */; };
 		972453BF2C0957210069A162 /* shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972453BE2C0957210069A162 /* shell.swift */; };
 		9761EE672C0A3A950073AB3E /* SpmFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9761EE662C0A3A950073AB3E /* SpmFileManager.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
@@ -91,6 +92,7 @@
 		972438842C1273D30011C5AE /* dependencies.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dependencies.test; sourceTree = "<group>"; };
 		972438862C12796E0011C5AE /* InitSpmFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitSpmFileTests.swift; sourceTree = "<group>"; };
 		972438882C1280230011C5AE /* config.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.test; sourceTree = "<group>"; };
+		9724388A2C1298B00011C5AE /* MyAppJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppJson.swift; sourceTree = "<group>"; };
 		972453BE2C0957210069A162 /* shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shell.swift; sourceTree = "<group>"; };
 		9761EE662C0A3A950073AB3E /* SpmFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpmFileManager.swift; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				972438842C1273D30011C5AE /* dependencies.test */,
 				972438312C1247940011C5AE /* MyAppProject.test */,
 				972438882C1280230011C5AE /* config.test */,
+				9724388A2C1298B00011C5AE /* MyAppJson.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				972437C22C1235940011C5AE /* DependencyCache.swift in Sources */,
 				972437C32C1235940011C5AE /* Install.swift in Sources */,
 				972437C42C1235940011C5AE /* Config.swift in Sources */,
+				9724388B2C1298B00011C5AE /* MyAppJson.swift in Sources */,
 				972437C52C1235940011C5AE /* RemoteDepenencyManager.swift in Sources */,
 				972438872C12796E0011C5AE /* InitSpmFileTests.swift in Sources */,
 				972437C62C1235990011C5AE /* JsonSpmFile.swift in Sources */,
