@@ -3,7 +3,7 @@
 
 import XCTest
 
-final class I_JSPM_T1_DEP_G_Tests: XCTestCase {
+final class INIT_JSPM_T1_DEP_L_Tests: XCTestCase {
 
     var sut: Init!
     var myApp: MyApp!
@@ -16,9 +16,7 @@ final class I_JSPM_T1_DEP_G_Tests: XCTestCase {
         Output.test_setup()
         sut = Init().setup_testing()
         sut.verbose = true
-        sut.globalDependencies = true
         try myApp.moveProjectFile()
-        try myApp.moveLocalConfigFile()
     }
 
     override func tearDownWithError() throws {
@@ -27,20 +25,23 @@ final class I_JSPM_T1_DEP_G_Tests: XCTestCase {
         try fileManager.cleanup()
     }
 
-    // MARK: - I-JSPM-T1-DEP-GD0
+    // MARK: - INIT-JSPM-T1-DEP-LD0
     func testEmptySpmFileCreatedExample() throws {
+        try myApp.moveLocalConfigFile()
 
         try sut.run(fileManager: fileManager)
 
         try XCTAssertEqual(
             fileManager.spmFileDir,
-            myApp.application(with: [], globalDependencies: true),
+            myApp.application(with: []),
             encoder: SpmFileManager.encoder
         )
     }
 
-    // MARK: - I-JSPM-T1-DEP-GD1
+    // MARK: - INIT-JSPM-T1-DEP-LD1
     func testSpmFileWithOneCachedDependencyExample() throws {
+        try myApp.moveLocalConfigFile()
+        try myApp.moveProjectFile()
         try myApp.moveDependenciesFile()
 
         let dependencies = ["LoadableView"]
@@ -50,13 +51,15 @@ final class I_JSPM_T1_DEP_G_Tests: XCTestCase {
 
         try XCTAssertEqual(
             fileManager.spmFileDir,
-            myApp.application(with: dependencies, globalDependencies: true),
+            myApp.application(with: dependencies),
             encoder: SpmFileManager.encoder
         )
     }
 
-    // MARK: - I-JSPM-T1-DEP-DEP-GD2
+    // MARK: - INIT-JSPM-T1-DEP-LD2
     func testSpmFileWithTwoCachedDependencyExample() throws {
+        try myApp.moveLocalConfigFile()
+        try myApp.moveProjectFile()
         try myApp.moveDependenciesFile()
 
         let dependencies = ["LoadableView", "DebugSwiftUI"]
@@ -66,7 +69,7 @@ final class I_JSPM_T1_DEP_G_Tests: XCTestCase {
 
         try XCTAssertEqual(
             fileManager.spmFileDir,
-            myApp.application(with: dependencies, globalDependencies: true),
+            myApp.application(with: dependencies),
             encoder: SpmFileManager.encoder
         )
     }
