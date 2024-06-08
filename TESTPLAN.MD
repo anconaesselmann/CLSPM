@@ -39,9 +39,9 @@
 ### JSON spmfile
 
 - One target INST-JSPM-T1 
-    - [ ] 1, 2 dependencies resolved from global dependencies file
-        - [ ] dependencies stored in spmfile INST-JSPM-T1-LD0/1/2
-        - [ ] dependencies not stored in spmfile INST-JSPM-T1-G0/1/2
+    - [x] 1, 2 dependencies resolved from global dependencies file
+        - [x] dependencies stored in spmfile INST-JSPM-T1-LD1/2
+        - [x] dependencies not stored in spmfile INST-JSPM-T1-G1/2
 
 ### CSV spmfile
 

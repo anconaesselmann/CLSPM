@@ -5,6 +5,10 @@ import Foundation
 
 class MyApp {
 
+    enum Error: Swift.Error {
+        case invalidFileData
+    }
+
     private let fileManager: TempFileManager
 
     init(_ fileManager: TempFileManager) {
@@ -95,6 +99,19 @@ class MyApp {
     func moveCsvSpmFile(with dependencies: [String]) throws {
         try fileManager.copy(
             dependencies.sorted().joined(separator: ", "),
+            to: "spmfile",
+            in: .current
+        )
+    }
+
+    func moveJsonSpmFile(with dependencies: [String], globalDependencies: Bool = false, local: Set<String> = []) throws {
+        let jsonSpm = application(with: dependencies, globalDependencies: globalDependencies, local: local)
+        let data = try SpmFileManager.encoder.encode(jsonSpm)
+        guard let content = String(data: data, encoding: .utf8) else {
+            throw Error.invalidFileData
+        }
+        try fileManager.copy(
+            content,
             to: "spmfile",
             in: .current
         )
