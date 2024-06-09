@@ -59,40 +59,39 @@
 	- MyApp/.swiftpmm
 		- not relevant
 	- Project directory
-		- A JSON spmfile is generated:
+		<details>
+			<summary>A JSON spmfile is generated:</summary>
+		
+			{
+			  "dependencies" : [
+			    {
+			      "id" : "8918A5F9-4693-4285-A10B-D702E877E9B4",
+			      "name" : "DebugSwiftUI",
+			      "url" : "https://github.com/anconaesselmann/DebugSwiftUI",
+			      "version" : "0.0.1"
+			    },
+			    {
+			      "id" : "AA39C307-0F4C-4482-916E-23D715D7BE8A",
+			      "name" : "LoadableView",
+			      "url" : "https://github.com/anconaesselmann/LoadableView",
+			      "version" : "0.3.9"
+			    }
+			  ],
+			  "targets" : [
+			    {
+			      "dependencies" : [
+			        "DebugSwiftUI",
+			        "LoadableView"
+			      ],
+			      "id" : "9D6FC795-45A9-457C-919F-D8CE20A9DFDA",
+			      "name" : "MyApp"
+			    }
+			  ]
+			}
+		
+		</details>
 			- One target named "MyApp"
 			- Dependency section with 1/2 remote dependencies
-<details>
-	<summary>spmfile</summary>
-
-	{
-	  "dependencies" : [
-	    {
-	      "id" : "8918A5F9-4693-4285-A10B-D702E877E9B4",
-	      "name" : "DebugSwiftUI",
-	      "url" : "https://github.com/anconaesselmann/DebugSwiftUI",
-	      "version" : "0.0.1"
-	    },
-	    {
-	      "id" : "AA39C307-0F4C-4482-916E-23D715D7BE8A",
-	      "name" : "LoadableView",
-	      "url" : "https://github.com/anconaesselmann/LoadableView",
-	      "version" : "0.3.9"
-	    }
-	  ],
-	  "targets" : [
-	    {
-	      "dependencies" : [
-	        "DebugSwiftUI",
-	        "LoadableView"
-	      ],
-	      "id" : "9D6FC795-45A9-457C-919F-D8CE20A9DFDA",
-	      "name" : "MyApp"
-	    }
-	  ]
-	}
-
-</details>
 	- Project:
 		- no change
 
