@@ -64,7 +64,7 @@
 			- Dependency section with 1/2 remote dependencies
 			<details>
 				<summary>spmfile</summary>
-				```json
+```json
 {
   "dependencies" : [
     {
@@ -91,7 +91,7 @@
     }
   ]
 }
-				```
+```
 			</details>
 	- Project:
 		- no change
