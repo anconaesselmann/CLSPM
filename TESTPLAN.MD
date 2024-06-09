@@ -12,14 +12,13 @@
 			- Targets: "MyApp", "MyAppTests", "MyAppUITests". 
 			- Package Dependencies: none
 		#### Command: 
-
-			`init`
-
+		```
+		init
+		```
 		#### Outcome:
-
-			- A JSON spmfile with the  a "dependencies" section is generated:
-				- One target named "MyApp"
-				- Empty dependency section
+		- A JSON spmfile with the  a "dependencies" section is generated:
+			- One target named "MyApp"
+			- Empty dependency section
 
 	- [x] INIT_JSON_OPT_T1_R1/R2: 1/2 depedencies in a JSON spmfile
 
