@@ -59,8 +59,11 @@
 	- MyApp/.swiftpmm
 		- not relevant
 	- Project directory
+		- A JSON spmfile is generated:
+			- One target named "MyApp"
+			- Dependency section with 1/2 remote dependencies
 		<details>
-			<summary>A JSON spmfile is generated:</summary>
+			<summary>expand spmfile</summary>
 		
 			{
 			  "dependencies" : [
@@ -90,8 +93,6 @@
 			}
 		
 		</details>
-			- One target named "MyApp"
-			- Dependency section with 1/2 remote dependencies
 	- Project:
 		- no change
 
