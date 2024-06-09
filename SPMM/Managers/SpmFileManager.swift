@@ -223,12 +223,12 @@ struct SpmFileManager {
         }
     }
 
-    func save(_ jsonFile: JsonSpmFile, to spmfile: String?, microSpmfile: Bool) throws {
+    func save(_ jsonFile: JsonSpmFile, to spmfile: String?, isCsv: Bool) throws {
         let dir = try spmfile ?? (try spmfileDir())
         output.send("Saving spm file:", .verbose)
         output.send("\t\(dir)", .verbose)
         let url = URL(fileURLWithPath: dir)
-        if microSpmfile {
+        if isCsv {
             guard jsonFile.microCompatible else {
                 output.send("Incompatible targets", .verbose)
                 throw Error.notMicroSpmfileCompatible

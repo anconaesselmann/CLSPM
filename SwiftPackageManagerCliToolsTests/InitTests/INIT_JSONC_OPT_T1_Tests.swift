@@ -3,7 +3,7 @@
 
 import XCTest
 
-final class INIT_JSPM_T1_DEP_G_Tests: XCTestCase {
+final class INIT_JSONC_OPT_T1__Tests: XCTestCase {
 
     var sut: Init!
     var myApp: MyApp!
@@ -27,8 +27,7 @@ final class INIT_JSPM_T1_DEP_G_Tests: XCTestCase {
         try fileManager.cleanup()
     }
 
-    // MARK: - INIT-JSPM-T1-DEP-GD0
-    func testEmptySpmFileCreatedExample() throws {
+    func test_INIT_JSONC_T1_D0() throws {
 
         try sut.run(fileManager: fileManager)
 
@@ -39,12 +38,11 @@ final class INIT_JSPM_T1_DEP_G_Tests: XCTestCase {
         )
     }
 
-    // MARK: - INIT-JSPM-T1-DEP-GD1
-    func testSpmFileWithOneCachedDependencyExample() throws {
+    func test_INIT_JSONC_OPT_T1_R1() throws {
         try myApp.moveDependenciesFile()
 
         let dependencies = ["LoadableView"]
-        sut.cached = dependencies
+        sut.dependencies = dependencies
 
         try sut.run(fileManager: fileManager)
 
@@ -55,12 +53,11 @@ final class INIT_JSPM_T1_DEP_G_Tests: XCTestCase {
         )
     }
 
-    // MARK: - INIT-JSPM-T1-DEP-DEP-GD2
-    func testSpmFileWithTwoCachedDependencyExample() throws {
+    func test_INIT_JSONC_OPT_T1_R2() throws {
         try myApp.moveDependenciesFile()
 
         let dependencies = ["LoadableView", "DebugSwiftUI"]
-        sut.cached = dependencies
+        sut.dependencies = dependencies
 
         try sut.run(fileManager: fileManager)
 

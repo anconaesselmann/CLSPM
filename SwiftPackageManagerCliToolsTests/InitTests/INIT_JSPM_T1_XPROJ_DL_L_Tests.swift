@@ -26,7 +26,7 @@ final class INIT_JSPM_T1_XPROJ_DL_L_Tests: XCTestCase {
         try fileManager.cleanup()
     }
 
-    // MARK: - INIT-JSPM-T1-XPROJ-DL-LD1
+    // MARK: - INIT-JSPM-T1-XPROJ-LD-LD1
     func testSpmFileWithOneCachedDependencyExample() throws {
         try myApp.moveProjectFile(1, local: true)
 
@@ -41,7 +41,7 @@ final class INIT_JSPM_T1_XPROJ_DL_L_Tests: XCTestCase {
         )
     }
 
-    // MARK: - INIT-JSPM-T1-XPROJ-DL-LD2
+    // MARK: - INIT-JSPM-T1-XPROJ-LD-LD2
     func testSpmFileWithTwoCachedDependencyExample() throws {
         try myApp.moveProjectFile(2, local: true)
 

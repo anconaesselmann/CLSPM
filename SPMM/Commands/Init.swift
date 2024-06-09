@@ -25,7 +25,7 @@ struct Init: ParsableCommand {
         name: .shortAndLong,
         help: "Dependency names for dependencies cached with `dependency-cache`"
     )
-    var cached: [String] = []
+    var dependencies: [String] = []
 
     @Option(
         name: .shortAndLong,
@@ -47,7 +47,7 @@ struct Init: ParsableCommand {
 
     @Flag(
         name: .shortAndLong,
-        help: "Creates an spmfile without test targets"
+        help: "Creates an spmfile with test targets"
     )
     var testTargets: Bool = false
 
@@ -58,10 +58,10 @@ struct Init: ParsableCommand {
     var globalDependencies: Bool = false
 
     @Flag(
-        name: .shortAndLong,
+        name: .long,
         help: "For projects that have only one none-test target a plaintext spmfile that has a comma-separated list of dependencies can be created."
     )
-    var microSpmfile: Bool = false
+    var csv: Bool = false
 
     func run() throws {
         try self.run(fileManager: FileManager.default)
@@ -75,7 +75,7 @@ struct Init: ParsableCommand {
         let root = try project.root()
         let targets = try project.targets(in: root)
         var targetDependencies = try project.dependencies(in: root, verbose: verbose)
-        let cached = Set(cached)
+        let cached = Set(dependencies)
         let configManager = ConfigManager(fileManager: fileManager)
 
         var targetNames = targets.map { $0.name }
@@ -238,6 +238,6 @@ struct Init: ParsableCommand {
             }
             try configManager.save(localConfigFile, global: false)
         }
-        try manager.save(jsonSpmFile, to: spmfile, microSpmfile: microSpmfile)
+        try manager.save(jsonSpmFile, to: spmfile, isCsv: csv)
     }
 }

@@ -14,20 +14,7 @@ Use make to compile and install SPMM:
 
 2) Reload your `PATH` variable or restart `Terminal`/`iTerm`...
 
-## How to use SPMM
+### 
 
-### Generating an `spmfile`
-
-```
-SPMM init
-```
-
-### Adding dependencies to an `spmfile`
-
-// TODO
-
-### Installing packages with an `spmfile`
-
-
-// TODO
+The visit the [wiki](https://github.com/anconaesselmann/SPMM/wiki) for help
 

@@ -7,13 +7,13 @@ extension Init {
     func setup_testing() -> Self {
         var copy = self
         copy.spmfile = nil
-        copy.cached = []
+        copy.dependencies = []
         copy.target = nil
         copy.verbose = false
         copy.force = false
         copy.testTargets = false
         copy.globalDependencies = false
-        copy.microSpmfile = false
+        copy.csv = false
         return copy
     }
 }
