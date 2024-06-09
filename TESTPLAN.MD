@@ -9,9 +9,9 @@
 		- [x] INIT_JSON_T1_D0: 
 
 			Setup:
-				- Project:
-					- Targets: "MyApp", "MyAppTests", "MyAppUITests". 
-					- Package Dependencies: none
+			- Project:
+				- Targets: "MyApp", "MyAppTests", "MyAppUITests". 
+				- Package Dependencies: none
 			- Command: 
 				init
 			Outcome:
