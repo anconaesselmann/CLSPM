@@ -6,7 +6,6 @@
 
 #### One target INIT-JSPM-T1 
 - [x] INIT_JSON_T1_D0: 
-
 	##### Setup:
 	- Project:
 		- Targets: "MyApp", "MyAppTests", "MyAppUITests". 
@@ -20,7 +19,7 @@
 		- One target named "MyApp"
 		- Empty dependency section
 	
-		- [x] INIT_JSON_OPT_T1_R1/R2: 1/2 depedencies in a JSON spmfile
+	- [x] INIT_JSON_OPT_T1_R1/R2: 1/2 depedencies in a JSON spmfile
 
 - One target INIT-JSPM-T1 
 	- [x] 0, 1, 2 dependencies resolved from global dependencies file
