@@ -7,6 +7,12 @@
 #### One target INIT-JSPM-T1 
 - [x] INIT_JSON_T1_D0: 
 	##### Setup:
+	- ~/.swiftpmm
+		- not relevant
+	- MyApp/.swiftpmm
+		- not relevant
+	- Project directory
+		- not relevant
 	- Project:
 		- Targets: "MyApp", "MyAppTests", "MyAppUITests". 
 		- Package Dependencies: none
@@ -15,11 +21,49 @@
 	init
 	```
 	##### Outcome:
-	- A JSON spmfile with the  a "dependencies" section is generated:
-		- One target named "MyApp"
-		- Empty dependency section
-	
-	- [x] INIT_JSON_OPT_T1_R1/R2: 1/2 depedencies in a JSON spmfile
+	- ~/.swiftpmm
+		- not relevant
+	- MyApp/.swiftpmm
+		- not relevant
+	- Project directory
+		- A JSON spmfile is generated:
+			- One target named "MyApp"
+			- Empty dependency section
+	- Project:
+		- no change
+
+- [x] INIT_JSONC_OPT_T1_R1/R2: 
+	##### Setup:
+	- ~/.swiftpmm
+		- `dependencies` file:
+			- two remote dependencies: "LoadableView" and "DebugSwiftUI"
+			- each has an ID, a remote url and a version
+	- MyApp/.swiftpmm
+		- not relevant
+	- Project directory
+		- not relevant
+	- Project:
+		- Targets: "MyApp", "MyAppTests", "MyAppUITests". 
+		- Package Dependencies: none
+	##### Command: 
+	```
+	// R1:
+	init -d LoadableView
+
+	// R2:
+	init -d LoadableView, -d MyAppUITests
+	```
+	##### Outcome:
+	- ~/.swiftpmm
+		- not relevant
+	- MyApp/.swiftpmm
+		- not relevant
+	- Project directory
+		- A JSON spmfile is generated:
+			- One target named "MyApp"
+			- Dependency section with 1/2 remote dependencies
+	- Project:
+		- no change
 
 - One target INIT-JSPM-T1 
 	- [x] 0, 1, 2 dependencies resolved from global dependencies file
