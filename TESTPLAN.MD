@@ -36,7 +36,7 @@
 	##### Setup:
 	- ~/.swiftpmm
 		<details>
-			<summary>expand dependencies</summary>
+			<summary>`dependencies` file</summary>
 		
 			{
 			  "dependencies" : [
@@ -79,7 +79,7 @@
 		- not relevant
 	- Project directory
 		<details>
-			<summary>JSON spmfile</summary>
+			<summary>`spmfile` (JSON)</summary>
 		
 			{
 			  "dependencies" : [
