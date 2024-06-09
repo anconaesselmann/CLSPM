@@ -8,15 +8,16 @@
 	- [x] 
 		- [x] INIT_JSON_T1_D0: 
 
-			Setup:
+			#### Setup:
 			- Project:
 				- Targets: "MyApp", "MyAppTests", "MyAppUITests". 
 				- Package Dependencies: none
-			- Command: 
+			#### Command: 
 
 				`init`
 
-			Outcome:
+			#### Outcome:
+
 				- A JSON spmfile with the  a "dependencies" section is generated:
 					- One target named "MyApp"
 					- Empty dependency section
