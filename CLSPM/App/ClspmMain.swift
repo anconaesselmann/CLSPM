@@ -5,7 +5,7 @@ import Foundation
 import ArgumentParser
 
 @main
-struct SpmmMain: AsyncParsableCommand {
+struct ClspmmMain: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "A command-line tool for managing Xcode project dependencies",
         subcommands: [

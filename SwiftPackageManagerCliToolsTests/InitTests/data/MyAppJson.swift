@@ -83,7 +83,7 @@ class MyApp {
     func moveDependenciesFile() throws {
         try fileManager.copy(
             from: bundle, "dependencies.test",
-            to: ".swiftpmm/dependencies",
+            to: ".swiftclpm/dependencies",
             in: .home
         )
     }
@@ -91,7 +91,7 @@ class MyApp {
     func moveLocalConfigFile() throws {
         try fileManager.copy(
             from: bundle, "config.test",
-            to: ".swiftpmm/config",
+            to: ".swiftclpm/config",
             in: .current
         )
     }

@@ -36,9 +36,9 @@ struct Install: AsyncParsableCommand {
 
     @Flag(
         name: .long,
-        help: "Packages are cloned to a local DerivedData directory inside .swiftspmm"
+        help: "Packages are cloned to a local DerivedData directory inside .swiftclpm"
     )
-    var cloneToSpmmDir: Bool = false
+    var cloneToClspmDir: Bool = false
 
     @Option(
         name: .long,
@@ -65,7 +65,7 @@ struct Install: AsyncParsableCommand {
 
         let location = PackageLocation(
             packageCacheDir: packageCacheDir,
-            cloneToSpmmDir: cloneToSpmmDir
+            cloneToClspmDir: cloneToClspmDir
         )
 
         let remove = try manager.packagesToRemove(in: targets)

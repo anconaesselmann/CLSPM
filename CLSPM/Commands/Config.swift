@@ -24,7 +24,7 @@ struct Config: ParsableCommand {
 
     @Flag(
         name: .shortAndLong,
-        help: "Global configurations get stored in ~/.swiftpmm"
+        help: "Global configurations get stored in ~/.swiftclpm"
     )
     var global: Bool = false
 

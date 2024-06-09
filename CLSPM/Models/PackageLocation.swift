@@ -5,14 +5,14 @@ import Foundation
 
 enum PackageLocation {
     case defaultLocation
-    case spmmDerivedData
+    case clspmDerivedData
     case custom(String)
 
-    init(packageCacheDir: String?, cloneToSpmmDir: Bool) {
+    init(packageCacheDir: String?, cloneToClspmDir: Bool) {
         if let packageCacheDir = packageCacheDir {
             self = .custom(packageCacheDir)
-        } else if cloneToSpmmDir {
-            self = .spmmDerivedData
+        } else if cloneToClspmDir {
+            self = .clspmDerivedData
         } else {
             self = .defaultLocation
         }

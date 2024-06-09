@@ -76,7 +76,7 @@
 		979967EA2C11825200782E40 /* JsonSpmDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979967E92C11825200782E40 /* JsonSpmDependency.swift */; };
 		9799682D2C121EF200782E40 /* Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9799682C2C121EF200782E40 /* Add.swift */; };
 		9799682F2C12249F00782E40 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9799682E2C12249F00782E40 /* Target.swift */; };
-		97E7B2432C09117A00E33740 /* SpmmMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2422C09117A00E33740 /* SpmmMain.swift */; };
+		97E7B2432C09117A00E33740 /* ClspmMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2422C09117A00E33740 /* ClspmMain.swift */; };
 		97E7B2672C092CD600E33740 /* Install.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2662C092CD600E33740 /* Install.swift */; };
 		97E7B2692C093B9600E33740 /* Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2682C093B9600E33740 /* Init.swift */; };
 		97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */; };
@@ -143,8 +143,8 @@
 		979967E92C11825200782E40 /* JsonSpmDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonSpmDependency.swift; sourceTree = "<group>"; };
 		9799682C2C121EF200782E40 /* Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add.swift; sourceTree = "<group>"; };
 		9799682E2C12249F00782E40 /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
-		97E7B23F2C09117A00E33740 /* SPMM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SPMM; sourceTree = BUILT_PRODUCTS_DIR; };
-		97E7B2422C09117A00E33740 /* SpmmMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpmmMain.swift; sourceTree = "<group>"; };
+		97E7B23F2C09117A00E33740 /* CLSPM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CLSPM; sourceTree = BUILT_PRODUCTS_DIR; };
+		97E7B2422C09117A00E33740 /* ClspmMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClspmMain.swift; sourceTree = "<group>"; };
 		97E7B2662C092CD600E33740 /* Install.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Install.swift; sourceTree = "<group>"; };
 		97E7B2682C093B9600E33740 /* Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Init.swift; sourceTree = "<group>"; };
 		97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonSpmFile.swift; sourceTree = "<group>"; };
@@ -257,7 +257,6 @@
 				972437B02C12354E0011C5AE /* INST_CSPM_T1_Tests.swift */,
 				97192ABA2C13FD5900287B03 /* INST_JSPM_T1_L_Tests.swift */,
 				97192ABC2C13FFC500287B03 /* INST_JSPM_T1_G_Tests.swift */,
-				976A0DA52C13A097008036D3 /* data */,
 			);
 			path = InstallTests;
 			sourceTree = "<group>";
@@ -268,13 +267,6 @@
 				976A0DA32C139EE3008036D3 /* Install+Tests.swift */,
 			);
 			path = supporting;
-			sourceTree = "<group>";
-		};
-		976A0DA52C13A097008036D3 /* data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = data;
 			sourceTree = "<group>";
 		};
 		979967E02C11814200782E40 /* Commands */ = {
@@ -333,7 +325,7 @@
 		979967E52C1181DC00782E40 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				97E7B2422C09117A00E33740 /* SpmmMain.swift */,
+				97E7B2422C09117A00E33740 /* ClspmMain.swift */,
 				9724387B2C12625B0011C5AE /* Output.swift */,
 			);
 			path = App;
@@ -353,7 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				97192ABF2C1555F900287B03 /* README.MD */,
-				97E7B2412C09117A00E33740 /* SPMM */,
+				97E7B2412C09117A00E33740 /* CLSPM */,
 				972437AF2C12354E0011C5AE /* SwiftPackageManagerCliToolsTests */,
 				97E7B2402C09117A00E33740 /* Products */,
 			);
@@ -362,13 +354,13 @@
 		97E7B2402C09117A00E33740 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				97E7B23F2C09117A00E33740 /* SPMM */,
+				97E7B23F2C09117A00E33740 /* CLSPM */,
 				972437AE2C12354E0011C5AE /* SwiftPackageManagerCliToolsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		97E7B2412C09117A00E33740 /* SPMM */ = {
+		97E7B2412C09117A00E33740 /* CLSPM */ = {
 			isa = PBXGroup;
 			children = (
 				979967E52C1181DC00782E40 /* App */,
@@ -378,7 +370,7 @@
 				979967E42C1181D400782E40 /* Extensions */,
 				979967E32C1181A800782E40 /* Supporting */,
 			);
-			path = SPMM;
+			path = CLSPM;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,9 +397,9 @@
 			productReference = 972437AE2C12354E0011C5AE /* SwiftPackageManagerCliToolsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		97E7B23E2C09117A00E33740 /* SPMM */ = {
+		97E7B23E2C09117A00E33740 /* CLSPM */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 97E7B2462C09117A00E33740 /* Build configuration list for PBXNativeTarget "SPMM" */;
+			buildConfigurationList = 97E7B2462C09117A00E33740 /* Build configuration list for PBXNativeTarget "CLSPM" */;
 			buildPhases = (
 				97E7B23B2C09117A00E33740 /* Sources */,
 				97E7B23C2C09117A00E33740 /* Frameworks */,
@@ -417,13 +409,13 @@
 			);
 			dependencies = (
 			);
-			name = SPMM;
+			name = CLSPM;
 			packageProductDependencies = (
 				0ED594008AD8F1CDAC9350F5 /* XProjParser */,
 				0ED594008AF0BCD2BC0C742A /* ArgumentParser */,
 			);
-			productName = SPMM;
-			productReference = 97E7B23F2C09117A00E33740 /* SPMM */;
+			productName = CLSPM;
+			productReference = 97E7B23F2C09117A00E33740 /* CLSPM */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -444,7 +436,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 97E7B23A2C09117A00E33740 /* Build configuration list for PBXProject "SPMM" */;
+			buildConfigurationList = 97E7B23A2C09117A00E33740 /* Build configuration list for PBXProject "CLSPM" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -461,7 +453,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				97E7B23E2C09117A00E33740 /* SPMM */,
+				97E7B23E2C09117A00E33740 /* CLSPM */,
 				972437AD2C12354E0011C5AE /* SwiftPackageManagerCliToolsTests */,
 			);
 		};
@@ -547,7 +539,7 @@
 				972437CA2C123D400011C5AE /* FileManager.swift in Sources */,
 				976A0D9D2C138511008036D3 /* FileManagerProtocol.swift in Sources */,
 				979967DF2C1178AA00782E40 /* Bool+StringInitialization.swift in Sources */,
-				97E7B2432C09117A00E33740 /* SpmmMain.swift in Sources */,
+				97E7B2432C09117A00E33740 /* ClspmMain.swift in Sources */,
 				9799682F2C12249F00782E40 /* Target.swift in Sources */,
 				97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */,
 				9799671A2C1105D400782E40 /* RemoteDepenencyManager.swift in Sources */,
@@ -750,7 +742,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		97E7B23A2C09117A00E33740 /* Build configuration list for PBXProject "SPMM" */ = {
+		97E7B23A2C09117A00E33740 /* Build configuration list for PBXProject "CLSPM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				97E7B2442C09117A00E33740 /* Debug */,
@@ -759,7 +751,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		97E7B2462C09117A00E33740 /* Build configuration list for PBXNativeTarget "SPMM" */ = {
+		97E7B2462C09117A00E33740 /* Build configuration list for PBXNativeTarget "CLSPM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				97E7B2472C09117A00E33740 /* Debug */,

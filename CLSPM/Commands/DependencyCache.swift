@@ -22,7 +22,7 @@ struct DependencyCache: ParsableCommand {
 
     @Option(
         name: .shortAndLong,
-        help: "Dependencies from the current project to be cached in ~/.swiftpmm/dependencies to later be passed into init by name"
+        help: "Dependencies from the current project to be cached in ~/.swiftclpm/dependencies to later be passed into init by name"
     )
     var dependencyName: [String] = []
 

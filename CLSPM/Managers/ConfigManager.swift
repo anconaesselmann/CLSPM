@@ -11,14 +11,14 @@ class ConfigManager {
         self.fileManager = fileManager
     }
 
-    func swiftPmmDirUrl(global: Bool) throws -> URL {
+    func swiftClpmDirUrl(global: Bool) throws -> URL {
         let base: URL
         if global {
             base = fileManager.homeDirectoryForCurrentUser
         } else {
             base = URL(fileURLWithPath: fileManager.currentDirectoryPath)
         }
-        let dir = base.appending(path: ".swiftpmm")
+        let dir = base.appending(path: ".swiftclpm")
         if !directoryExistsAtPath(dir.path()) {
             try fileManager.createDirectory(at: dir, withIntermediateDirectories: false)
         }
@@ -29,8 +29,8 @@ class ConfigManager {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
-        let spmmDir = try swiftPmmDirUrl(global: isGlobal)
-        let defaultsDir = spmmDir.appending(path: "config")
+        let clspmDir = try swiftClpmDirUrl(global: isGlobal)
+        let defaultsDir = clspmDir.appending(path: "config")
         var config: ConfigFile
         if !fileManager.fileExists(atPath: defaultsDir.path()) {
             config = ConfigFile()
@@ -86,8 +86,8 @@ class ConfigManager {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
-        let spmmDir = try swiftPmmDirUrl(global: true)
-        let defaultsDir = spmmDir.appending(path: "dependencies")
+        let clspmDir = try swiftClpmDirUrl(global: true)
+        let defaultsDir = clspmDir.appending(path: "dependencies")
         var dependencies: DependenciesFile
         if !fileManager.fileExists(atPath: defaultsDir.path()) {
             dependencies = DependenciesFile()
@@ -127,8 +127,8 @@ class ConfigManager {
     }
 
     func packagesDir() throws -> String {
-        let swiftpmmDir = try swiftPmmDirUrl(global: false)
-        let dir = swiftpmmDir.appending(path: "DerivedData")
+        let swiftClpmDir = try swiftClpmDirUrl(global: false)
+        let dir = swiftClpmDir.appending(path: "DerivedData")
         if !directoryExistsAtPath(dir.path()) {
             try fileManager.createDirectory(at: dir, withIntermediateDirectories: false)
         }

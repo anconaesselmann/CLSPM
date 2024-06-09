@@ -22,7 +22,7 @@
         "ArgumentParser"
       ],
       "id" : "0ED59400-3C2F-4C93-9E07-A73D244AB0A6",
-      "name" : "SPMM"
+      "name" : "CLSPM"
     },
     {
       "dependencies" : [

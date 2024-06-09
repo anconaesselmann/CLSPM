@@ -9,7 +9,7 @@ extension Install {
         copy.spmfile = nil
         copy.local = []
         copy.verbose = false
-        copy.cloneToSpmmDir = false
+        copy.cloneToClspmDir = false
         copy.packageCacheDir = nil
         return copy
     }

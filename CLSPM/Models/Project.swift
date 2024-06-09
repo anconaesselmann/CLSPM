@@ -89,9 +89,9 @@ struct Project {
         switch location {
         case .defaultLocation:
             clonedSourcePacagesOption = ""
-        case .spmmDerivedData:
+        case .clspmDerivedData:
             let _ = try manager.packagesDir()
-            clonedSourcePacagesOption = " -clonedSourcePackagesDirPath .swiftpmm/DerivedData/packages"
+            clonedSourcePacagesOption = " -clonedSourcePackagesDirPath .swiftclpm/DerivedData/packages"
         case .custom(let location):
             clonedSourcePacagesOption = " -clonedSourcePackagesDirPath \(location)"
         }
