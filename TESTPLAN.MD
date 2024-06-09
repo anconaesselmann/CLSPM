@@ -4,18 +4,18 @@
 
 ### JSON spmfile
 
-- One target INIT-JSPM-T1 
+#### One target INIT-JSPM-T1 
 	- [x] INIT_JSON_T1_D0: 
 
-		#### Setup:
+		##### Setup:
 		- Project:
 			- Targets: "MyApp", "MyAppTests", "MyAppUITests". 
 			- Package Dependencies: none
-		#### Command: 
+		##### Command: 
 		```
 		init
 		```
-		#### Outcome:
+		##### Outcome:
 		- A JSON spmfile with the  a "dependencies" section is generated:
 			- One target named "MyApp"
 			- Empty dependency section
