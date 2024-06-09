@@ -13,6 +13,7 @@
 				- Targets: "MyApp", "MyAppTests", "MyAppUITests". 
 				- Package Dependencies: none
 			- Command: 
+
 				init
 			Outcome:
 				- A JSON spmfile with the  a "dependencies" section is generated:
