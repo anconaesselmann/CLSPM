@@ -14,7 +14,8 @@
 				- Package Dependencies: none
 			- Command: 
 
-				init
+				`init`
+
 			Outcome:
 				- A JSON spmfile with the  a "dependencies" section is generated:
 					- One target named "MyApp"
