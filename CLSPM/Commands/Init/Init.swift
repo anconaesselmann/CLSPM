@@ -85,7 +85,7 @@ struct Init: ParsableCommand {
         let root = try project.root()
         let targets = try project.targets(in: root)
         var targetDependencies = try project.dependencies(in: root, verbose: verbose)
-        let cached = Set(dependency)
+        let passedIn = Set(dependency)
 
         var targetNames = targets.map { $0.name }
 
@@ -114,10 +114,9 @@ struct Init: ParsableCommand {
         let targetIds: [String: UUID] = configFile.targetIds ?? [:]
         var newTargetIds: [String: UUID] = [:]
 
-        targetDependencies = try targetDependencies.resolve(cached, using: cachedDependencies)
-        
-        if !cached.isEmpty {
-            view.dependenciesToResolve(cached)
+        if !passedIn.isEmpty {
+            view.dependenciesToResolve(passedIn)
+            targetDependencies = try targetDependencies.resolve(passedIn, using: cachedDependencies)
         }
 
         let spmTargets = targetDependencies.targetsFor(
