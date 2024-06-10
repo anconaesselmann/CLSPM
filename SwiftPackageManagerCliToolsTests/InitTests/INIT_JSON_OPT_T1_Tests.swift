@@ -38,6 +38,21 @@ final class INIT_JSON_OPT_T1_Tests: XCTestCase {
         )
     }
 
+    func test_INIT_JSON_T1_F_spmfile_D0() throws {
+        try myApp.moveLocalConfigFile()
+
+        let spmfileDir = fileManager.homeDirectoryForCurrentUser.appending(path: "alternate_spmfile")
+
+        sut.spmfile = spmfileDir.path()
+        try sut.run(fileManager: fileManager)
+
+        try XCTAssertEqual(
+            spmfileDir,
+            myApp.application(with: []),
+            encoder: SpmFileManager.encoder
+        )
+    }
+
     // https://github.com/anconaesselmann/CLSPM/wiki/Tests#init_json_opt_t1_r1r2
     func test_INIT_JSON_OPT_T1_R1() throws {
         try myApp.moveLocalConfigFile()
