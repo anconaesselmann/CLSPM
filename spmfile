@@ -1,36 +1,26 @@
 {
   "dependencies" : [
     {
-      "id" : "33D5A837-7E86-4205-8AD8-F1CDAC9350F5",
-      "local_path" : "../AxelPods/XProjParser",
-      "name" : "XProjParser",
-      "url" : "https://github.com/anconaesselmann/XProjParser",
-      "use_local" : false,
-      "version" : "0.0.7"
-    },
-    {
-      "id" : "8B553966-8A02-4587-8AF0-BCD2BC0C742A",
+      "id" : "1C7343BE-4D2B-45D2-B6B8-B6E5FBF9C8B4",
       "name" : "ArgumentParser",
       "url" : "https://github.com/apple/swift-argument-parser",
       "version" : "1.4.0"
+    },
+    {
+      "id" : "68243F08-C28E-4E25-A68B-9B53EF0540FB",
+      "name" : "XProjParser",
+      "url" : "https://github.com/anconaesselmann/XProjParser",
+      "version" : "0.0.7"
     }
   ],
   "targets" : [
     {
       "dependencies" : [
-        "XProjParser",
-        "ArgumentParser"
+        "ArgumentParser",
+        "XProjParser"
       ],
-      "id" : "0ED59400-3C2F-4C93-9E07-A73D244AB0A6",
+      "id" : "8E0E82DB-1845-4BC5-A674-8C88A318F5B0",
       "name" : "CLSPM"
-    },
-    {
-      "dependencies" : [
-        "XProjParser",
-        "ArgumentParser"
-      ],
-      "id" : "D8B5A0FD-2B2A-4985-B071-1F6D87130E17",
-      "name" : "SwiftPackageManagerCliToolsTests"
     }
   ]
 }
