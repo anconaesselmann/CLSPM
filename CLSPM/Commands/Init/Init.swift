@@ -24,12 +24,6 @@ struct Init: ParsableCommand {
     )
     var dependency: [String] = []
 
-    @Option(
-        name: .shortAndLong,
-        help: "Only perform command on a given target"
-    )
-    var target: String?
-
     @Flag(
         name: .shortAndLong,
         help: "Show extra logging"
@@ -76,11 +70,6 @@ struct Init: ParsableCommand {
             }
         }
         let view = InitView(verbose: verbose)
-        if let target = target {
-            guard !target.hasSuffix("Tests") else {
-                throw InitError.passingATestTargetIntoInitIsNotSupported
-            }
-        }
         let project = try Project(fileManager: fileManager)
         let root = try project.root()
         let targets = try project.targets(in: root)
@@ -97,10 +86,8 @@ struct Init: ParsableCommand {
             $0[$1.name] = $1.id ?? UUID()
         }
 
-        let ignored: Set<String>
-        if let target = target {
-            ignored = Set(targetNames.filter { $0 != target })
-        } else {
+        var ignored: Set<String> = []
+        if !testTargets {
             ignored = Set(targetNames.filter { $0.hasSuffix("Tests") })
         }
         targetNames = targetNames.filter { !ignored.contains($0) }

@@ -5,6 +5,5 @@ import Foundation
 
 enum InitError: Swift.Error, LocalizedError {
     case couldNotResolveDependencyNames([String])
-    case passingATestTargetIntoInitIsNotSupported // In recovery steps suggest using add
     case projectHasBeenInitialized
 }

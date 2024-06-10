@@ -39,8 +39,6 @@ final class INIT_edgeCasesTests: XCTestCase {
         try myApp.moveCsvSpmFile(with: ["Test"])
         sut.force = true
         sut.csv = true
-        let manager = SpmFileManager(fileManager: fileManager)
-        let spmFilePath = fileManager.spmFileDir
 
         try sut.run(fileManager: fileManager)
 
@@ -48,15 +46,5 @@ final class INIT_edgeCasesTests: XCTestCase {
             fileManager.spmFileDir,
             ""
         )
-    }
-
-    func test_errorPassingInTestsTarget() throws {
-        do {
-            sut.target = "MyAppTests"
-            try sut.run(fileManager: fileManager)
-        } catch InitError.passingATestTargetIntoInitIsNotSupported {
-            return
-        }
-        XCTFail("Init can not be called with a test target")
     }
 }

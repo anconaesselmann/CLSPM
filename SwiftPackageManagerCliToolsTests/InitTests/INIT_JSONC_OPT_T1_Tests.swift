@@ -3,7 +3,7 @@
 
 import XCTest
 
-final class INIT_JSONC_OPT_T1__Tests: XCTestCase {
+final class INIT_JSONC_OPT_T1_Tests: XCTestCase {
 
     var sut: Init!
     var myApp: MyApp!

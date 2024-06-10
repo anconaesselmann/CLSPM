@@ -8,7 +8,6 @@ extension Init {
         var copy = self
         copy.spmfile = nil
         copy.dependency = []
-        copy.target = nil
         copy.verbose = false
         copy.force = false
         copy.testTargets = false
