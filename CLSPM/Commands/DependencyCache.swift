@@ -3,6 +3,7 @@
 
 import Foundation
 import ArgumentParser
+import XProjParser
 
 struct DependencyCache: ParsableCommand {
 
@@ -22,9 +23,10 @@ struct DependencyCache: ParsableCommand {
 
     @Option(
         name: .shortAndLong,
+        parsing: .upToNextOption,
         help: "Dependencies from the current project to be cached in ~/.swiftclpm/dependencies to later be passed into init by name"
     )
-    var dependencyName: [String] = []
+    var dependency: [String] = []
 
     @Option(
         name: .shortAndLong,
@@ -40,7 +42,7 @@ struct DependencyCache: ParsableCommand {
         let output = Output.shared
         output.verboseFlagIsSet(verbose)
 
-        let dependencyNames = Set(dependencyName)
+        let dependencyNames = Set(dependency)
         let configManager = ConfigManager(fileManager: fileManager)
         let spmFileManager = SpmFileManager(fileManager: fileManager)
         output.send("Adding dependencies to cache at \(try configManager.dependenciesUrl())", .verbose)
