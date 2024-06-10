@@ -1,13 +1,13 @@
 {
   "dependencies" : [
     {
-      "id" : "1C7343BE-4D2B-45D2-B6B8-B6E5FBF9C8B4",
+      "id" : "FDC44123-5534-486E-BA88-7A6FF0BD4B65",
       "name" : "ArgumentParser",
       "url" : "https://github.com/apple/swift-argument-parser",
       "version" : "1.4.0"
     },
     {
-      "id" : "68243F08-C28E-4E25-A68B-9B53EF0540FB",
+      "id" : "EAA63037-926F-4691-8F63-8660399476C2",
       "name" : "XProjParser",
       "url" : "https://github.com/anconaesselmann/XProjParser",
       "version" : "0.0.7"

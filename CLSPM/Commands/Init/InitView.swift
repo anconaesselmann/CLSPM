@@ -32,25 +32,6 @@ struct InitView {
         output.send("Resolving dependencies \(cached.sorted().joined(separator: ", "))", .verbose)
     }
 
-    func dependenciesForTarget(_ dependenciesFound: [String: [(name: String, passedIn: Bool)]] ) {
-        let targets = dependenciesFound.keys.sorted()
-        for targetName in targets {
-            output.send("Dependencies for target \(targetName):", .verbose)
-            let dependencies = dependenciesFound[targetName] ?? []
-            guard !dependencies.isEmpty else {
-                output.send("\tnone", .verbose)
-                continue
-            }
-            for dependency in dependencies {
-                if dependency.passedIn {
-                    output.send("\tOverwriting dependency \(dependency.name) from cache in \(targetName)", .verbose)
-                } else {
-                    output.send("\tUsing cached dependency \(dependency.name) in \(targetName)", .verbose)
-                }
-            }
-        }
-    }
-
     func dependenciesAcrossAllTargets(_ dependencies: [JsonSpmDependency]) {
         output.send("Dependencies across all targets:", .verbose)
         if dependencies.isEmpty {

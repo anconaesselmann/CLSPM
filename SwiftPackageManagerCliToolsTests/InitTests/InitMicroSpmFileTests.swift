@@ -34,7 +34,7 @@ final class InitMicroSpmFileTests: XCTestCase {
 
     func testMicroSpmFileWithOneCachedDependencyExample() throws {
         try myApp.moveDependenciesFile()
-        sut.dependencies = ["LoadableView"]
+        sut.dependency = ["LoadableView"]
 
         try sut.run(fileManager: fileManager)
 
@@ -43,7 +43,7 @@ final class InitMicroSpmFileTests: XCTestCase {
 
     func testMicroSpmFileWithTwoCachedDependencyExample() throws {
         try myApp.moveDependenciesFile()
-        sut.dependencies = ["LoadableView", "DebugSwiftUI"]
+        sut.dependency = ["LoadableView", "DebugSwiftUI"]
         
         try sut.run(fileManager: fileManager)
 

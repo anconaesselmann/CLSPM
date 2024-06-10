@@ -42,7 +42,7 @@ final class INIT_JSONC_OPT_T1__Tests: XCTestCase {
         try myApp.moveDependenciesFile()
 
         let dependencies = ["LoadableView"]
-        sut.dependencies = dependencies
+        sut.dependency = dependencies
 
         try sut.run(fileManager: fileManager)
 
@@ -57,7 +57,7 @@ final class INIT_JSONC_OPT_T1__Tests: XCTestCase {
         try myApp.moveDependenciesFile()
 
         let dependencies = ["LoadableView", "DebugSwiftUI"]
-        sut.dependencies = dependencies
+        sut.dependency = dependencies
 
         try sut.run(fileManager: fileManager)
 

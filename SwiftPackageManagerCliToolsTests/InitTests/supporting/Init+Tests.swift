@@ -7,7 +7,7 @@ extension Init {
     func setup_testing() -> Self {
         var copy = self
         copy.spmfile = nil
-        copy.dependencies = []
+        copy.dependency = []
         copy.target = nil
         copy.verbose = false
         copy.force = false

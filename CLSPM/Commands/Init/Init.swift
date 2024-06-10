@@ -19,9 +19,10 @@ struct Init: ParsableCommand {
 
     @Option(
         name: .shortAndLong,
-        help: "Dependency names for dependencies cached with `dependency-cache`"
+        parsing: .upToNextOption,
+        help: "Name of a SPM (Swift Package Manager) dependency."
     )
-    var dependencies: [String] = []
+    var dependency: [String] = []
 
     @Option(
         name: .shortAndLong,
@@ -43,19 +44,19 @@ struct Init: ParsableCommand {
 
     @Flag(
         name: .shortAndLong,
-        help: "Creates an spmfile with test targets"
+        help: "Creates an spmfile that includes the project's test-targets"
     )
     var testTargets: Bool = false
 
     @Flag(
         name: .shortAndLong,
-        help: "Does not add dependencies to the spmfile. On install dependencies are resolved from a global list of dependencies. For existing spmfiles --global-dependencies does not remove dependencies."
+        help: "Does not add dependencies to the spmfile. On install dependencies are resolved from a global list of dependencies."
     )
     var globalDependencies: Bool = false
 
     @Flag(
         name: .long,
-        help: "For projects that have only one none-test target a plaintext spmfile that has a comma-separated list of dependencies can be created."
+        help: "Simplified spmfile of comma-separated dependencies."
     )
     var csv: Bool = false
 
@@ -84,7 +85,7 @@ struct Init: ParsableCommand {
         let root = try project.root()
         let targets = try project.targets(in: root)
         var targetDependencies = try project.dependencies(in: root, verbose: verbose)
-        let cached = Set(dependencies)
+        let cached = Set(dependency)
 
         var targetNames = targets.map { $0.name }
 
@@ -113,14 +114,10 @@ struct Init: ParsableCommand {
         let targetIds: [String: UUID] = configFile.targetIds ?? [:]
         var newTargetIds: [String: UUID] = [:]
 
-        let dependenciesFound = try resolveTargetDependencies(
-            cached,
-            cachedDependencies: cachedDependencies, 
-            targetDependencies: &targetDependencies
-        )
+        targetDependencies = try targetDependencies.resolve(cached, using: cachedDependencies)
+        
         if !cached.isEmpty {
             view.dependenciesToResolve(cached)
-            view.dependenciesForTarget(dependenciesFound)
         }
 
         let spmTargets = targetDependencies.targetsFor(
@@ -155,41 +152,6 @@ struct Init: ParsableCommand {
         }
         try manager.save(jsonSpmFile, to: spmfile, isCsv: csv)
     }
-
-    private func resolveTargetDependencies(
-        _ cached: Set<String>,
-        cachedDependencies: [JsonSpmDependency],
-        targetDependencies: inout [String : [JsonSpmDependency]]
-    ) throws -> [String : [(name: String, passedIn: Bool)]] {
-        var dependenciesFound: [String: [(name: String, passedIn: Bool)]] = [:]
-        guard !cached.isEmpty else {
-            return dependenciesFound
-        }
-        let filteredCachedDependencies = cachedDependencies
-            .filter { cached.contains($0.name) }
-        let used = Set(filteredCachedDependencies.map { $0.name })
-        let notUsed = cached.subtracting(used)
-        guard notUsed.isEmpty else {
-            throw InitError.couldNotResolveDependencyNames(notUsed.sorted())
-        }
-        for (targetName, dependencies) in targetDependencies {
-            var dependencies = dependencies
-            for dependency in filteredCachedDependencies {
-                let passedIn: Bool
-                if let index = dependencies.firstIndex(where: { $0.name == dependency.name }) {
-                    passedIn = true
-                    dependencies[index] = dependency
-                } else {
-                    passedIn = false
-                    dependencies.append(dependency)
-                }
-                let new = (name: dependency.name, passedIn: passedIn)
-                dependenciesFound[targetName] = (dependenciesFound[targetName] ?? []) + [new]
-            }
-            targetDependencies[targetName] = dependencies
-        }
-        return dependenciesFound
-    }
 }
 
 fileprivate extension Dictionary where Key == String, Value == [JsonSpmDependency] {
@@ -212,5 +174,31 @@ fileprivate extension Dictionary where Key == String, Value == [JsonSpmDependenc
                 dependencies: (self[targetName]?.map { $0.name } ?? []).sorted()
             )
         }
+    }
+
+    func resolve(
+        _ cached: Set<String>,
+        using cachedDependencies: [JsonSpmDependency]
+    ) throws -> Self {
+        var copy = self
+        let filteredCachedDependencies = cachedDependencies
+            .filter { cached.contains($0.name) }
+        let used = Set(filteredCachedDependencies.map { $0.name })
+        let notUsed = cached.subtracting(used)
+        guard notUsed.isEmpty else {
+            throw InitError.couldNotResolveDependencyNames(notUsed.sorted())
+        }
+        copy = copy.reduce(into: copy) {
+            var dependencies = $1.value
+            for dependency in filteredCachedDependencies {
+                if let index = dependencies.firstIndex(where: { $0.name == dependency.name }) {
+                    dependencies[index] = dependency
+                } else {
+                    dependencies.append(dependency)
+                }
+            }
+            $0[$1.key] = dependencies.sorted { $0.name < $1.name }
+        }
+        return copy
     }
 }
