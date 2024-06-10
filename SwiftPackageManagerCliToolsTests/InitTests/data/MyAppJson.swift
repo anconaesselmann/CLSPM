@@ -30,11 +30,19 @@ class MyApp {
         )
     }
 
-    func application(with dependencies: [String], globalDependencies: Bool = false, local: Set<String> = []) -> JsonSpmFile {
+    func application(
+        with dependencies: [String],
+        globalDependencies: Bool = false,
+        local: Set<String> = [],
+        testTargets: [(String, UUID)] = []
+    ) -> JsonSpmFile {
         let sorted = dependencies.sorted()
         var copy = noDependencies()
         for i in 0..<copy.targets.count {
             copy.targets[i].dependencies = sorted
+        }
+        copy.targets += testTargets.map {
+            JsonSpmTarget(id: $0.1, name: $0.0, dependencies: [])
         }
         if globalDependencies {
             copy.dependencies = nil

@@ -53,6 +53,25 @@ final class INIT_JSON_OPT_T1_Tests: XCTestCase {
         )
     }
 
+    func test_INIT_JSON_T1_F_testTargets() throws {
+        try myApp.moveLocalConfigFile()
+
+        sut.testTargets = true
+        try sut.run(fileManager: fileManager)
+
+        try XCTAssertEqual(
+            fileManager.spmFileDir,
+            myApp.application(
+                with: [],
+                testTargets: [
+                    ("MyAppTests", UUID(uuidString: "151A2DBC-9FD8-4C3C-8EB4-E13711B476C2")!),
+                    ("MyAppUITests", UUID(uuidString: "6A5F613D-E8DD-415E-938C-E8DF41981A5E")!)
+                ]
+            ),
+            encoder: SpmFileManager.encoder
+        )
+    }
+
     // https://github.com/anconaesselmann/CLSPM/wiki/Tests#init_json_opt_t1_r1r2
     func test_INIT_JSON_OPT_T1_R1() throws {
         try myApp.moveLocalConfigFile()
