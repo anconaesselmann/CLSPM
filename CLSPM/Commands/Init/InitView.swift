@@ -19,7 +19,7 @@ struct InitView {
             if verbose {
                 output.send("\t\(jsonSpmFile.targets.map { $0.name }.joined(separator: ", "))", .verbose)
             }
-            output.send("To reinitialize all targets pass the -f flag", .verbose)
+            output.send("To regenerate the spmfile pass in the -f flag", .verbose)
         }
     }
 

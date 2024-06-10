@@ -68,7 +68,7 @@ struct Init: ParsableCommand {
         let configManager = ConfigManager(fileManager: fileManager)
         let manager = SpmFileManager(fileManager: fileManager)
         if force {
-            try manager.removeSpmFile()
+            try? manager.removeSpmFile()
         } else {
             guard !manager.hasSpmFile else {
                 // TODO: Let user know that they can add dependencies with `add` and update targets with `update --targets`

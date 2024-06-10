@@ -225,7 +225,7 @@ struct SpmFileManager {
 
     func save(_ jsonFile: JsonSpmFile, to spmfile: String?, isCsv: Bool) throws {
         let dir = spmfile ?? spmfileDir()
-        output.send("Saving spm file:", .verbose)
+        output.send("Saving spmfile:", .verbose)
         output.send("\t\(dir)", .verbose)
         let url = URL(fileURLWithPath: dir)
         if isCsv {
