@@ -18,4 +18,13 @@ extension JsonSpmDependency {
         copy.useLocal = true
         return copy
     }
+
+    func withUpdatedId(_ id: UUID?) -> Self {
+        guard let id = id else {
+            return self
+        }
+        var copy = self
+        copy.id = id
+        return copy
+    }
 }

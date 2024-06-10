@@ -1,0 +1,216 @@
+//  Created by Axel Ancona Esselmann on 5/30/24.
+//
+
+import Foundation
+import ArgumentParser
+import XProjParser
+
+struct Init: ParsableCommand {
+
+    public static let configuration = CommandConfiguration(
+        abstract: "Initialize an spmfile"
+    )
+
+    @Option(
+        name: .shortAndLong,
+        help: "The path to a custom spmfile"
+    )
+    var spmfile: String?
+
+    @Option(
+        name: .shortAndLong,
+        help: "Dependency names for dependencies cached with `dependency-cache`"
+    )
+    var dependencies: [String] = []
+
+    @Option(
+        name: .shortAndLong,
+        help: "Only perform command on a given target"
+    )
+    var target: String?
+
+    @Flag(
+        name: .shortAndLong,
+        help: "Show extra logging"
+    )
+    var verbose: Bool = false
+
+    @Flag(
+        name: .shortAndLong,
+        help: "Force reinitialization of all targets"
+    )
+    var force: Bool = false
+
+    @Flag(
+        name: .shortAndLong,
+        help: "Creates an spmfile with test targets"
+    )
+    var testTargets: Bool = false
+
+    @Flag(
+        name: .shortAndLong,
+        help: "Does not add dependencies to the spmfile. On install dependencies are resolved from a global list of dependencies. For existing spmfiles --global-dependencies does not remove dependencies."
+    )
+    var globalDependencies: Bool = false
+
+    @Flag(
+        name: .long,
+        help: "For projects that have only one none-test target a plaintext spmfile that has a comma-separated list of dependencies can be created."
+    )
+    var csv: Bool = false
+
+    func run() throws {
+        try self.run(fileManager: FileManager.default)
+    }
+
+    func run(fileManager: FileManagerProtocol) throws {
+        let configManager = ConfigManager(fileManager: fileManager)
+        let manager = SpmFileManager(fileManager: fileManager)
+        if force {
+            try manager.removeSpmFile()
+        } else {
+            guard !manager.hasSpmFile else {
+                // TODO: Let user know that they can add dependencies with `add` and update targets with `update --targets`
+                throw InitError.projectHasBeenInitialized
+            }
+        }
+        let view = InitView(verbose: verbose)
+        if let target = target {
+            guard !target.hasSuffix("Tests") else {
+                throw InitError.passingATestTargetIntoInitIsNotSupported
+            }
+        }
+        let project = try Project(fileManager: fileManager)
+        let root = try project.root()
+        let targets = try project.targets(in: root)
+        var targetDependencies = try project.dependencies(in: root, verbose: verbose)
+        let cached = Set(dependencies)
+
+        var targetNames = targets.map { $0.name }
+
+        let cachedDependencies = try configManager
+            .dependenciesFile()
+            .dependencies
+
+        let chachedDependencyIds: [String: UUID] = cachedDependencies.reduce(into: [:]) {
+            $0[$1.name] = $1.id ?? UUID()
+        }
+
+        let ignored: Set<String>
+        if let target = target {
+            ignored = Set(targetNames.filter { $0 != target })
+        } else {
+            ignored = Set(targetNames.filter { $0.hasSuffix("Tests") })
+        }
+        targetNames = targetNames.filter { !ignored.contains($0) }
+        view.ignoredTargets(ignored)
+
+        for ignore in ignored {
+            targetDependencies.removeValue(forKey: ignore)
+        }
+
+        let configFile = try configManager.combinedConfigFile()
+        let targetIds: [String: UUID] = configFile.targetIds ?? [:]
+        var newTargetIds: [String: UUID] = [:]
+
+        let dependenciesFound = try resolveTargetDependencies(
+            cached,
+            cachedDependencies: cachedDependencies, 
+            targetDependencies: &targetDependencies
+        )
+        if !cached.isEmpty {
+            view.dependenciesToResolve(cached)
+            view.dependenciesForTarget(dependenciesFound)
+        }
+
+        let spmTargets = targetDependencies.targetsFor(
+            targetNames: targetNames,
+            targetIds: targetIds,
+            newTargetIds: &newTargetIds
+        )
+
+        let dependencies = targetDependencies
+            .flatMap { $0.value }
+            .reduce(into: [:]) { $0[$1.name] = $1 }.values
+            .sorted { $0.name < $1.name }
+            .map { $0.withUpdatedId(chachedDependencyIds[$0.name]) }
+
+        view.dependenciesAcrossAllTargets(dependencies)
+
+        let spmFileDependencies: [JsonSpmDependency]? = globalDependencies
+            ? nil
+            : dependencies
+        let jsonSpmFile = JsonSpmFile(
+            targets: spmTargets,
+            dependencies: spmFileDependencies
+        )
+        if !newTargetIds.isEmpty {
+            var localConfigFile = try configManager.configFile(global: false)
+            let existing = localConfigFile.targetIds ?? [:]
+            localConfigFile.targetIds = newTargetIds
+                .reduce(into: existing) {
+                    $0[$1.key] = $1.value
+                }
+            try configManager.save(localConfigFile, global: false)
+        }
+        try manager.save(jsonSpmFile, to: spmfile, isCsv: csv)
+    }
+
+    private func resolveTargetDependencies(
+        _ cached: Set<String>,
+        cachedDependencies: [JsonSpmDependency],
+        targetDependencies: inout [String : [JsonSpmDependency]]
+    ) throws -> [String : [(name: String, passedIn: Bool)]] {
+        var dependenciesFound: [String: [(name: String, passedIn: Bool)]] = [:]
+        guard !cached.isEmpty else {
+            return dependenciesFound
+        }
+        let filteredCachedDependencies = cachedDependencies
+            .filter { cached.contains($0.name) }
+        let used = Set(filteredCachedDependencies.map { $0.name })
+        let notUsed = cached.subtracting(used)
+        guard notUsed.isEmpty else {
+            throw InitError.couldNotResolveDependencyNames(notUsed.sorted())
+        }
+        for (targetName, dependencies) in targetDependencies {
+            var dependencies = dependencies
+            for dependency in filteredCachedDependencies {
+                let passedIn: Bool
+                if let index = dependencies.firstIndex(where: { $0.name == dependency.name }) {
+                    passedIn = true
+                    dependencies[index] = dependency
+                } else {
+                    passedIn = false
+                    dependencies.append(dependency)
+                }
+                let new = (name: dependency.name, passedIn: passedIn)
+                dependenciesFound[targetName] = (dependenciesFound[targetName] ?? []) + [new]
+            }
+            targetDependencies[targetName] = dependencies
+        }
+        return dependenciesFound
+    }
+}
+
+fileprivate extension Dictionary where Key == String, Value == [JsonSpmDependency] {
+    func targetsFor(
+        targetNames: [String],
+        targetIds: [String: UUID],
+        newTargetIds: inout [String: UUID]
+    ) -> [JsonSpmTarget] {
+        targetNames.map { targetName in
+            let targetId: UUID
+            if let existing = targetIds[targetName] {
+                targetId = existing
+            } else {
+                targetId = UUID()
+                newTargetIds[targetName] = targetId
+            }
+            return JsonSpmTarget(
+                id: targetId,
+                name: targetName,
+                dependencies: (self[targetName]?.map { $0.name } ?? []).sorted()
+            )
+        }
+    }
+}

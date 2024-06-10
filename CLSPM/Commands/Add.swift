@@ -25,7 +25,7 @@ struct Add: AsyncParsableCommand {
         name: .shortAndLong,
         help: "Dependency name"
     )
-    var name: [String] = []
+    var dependency: [String] = []
 
     @Option(
         name: .shortAndLong,

@@ -27,7 +27,7 @@ struct SpmFileManager {
         if let spmfile = spmfile {
             output.send("Using spmfile \"\(spmfile)\"", .verbose)
         }
-        let spmFileDir = try spmfile ?? (try spmfileDir())
+        let spmFileDir = spmfile ?? spmfileDir()
         guard fileManager.fileExists(atPath: spmFileDir) else {
             throw Error.fileDoesNotExist(spmFileDir)
         }
@@ -224,7 +224,7 @@ struct SpmFileManager {
     }
 
     func save(_ jsonFile: JsonSpmFile, to spmfile: String?, isCsv: Bool) throws {
-        let dir = try spmfile ?? (try spmfileDir())
+        let dir = spmfile ?? spmfileDir()
         output.send("Saving spm file:", .verbose)
         output.send("\t\(dir)", .verbose)
         let url = URL(fileURLWithPath: dir)
@@ -251,7 +251,16 @@ struct SpmFileManager {
         }
     }
 
-    private func spmfileDir() throws -> String {
+    var hasSpmFile: Bool {
+        fileManager.fileExists(atPath: spmfileDir())
+    }
+
+    func removeSpmFile() throws {
+        let url = URL(fileURLWithPath: spmfileDir())
+        try fileManager.removeItem(at: url)
+    }
+
+    private func spmfileDir() -> String {
         let currentPath = fileManager.currentDirectoryPath
         return "\(currentPath)/spmfile"
     }
