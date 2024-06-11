@@ -6,4 +6,5 @@ import Foundation
 enum InitError: Swift.Error, LocalizedError {
     case couldNotResolveDependencyNames([String])
     case projectHasBeenInitialized
+    case globalDependenciesNotSupportedForCsv
 }

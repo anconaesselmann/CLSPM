@@ -59,6 +59,10 @@ struct Init: ParsableCommand {
     }
 
     func run(fileManager: FileManagerProtocol) throws {
+        guard !(csv && globalDependencies) else {
+            // TODO: give more info to user
+            throw InitError.globalDependenciesNotSupportedForCsv
+        }
         let configManager = ConfigManager(fileManager: fileManager)
         let manager = SpmFileManager(fileManager: fileManager)
         if force {

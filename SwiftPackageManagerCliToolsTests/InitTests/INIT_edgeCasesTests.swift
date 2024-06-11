@@ -47,4 +47,16 @@ final class INIT_edgeCasesTests: XCTestCase {
             ""
         )
     }
+
+    func test_csvAndGlobalDependencies() throws {
+        sut.globalDependencies = true
+        sut.csv = true
+
+        do {
+            try sut.run(fileManager: fileManager)
+        } catch InitError.globalDependenciesNotSupportedForCsv {
+            return
+        }
+        XCTFail("CSV and global-dependencies is not supported")
+    }
 }
