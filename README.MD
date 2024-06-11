@@ -2,9 +2,7 @@
 
 CLSPM is a command line application for managing [SPM](https://www.swift.org/documentation/package-manager/) (Swift Package Manager) dependencies in Xcode projects.
 
-- [Toggle packages](https://github.com/anconaesselmann/CLSPM/wiki/Toggle-Package-Sources) between local and remote
-- [Add multiple packages](https://github.com/anconaesselmann/CLSPM/wiki/Adding-Packages) to new or existing packages
-- [Keep package versions consistent](https://github.com/anconaesselmann/CLSPM/wiki/Consistent-Versions-Across-Projects) across multiple projects
+- [Toggle packages](https://medium.com/@dudeOnRock/workflow-improvements-to-building-modular-ios-macos-apps-using-spm-swift-package-manager-402116a01dfa) between local and remote
 
 ### Installation
 
