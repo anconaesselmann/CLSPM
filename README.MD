@@ -18,4 +18,4 @@ Use make to compile and install CLSPM:
 
 ### How to use CLSPM
 
-See the [quickstart guide](https://github.com/anconaesselmann/CLSPM/wiki#quickstart) in the [wiki](https://github.com/anconaesselmann/CLSPM/wiki) for how to get started.
+See the [quickstart guide](https://github.com/anconaesselmann/CLSPM/wiki#quick-start) in the [wiki](https://github.com/anconaesselmann/CLSPM/wiki) for how to get started.
