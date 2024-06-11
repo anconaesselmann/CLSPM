@@ -40,7 +40,7 @@ class TempFileManager: FileManagerProtocol {
     }
 
     func fileExists(atPath path: String, isDirectory: UnsafeMutablePointer<ObjCBool>?) -> Bool {
-        _fileManager.fileExists(atPath: path)
+        _fileManager.fileExists(atPath: path, isDirectory: isDirectory)
     }
 
     func removeItem(at url: URL) throws {

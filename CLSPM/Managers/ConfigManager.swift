@@ -5,13 +5,17 @@ import Foundation
 
 class ConfigManager {
 
+    enum Error: Swift.Error {
+        case pathDoesNotExist
+    }
+
     private let fileManager: FileManagerProtocol
 
     init(fileManager: FileManagerProtocol) {
         self.fileManager = fileManager
     }
 
-    func swiftClpmDirUrl(global: Bool) throws -> URL {
+    func swiftClpmDirUrl(global: Bool, create: Bool = true) throws -> URL {
         let base: URL
         if global {
             base = fileManager.homeDirectoryForCurrentUser
@@ -19,23 +23,32 @@ class ConfigManager {
             base = URL(fileURLWithPath: fileManager.currentDirectoryPath)
         }
         let dir = base.appending(path: ".swiftclpm")
+
         if !directoryExistsAtPath(dir.path()) {
-            try fileManager.createDirectory(at: dir, withIntermediateDirectories: false)
+            if create {
+                try fileManager.createDirectory(at: dir, withIntermediateDirectories: false)
+            } else {
+                throw Error.pathDoesNotExist
+            }
         }
         return dir
     }
 
-    func defaultsUrl(global isGlobal: Bool) throws -> URL {
+    func configUrl(global isGlobal: Bool, create: Bool = true) throws -> URL {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
-        let clspmDir = try swiftClpmDirUrl(global: isGlobal)
+        let clspmDir = try swiftClpmDirUrl(global: isGlobal, create: create)
         let defaultsDir = clspmDir.appending(path: "config")
         var config: ConfigFile
         if !fileManager.fileExists(atPath: defaultsDir.path()) {
-            config = ConfigFile()
-            let contents = try encoder.encode(config)
-            fileManager.createFile(atPath: defaultsDir.path(), contents: contents)
+            if create {
+                config = ConfigFile()
+                let contents = try encoder.encode(config)
+                fileManager.createFile(atPath: defaultsDir.path(), contents: contents)
+            } else {
+                throw Error.pathDoesNotExist
+            }
         }
         return defaultsDir
     }
@@ -44,7 +57,7 @@ class ConfigManager {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
-        let defaultsUrl = try defaultsUrl(global: isGlobal)
+        let defaultsUrl = try configUrl(global: isGlobal)
 
         if let data = fileManager.contents(atPath: defaultsUrl.path()) {
             return try decoder.decode(ConfigFile.self, from: data)
@@ -65,7 +78,7 @@ class ConfigManager {
         encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
 
         let data = try encoder.encode(config)
-        let defaultsUrl = try defaultsUrl(global: isGlobal)
+        let defaultsUrl = try configUrl(global: isGlobal)
         try data.write(to: defaultsUrl)
     }
 
@@ -82,7 +95,7 @@ class ConfigManager {
         try save(config, global: isGlobal)
     }
 
-    func dependenciesUrl() throws -> URL {
+    func dependenciesUrl(create: Bool = true) throws -> URL {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
@@ -90,9 +103,13 @@ class ConfigManager {
         let defaultsDir = clspmDir.appending(path: "dependencies")
         var dependencies: DependenciesFile
         if !fileManager.fileExists(atPath: defaultsDir.path()) {
-            dependencies = DependenciesFile()
-            let contents = try encoder.encode(dependencies)
-            fileManager.createFile(atPath: defaultsDir.path(), contents: contents)
+            if create {
+                dependencies = DependenciesFile()
+                let contents = try encoder.encode(dependencies)
+                fileManager.createFile(atPath: defaultsDir.path(), contents: contents)
+            } else {
+                throw Error.pathDoesNotExist
+            }
         }
         return defaultsDir
     }
@@ -133,5 +150,32 @@ class ConfigManager {
             try fileManager.createDirectory(at: dir, withIntermediateDirectories: false)
         }
         return "\(dir)/packages"
+    }
+
+    func deleteConfig(global: Bool) throws {
+        do {
+            let url = try configUrl(global: global, create: false)
+            try fileManager.removeItem(at: url)
+        } catch Error.pathDoesNotExist {
+            return
+        }
+    }
+
+    func deleteDependencies() throws {
+        do {
+            let url = try dependenciesUrl()
+            try fileManager.removeItem(at: url)
+        } catch Error.pathDoesNotExist {
+            return
+        }
+    }
+
+    func deleteDirectory(global: Bool) throws {
+        do {
+            let url = try swiftClpmDirUrl(global: global)
+            try fileManager.removeItem(at: url)
+        } catch Error.pathDoesNotExist {
+            return
+        }
     }
 }

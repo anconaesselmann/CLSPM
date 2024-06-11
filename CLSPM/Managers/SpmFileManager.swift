@@ -260,7 +260,7 @@ struct SpmFileManager {
         try fileManager.removeItem(at: url)
     }
 
-    private func spmfileDir() -> String {
+    func spmfileDir() -> String {
         let currentPath = fileManager.currentDirectoryPath
         return "\(currentPath)/spmfile"
     }

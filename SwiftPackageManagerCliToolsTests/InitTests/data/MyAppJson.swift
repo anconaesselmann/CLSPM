@@ -104,6 +104,14 @@ class MyApp {
         )
     }
 
+    func moveGlobalConfigFile() throws {
+        try fileManager.copy(
+            from: bundle, "config.test",
+            to: ".swiftclpm/config",
+            in: .home
+        )
+    }
+
     func moveCsvSpmFile(with dependencies: [String]) throws {
         try fileManager.copy(
             dependencies.sorted().joined(separator: ", "),

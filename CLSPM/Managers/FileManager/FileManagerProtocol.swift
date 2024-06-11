@@ -44,4 +44,8 @@ extension FileManagerProtocol {
     func createFile(atPath path: String, contents data: Data?) -> Bool {
         createFile(atPath: path, contents: data, attributes: nil)
     }
+
+    func fileExists(at url: URL) -> Bool {
+        self.fileExists(atPath: url.path())
+    }
 }

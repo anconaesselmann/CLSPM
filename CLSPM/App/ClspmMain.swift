@@ -13,7 +13,8 @@ struct ClspmmMain: AsyncParsableCommand {
             Init.self,
             Config.self,
             DependencyCache.self,
-            Add.self
+            Add.self,
+            Reset.self
         ]
     )
 
