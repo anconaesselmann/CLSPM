@@ -24,4 +24,8 @@ extension JsonSpmFile {
             return true
         }
     }
+
+    var dependencyNames: [String] {
+        dependencies?.names ?? []
+    }
 }

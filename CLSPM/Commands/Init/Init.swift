@@ -173,7 +173,7 @@ fileprivate extension Dictionary where Key == String, Value == [JsonSpmDependenc
         var copy = self
         let filteredCachedDependencies = cachedDependencies
             .filter { cached.contains($0.name) }
-        let used = Set(filteredCachedDependencies.map { $0.name })
+        let used = Set(filteredCachedDependencies.names)
         let notUsed = cached.subtracting(used)
         guard notUsed.isEmpty else {
             throw InitError.couldNotResolveDependencyNames(notUsed.sorted())

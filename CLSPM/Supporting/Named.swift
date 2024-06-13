@@ -19,4 +19,8 @@ extension Array where Element: Named {
             $0[$1.name] = $1
         }
     }
+
+    var names: [String] {
+        map { $0.name }
+    }
 }
