@@ -59,7 +59,8 @@ class MyApp {
                     dependency.localPath = nil
                 }
                 return dependency
-            }.sorted { $0.name < $1.name }
+            }
+            .sorted()
         }
         return copy
     }

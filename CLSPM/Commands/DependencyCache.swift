@@ -50,9 +50,7 @@ struct DependencyCache: ParsableCommand {
         var dependenciesFile = try configManager.dependenciesFile()
         var notUsed = dependencyNames
 
-        let cachedDependencies: [String: JsonSpmDependency] = dependenciesFile
-            .dependencies
-            .reduce(into: [:]) { $0[$1.name] = $1 }
+        let cachedDependencies = dependenciesFile.dependencies.byName
 
         let combined: [String: JsonSpmDependency] = (spmFile.dependencies ?? [])
             .reduce(into: cachedDependencies) {

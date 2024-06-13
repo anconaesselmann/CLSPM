@@ -118,8 +118,8 @@ struct Init: ParsableCommand {
 
         let dependencies = targetDependencies
             .flatMap { $0.value }
-            .reduce(into: [:]) { $0[$1.name] = $1 }.values
-            .sorted { $0.name < $1.name }
+            .byName.values
+            .sorted()
             .map { $0.withUpdatedId(chachedDependencyIds[$0.name]) }
 
         view.dependenciesAcrossAllTargets(dependencies)
@@ -161,7 +161,7 @@ fileprivate extension Dictionary where Key == String, Value == [JsonSpmDependenc
             return JsonSpmTarget(
                 id: targetId,
                 name: targetName,
-                dependencies: (self[targetName]?.map { $0.name } ?? []).sorted()
+                dependencies: (self[targetName]?.names ?? []).sorted()
             )
         }
     }
@@ -187,7 +187,7 @@ fileprivate extension Dictionary where Key == String, Value == [JsonSpmDependenc
                     dependencies.append(dependency)
                 }
             }
-            $0[$1.key] = dependencies.sorted { $0.name < $1.name }
+            $0[$1.key] = dependencies.sorted()
         }
         return copy
     }

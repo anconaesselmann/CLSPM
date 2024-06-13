@@ -43,7 +43,7 @@ struct InstallView {
         for targetName in targetNames {
             output.send("Target \(targetName):", .verbose)
             let dependencies = targets[targetName]?.dependencies
-                .sorted { $0.name < $1.name } ?? []
+                .sorted() ?? []
             if dependencies.isEmpty {
                 output.send("no local dependencies".indented(), .verbose)
             } else {
