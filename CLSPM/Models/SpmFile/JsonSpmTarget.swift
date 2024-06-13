@@ -3,7 +3,7 @@
 
 import Foundation
 
-struct JsonSpmTarget: Codable {
+struct JsonSpmTarget: Codable, Named {
     let id: UUID?
     let name: String
     var dependencies: [String]

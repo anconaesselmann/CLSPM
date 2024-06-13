@@ -3,7 +3,7 @@
 
 import Foundation
 
-struct JsonSpmDependency: Codable {
+struct JsonSpmDependency: Codable, Named {
     var id: UUID?
     let name: String
     var url: String?
