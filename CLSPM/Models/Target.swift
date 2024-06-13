@@ -37,8 +37,7 @@ extension Dictionary where Key == String, Value == Target {
 
     func mapUsingLocalDependencies(for localNames: [String]) throws -> Self {
         var targets = self
-        var localNames = Set(localNames)
-        let output = Output.shared
+        let localNames = Set(localNames)
         if !localNames.isEmpty {
             var found: Set<String> = []
             targets = targets.reduce(into: [:]) {
