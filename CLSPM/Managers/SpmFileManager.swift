@@ -12,15 +12,14 @@ struct SpmFileManager {
         case fileDoesNotExist(String)
         case invalidUserInput
         case notMicroSpmfileCompatible
+        case unresovedDependencies([String])
     }
 
     private let output = Output.shared
     private let fileManager: FileManagerProtocol
-    private let remoteManager: RemoteDepenencyManager
 
     init(fileManager: FileManagerProtocol) {
         self.fileManager = fileManager
-        self.remoteManager = RemoteDepenencyManager(fileManager: fileManager)
     }
 
     func spmFile(in spmfile: String?) throws -> JsonSpmFile {
@@ -67,74 +66,67 @@ struct SpmFileManager {
 
     }
 
-    func targets(in spmfile: String?) async throws -> [String: Target] {
+    func unresolvableDependencies(in spmfile: String?) throws -> [String]? {
         let spmFileJson = try spmFile(in: spmfile)
 
-        let dependencyNamesUsedByTargets: Set<String> = spmFileJson.targets.reduce(into: []) {
-            $0 = $0.union(Set($1.dependencies))
+        let dependencyNames: Set<String> = spmFileJson.targets
+            .reduce(into: []) {
+                $0 = $0.union(Set($1.dependencies))
+            }
+
+        let configManager = ConfigManager(fileManager: fileManager)
+        let dependenciesFile = try configManager.dependenciesFile()
+        let cachedDependencyNames = Set(dependenciesFile.dependencies.names)
+
+        let resolvedDependencyNames = Set(spmFileJson.dependencyNames)
+        let uresolvedDependencyNames = dependencyNames.subtracting(resolvedDependencyNames)
+        let resolvableByDependenciesFile = uresolvedDependencyNames.intersection(cachedDependencyNames)
+        let unresolvable = uresolvedDependencyNames.subtracting(resolvableByDependenciesFile).sorted()
+        guard !unresolvable.isEmpty else {
+            return nil
         }
-        let resolvedDependencyNames = Set((spmFileJson.dependencies ?? []).map { $0.name })
+        return unresolvable
+    }
+
+    func targets(in spmfile: String?) throws -> [String: Target] {
+        let spmFileJson = try spmFile(in: spmfile)
+
+        let dependencyNamesUsedByTargets: Set<String> = spmFileJson.targets
+            .reduce(into: []) {
+                $0 = $0.union(Set($1.dependencies))
+            }
+
+        let configManager = ConfigManager(fileManager: fileManager)
+        let dependenciesFile = try configManager.dependenciesFile()
+
+        let resolvedDependencyNames = Set(spmFileJson.dependencyNames)
         let uresolvedDependencyNames = dependencyNamesUsedByTargets.subtracting(resolvedDependencyNames)
 
-        var dependencies: [String: JsonSpmDependency] = (spmFileJson.dependencies ?? [])
-            .reduce(into: [:]) {
-                $0[$1.name] = $1
-            }
+        var dependencies = spmFileJson.dependencies?.byName ?? [:]
 
         if !uresolvedDependencyNames.isEmpty {
-            let configManager = ConfigManager(fileManager: fileManager)
-            var dependenciesFile = try configManager.dependenciesFile()
-            let globalDependencies: [String: JsonSpmDependency] = dependenciesFile
-                .dependencies.reduce(into: [:]) {
-                    $0[$1.name] = $1
-                }
-            output.send("Unresolved dependencies", .verbose)
-            let sorted = uresolvedDependencyNames.sorted()
-            for dependencyName in sorted {
-                output.send("\t\(dependencyName)", .verbose)
+            let resolved = dependenciesFile.dependencies
+                .filter { uresolvedDependencyNames.contains($0.name) }
+            let unresolved = uresolvedDependencyNames.subtracting(Set(resolved.names))
+            guard unresolved.isEmpty else {
+                throw Error.unresovedDependencies(unresolved.sorted())
             }
-            output.send("Resolving global dependencies", .verbose)
-            for dependencyName in sorted {
-                if let resolvedDependency = globalDependencies[dependencyName] {
-                    dependencies[dependencyName] = resolvedDependency
-                    output.send("\t\(dependencyName) resolved", .verbose)
-                } else {
-                    let new: JsonSpmDependency
-                    if let resolved = try await remoteManager.resolve(name: dependencyName) {
-                        new = resolved
-                    } else {
-                        output.send("Could not resolve dependency \(dependencyName)")
-                        output.send("Either:")
-                        output.send("\t - Enter the url for the repository")
-                        output.send("\t\t(Optional: For none github repositories or to specify a speciffic version append a")
-                        output.send("\t\t release tag name to the repository url separated by a space.)")
-                        output.send("\t - Enter the github user/organization that should be used to resolve dependencies")
-                        guard let line = readLine() else {
-                            throw Error.invalidUserInput
-                        }
-                        new = try await remoteManager.resolve(
-                            input: line,
-                            name: dependencyName
-                        )
-                    }
-                    dependencies[dependencyName] = new
-                    output.send("\t\(dependencyName) resolved", .verbose)
-                    dependenciesFile.dependencies = (dependenciesFile.dependencies + [new])
-                        .sorted { $0.name < $1.name }
-                    try configManager.save(dependenciesFile)
-                }
+            for dependency in resolved {
+                dependencies[dependency.name] = dependency
             }
         }
 
-        let targetIds: [String: UUID] = spmFileJson.targets.reduce(into: [:]) {
-            $0[$1.name] = $1.id
-        }
+        let targetIds: [String: UUID] = spmFileJson.targets
+            .reduce(into: [:]) {
+                $0[$1.name] = $1.id
+            }
 
         return spmFileJson.targets
             .reduce(into: [String: Target]()) {
-                let depencencies = $1.dependencies.compactMap { dependencyName in
-                    dependencies[dependencyName]
-                }
+                let depencencies = $1.dependencies
+                    .compactMap { dependencyName in
+                        dependencies[dependencyName]
+                    }
                 $0[$1.name] = Target(id: targetIds[$1.name], dependencies: depencencies)
             }
     }

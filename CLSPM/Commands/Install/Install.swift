@@ -47,8 +47,10 @@ struct Install: AsyncParsableCommand {
     func run(fileManager: FileManagerProtocol) async throws {
         let view = InstallView(verbose: verbose)
 
-        let manager = SpmFileManager(fileManager: fileManager)
+        let spmFileManager = SpmFileManager(fileManager: fileManager)
         let configManager = ConfigManager(fileManager: fileManager)
+        let userPackageResolutionManager = UserPackageResolutionManager(fileManager: fileManager)
+        let remoteManager = RemoteDepenencyManager(fileManager: fileManager)
 
         let localRoot = try configManager
             .combinedConfigFile()
@@ -56,7 +58,22 @@ struct Install: AsyncParsableCommand {
 
         view.installingPackages()
 
-        let targets = try await manager
+        if let unresolvableDependencies = try spmFileManager.unresolvableDependencies(in: spmfile) {
+            view.unresolvedDependencies(unresolvableDependencies)
+            for dependencyName in unresolvableDependencies {
+                if let resolved = await remoteManager.resolve(name: dependencyName) {
+                    view.dependencyResolvedUsingOrgs(resolved)
+                } else {
+                    view.couldNotResolve(dependencyName)
+                    try await userPackageResolutionManager.userResolve(
+                        dependencyName: dependencyName,
+                        in: spmfile
+                    )
+                }
+            }
+        }
+
+        let targets = try spmFileManager
             .targets(in: spmfile)
             .mapUsingLocalDependencies(for: local)
 
@@ -67,8 +84,8 @@ struct Install: AsyncParsableCommand {
             cloneToClspmDir: cloneToClspmDir
         )
 
-        let remove = try manager.packagesToRemove(in: targets)
-        let add = try manager.packagesToAdd(in: targets)
+        let remove = try spmFileManager.packagesToRemove(in: targets)
+        let add = try spmFileManager.packagesToAdd(in: targets)
 
         let packagesNeedingToResolveLocalPath = add
             .filter { $0.isLocal && !$0.dependency.hasLocalPath }

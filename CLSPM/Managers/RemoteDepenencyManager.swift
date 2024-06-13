@@ -6,7 +6,6 @@ import Foundation
 class RemoteDepenencyManager {
 
     private let fileManager: FileManagerProtocol
-    private let output = Output.shared
 
     enum Error: Swift.Error {
         case noReleaseVersionFound
@@ -17,6 +16,10 @@ class RemoteDepenencyManager {
     private enum Input {
         case dependency(url: String, version: String)
         case githubOrg(url: String, name: String)
+    }
+
+    var hasOrgs: Bool {
+        !orgs.isEmpty
     }
 
     var orgs: [String] {
@@ -45,28 +48,25 @@ class RemoteDepenencyManager {
         self.fileManager = fileManager
     }
 
-    func resolve(name: String) async throws -> JsonSpmDependency? {
+    func resolve(name: String) async -> JsonSpmDependency? {
         guard !orgs.isEmpty else {
             return nil
-        }
-        if !orgs.isEmpty {
-            output.send("Resolving using orgs \(orgs.joined(separator: ", "))", .verbose)
         }
         for org in orgs {
             do {
                 let version = try await fetchVersion(for: org, dependencyName: name)
                 let orgUrl = "https://github.com/\(org)"
                 let url = "\(orgUrl)/\(name)"
-                output.send("Found depenency at \(orgUrl):", .verbose)
-                output.send("\tUrl: \(url)", .verbose)
-                output.send("\tversion: \(version)", .verbose)
-                return JsonSpmDependency(
+                let new = JsonSpmDependency(
                     id: UUID(),
                     name: name,
                     url: url,
                     version: version,
                     localPath: nil
                 )
+                let configManager = ConfigManager(fileManager: fileManager)
+                try configManager.saveDependency(new)
+                return new
             } catch {
                 continue
             }
@@ -75,62 +75,38 @@ class RemoteDepenencyManager {
     }
 
     func resolve(
-        input line: String,
+        input: DependencyResolutionInput,
         name: String
-    ) async throws -> JsonSpmDependency {
-        let input = try await parseUserInput(line, name: name)
+    ) async throws {
+        let remoteUrl: String
+        let remoteVersion: String
         switch input {
-        case .dependency(url: let url, version: let version):
-            output.send("Found depenency:", .verbose)
-            output.send("\tUrl: \(url)", .verbose)
-            output.send("\tversion: \(version)", .verbose)
-            return JsonSpmDependency(
-                id: UUID(),
-                name: name,
-                url: url,
-                version: version,
-                localPath: nil
+        case .versionedDependency(url: let url, version: let version):
+            remoteUrl = url
+            remoteVersion = version
+        case .dependency(url: let url):
+            remoteUrl = url
+            remoteVersion = try await fetchVersion(
+                for: url,
+                dependencyName: name
             )
-        case .githubOrg(url: let url, name: let name):
-            return try await resolve(input: url + "/\(name)", name: name)
-        }
-    }
-
-    private func parseUserInput(_ line: String, name: String) async throws -> Input {
-        let line = line.trimmingCharacters(in: .whitespaces)
-        let components = line.split(separator: " ")
-        if components.count == 2 {
-            let url = String(components[0])
-            let version = String(components[1])
-            return .dependency(url: url, version: version)
-        } else if
-            let result = try /github\.com[\/|:](?<org>[^\/]+)\/(?<dependency>[^\/\s\.]+)/
-                .firstMatch(in: line)
-        {
-            let org = String(result.output.org)
-            let dependency = String(result.output.dependency)
-            let version = try await fetchVersion(
-                for: org,
-                dependencyName: dependency
+        case .githubOrg(url: let url, org: let org):
+            orgs.append(org)
+            remoteUrl = url
+            remoteVersion = try await fetchVersion(
+                for: url,
+                dependencyName: name
             )
-            return .dependency(url: "https://github.com/\(org)/\(dependency)", version: version)
-        } else if
-            let result = try /github\.com[\/|:](?<org>[^\/\s]+)/
-                .firstMatch(in: line)
-        {
-            let org = String(result.output.org)
-            orgs.append(org)
-            return .githubOrg(url: "https://github.com/\(org)", name: name)
-        } else if
-            let result = try /^\s*(?<org>[a-zA-A0-9\-]+)\s*$/
-                .firstMatch(in: line)
-        {
-            let org = String(result.output.org)
-            orgs.append(org)
-            return .githubOrg(url: "https://github.com/\(org)", name: name)
-        } else {
-            throw Error.invalidInput
         }
+        let new = JsonSpmDependency(
+            id: UUID(),
+            name: name,
+            url: remoteUrl,
+            version: remoteVersion,
+            localPath: nil
+        )
+        let configManager = ConfigManager(fileManager: fileManager)
+        try configManager.saveDependency(new)
     }
 
     private func fetchVersion(for org: String, dependencyName: String) async throws -> String {
