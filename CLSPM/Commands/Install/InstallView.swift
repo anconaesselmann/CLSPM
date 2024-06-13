@@ -67,4 +67,37 @@ struct InstallView {
             }
         }
     }
+
+    func unresolvedDependencies(_ dependencyNames: [String]) {
+        output.send("Unresolved dependencies", .verbose)
+        for dependencyName in dependencyNames {
+            output.send(dependencyName.indented(), .verbose)
+        }
+    }
+    
+    func couldNotResolve(_ dependencyName: String) {
+        let prompt = """
+Could not resolve dependency \(dependencyName)
+
+Enter:
+    - The github user/organization that should be used to resolve dependencies
+
+    - The url for the repository
+        Optional: For none github repositories or to specify a speciffic
+                  version append a release tag name to the repository url
+                  separated by a space.
+"""
+        output.send(prompt)
+    }
+
+    func dependencyResolvedUsingOrgs(_ dependency: JsonSpmDependency) {
+        output.send("Resolved \(dependency) using github organization/user-name:", .verbose)
+        output.send("Name: \(dependency.name)".indented(), .verbose)
+        if let url = dependency.url {
+            output.send("Remote: \(url)".indented(), .verbose)
+        }
+        if let version = dependency.version {
+            output.send("Version: \(version)".indented(), .verbose)
+        }
+    }
 }
