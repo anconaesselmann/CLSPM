@@ -78,6 +78,8 @@
 		977FEDB62C1B609D00FC7833 /* InstallError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDB42C1B608800FC7833 /* InstallError.swift */; };
 		977FEDB82C1B820400FC7833 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDB72C1B820400FC7833 /* Named.swift */; };
 		977FEDB92C1B820700FC7833 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDB72C1B820400FC7833 /* Named.swift */; };
+		977FEDBB2C1B8DDE00FC7833 /* UserPackageResolutionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDBA2C1B8DDE00FC7833 /* UserPackageResolutionManager.swift */; };
+		977FEDBC2C1B8E0B00FC7833 /* UserPackageResolutionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDBA2C1B8DDE00FC7833 /* UserPackageResolutionManager.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
 		979962C72C0F952100782E40 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C62C0F952100782E40 /* ConfigManager.swift */; };
 		979962C92C0FA77300782E40 /* ConfigFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C82C0FA77300782E40 /* ConfigFile.swift */; };
@@ -160,6 +162,7 @@
 		977FEDB12C1B5F2300FC7833 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		977FEDB42C1B608800FC7833 /* InstallError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallError.swift; sourceTree = "<group>"; };
 		977FEDB72C1B820400FC7833 /* Named.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Named.swift; sourceTree = "<group>"; };
+		977FEDBA2C1B8DDE00FC7833 /* UserPackageResolutionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPackageResolutionManager.swift; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		979962C62C0F952100782E40 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		979962C82C0FA77300782E40 /* ConfigFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigFile.swift; sourceTree = "<group>"; };
@@ -368,6 +371,7 @@
 				9761EE662C0A3A950073AB3E /* SpmFileManager.swift */,
 				979967192C1105D400782E40 /* RemoteDepenencyManager.swift */,
 				979962C62C0F952100782E40 /* ConfigManager.swift */,
+				977FEDBA2C1B8DDE00FC7833 /* UserPackageResolutionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -577,6 +581,7 @@
 				976A0DA42C139EE3008036D3 /* Install+Tests.swift in Sources */,
 				972437C02C1235940011C5AE /* Add.swift in Sources */,
 				976A0DA02C138B84008036D3 /* TempFileManager.swift in Sources */,
+				977FEDBC2C1B8E0B00FC7833 /* UserPackageResolutionManager.swift in Sources */,
 				972438792C12600F0011C5AE /* XCTAssertEqual+fileContent.swift in Sources */,
 				977FEDAA2C18DC6800FC7833 /* Rest_spmfile_Tests.swift in Sources */,
 				9724387D2C12640F0011C5AE /* Output.swift in Sources */,
@@ -637,6 +642,7 @@
 				9799682F2C12249F00782E40 /* Target.swift in Sources */,
 				97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */,
 				9799671A2C1105D400782E40 /* RemoteDepenencyManager.swift in Sources */,
+				977FEDBB2C1B8DDE00FC7833 /* UserPackageResolutionManager.swift in Sources */,
 				97044C7E2C0A3DE700D7424A /* Project.swift in Sources */,
 				977FEDB52C1B608800FC7833 /* InstallError.swift in Sources */,
 				9724387C2C12625B0011C5AE /* Output.swift in Sources */,
