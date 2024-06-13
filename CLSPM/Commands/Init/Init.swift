@@ -59,6 +59,7 @@ struct Init: ParsableCommand {
     }
 
     func run(fileManager: FileManagerProtocol) throws {
+        let view = InitView(verbose: verbose)
         guard !(csv && globalDependencies) else {
             // TODO: give more info to user
             throw InitError.globalDependenciesNotSupportedForCsv
@@ -73,7 +74,6 @@ struct Init: ParsableCommand {
                 throw InitError.projectHasBeenInitialized
             }
         }
-        let view = InitView(verbose: verbose)
         let project = try Project(fileManager: fileManager)
         let root = try project.root()
         let targets = try project.targets(in: root)

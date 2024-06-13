@@ -70,6 +70,12 @@
 		977FEDA82C18DA1A00FC7833 /* Rest_config_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDA72C18DA1A00FC7833 /* Rest_config_Tests.swift */; };
 		977FEDAA2C18DC6800FC7833 /* Rest_spmfile_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDA92C18DC6800FC7833 /* Rest_spmfile_Tests.swift */; };
 		977FEDAC2C18DD8400FC7833 /* Rest_all_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDAB2C18DD8400FC7833 /* Rest_all_Tests.swift */; };
+		977FEDAF2C1B556600FC7833 /* InstallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDAE2C1B556600FC7833 /* InstallView.swift */; };
+		977FEDB02C1B55FC00FC7833 /* InstallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDAE2C1B556600FC7833 /* InstallView.swift */; };
+		977FEDB22C1B5F2300FC7833 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDB12C1B5F2300FC7833 /* String+Extensions.swift */; };
+		977FEDB32C1B5FEE00FC7833 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDB12C1B5F2300FC7833 /* String+Extensions.swift */; };
+		977FEDB52C1B608800FC7833 /* InstallError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDB42C1B608800FC7833 /* InstallError.swift */; };
+		977FEDB62C1B609D00FC7833 /* InstallError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDB42C1B608800FC7833 /* InstallError.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
 		979962C72C0F952100782E40 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C62C0F952100782E40 /* ConfigManager.swift */; };
 		979962C92C0FA77300782E40 /* ConfigFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C82C0FA77300782E40 /* ConfigFile.swift */; };
@@ -148,6 +154,9 @@
 		977FEDA72C18DA1A00FC7833 /* Rest_config_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rest_config_Tests.swift; sourceTree = "<group>"; };
 		977FEDA92C18DC6800FC7833 /* Rest_spmfile_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rest_spmfile_Tests.swift; sourceTree = "<group>"; };
 		977FEDAB2C18DD8400FC7833 /* Rest_all_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rest_all_Tests.swift; sourceTree = "<group>"; };
+		977FEDAE2C1B556600FC7833 /* InstallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallView.swift; sourceTree = "<group>"; };
+		977FEDB12C1B5F2300FC7833 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		977FEDB42C1B608800FC7833 /* InstallError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallError.swift; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		979962C62C0F952100782E40 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		979962C82C0FA77300782E40 /* ConfigFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigFile.swift; sourceTree = "<group>"; };
@@ -312,10 +321,20 @@
 			path = supporting;
 			sourceTree = "<group>";
 		};
-		979967E02C11814200782E40 /* Commands */ = {
+		977FEDAD2C1B552C00FC7833 /* Install */ = {
 			isa = PBXGroup;
 			children = (
 				97E7B2662C092CD600E33740 /* Install.swift */,
+				977FEDAE2C1B556600FC7833 /* InstallView.swift */,
+				977FEDB42C1B608800FC7833 /* InstallError.swift */,
+			);
+			path = Install;
+			sourceTree = "<group>";
+		};
+		979967E02C11814200782E40 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				977FEDAD2C1B552C00FC7833 /* Install */,
 				97CB2A4D2C16B068000B87B2 /* Init */,
 				979962C42C0F84C200782E40 /* Config.swift */,
 				979962CA2C0FBDFC00782E40 /* DependencyCache.swift */,
@@ -362,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				979967DE2C1178AA00782E40 /* Bool+StringInitialization.swift */,
+				977FEDB12C1B5F2300FC7833 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -562,6 +582,7 @@
 				972438762C1252460011C5AE /* Init+Tests.swift in Sources */,
 				97192AB72C13C99400287B03 /* FileManagerProtocol+Extensions.swift in Sources */,
 				976A0D8C2C12E52B008036D3 /* INIT_JSPM_T1_XPROJ_G_Tests.swift in Sources */,
+				977FEDB02C1B55FC00FC7833 /* InstallView.swift in Sources */,
 				976A0DA92C13A63A008036D3 /* XCTestCase+runAsyncTest.swift in Sources */,
 				972437C22C1235940011C5AE /* DependencyCache.swift in Sources */,
 				972437C32C1235940011C5AE /* Install.swift in Sources */,
@@ -577,10 +598,12 @@
 				972438802C1267AB0011C5AE /* TestOutput.swift in Sources */,
 				977FEDA22C18D47700FC7833 /* Rest_dependencies_Tests.swift in Sources */,
 				972437C82C1235990011C5AE /* JsonSpmTarget.swift in Sources */,
+				977FEDB62C1B609D00FC7833 /* InstallError.swift in Sources */,
 				976A0D9E2C13852C008036D3 /* FileManagerProtocol.swift in Sources */,
 				97CB2A532C16CDB8000B87B2 /* InitError.swift in Sources */,
 				977FEDAC2C18DD8400FC7833 /* Rest_all_Tests.swift in Sources */,
 				972437B62C1235860011C5AE /* shell.swift in Sources */,
+				977FEDB32C1B5FEE00FC7833 /* String+Extensions.swift in Sources */,
 				976A0D982C1313E7008036D3 /* INIT_JSPM_T1_XPROJ_DL_L_Tests.swift in Sources */,
 				97CB2A502C16B0BA000B87B2 /* InitView.swift in Sources */,
 				97192ABB2C13FD5900287B03 /* INST_JSPM_T1_L_Tests.swift in Sources */,
@@ -600,6 +623,7 @@
 				979962C72C0F952100782E40 /* ConfigManager.swift in Sources */,
 				972453BF2C0957210069A162 /* shell.swift in Sources */,
 				972437CA2C123D400011C5AE /* FileManager.swift in Sources */,
+				977FEDB22C1B5F2300FC7833 /* String+Extensions.swift in Sources */,
 				976A0D9D2C138511008036D3 /* FileManagerProtocol.swift in Sources */,
 				979967DF2C1178AA00782E40 /* Bool+StringInitialization.swift in Sources */,
 				97E7B2432C09117A00E33740 /* ClspmMain.swift in Sources */,
@@ -608,6 +632,7 @@
 				97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */,
 				9799671A2C1105D400782E40 /* RemoteDepenencyManager.swift in Sources */,
 				97044C7E2C0A3DE700D7424A /* Project.swift in Sources */,
+				977FEDB52C1B608800FC7833 /* InstallError.swift in Sources */,
 				9724387C2C12625B0011C5AE /* Output.swift in Sources */,
 				97CB2A4F2C16B076000B87B2 /* InitView.swift in Sources */,
 				9799682D2C121EF200782E40 /* Add.swift in Sources */,
@@ -617,6 +642,7 @@
 				979967E82C11823A00782E40 /* JsonSpmTarget.swift in Sources */,
 				97E7B2672C092CD600E33740 /* Install.swift in Sources */,
 				97CB2A522C16CDA3000B87B2 /* InitError.swift in Sources */,
+				977FEDAF2C1B556600FC7833 /* InstallView.swift in Sources */,
 				979967182C10FB1800782E40 /* GithubRelease.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

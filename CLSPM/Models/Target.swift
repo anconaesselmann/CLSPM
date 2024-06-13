@@ -34,4 +34,26 @@ extension Dictionary where Key == String, Value == Target {
     var names: [String] {
         keys.sorted()
     }
+
+    func mapUsingLocalDependencies(for localNames: [String]) throws -> Self {
+        var targets = self
+        var localNames = Set(localNames)
+        let output = Output.shared
+        if !localNames.isEmpty {
+            var found: Set<String> = []
+            targets = targets.reduce(into: [:]) {
+                var (targetName, target) = $1
+                let foundInTarget = target.useLocal(for: localNames)
+                if !foundInTarget.isEmpty {
+                    found = found.union(foundInTarget)
+                }
+                $0[targetName] = target
+            }
+            let notFound = localNames.subtracting(found)
+            if !notFound.isEmpty {
+                throw InstallError.invalidLocalOverrides(notFound.sorted())
+            }
+        }
+        return targets
+    }
 }
