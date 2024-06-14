@@ -15,10 +15,17 @@ class UserPackageResolutionManager {
     private let spmFileManager: SpmFileManager
     private let input: Input
 
-    init(fileManager: FileManagerProtocol, input: Input = Input.shared) {
+    init(
+        fileManager: FileManagerProtocol,
+        service: ServiceProtocol,
+        input: Input
+    ) {
         self.input = input
         self.fileManager = fileManager
-        self.remoteManager = RemoteDepenencyManager(fileManager: fileManager)
+        self.remoteManager = RemoteDepenencyManager(
+            fileManager: fileManager,
+            service: service
+        )
         self.spmFileManager = SpmFileManager(fileManager: fileManager)
     }
 

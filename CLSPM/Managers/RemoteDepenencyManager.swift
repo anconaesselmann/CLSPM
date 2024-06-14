@@ -6,9 +6,9 @@ import Foundation
 class RemoteDepenencyManager {
 
     private let fileManager: FileManagerProtocol
+    private let service: ServiceProtocol
 
     enum Error: Swift.Error {
-        case noReleaseVersionFound
         case invalidUrl
         case invalidInput
     }
@@ -44,8 +44,9 @@ class RemoteDepenencyManager {
         }
     }
 
-    init(fileManager: FileManagerProtocol) {
+    init(fileManager: FileManagerProtocol, service: ServiceProtocol) {
         self.fileManager = fileManager
+        self.service = service
     }
 
     func resolve(name: String) async -> JsonSpmDependency? {
@@ -54,8 +55,8 @@ class RemoteDepenencyManager {
         }
         for org in orgs {
             do {
-                let version = try await fetchVersion(
-                    forOrg: org, 
+                let version = try await service.fetchVersion(
+                    forOrg: org,
                     dependencyName: name
                 )
                 let url: URL = try .githubRepo(githubUserName: org, repoName: name)
@@ -92,7 +93,7 @@ class RemoteDepenencyManager {
             remoteVersion = version
         case .dependency(url: let url) where org != nil:
             remoteUrl = url
-            remoteVersion = try await fetchVersion(
+            remoteVersion = try await service.fetchVersion(
                 forOrg: org!,
                 dependencyName: name
             )
@@ -108,19 +109,5 @@ class RemoteDepenencyManager {
         )
         let configManager = ConfigManager(fileManager: fileManager)
         try configManager.saveDependency(new)
-    }
-
-    private func fetchVersion(forOrg org: String, dependencyName: String) async throws -> String {
-        let releasesUrl: URL = try .githubReleases(githubUserName: org, repoName: dependencyName)
-        let (data, _) = try await URLSession.shared.data(from: releasesUrl)
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .iso8601
-        let releases = try decoder.decode([GithubRelease].self, from: data)
-            .filter { $0.draft == false && $0.prerelease == false}
-        guard let latestVersion = releases.first?.tagName else {
-            throw Error.noReleaseVersionFound
-        }
-        return latestVersion
     }
 }

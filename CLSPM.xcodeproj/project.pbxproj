@@ -87,6 +87,9 @@
 		977FEDC52C1BB5D200FC7833 /* JsonSpmDependency+Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDC42C1BB5D200FC7833 /* JsonSpmDependency+Test.swift */; };
 		977FEDC82C1C03E400FC7833 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDC72C1C03E400FC7833 /* Urls.swift */; };
 		977FEDC92C1C03F000FC7833 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDC72C1C03E400FC7833 /* Urls.swift */; };
+		977FEDCB2C1C16C300FC7833 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDCA2C1C16C300FC7833 /* Service.swift */; };
+		977FEDCC2C1C177200FC7833 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDCA2C1C16C300FC7833 /* Service.swift */; };
+		977FEDCE2C1C18C000FC7833 /* TestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDCD2C1C18C000FC7833 /* TestService.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
 		979962C72C0F952100782E40 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C62C0F952100782E40 /* ConfigManager.swift */; };
 		979962C92C0FA77300782E40 /* ConfigFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C82C0FA77300782E40 /* ConfigFile.swift */; };
@@ -175,6 +178,8 @@
 		977FEDC12C1BB11E00FC7833 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		977FEDC42C1BB5D200FC7833 /* JsonSpmDependency+Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JsonSpmDependency+Test.swift"; sourceTree = "<group>"; };
 		977FEDC72C1C03E400FC7833 /* Urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
+		977FEDCA2C1C16C300FC7833 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		977FEDCD2C1C18C000FC7833 /* TestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestService.swift; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		979962C62C0F952100782E40 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		979962C82C0FA77300782E40 /* ConfigFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigFile.swift; sourceTree = "<group>"; };
@@ -289,6 +294,7 @@
 				97192AB62C13C99400287B03 /* FileManagerProtocol+Extensions.swift */,
 				97192AB82C13C9BA00287B03 /* ProjectInspector.swift */,
 				977FEDC42C1BB5D200FC7833 /* JsonSpmDependency+Test.swift */,
+				977FEDCD2C1C18C000FC7833 /* TestService.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -395,6 +401,7 @@
 				979967192C1105D400782E40 /* RemoteDepenencyManager.swift */,
 				979962C62C0F952100782E40 /* ConfigManager.swift */,
 				977FEDBA2C1B8DDE00FC7833 /* UserPackageResolutionManager.swift */,
+				977FEDCA2C1C16C300FC7833 /* Service.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -604,8 +611,10 @@
 				972437BE2C1235940011C5AE /* ConfigManager.swift in Sources */,
 				972437BF2C1235940011C5AE /* Bool+StringInitialization.swift in Sources */,
 				976A0DA42C139EE3008036D3 /* Install+Tests.swift in Sources */,
+				977FEDCE2C1C18C000FC7833 /* TestService.swift in Sources */,
 				972437C02C1235940011C5AE /* Add.swift in Sources */,
 				976A0DA02C138B84008036D3 /* TempFileManager.swift in Sources */,
+				977FEDCC2C1C177200FC7833 /* Service.swift in Sources */,
 				977FEDBC2C1B8E0B00FC7833 /* UserPackageResolutionManager.swift in Sources */,
 				972438792C12600F0011C5AE /* XCTAssertEqual+fileContent.swift in Sources */,
 				977FEDAA2C18DC6800FC7833 /* Rest_spmfile_Tests.swift in Sources */,
@@ -666,6 +675,7 @@
 				972453BF2C0957210069A162 /* shell.swift in Sources */,
 				972437CA2C123D400011C5AE /* FileManager.swift in Sources */,
 				977FEDB22C1B5F2300FC7833 /* String+Extensions.swift in Sources */,
+				977FEDCB2C1C16C300FC7833 /* Service.swift in Sources */,
 				976A0D9D2C138511008036D3 /* FileManagerProtocol.swift in Sources */,
 				979967DF2C1178AA00782E40 /* Bool+StringInitialization.swift in Sources */,
 				97E7B2432C09117A00E33740 /* CLSPM.swift in Sources */,

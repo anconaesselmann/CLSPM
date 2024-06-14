@@ -41,16 +41,26 @@ struct Install: AsyncParsableCommand {
     var packageCacheDir: String?
 
     func run() async throws {
-        try await self.run(fileManager: FileManager.default)
+        try await self.run(
+            fileManager: FileManager.default,
+            service: Service()
+        )
     }
 
-    func run(fileManager: FileManagerProtocol) async throws {
+    func run(fileManager: FileManagerProtocol, service: ServiceProtocol) async throws {
         let view = InstallView(verbose: verbose)
 
         let spmFileManager = SpmFileManager(fileManager: fileManager)
         let configManager = ConfigManager(fileManager: fileManager)
-        let userPackageResolutionManager = UserPackageResolutionManager(fileManager: fileManager)
-        let remoteManager = RemoteDepenencyManager(fileManager: fileManager)
+        let userPackageResolutionManager = UserPackageResolutionManager(
+            fileManager: fileManager,
+            service: service,
+            input: Input.shared
+        )
+        let remoteManager = RemoteDepenencyManager(
+            fileManager: fileManager,
+            service: service
+        )
 
         let localRoot = try configManager
             .combinedConfigFile()

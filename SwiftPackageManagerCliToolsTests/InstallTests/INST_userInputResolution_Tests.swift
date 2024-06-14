@@ -9,6 +9,7 @@ final class INST_userInputResolution_Tests: XCTestCase {
     var input: TestInput!
 
     var fileManager: TempFileManager!
+    var service: TestService!
 
     var bundle: Bundle {
         Bundle(for: Self.self)
@@ -16,6 +17,7 @@ final class INST_userInputResolution_Tests: XCTestCase {
 
     override func setUpWithError() throws {
         fileManager = try TempFileManager(current: "MyApp")
+        service = TestService()
         myApp = MyApp(fileManager)
         Output.test_setup()
         input = Input.test_setup()
@@ -34,13 +36,16 @@ final class INST_userInputResolution_Tests: XCTestCase {
         let dependencyNames = ["LoadableView"]
         try myApp.moveCsvSpmFile(with: dependencyNames)
         let dependencies = dependencyNames.compactMap { myApp.dependencies[$0] }
-        var dependency = dependencies[0]
+        let dependency = dependencies[0]
 
         let inputText = try dependency.consolTextForResolution(useVersion: true)
         input.send(inputText)
 
         runAsyncTest {
-            try await self.sut.run(fileManager: self.fileManager)
+            try await self.sut.run(
+                fileManager: self.fileManager,
+                service: self.service
+            )
             let project = try ProjectInspector(self.fileManager)
 
             try XCTAssertDependencies(
@@ -55,12 +60,15 @@ final class INST_userInputResolution_Tests: XCTestCase {
         let dependencyNames = ["LoadableView"]
         try myApp.moveCsvSpmFile(with: dependencyNames)
         let dependencies = dependencyNames.compactMap { myApp.dependencies[$0] }
-        var dependency = dependencies[0]
+        let dependency = dependencies[0]
 
         let inputText = try dependency.consolTextForResolution(useVersion: true)
         input.send(inputText)
         runAsyncTest {
-            try await self.sut.run(fileManager: self.fileManager)
+            try await self.sut.run(
+                fileManager: self.fileManager,
+                service: self.service
+            )
 
             guard let dependencyFile = try self.fileManager.dependencyFile() else {
                 XCTFail("Dependencies file does not exist")
@@ -85,7 +93,10 @@ final class INST_userInputResolution_Tests: XCTestCase {
         input.send(inputText)
 
         runAsyncTest {
-            try await self.sut.run(fileManager: self.fileManager)
+            try await self.sut.run(
+                fileManager: self.fileManager,
+                service: self.service
+            )
             let project = try ProjectInspector(self.fileManager)
 
             try XCTAssertDependencies(
@@ -107,7 +118,10 @@ final class INST_userInputResolution_Tests: XCTestCase {
 
         input.send(inputText)
         runAsyncTest {
-            try await self.sut.run(fileManager: self.fileManager)
+            try await self.sut.run(
+                fileManager: self.fileManager,
+                service: self.service
+            )
 
             guard let dependencyFile = try self.fileManager.dependencyFile() else {
                 XCTFail("Dependencies file does not exist")
