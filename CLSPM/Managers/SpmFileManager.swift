@@ -263,4 +263,10 @@ struct SpmFileManager {
         encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
         return encoder
     }
+
+    static var decoder: JSONDecoder {
+        let encoder = JSONDecoder()
+        encoder.keyDecodingStrategy = .convertFromSnakeCase
+        return encoder
+    }
 }
