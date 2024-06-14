@@ -76,7 +76,7 @@ struct Create: AsyncParsableCommand {
         let configManager = ConfigManager(fileManager: fileManager)
         let project = try Project(fileManager: fileManager)
         let root = try project.root()
-        var targetDependencies = try project.dependencies(in: root, verbose: verbose)
+        let targetDependencies = try project.dependencies(in: root, verbose: verbose)
         var targetNames = targetDependencies.keys.sorted()
         if !self.target.isEmpty {
             let allTargets = Set(targetNames)
@@ -116,7 +116,7 @@ struct Create: AsyncParsableCommand {
         try fileManager.createDirectory(at: packageUrl, withIntermediateDirectories: false)
         let result = shell("cd \"\(packageUrl.path())\"; swift package init --type library")
 
-        print(result)
+        output.send(result, .verbose)
 
         let newPackageSourceDir = packageUrl.appending(path: "Sources").appending(path: name)
 
@@ -139,13 +139,13 @@ struct Create: AsyncParsableCommand {
 
         spmfile.dependencies = dependencies.sorted()
 
-        var targetsByName = targetNames.reduce(into: spmfile.targets.byName) {
+        let targetsByName = targetNames.reduce(into: spmfile.targets.byName) {
             guard var target = $0[$1] else {
                 assertionFailure()
                 // TODO: This should be an error and caught earlier
                 return
             }
-            var dependencies = target.dependencies + [newDependency.name]
+            let dependencies = target.dependencies + [newDependency.name]
             target.dependencies = dependencies.sorted()
             $0[$1] = target
         }
