@@ -99,7 +99,7 @@ struct Create: AsyncParsableCommand {
         }
         let packageUrl = localRootUrl.appending(path: name)
         try fileManager.createDirectory(at: packageUrl, withIntermediateDirectories: false)
-        let result = shell("cd \"\(packageUrl.path())\"; swift package init --type library; swift package generate-xcodeproj")
+        let result = shell("cd \"\(packageUrl.path())\"; swift package init --type library; swift package")
         
 
         let newPackageSourceDir = packageUrl.appending(path: "Sources").appending(path: name)
@@ -123,10 +123,7 @@ struct Create: AsyncParsableCommand {
 
         spmfile.dependencies = dependencies.sorted()
 
-        var targets = spmfile.targets
-        var targetsByName = spmfile.targets.byName
-
-        targetsByName = targetNames.reduce(into: targetsByName) {
+        var targetsByName = targetNames.reduce(into: spmfile.targets.byName) {
             guard var target = $0[$1] else {
                 assertionFailure()
                 // TODO: This should be an error and caught earlier
