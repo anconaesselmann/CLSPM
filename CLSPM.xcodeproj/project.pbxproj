@@ -105,7 +105,7 @@
 		97CB2A522C16CDA3000B87B2 /* InitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB2A512C16CDA3000B87B2 /* InitError.swift */; };
 		97CB2A532C16CDB8000B87B2 /* InitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB2A512C16CDA3000B87B2 /* InitError.swift */; };
 		97CB2A552C16D812000B87B2 /* INIT_edgeCasesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB2A542C16D812000B87B2 /* INIT_edgeCasesTests.swift */; };
-		97E7B2432C09117A00E33740 /* ClspmMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2422C09117A00E33740 /* ClspmMain.swift */; };
+		97E7B2432C09117A00E33740 /* CLSPM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2422C09117A00E33740 /* CLSPM.swift */; };
 		97E7B2672C092CD600E33740 /* Install.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2662C092CD600E33740 /* Install.swift */; };
 		97E7B2692C093B9600E33740 /* Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2682C093B9600E33740 /* Init.swift */; };
 		97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */; };
@@ -192,7 +192,7 @@
 		97CB2A512C16CDA3000B87B2 /* InitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitError.swift; sourceTree = "<group>"; };
 		97CB2A542C16D812000B87B2 /* INIT_edgeCasesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INIT_edgeCasesTests.swift; sourceTree = "<group>"; };
 		97E7B23F2C09117A00E33740 /* CLSPM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CLSPM; sourceTree = BUILT_PRODUCTS_DIR; };
-		97E7B2422C09117A00E33740 /* ClspmMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClspmMain.swift; sourceTree = "<group>"; };
+		97E7B2422C09117A00E33740 /* CLSPM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLSPM.swift; sourceTree = "<group>"; };
 		97E7B2662C092CD600E33740 /* Install.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Install.swift; sourceTree = "<group>"; };
 		97E7B2682C093B9600E33740 /* Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Init.swift; sourceTree = "<group>"; };
 		97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonSpmFile.swift; sourceTree = "<group>"; };
@@ -420,7 +420,7 @@
 		979967E52C1181DC00782E40 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				97E7B2422C09117A00E33740 /* ClspmMain.swift */,
+				97E7B2422C09117A00E33740 /* CLSPM.swift */,
 				9724387B2C12625B0011C5AE /* Output.swift */,
 				977FEDC12C1BB11E00FC7833 /* Input.swift */,
 			);
@@ -668,7 +668,7 @@
 				977FEDB22C1B5F2300FC7833 /* String+Extensions.swift in Sources */,
 				976A0D9D2C138511008036D3 /* FileManagerProtocol.swift in Sources */,
 				979967DF2C1178AA00782E40 /* Bool+StringInitialization.swift in Sources */,
-				97E7B2432C09117A00E33740 /* ClspmMain.swift in Sources */,
+				97E7B2432C09117A00E33740 /* CLSPM.swift in Sources */,
 				977FED9F2C18CEB000FC7833 /* Reset.swift in Sources */,
 				977FEDC82C1C03E400FC7833 /* Urls.swift in Sources */,
 				9799682F2C12249F00782E40 /* Target.swift in Sources */,
