@@ -83,6 +83,8 @@
 		977FEDC02C1BB10C00FC7833 /* TestInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDBF2C1BB10C00FC7833 /* TestInput.swift */; };
 		977FEDC22C1BB11E00FC7833 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDC12C1BB11E00FC7833 /* Input.swift */; };
 		977FEDC32C1BB14E00FC7833 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDC12C1BB11E00FC7833 /* Input.swift */; };
+		977FEDC82C1C03E400FC7833 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDC72C1C03E400FC7833 /* Urls.swift */; };
+		977FEDC92C1C03F000FC7833 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDC72C1C03E400FC7833 /* Urls.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
 		979962C72C0F952100782E40 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C62C0F952100782E40 /* ConfigManager.swift */; };
 		979962C92C0FA77300782E40 /* ConfigFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C82C0FA77300782E40 /* ConfigFile.swift */; };
@@ -343,6 +345,14 @@
 			path = Install;
 			sourceTree = "<group>";
 		};
+		977FEDC62C1C03DA00FC7833 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				977FEDC72C1C03E400FC7833 /* Urls.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		979967E02C11814200782E40 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,6 +462,7 @@
 		97E7B2412C09117A00E33740 /* CLSPM */ = {
 			isa = PBXGroup;
 			children = (
+				977FEDC62C1C03DA00FC7833 /* Constants */,
 				979967E52C1181DC00782E40 /* App */,
 				979967E02C11814200782E40 /* Commands */,
 				979967E12C11819100782E40 /* Models */,
@@ -617,6 +628,7 @@
 				972437C82C1235990011C5AE /* JsonSpmTarget.swift in Sources */,
 				977FEDC32C1BB14E00FC7833 /* Input.swift in Sources */,
 				977FEDB62C1B609D00FC7833 /* InstallError.swift in Sources */,
+				977FEDC92C1C03F000FC7833 /* Urls.swift in Sources */,
 				976A0D9E2C13852C008036D3 /* FileManagerProtocol.swift in Sources */,
 				97CB2A532C16CDB8000B87B2 /* InitError.swift in Sources */,
 				977FEDAC2C18DD8400FC7833 /* Rest_all_Tests.swift in Sources */,
@@ -649,6 +661,7 @@
 				979967DF2C1178AA00782E40 /* Bool+StringInitialization.swift in Sources */,
 				97E7B2432C09117A00E33740 /* ClspmMain.swift in Sources */,
 				977FED9F2C18CEB000FC7833 /* Reset.swift in Sources */,
+				977FEDC82C1C03E400FC7833 /* Urls.swift in Sources */,
 				9799682F2C12249F00782E40 /* Target.swift in Sources */,
 				97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */,
 				9799671A2C1105D400782E40 /* RemoteDepenencyManager.swift in Sources */,
