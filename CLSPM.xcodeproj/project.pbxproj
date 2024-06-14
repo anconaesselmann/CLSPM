@@ -91,6 +91,7 @@
 		977FEDCC2C1C177200FC7833 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDCA2C1C16C300FC7833 /* Service.swift */; };
 		977FEDCE2C1C18C000FC7833 /* TestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDCD2C1C18C000FC7833 /* TestService.swift */; };
 		977FEDD02C1C1CE800FC7833 /* INST_cashedOrgsResolution_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDCF2C1C1CE800FC7833 /* INST_cashedOrgsResolution_Tests.swift */; };
+		977FEDD22C1C2A4400FC7833 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDD12C1C2A4400FC7833 /* List.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
 		979962C72C0F952100782E40 /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C62C0F952100782E40 /* ConfigManager.swift */; };
 		979962C92C0FA77300782E40 /* ConfigFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C82C0FA77300782E40 /* ConfigFile.swift */; };
@@ -182,6 +183,7 @@
 		977FEDCA2C1C16C300FC7833 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		977FEDCD2C1C18C000FC7833 /* TestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestService.swift; sourceTree = "<group>"; };
 		977FEDCF2C1C1CE800FC7833 /* INST_cashedOrgsResolution_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INST_cashedOrgsResolution_Tests.swift; sourceTree = "<group>"; };
+		977FEDD12C1C2A4400FC7833 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		979962C62C0F952100782E40 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
 		979962C82C0FA77300782E40 /* ConfigFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigFile.swift; sourceTree = "<group>"; };
@@ -372,11 +374,12 @@
 		979967E02C11814200782E40 /* Commands */ = {
 			isa = PBXGroup;
 			children = (
-				977FEDAD2C1B552C00FC7833 /* Install */,
 				97CB2A4D2C16B068000B87B2 /* Init */,
+				977FEDAD2C1B552C00FC7833 /* Install */,
 				979962C42C0F84C200782E40 /* Config.swift */,
 				979962CA2C0FBDFC00782E40 /* DependencyCache.swift */,
 				9799682C2C121EF200782E40 /* Add.swift */,
+				977FEDD12C1C2A4400FC7833 /* List.swift */,
 				977FED9E2C18CEB000FC7833 /* Reset.swift */,
 			);
 			path = Commands;
@@ -691,6 +694,7 @@
 				977FEDBB2C1B8DDE00FC7833 /* UserPackageResolutionManager.swift in Sources */,
 				97044C7E2C0A3DE700D7424A /* Project.swift in Sources */,
 				977FEDB52C1B608800FC7833 /* InstallError.swift in Sources */,
+				977FEDD22C1C2A4400FC7833 /* List.swift in Sources */,
 				9724387C2C12625B0011C5AE /* Output.swift in Sources */,
 				97CB2A4F2C16B076000B87B2 /* InitView.swift in Sources */,
 				9799682D2C121EF200782E40 /* Add.swift in Sources */,

@@ -14,7 +14,8 @@ struct CLSPM: AsyncParsableCommand {
             Config.self,
             DependencyCache.self,
             Add.self,
-            Reset.self
+            Reset.self,
+            List.self
         ]
     )
 
