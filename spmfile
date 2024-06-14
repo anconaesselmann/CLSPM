@@ -7,6 +7,12 @@
       "version" : "1.4.0"
     },
     {
+      "id" : "B7EC4AD8-5C40-4618-B85D-738BC0C9AEF9",
+      "name" : "GithubApi",
+      "url" : "https://github.com/anconaesselmann/GithubApi",
+      "version" : "0.0.1"
+    },
+    {
       "id" : "EAA63037-926F-4691-8F63-8660399476C2",
       "name" : "XProjParser",
       "url" : "https://github.com/anconaesselmann/XProjParser",
@@ -17,18 +23,20 @@
     {
       "dependencies" : [
         "ArgumentParser",
-        "XProjParser"
-      ],
-      "id" : "0C374E88-C96B-4EA3-9D46-42638EBD03E2",
-      "name" : "SwiftPackageManagerCliToolsTests"
-    },
-    {
-      "dependencies" : [
-        "ArgumentParser",
+        "GithubApi",
         "XProjParser"
       ],
       "id" : "8E0E82DB-1845-4BC5-A674-8C88A318F5B0",
       "name" : "CLSPM"
+    },
+    {
+      "dependencies" : [
+        "ArgumentParser",
+        "GithubApi",
+        "XProjParser"
+      ],
+      "id" : "0C374E88-C96B-4EA3-9D46-42638EBD03E2",
+      "name" : "SwiftPackageManagerCliToolsTests"
     }
   ]
 }

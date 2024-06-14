@@ -2,6 +2,7 @@
 //
 
 import Foundation
+import GithubApi
 
 enum DependencyResolutionInput {
     case dependency(url: URL)

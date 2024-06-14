@@ -1,6 +1,15 @@
 {
-  "originHash" : "96f4c7d633c8a13fe73d71630f498d8b914a61f9b24687d497310562a82111ac",
+  "originHash" : "7a0af49b528548c8816f957d481798c42e170a2f8b82e7b1c1b0f33adecc2d71",
   "pins" : [
+    {
+      "identity" : "githubapi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anconaesselmann/GithubApi",
+      "state" : {
+        "revision" : "a9ba45120c80212cf6b78e49e75498c5b7a96fe9",
+        "version" : "0.0.1"
+      }
+    },
     {
       "identity" : "parenthesesparser",
       "kind" : "remoteSourceControl",
