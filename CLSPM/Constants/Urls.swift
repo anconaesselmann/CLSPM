@@ -3,7 +3,7 @@
 
 import Foundation
 
-extension URL {
+public extension URL {
     static func githubRepo(githubUserName org: String, repoName name: String) throws -> URL {
         guard let url = URL(string: "https://github.com/\(org)/\(name)") else {
             throw RemoteDepenencyManager.Error.invalidUrl
