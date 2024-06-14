@@ -62,6 +62,10 @@ class TempFileManager: FileManagerProtocol {
             attributes: attributes
         )
     }
+
+    func moveItem(at srcURL: URL, to dstURL: URL) throws {
+        try _fileManager.moveItem(at: srcURL, to: dstURL)
+    }
 }
 
 extension TempFileManager {

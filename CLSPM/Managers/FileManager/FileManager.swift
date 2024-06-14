@@ -52,4 +52,8 @@ class FileManager: FileManagerProtocol {
     func removeItem(at url: URL) throws {
         try _fileManager.removeItem(at: url)
     }
+
+    func moveItem(at srcURL: URL, to dstURL: URL) throws {
+        try _fileManager.moveItem(at: srcURL, to: dstURL)
+    }
 }

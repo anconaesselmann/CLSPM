@@ -113,8 +113,18 @@ class MyApp {
         )
     }
 
-    func moveConfigFile(isGlobal: Bool, orgs: [String]? = nil) throws {
-        let configFile = ConfigFile(orgs: orgs)
+    func moveConfigFile(isGlobal: Bool, orgs: [String]? = nil, localRootDirectoryName: String? = nil) throws {
+        let localRoot: String?
+        if let localRootDirectoryName = localRootDirectoryName {
+            let localRootUrl = fileManager.homeDirectoryForCurrentUser.appending(path: localRootDirectoryName)
+            localRoot = localRootUrl.path()
+        } else {
+            localRoot = nil
+        }
+        let configFile = ConfigFile(
+            localRoot: localRoot,
+            orgs: orgs
+        )
         let data = try SpmFileManager.encoder.encode(configFile)
         let content = String(data: data, encoding: .utf8) ?? ""
         try fileManager.copy(

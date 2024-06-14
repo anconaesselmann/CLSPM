@@ -26,6 +26,8 @@ protocol FileManagerProtocol {
     func fileExists(atPath path: String, isDirectory: UnsafeMutablePointer<ObjCBool>?) -> Bool
 
     func removeItem(at url: URL) throws
+
+    func moveItem(at srcURL: URL, to dstURL: URL) throws
 }
 
 extension FileManagerProtocol {

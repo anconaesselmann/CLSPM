@@ -10,8 +10,7 @@ extension FileManagerProtocol {
     }
 
     var dependenciesFileDir: URL {
-        homeDirectoryForCurrentUser
-            .appending(component: ".swiftclpm")
+        swiftclpmDir(global: true)
             .appending(path: "dependencies")
     }
 
@@ -19,8 +18,24 @@ extension FileManagerProtocol {
         guard let data = contents(at: dependenciesFileDir) else {
             return nil
         }
-        print("deconding dependencyFile in tests")
         return try SpmFileManager.decoder.decode(DependenciesFile.self, from: data)
+    }
+
+    func swiftclpmDir(global: Bool) -> URL {
+        let root = global ? homeDirectoryForCurrentUser : currentDirectory
+        return root.appending(path: ".swiftclpm")
+    }
+
+    func configFileUrl(global: Bool) -> URL {
+        swiftclpmDir(global: global)
+            .appending(path: "config")
+    }
+
+    func configFile(global: Bool) throws -> ConfigFile? {
+        guard let data = contents(at: configFileUrl(global: global)) else {
+            return nil
+        }
+        return try SpmFileManager.decoder.decode(ConfigFile.self, from: data)
     }
 }
 

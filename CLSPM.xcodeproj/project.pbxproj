@@ -107,6 +107,10 @@
 		979967EA2C11825200782E40 /* JsonSpmDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979967E92C11825200782E40 /* JsonSpmDependency.swift */; };
 		9799682D2C121EF200782E40 /* Add.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9799682C2C121EF200782E40 /* Add.swift */; };
 		9799682F2C12249F00782E40 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9799682E2C12249F00782E40 /* Target.swift */; };
+		97C6E41A2C1CB86D00CBC93B /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C6E4192C1CB86D00CBC93B /* Create.swift */; };
+		97C6E41F2C1CBD8200CBC93B /* Create+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C6E41E2C1CBD1A00CBC93B /* Create+Tests.swift */; };
+		97C6E4202C1CBD8600CBC93B /* CREATE_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C6E41C2C1CBCD200CBC93B /* CREATE_Tests.swift */; };
+		97C6E4212C1CBD9800CBC93B /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C6E4192C1CB86D00CBC93B /* Create.swift */; };
 		97CB2A4F2C16B076000B87B2 /* InitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB2A4E2C16B076000B87B2 /* InitView.swift */; };
 		97CB2A502C16B0BA000B87B2 /* InitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB2A4E2C16B076000B87B2 /* InitView.swift */; };
 		97CB2A522C16CDA3000B87B2 /* InitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB2A512C16CDA3000B87B2 /* InitError.swift */; };
@@ -197,6 +201,9 @@
 		979967E92C11825200782E40 /* JsonSpmDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonSpmDependency.swift; sourceTree = "<group>"; };
 		9799682C2C121EF200782E40 /* Add.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Add.swift; sourceTree = "<group>"; };
 		9799682E2C12249F00782E40 /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		97C6E4192C1CB86D00CBC93B /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
+		97C6E41C2C1CBCD200CBC93B /* CREATE_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CREATE_Tests.swift; sourceTree = "<group>"; };
+		97C6E41E2C1CBD1A00CBC93B /* Create+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Create+Tests.swift"; sourceTree = "<group>"; };
 		97CB2A4E2C16B076000B87B2 /* InitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitView.swift; sourceTree = "<group>"; };
 		97CB2A512C16CDA3000B87B2 /* InitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitError.swift; sourceTree = "<group>"; };
 		97CB2A542C16D812000B87B2 /* INIT_edgeCasesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INIT_edgeCasesTests.swift; sourceTree = "<group>"; };
@@ -232,6 +239,7 @@
 		972437AF2C12354E0011C5AE /* SwiftPackageManagerCliToolsTests */ = {
 			isa = PBXGroup;
 			children = (
+				97C6E41B2C1CBCC500CBC93B /* Create */,
 				9724387E2C1267A30011C5AE /* Supporting */,
 				972438772C125FF60011C5AE /* Assertions */,
 				977FEDA02C18D44700FC7833 /* RestTests */,
@@ -381,6 +389,7 @@
 				9799682C2C121EF200782E40 /* Add.swift */,
 				977FEDD12C1C2A4400FC7833 /* List.swift */,
 				977FED9E2C18CEB000FC7833 /* Reset.swift */,
+				97C6E4182C1CB86300CBC93B /* Create */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -456,6 +465,31 @@
 				977FEDC62C1C03DA00FC7833 /* Constants */,
 			);
 			path = GithubApi;
+			sourceTree = "<group>";
+		};
+		97C6E4182C1CB86300CBC93B /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				97C6E4192C1CB86D00CBC93B /* Create.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		97C6E41B2C1CBCC500CBC93B /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				97C6E41D2C1CBD1A00CBC93B /* supporting */,
+				97C6E41C2C1CBCD200CBC93B /* CREATE_Tests.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		97C6E41D2C1CBD1A00CBC93B /* supporting */ = {
+			isa = PBXGroup;
+			children = (
+				97C6E41E2C1CBD1A00CBC93B /* Create+Tests.swift */,
+			);
+			path = supporting;
 			sourceTree = "<group>";
 		};
 		97CB2A4D2C16B068000B87B2 /* Init */ = {
@@ -629,11 +663,13 @@
 				972437C02C1235940011C5AE /* Add.swift in Sources */,
 				976A0DA02C138B84008036D3 /* TempFileManager.swift in Sources */,
 				977FEDCC2C1C177200FC7833 /* Service.swift in Sources */,
+				97C6E41F2C1CBD8200CBC93B /* Create+Tests.swift in Sources */,
 				977FEDBC2C1B8E0B00FC7833 /* UserPackageResolutionManager.swift in Sources */,
 				972438792C12600F0011C5AE /* XCTAssertEqual+fileContent.swift in Sources */,
 				977FEDAA2C18DC6800FC7833 /* Rest_spmfile_Tests.swift in Sources */,
 				9724387D2C12640F0011C5AE /* Output.swift in Sources */,
 				972437CD2C12427F0011C5AE /* InitMicroSpmFileTests.swift in Sources */,
+				97C6E4202C1CBD8600CBC93B /* CREATE_Tests.swift in Sources */,
 				977FEDD02C1C1CE800FC7833 /* INST_cashedOrgsResolution_Tests.swift in Sources */,
 				972437C12C1235940011C5AE /* GithubRelease.swift in Sources */,
 				977FEDA82C18DA1A00FC7833 /* Rest_config_Tests.swift in Sources */,
@@ -672,6 +708,7 @@
 				97CB2A502C16B0BA000B87B2 /* InitView.swift in Sources */,
 				97192ABB2C13FD5900287B03 /* INST_JSPM_T1_L_Tests.swift in Sources */,
 				972437B12C12354E0011C5AE /* INST_CSPM_T1_Tests.swift in Sources */,
+				97C6E4212C1CBD9800CBC93B /* Create.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,6 +743,7 @@
 				9724387C2C12625B0011C5AE /* Output.swift in Sources */,
 				97CB2A4F2C16B076000B87B2 /* InitView.swift in Sources */,
 				9799682D2C121EF200782E40 /* Add.swift in Sources */,
+				97C6E41A2C1CB86D00CBC93B /* Create.swift in Sources */,
 				979967EA2C11825200782E40 /* JsonSpmDependency.swift in Sources */,
 				979962CD2C0FBF9D00782E40 /* DependenciesFile.swift in Sources */,
 				979962CB2C0FBDFC00782E40 /* DependencyCache.swift in Sources */,
