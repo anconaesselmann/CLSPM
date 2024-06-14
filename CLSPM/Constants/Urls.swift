@@ -30,4 +30,14 @@ extension URL {
         }
         return url
     }
+
+    static func githubProjectInfo(
+        githubUserName org: String,
+        repoName name: String
+    ) throws -> URL {
+        guard let url = URL(string: "https://api.github.com/repos/\(org)/\(name)") else {
+            throw RemoteDepenencyManager.Error.invalidUrl
+        }
+        return url
+    }
 }
