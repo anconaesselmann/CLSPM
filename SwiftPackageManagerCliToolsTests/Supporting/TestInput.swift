@@ -7,8 +7,15 @@ class TestInput: InputKind {
     var toBeRead: String?
 
     func read() -> String? {
-        let result = toBeRead
-        toBeRead = nil
+        guard let toBeRead = toBeRead else {
+            return nil
+        }
+        var elements = toBeRead.split(separator: "\n")
+        guard !elements.isEmpty else {
+            return nil
+        }
+        let result = String(elements.remove(at: 0))
+        self.toBeRead = elements.joined(separator: "\n")
         return result
     }
 

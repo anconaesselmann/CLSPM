@@ -54,13 +54,15 @@ class RemoteDepenencyManager {
         }
         for org in orgs {
             do {
-                let version = try await fetchVersion(for: org, dependencyName: name)
-                let orgUrl = "https://github.com/\(org)"
-                let url = "\(orgUrl)/\(name)"
+                let version = try await fetchVersion(
+                    forOrg: org, 
+                    dependencyName: name
+                )
+                let url: URL = try .githubRepo(githubUserName: org, repoName: name)
                 let new = JsonSpmDependency(
                     id: UUID(),
                     name: name,
-                    url: url,
+                    url: url.absoluteString,
                     version: version,
                     localPath: nil
                 )
@@ -76,32 +78,31 @@ class RemoteDepenencyManager {
 
     func resolve(
         input: DependencyResolutionInput,
-        name: String
+        name: String,
+        org: String?
     ) async throws {
-        let remoteUrl: String
-        let remoteVersion: String
+        let remoteUrl: URL
+        var remoteVersion: String
+        if let org = org {
+            orgs.append(org)
+        }
         switch input {
         case .versionedDependency(url: let url, version: let version):
             remoteUrl = url
             remoteVersion = version
-        case .dependency(url: let url):
+        case .dependency(url: let url) where org != nil:
             remoteUrl = url
             remoteVersion = try await fetchVersion(
-                for: url,
+                forOrg: org!,
                 dependencyName: name
             )
-        case .githubOrg(url: let url, org: let org):
-            orgs.append(org)
-            remoteUrl = url
-            remoteVersion = try await fetchVersion(
-                for: url,
-                dependencyName: name
-            )
+        default:
+            throw Error.invalidInput
         }
         let new = JsonSpmDependency(
             id: UUID(),
             name: name,
-            url: remoteUrl,
+            url: remoteUrl.absoluteString,
             version: remoteVersion,
             localPath: nil
         )
@@ -109,13 +110,9 @@ class RemoteDepenencyManager {
         try configManager.saveDependency(new)
     }
 
-    private func fetchVersion(for org: String, dependencyName: String) async throws -> String {
-        guard let releasesUrl = URL(string: "https://api.github.com/repos/\(org)/\(dependencyName)/releases") else {
-            throw Error.invalidUrl
-        }
-
+    private func fetchVersion(forOrg org: String, dependencyName: String) async throws -> String {
+        let releasesUrl: URL = try .githubReleases(githubUserName: org, repoName: dependencyName)
         let (data, _) = try await URLSession.shared.data(from: releasesUrl)
-
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         decoder.dateDecodingStrategy = .iso8601
