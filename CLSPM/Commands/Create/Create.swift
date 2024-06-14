@@ -99,7 +99,7 @@ struct Create: AsyncParsableCommand {
         }
         let packageUrl = localRootUrl.appending(path: name)
         try fileManager.createDirectory(at: packageUrl, withIntermediateDirectories: false)
-        let result = shell("cd \"\(packageUrl.path())\"; swift package init --type library; swift package")
+        let result = shell("cd \"\(packageUrl.path())\"; swift package init --type library")
         
 
         let newPackageSourceDir = packageUrl.appending(path: "Sources").appending(path: name)
