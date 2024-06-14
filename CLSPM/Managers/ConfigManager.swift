@@ -138,11 +138,10 @@ class ConfigManager {
     }
 
     func saveDependency(_ dependency: JsonSpmDependency) throws {
-        let configManager = ConfigManager(fileManager: fileManager)
-        var dependenciesFile = try configManager.dependenciesFile()
+        var dependenciesFile = try dependenciesFile()
         dependenciesFile.dependencies = (dependenciesFile.dependencies + [dependency])
             .sorted()
-        try configManager.save(dependenciesFile)
+        try save(dependenciesFile)
     }
 
     func directoryExistsAtPath(_ path: String) -> Bool {
