@@ -1,5 +1,6 @@
 {
   "target_ids" : {
-    "CLSPM" : "8E0E82DB-1845-4BC5-A674-8C88A318F5B0"
+    "CLSPM" : "8E0E82DB-1845-4BC5-A674-8C88A318F5B0",
+    "SwiftPackageManagerCliToolsTests" : "0C374E88-C96B-4EA3-9D46-42638EBD03E2"
   }
 }
