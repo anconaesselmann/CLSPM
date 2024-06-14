@@ -48,4 +48,8 @@ extension FileManagerProtocol {
     func fileExists(at url: URL) -> Bool {
         self.fileExists(atPath: url.path())
     }
+
+    func contents(at dir: URL) -> Data? {
+        contents(atPath: dir.path())
+    }
 }
