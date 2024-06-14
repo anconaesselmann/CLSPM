@@ -80,6 +80,7 @@
 		977FEDB92C1B820700FC7833 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDB72C1B820400FC7833 /* Named.swift */; };
 		977FEDBB2C1B8DDE00FC7833 /* UserPackageResolutionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDBA2C1B8DDE00FC7833 /* UserPackageResolutionManager.swift */; };
 		977FEDBC2C1B8E0B00FC7833 /* UserPackageResolutionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDBA2C1B8DDE00FC7833 /* UserPackageResolutionManager.swift */; };
+		977FEDC02C1BB10C00FC7833 /* TestInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDBF2C1BB10C00FC7833 /* TestInput.swift */; };
 		977FEDC22C1BB11E00FC7833 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDC12C1BB11E00FC7833 /* Input.swift */; };
 		977FEDC32C1BB14E00FC7833 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDC12C1BB11E00FC7833 /* Input.swift */; };
 		979962C52C0F84C200782E40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979962C42C0F84C200782E40 /* Config.swift */; };
@@ -165,6 +166,7 @@
 		977FEDB42C1B608800FC7833 /* InstallError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallError.swift; sourceTree = "<group>"; };
 		977FEDB72C1B820400FC7833 /* Named.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Named.swift; sourceTree = "<group>"; };
 		977FEDBA2C1B8DDE00FC7833 /* UserPackageResolutionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPackageResolutionManager.swift; sourceTree = "<group>"; };
+		977FEDBF2C1BB10C00FC7833 /* TestInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInput.swift; sourceTree = "<group>"; };
 		977FEDC12C1BB11E00FC7833 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
 		979962C42C0F84C200782E40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		979962C62C0F952100782E40 /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				9724387F2C1267AB0011C5AE /* TestOutput.swift */,
+				977FEDBF2C1BB10C00FC7833 /* TestInput.swift */,
 				976A0D9F2C138B84008036D3 /* TempFileManager.swift */,
 				976A0DA82C13A63A008036D3 /* XCTestCase+runAsyncTest.swift */,
 				97192AB62C13C99400287B03 /* FileManagerProtocol+Extensions.swift */,
@@ -602,6 +605,7 @@
 				972437C42C1235940011C5AE /* Config.swift in Sources */,
 				9724388B2C1298B00011C5AE /* MyAppJson.swift in Sources */,
 				977FEDA32C18D49B00FC7833 /* Reset.swift in Sources */,
+				977FEDC02C1BB10C00FC7833 /* TestInput.swift in Sources */,
 				97192AB92C13C9BA00287B03 /* ProjectInspector.swift in Sources */,
 				977FEDA62C18D4C100FC7833 /* Reset+Tests.swift in Sources */,
 				972437C52C1235940011C5AE /* RemoteDepenencyManager.swift in Sources */,
