@@ -6,6 +6,10 @@ import ArgumentParser
 
 struct Install: AsyncParsableCommand {
 
+    enum Error: Swift.Error {
+        case canNotResolve(String)
+    }
+
     public static let configuration = CommandConfiguration(
         abstract: "Install dependencies from an spmfile"
     )
@@ -96,7 +100,40 @@ struct Install: AsyncParsableCommand {
         )
 
         let remove = try spmFileManager.packagesToRemove(in: targets)
-        let add = try spmFileManager.packagesToAdd(in: targets)
+        var add = spmFileManager.packagesToAdd(in: targets)
+
+        for index in 0..<add.count {
+            var item = add[index]
+            if item.needsVersion {
+                if
+                    let urlString = item.dependency.url,
+                    let url = URL(string: urlString),
+                    let dependency = try? await remoteManager.resolve(
+                        repoUrl: url,
+                        localPath: item.dependency.localPath,
+                        name: item.dependency.name
+                    ),
+                    let version = dependency.version
+                {
+                    item.dependency.version = version
+                    item.needsVersion = false
+                    add[index] = item
+                    try spmFileManager.updateSpmFileDepenency(dependency, in: self.spmfile)
+                } else if
+                    let dependency = await remoteManager.resolve(name: item.dependency.name),
+                    let version = dependency.version,
+                    let url = dependency.url
+                {
+                    item.dependency.version = version
+                    item.dependency.url = url
+                    item.needsVersion = false
+                    add[index] = item
+                    try spmFileManager.updateSpmFileDepenency(dependency, in: self.spmfile)
+                } else {
+                    throw Error.canNotResolve(item.dependency.name)
+                }
+            }
+        }
 
         let packagesNeedingToResolveLocalPath = add
             .filter { $0.isLocal && !$0.dependency.hasLocalPath }

@@ -143,76 +143,59 @@ struct SpmFileManager {
         }
     }
 
-    func packagesToAdd(in targets: [String: Target]) throws -> [(dependency: XProjDependency, isLocal: Bool, targetName: String)] {
-        try targets.flatMap { (targetName, target) in
-            try target.dependencies.map { value -> (dependency: XProjDependency, isLocal: Bool, targetName: String) in
+    func packagesToAdd(
+        in targets: [String: Target]
+    ) -> [
+        (
+            dependency: XProjDependency,
+            isLocal: Bool,
+            needsVersion: Bool,
+            targetName: String
+        )
+    ]
+    {
+        targets.flatMap { (targetName, target) in
+            target.dependencies.map { value -> (dependency: XProjDependency, isLocal: Bool, needsVersion: Bool, targetName: String) in
                 let targetId = target.id
                 let dependencyId = value.id ?? UUID()
                 let start = targetId.uuidString.startIndex
                 let center = targetId.uuidString.index(start, offsetBy: 8)
                 let end = targetId.uuidString.endIndex
                 let id = UUID(uuidString: String(targetId.uuidString[start..<center]) + String(dependencyId.uuidString[center..<end])) ?? UUID()
-                if let url = value.url, let version = value.version, let localPath = value.localPath {
-                    return (
-                        dependency: XProjDependency(
-                            id: id,
-                            name: value.name,
-                            url: url,
-                            version: version,
-                            localPath: localPath
-                        ),
-                        isLocal: value.useLocal ?? false,
-                        targetName: targetName
-                    )
-                } else if let url = value.url, let version = value.version {
-                    return (
-                        dependency: XProjDependency(
-                            id: id,
-                            name: value.name,
-                            url: url,
-                            version: version
-                        ),
-                        isLocal: value.useLocal ?? false,
-                        targetName: targetName
-                    )
-                } else if let localPath = value.localPath {
-                    return (
-                        dependency: XProjDependency(
-                            id: id,
-                            name: value.name,
-                            localPath: localPath
-                        ),
-                        isLocal: true,
-                        targetName: targetName
-                    )
-                } else if let useLocal = value.useLocal, useLocal == true {
-                    return (
-                        dependency: XProjDependency(
-                            id: id,
-                            name: value.name
-                        ),
-                        isLocal: true,
-                        targetName: targetName
-                    )
-                } else if value.useLocal == nil, value.url == nil, value.version == nil {
-                    return (
-                        dependency: XProjDependency(
-                            id: id,
-                            name: value.name
-                        ),
-                        isLocal: true,
-                        targetName: targetName
-                    )
-                } else {
-                    output.send("Dependency with missing entries:")
-                    output.send(value.name)
-                    output.send("URL: \(value.url ?? "none")")
-                    output.send("Version: \(value.version ?? "none")")
-                    output.send("Local: \(value.localPath ?? "none")")
-                    throw Error.invalidSpmFile
-                }
+                return (
+                    dependency: XProjDependency(
+                        id: id,
+                        name: value.name,
+                        url:  value.url,
+                        version: value.version,
+                        localPath: value.localPath
+                    ),
+                    isLocal: value.useLocal ?? false,
+                    needsVersion: value.localPath == nil && value.version == nil,
+                    targetName: targetName
+                )
             }
         }
+    }
+
+    func updateSpmFileDepenency(_ depenency: JsonSpmDependency, in spmfileDir: String?) throws {
+        var spmfile = try self.spmFile(in: spmfileDir)
+        let dependencyNames = Set(spmfile.dependencyNames)
+        guard dependencyNames.contains(depenency.name) else {
+            return
+        }
+        var dependencies = spmfile.dependencies ?? []
+        guard let index = dependencies.firstIndex(where: { $0.name == depenency.name}) else {
+            return
+        }
+        var updated = dependencies[index]
+        updated.id = updated.id ?? depenency.id ?? UUID()
+        updated.url = updated.url ?? depenency.url
+        updated.localPath = updated.localPath ?? depenency.localPath
+        updated.version = updated.version ?? depenency.version
+        dependencies[index] = updated
+        spmfile.dependencies = dependencies
+        try save(spmfile, to: spmfileDir, isCsv: false)
     }
 
     func save(_ jsonFile: JsonSpmFile, to spmfile: String?, isCsv: Bool) throws {

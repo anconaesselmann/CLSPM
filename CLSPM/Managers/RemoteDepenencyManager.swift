@@ -46,7 +46,7 @@ class RemoteDepenencyManager {
         self.service = service
     }
 
-    func resolve(name: String) async -> JsonSpmDependency? {
+    func resolve(name: String, localPath: String? = nil) async -> JsonSpmDependency? {
         guard !orgs.isEmpty else {
             return nil
         }
@@ -62,7 +62,7 @@ class RemoteDepenencyManager {
                     name: name,
                     url: url.absoluteString,
                     version: version,
-                    localPath: nil
+                    localPath: localPath
                 )
                 let configManager = ConfigManager(fileManager: fileManager)
                 try configManager.saveDependency(new)
@@ -107,5 +107,22 @@ class RemoteDepenencyManager {
         )
         let configManager = ConfigManager(fileManager: fileManager)
         try configManager.saveDependency(new)
+    }
+
+    func resolve(repoUrl: URL, localPath: String?, name: String) async throws  -> JsonSpmDependency {
+        let remoteVersion = try await service.fetchVersion(
+            forRepo: repoUrl
+        )
+        let new = JsonSpmDependency(
+            id: UUID(),
+            name: name,
+            url: repoUrl.absoluteString,
+            version: remoteVersion,
+            localPath: localPath
+        )
+        print("debug new", new)
+        let configManager = ConfigManager(fileManager: fileManager)
+        try configManager.saveDependency(new)
+        return new
     }
 }

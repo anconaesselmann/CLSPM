@@ -114,12 +114,12 @@
 		97E7B2672C092CD600E33740 /* Install.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2662C092CD600E33740 /* Install.swift */; };
 		97E7B2692C093B9600E33740 /* Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2682C093B9600E33740 /* Init.swift */; };
 		97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */; };
-		0C374E885534486EBA887A6F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0C374E88BA887A6FF0BD4B65 /* ArgumentParser */; };
-		0C374E885C404618B85D738B /* GithubApi in Frameworks */ = {isa = PBXBuildFile; productRef = 0C374E88B85D738BC0C9AEF9 /* GithubApi */; };
-		0C374E88926F46918F638660 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0C374E888F638660399476C2 /* XProjParser */; };
 		8E0E82DB5534486EBA887A6F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0E82DBBA887A6FF0BD4B65 /* ArgumentParser */; };
 		8E0E82DB5C404618B85D738B /* GithubApi in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0E82DBB85D738BC0C9AEF9 /* GithubApi */; };
 		8E0E82DB926F46918F638660 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0E82DB8F638660399476C2 /* XProjParser */; };
+		0C374E885534486EBA887A6F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0C374E88BA887A6FF0BD4B65 /* ArgumentParser */; };
+		0C374E885C404618B85D738B /* GithubApi in Frameworks */ = {isa = PBXBuildFile; productRef = 0C374E88B85D738BC0C9AEF9 /* GithubApi */; };
+		0C374E88926F46918F638660 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0C374E888F638660399476C2 /* XProjParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -975,21 +975,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0C374E88BA887A6FF0BD4B65 /* ArgumentParser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5534486EBA887A6FF0BD4B65 /* XCRemoteSwiftPackageReference "ArgumentParser" */;
-			productName = ArgumentParser;
-		};
-		0C374E88B85D738BC0C9AEF9 /* GithubApi */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5C404618B85D738BC0C9AEF9 /* XCRemoteSwiftPackageReference "GithubApi" */;
-			productName = GithubApi;
-		};
-		0C374E888F638660399476C2 /* XProjParser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 926F46918F638660399476C2 /* XCRemoteSwiftPackageReference "XProjParser" */;
-			productName = XProjParser;
-		};
 		8E0E82DBBA887A6FF0BD4B65 /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5534486EBA887A6FF0BD4B65 /* XCRemoteSwiftPackageReference "ArgumentParser" */;
@@ -1001,6 +986,21 @@
 			productName = GithubApi;
 		};
 		8E0E82DB8F638660399476C2 /* XProjParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 926F46918F638660399476C2 /* XCRemoteSwiftPackageReference "XProjParser" */;
+			productName = XProjParser;
+		};
+		0C374E88BA887A6FF0BD4B65 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5534486EBA887A6FF0BD4B65 /* XCRemoteSwiftPackageReference "ArgumentParser" */;
+			productName = ArgumentParser;
+		};
+		0C374E88B85D738BC0C9AEF9 /* GithubApi */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C404618B85D738BC0C9AEF9 /* XCRemoteSwiftPackageReference "GithubApi" */;
+			productName = GithubApi;
+		};
+		0C374E888F638660399476C2 /* XProjParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 926F46918F638660399476C2 /* XCRemoteSwiftPackageReference "XProjParser" */;
 			productName = XProjParser;

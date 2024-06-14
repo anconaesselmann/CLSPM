@@ -43,7 +43,7 @@ struct Project {
     }
 
     func added(
-        _ add: [(dependency: XProjDependency, isLocal: Bool, targetName: String)],
+        _ add: [(dependency: XProjDependency, isLocal: Bool, needsVersion: Bool, targetName: String)],
         verbose: Bool
     ) throws -> Self {
         var copy = self

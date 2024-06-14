@@ -5,12 +5,14 @@ import Foundation
 
 protocol ServiceProtocol {
     func fetchVersion(forOrg org: String, dependencyName: String) async throws -> String
+    func fetchVersion(forRepo url: URL) async throws -> String
 }
 
 struct Service: ServiceProtocol {
 
     enum Error: Swift.Error {
         case noReleaseVersionFound
+        case notAGithubReop(URL)
     }
 
     func fetchVersion(forOrg org: String, dependencyName: String) async throws -> String {
@@ -25,5 +27,24 @@ struct Service: ServiceProtocol {
             throw Error.noReleaseVersionFound
         }
         return latestVersion
+    }
+
+    func fetchVersion(forRepo url: URL) async throws -> String {
+        if
+            let result = try /github\.com[\/|:](?<org>[^\/]+)\/(?<dependency>[^\/\s\.]+)/
+                .firstMatch(in: url.absoluteString)
+        {
+            let org = String(result.output.org)
+            let dependencName = String(result.output.dependency)
+            print("debug", org, dependencName)
+            let version = try await fetchVersion(
+                forOrg: org,
+                dependencyName: dependencName
+            )
+            return version
+        } else {
+            print("debug", Error.notAGithubReop(url))
+            throw Error.notAGithubReop(url)
+        }
     }
 }

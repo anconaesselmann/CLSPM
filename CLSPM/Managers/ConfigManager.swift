@@ -139,8 +139,19 @@ class ConfigManager {
 
     func saveDependency(_ dependency: JsonSpmDependency) throws {
         var dependenciesFile = try dependenciesFile()
-        dependenciesFile.dependencies = (dependenciesFile.dependencies + [dependency])
-            .sorted()
+        let dependencyNames = Set(dependenciesFile.dependencies.names)
+        if 
+            dependencyNames.contains(dependency.name),
+            let index = dependenciesFile.dependencies
+                .firstIndex(where: { $0.name == dependency.name})
+        {
+            var copy = dependency
+            copy.id = dependenciesFile.dependencies[index].id ?? dependency.id
+            dependenciesFile.dependencies[index] = copy
+        } else {
+            dependenciesFile.dependencies = (dependenciesFile.dependencies + [dependency])
+                .sorted()
+        }
         try save(dependenciesFile)
     }
 
