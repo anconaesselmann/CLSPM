@@ -10,6 +10,8 @@ extension Create {
         copy.target = []
         copy.verbose = false
         copy.spmfile = nil
+        copy.cloneToClspmDir = false
+        copy.packageCacheDir = nil
         return copy
     }
 }

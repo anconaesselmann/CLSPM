@@ -13,6 +13,7 @@ final class CREATE_Tests: XCTestCase {
     var myApp: MyApp!
 
     var fileManager: TempFileManager!
+    var service: TestService!
 
     var bundle: Bundle {
         Bundle(for: Self.self)
@@ -20,6 +21,7 @@ final class CREATE_Tests: XCTestCase {
 
     override func setUpWithError() throws {
         fileManager = try TempFileManager(current: "MyApp")
+        service = TestService()
         myApp = MyApp(fileManager)
         Output.test_setup()
         sut = Create().setup_testing()
@@ -47,6 +49,11 @@ final class CREATE_Tests: XCTestCase {
         try fileManager.createDirectory(at: URL(fileURLWithPath: localRoot), withIntermediateDirectories: false)
 
         sut.directory = myPackageInProjectDir.path()
-        try sut.run(fileManager: self.fileManager)
+        runAsyncTest {
+            try await self.sut.run(
+                fileManager: self.fileManager,
+                service: self.service
+            )
+        }
     }
 }

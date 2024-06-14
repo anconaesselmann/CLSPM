@@ -52,11 +52,26 @@ struct Create: AsyncParsableCommand {
     )
     var verbose: Bool = false
 
-    func run() throws {
-        try self.run(fileManager: FileManager.default)
+    @Flag(
+        name: .long,
+        help: "Packages are cloned to a local DerivedData directory inside .swiftclpm"
+    )
+    var cloneToClspmDir: Bool = false
+
+    @Option(
+        name: .long,
+        help: "Location remote packages get cloned to"
+    )
+    var packageCacheDir: String?
+
+    func run() async throws {
+        try await self.run(
+            fileManager: FileManager.default,
+            service: Service()
+        )
     }
 
-    func run(fileManager: FileManagerProtocol) throws {
+    func run(fileManager: FileManagerProtocol, service: ServiceProtocol) async throws {
         let output = Output.shared
         let configManager = ConfigManager(fileManager: fileManager)
         let project = try Project(fileManager: fileManager)
@@ -100,7 +115,8 @@ struct Create: AsyncParsableCommand {
         let packageUrl = localRootUrl.appending(path: name)
         try fileManager.createDirectory(at: packageUrl, withIntermediateDirectories: false)
         let result = shell("cd \"\(packageUrl.path())\"; swift package init --type library")
-        
+
+        print(result)
 
         let newPackageSourceDir = packageUrl.appending(path: "Sources").appending(path: name)
 
@@ -136,6 +152,12 @@ struct Create: AsyncParsableCommand {
         spmfile.targets = targetsByName.values.sorted()
         try spmFileManager.save(spmfile, to: self.spmfile, isCsv: false)
 
-        print(result)
+        var installCommand = Install()
+        installCommand.spmfile = self.spmfile
+        installCommand.local = []
+        installCommand.verbose = self.verbose
+        installCommand.cloneToClspmDir = self.cloneToClspmDir
+        installCommand.packageCacheDir = self.packageCacheDir
+        try await installCommand.run(fileManager: fileManager, service: service)
     }
 }
