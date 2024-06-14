@@ -77,7 +77,8 @@ struct Install: AsyncParsableCommand {
                     view.couldNotResolve(dependencyName)
                     try await userPackageResolutionManager.userResolve(
                         dependencyName: dependencyName,
-                        in: spmfile
+                        in: spmfile, 
+                        global: true
                     )
                 }
             }

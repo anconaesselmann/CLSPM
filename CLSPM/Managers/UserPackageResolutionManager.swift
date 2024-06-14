@@ -29,7 +29,7 @@ class UserPackageResolutionManager {
         self.spmFileManager = SpmFileManager(fileManager: fileManager)
     }
 
-    func userResolve(dependencyName: String, in spmfile: String?) async throws {
+    func userResolve(dependencyName: String, in spmfile: String?, global: Bool) async throws {
         guard let userInput = input.readLine() else {
             throw SpmFileManager.Error.invalidUserInput
         }
@@ -37,7 +37,8 @@ class UserPackageResolutionManager {
         try await remoteManager.resolve(
             input: input,
             name: dependencyName,
-            org: org
+            org: org,
+            global: global
         )
     }
 

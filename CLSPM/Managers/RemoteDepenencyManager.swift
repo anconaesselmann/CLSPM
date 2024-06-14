@@ -25,23 +25,20 @@ class RemoteDepenencyManager {
     var orgs: [String] {
         get {
             do {
-                let config = try ConfigManager(fileManager: fileManager).configFile(global: true)
+                let config = try ConfigManager(fileManager: fileManager).combinedConfigFile()
                 return config.orgs ?? []
             } catch {
                 print(error)
                 return []
             }
         }
-        set {
-            let manager = ConfigManager(fileManager: fileManager)
-            do {
-                var config = try manager.configFile(global: true)
-                config.orgs = newValue.sorted()
-                try manager.save(config, global: true)
-            } catch {
-                print(error)
-            }
-        }
+    }
+
+    func addOrg(_ newValue: String, global: Bool) throws {
+        let manager = ConfigManager(fileManager: fileManager)
+        var config = try manager.configFile(global: global)
+        config.orgs = ((config.orgs ?? []) + [newValue]).sorted()
+        try manager.save(config, global: global)
     }
 
     init(fileManager: FileManagerProtocol, service: ServiceProtocol) {
@@ -80,12 +77,13 @@ class RemoteDepenencyManager {
     func resolve(
         input: DependencyResolutionInput,
         name: String,
-        org: String?
+        org: String?,
+        global: Bool
     ) async throws {
         let remoteUrl: URL
         var remoteVersion: String
         if let org = org {
-            orgs.append(org)
+            try addOrg(org, global: global)
         }
         switch input {
         case .versionedDependency(url: let url, version: let version):

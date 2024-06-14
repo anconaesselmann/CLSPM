@@ -113,6 +113,17 @@ class MyApp {
         )
     }
 
+    func moveConfigFile(isGlobal: Bool, orgs: [String]? = nil) throws {
+        let configFile = ConfigFile(orgs: orgs)
+        let data = try SpmFileManager.encoder.encode(configFile)
+        let content = String(data: data, encoding: .utf8) ?? ""
+        try fileManager.copy(
+            content,
+            to: ".swiftclpm/config",
+            in: isGlobal ? .home : .current
+        )
+    }
+
     func moveCsvSpmFile(with dependencies: [String]) throws {
         try fileManager.copy(
             dependencies.sorted().joined(separator: ", "),
