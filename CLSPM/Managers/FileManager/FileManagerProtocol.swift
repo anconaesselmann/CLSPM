@@ -52,4 +52,10 @@ extension FileManagerProtocol {
     func contents(at dir: URL) -> Data? {
         contents(atPath: dir.path())
     }
+
+    func directoryExists(atPath path: String) -> Bool {
+        var isDirectory : ObjCBool = true
+        let exists = fileExists(atPath: path, isDirectory: &isDirectory)
+        return exists && isDirectory.boolValue
+    }
 }

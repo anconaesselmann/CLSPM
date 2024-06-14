@@ -24,7 +24,7 @@ class ConfigManager {
         }
         let dir = base.appending(path: ".swiftclpm")
 
-        if !directoryExistsAtPath(dir.path()) {
+        if !fileManager.directoryExists(atPath: dir.path()) {
             if create {
                 try fileManager.createDirectory(at: dir, withIntermediateDirectories: false)
             } else {
@@ -144,16 +144,10 @@ class ConfigManager {
         try save(dependenciesFile)
     }
 
-    func directoryExistsAtPath(_ path: String) -> Bool {
-        var isDirectory : ObjCBool = true
-        let exists = fileManager.fileExists(atPath: path, isDirectory: &isDirectory)
-        return exists && isDirectory.boolValue
-    }
-
     func packagesDir() throws -> String {
         let swiftClpmDir = try swiftClpmDirUrl(global: false)
         let dir = swiftClpmDir.appending(path: "DerivedData")
-        if !directoryExistsAtPath(dir.path()) {
+        if !fileManager.directoryExists(atPath: dir.path()) {
             try fileManager.createDirectory(at: dir, withIntermediateDirectories: false)
         }
         return "\(dir)/packages"

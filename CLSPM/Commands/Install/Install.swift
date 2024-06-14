@@ -105,7 +105,7 @@ struct Install: AsyncParsableCommand {
         if !packagesNeedingToResolveLocalPath.isEmpty, localRoot == nil {
             view.packagesWithoutLocalPaths(packagesNeedingToResolveLocalPath)
             let path = try view.getPath()
-            guard configManager.directoryExistsAtPath(path) else {
+            guard fileManager.directoryExists(atPath: path) else {
                 throw InstallError.invalidDirectoryPath(path)
             }
             let usePathForAllProjects = view.getYesNo("Use \(path) for all projects (y/n)")
