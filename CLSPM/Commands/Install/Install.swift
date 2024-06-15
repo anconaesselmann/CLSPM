@@ -16,13 +16,16 @@ struct Install: AsyncParsableCommand {
 
     @Option(
         name: .shortAndLong,
-        help: "The path to a custom spmfile"
+        help: "The path to a custom spmfile",
+        completion: .file()
     )
     var spmfile: String?
 
     @Option(
         name: .shortAndLong,
         help: "An override list of packages to be used locally"
+        // TODO: custom completion not working in zsh. Fix in the works:
+        // https://github.com/apple/swift-argument-parser/issues/646
     )
     var local: [String] = []
 
@@ -40,7 +43,8 @@ struct Install: AsyncParsableCommand {
 
     @Option(
         name: .long,
-        help: "Location remote packages get cloned to"
+        help: "Location remote packages get cloned to",
+        completion: .directory
     )
     var packageCacheDir: String?
 
