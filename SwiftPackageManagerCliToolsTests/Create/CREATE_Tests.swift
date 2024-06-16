@@ -15,10 +15,6 @@ final class CREATE_Tests: XCTestCase {
     var fileManager: TempFileManager!
     var service: TestService!
 
-    var bundle: Bundle {
-        Bundle(for: Self.self)
-    }
-
     override func setUpWithError() throws {
         fileManager = try TempFileManager(current: "MyApp")
         service = TestService()
@@ -26,7 +22,7 @@ final class CREATE_Tests: XCTestCase {
         Output.test_setup()
         sut = Create().setup_testing()
         sut.verbose = true
-        try myApp.moveProjectFile()
+        try myApp.moveProjectFile("d\(0)")
         try myApp.moveConfigFile(isGlobal: true, localRootDirectoryName: "LocalSwiftPackages")
     }
 

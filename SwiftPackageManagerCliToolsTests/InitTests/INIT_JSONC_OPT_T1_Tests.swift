@@ -17,7 +17,7 @@ final class INIT_JSONC_OPT_T1_Tests: XCTestCase {
         sut = Init().setup_testing()
         sut.verbose = true
         sut.globalDependencies = true
-        try myApp.moveProjectFile()
+        try myApp.moveProjectFile("d\(0)")
         try myApp.moveLocalConfigFile()
     }
 

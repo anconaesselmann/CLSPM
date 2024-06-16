@@ -82,9 +82,9 @@ class MyApp {
         )
     ]
 
-    func moveProjectFile(_ dependencyCount: Int = 0, local: Bool = false) throws {
+    func moveProjectFile(_ version: String) throws {
         try fileManager.copy(
-            from: bundle, "MyAppProject_d\(dependencyCount)\(local ? "_l" : "").test",
+            from: bundle, "MyAppProject_\(version).test",
             to: "MyApp.xcodeproj/project.pbxproj"
         )
     }

@@ -16,7 +16,7 @@ final class INIT_JSON_OPT_T1_Tests: XCTestCase {
         Output.test_setup()
         sut = Init().setup_testing()
         sut.verbose = true
-        try myApp.moveProjectFile()
+        try myApp.moveProjectFile("d\(0)")
     }
 
     override func tearDownWithError() throws {
@@ -75,7 +75,7 @@ final class INIT_JSON_OPT_T1_Tests: XCTestCase {
     // https://github.com/anconaesselmann/CLSPM/wiki/Tests#init_json_opt_t1_r1r2
     func test_INIT_JSON_OPT_T1_R1() throws {
         try myApp.moveLocalConfigFile()
-        try myApp.moveProjectFile()
+        try myApp.moveProjectFile("d\(0)")
         try myApp.moveDependenciesFile()
 
         let dependencies = ["LoadableView"]
@@ -93,7 +93,7 @@ final class INIT_JSON_OPT_T1_Tests: XCTestCase {
     // https://github.com/anconaesselmann/CLSPM/wiki/Tests#init_json_opt_t1_r1r2
     func test_INIT_JSON_OPT_T1_R2() throws {
         try myApp.moveLocalConfigFile()
-        try myApp.moveProjectFile()
+        try myApp.moveProjectFile("d\(0)")
         try myApp.moveDependenciesFile()
 
         let dependencies = ["LoadableView", "DebugSwiftUI"]

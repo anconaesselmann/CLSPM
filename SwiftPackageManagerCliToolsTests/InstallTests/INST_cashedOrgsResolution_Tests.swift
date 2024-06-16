@@ -21,7 +21,7 @@ final class INST_cashedOrgsResolution_Tests: XCTestCase {
         Output.test_setup()
         sut = Install().setup_testing()
         sut.verbose = true
-        try myApp.moveProjectFile()
+        try myApp.moveProjectFile("d\(0)")
     }
 
     override func tearDownWithError() throws {

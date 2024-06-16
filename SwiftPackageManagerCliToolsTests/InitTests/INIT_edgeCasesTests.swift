@@ -35,7 +35,7 @@ final class INIT_edgeCasesTests: XCTestCase {
     }
 
     func test_deletesSpmFileWithForce() throws {
-        try myApp.moveProjectFile()
+        try myApp.moveProjectFile("d\(0)")
         try myApp.moveCsvSpmFile(with: ["Test"])
         sut.force = true
         sut.csv = true

@@ -22,7 +22,7 @@ final class INST_JSPM_T1_G_Tests: XCTestCase {
         Output.test_setup()
         sut = Install().setup_testing()
         sut.verbose = true
-        try myApp.moveProjectFile()
+        try myApp.moveProjectFile("d\(0)")
         try myApp.moveDependenciesFile()
     }
 

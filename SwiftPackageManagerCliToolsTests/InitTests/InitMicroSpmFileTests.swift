@@ -17,7 +17,7 @@ final class InitMicroSpmFileTests: XCTestCase {
         sut = Init().setup_testing()
 //        sut.verbose = true
         sut.csv = true
-        try myApp.moveProjectFile()
+        try myApp.moveProjectFile("d\(0)")
     }
 
     override func tearDownWithError() throws {
