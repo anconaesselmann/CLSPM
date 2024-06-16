@@ -171,7 +171,10 @@ struct SpmFileManager {
                         localPath: value.localPath
                     ),
                     isLocal: value.useLocal ?? false,
-                    needsVersion: value.localPath == nil && value.version == nil,
+                    needsVersion: 
+                        value.useLocal != true &&
+                        value.localPath == nil &&
+                        value.version == nil,
                     targetName: targetName
                 )
             }
