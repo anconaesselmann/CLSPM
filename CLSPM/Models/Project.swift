@@ -209,6 +209,17 @@ struct Project {
             .root()
     }
 
+    func groups() throws -> XProjGroup {
+        try root().groups(in: content)
+    }
+
+    @discardableResult
+    func remove(group groupName: String) throws -> Self {
+        var copy = self
+        copy.content = try copy.root().removeGroup(groupName, in: copy.content)
+        return copy
+    }
+
     private static func projectContent(_ fileManager: FileManagerProtocol) throws -> String {
         let dir = try projectFileDir(fileManager)
         guard let data = fileManager.contents(atPath: dir) else {
