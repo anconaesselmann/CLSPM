@@ -73,6 +73,7 @@ struct Create: AsyncParsableCommand {
 
     func run(fileManager: FileManagerProtocol, service: ServiceProtocol) async throws {
         let output = Output.shared
+        output.verboseFlagIsSet(verbose)
         let configManager = ConfigManager(fileManager: fileManager)
         let project = try Project(fileManager: fileManager)
         let root = try project.root()
@@ -117,7 +118,7 @@ struct Create: AsyncParsableCommand {
 
         let packagePath = packageUrl.path()
         output.send("Creating Swift Package named \(name) at", .verbose)
-        output.send(packagePath.indented())
+        output.send(packagePath.indented(), .verbose)
 
         let result = shell("cd \"\(packagePath)\"; swift package init --type library")
 
@@ -170,6 +171,7 @@ struct Create: AsyncParsableCommand {
         output.send("Removing \(name) group from Xcode project", .verbose)
         try Project(fileManager: fileManager)
             .remove(group: name)
+            .save()
 
         output.send("Installing from spmfile", .verbose)
         var installCommand = Install()
