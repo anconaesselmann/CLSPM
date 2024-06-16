@@ -114,13 +114,23 @@ struct Create: AsyncParsableCommand {
         }
         let packageUrl = localRootUrl.appending(path: name)
         try fileManager.createDirectory(at: packageUrl, withIntermediateDirectories: false)
-        let result = shell("cd \"\(packageUrl.path())\"; swift package init --type library")
+
+        let packagePath = packageUrl.path()
+        output.send("Creating Swift Package named \(name) at", .verbose)
+        output.send(packagePath.indented())
+
+        let result = shell("cd \"\(packagePath)\"; swift package init --type library")
 
         output.send(result, .verbose)
 
         let newPackageSourceDir = packageUrl.appending(path: "Sources").appending(path: name)
 
         try fileManager.removeItem(at: newPackageSourceDir)
+
+        output.send("Moving", .verbose)
+        output.send(directoryUrl.path().indented(), .verbose)
+        output.send("To", .verbose)
+        output.send(newPackageSourceDir.path().indented(), .verbose)
 
         try fileManager.moveItem(at: directoryUrl, to: newPackageSourceDir)
 
@@ -132,13 +142,15 @@ struct Create: AsyncParsableCommand {
 
         let newDependency = JsonSpmDependency(
             id: UUID(),
-            name: name
+            name: name,
+            useLocal: true
         )
 
         dependencies.append(newDependency)
 
         spmfile.dependencies = dependencies.sorted()
 
+        output.send("Adding \(name) dependnecy to targets in spmfile", .verbose)
         let targetsByName = targetNames.reduce(into: spmfile.targets.byName) {
             guard var target = $0[$1] else {
                 assertionFailure()
@@ -148,13 +160,21 @@ struct Create: AsyncParsableCommand {
             let dependencies = target.dependencies + [newDependency.name]
             target.dependencies = dependencies.sorted()
             $0[$1] = target
+            output.send("Added \(name) to \(target.name)".indented(), .verbose)
         }
         spmfile.targets = targetsByName.values.sorted()
+
+        output.send("Saving updated spmfile", .verbose)
         try spmFileManager.save(spmfile, to: self.spmfile, isCsv: false)
 
+        output.send("Removing \(name) group from Xcode project", .verbose)
+        try Project(fileManager: fileManager)
+            .remove(group: name)
+
+        output.send("Installing from spmfile", .verbose)
         var installCommand = Install()
         installCommand.spmfile = self.spmfile
-        installCommand.local = []
+        installCommand.local = [name]
         installCommand.verbose = self.verbose
         installCommand.cloneToClspmDir = self.cloneToClspmDir
         installCommand.packageCacheDir = self.packageCacheDir
