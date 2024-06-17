@@ -112,7 +112,7 @@ struct Create: AsyncParsableCommand {
         guard fileManager.directoryExists(atPath: localRoot) else {
             throw Error.localPathDoesNotExist(localRoot)
         }
-        let (name, directoryUrl) = try getDirecotry(
+        let (name, groupName, directoryUrl) = try getDirecotry(
             from: directory,
             group: group,
             in: project,
@@ -173,9 +173,9 @@ struct Create: AsyncParsableCommand {
         output.send("Saving updated spmfile", .verbose)
         try spmFileManager.save(spmfile, to: self.spmfile, isCsv: false)
 
-        output.send("Removing \(name) group from Xcode project", .verbose)
+        output.send("Removing \"\(groupName)\" group from Xcode project", .verbose)
         try Project(fileManager: fileManager)
-            .remove(group: name)
+            .remove(group: groupName)
             .save()
 
         output.send("Installing from spmfile", .verbose)
@@ -188,14 +188,14 @@ struct Create: AsyncParsableCommand {
         try await installCommand.run(fileManager: fileManager, service: service)
     }
 
-    private func getDirecotry(from directory: String?, group: String?, in project: Project, fileManager: FileManagerProtocol) throws -> (name: String, directoryUrl: URL) {
+    private func getDirecotry(from directory: String?, group: String?, in project: Project, fileManager: FileManagerProtocol) throws -> (name: String, groupName: String, directoryUrl: URL) {
         let directoryUrl: URL
-        let name: String
+        let groupName: String
         if let directory = directory {
             directoryUrl = URL(fileURLWithPath: directory)
-            name = directoryUrl.lastPathComponent
+            groupName = directoryUrl.lastPathComponent
         } else if let group = group {
-            name = group
+            groupName = group
             directoryUrl = try project.url(forGroup: group)
 
         } else {
@@ -204,11 +204,12 @@ struct Create: AsyncParsableCommand {
         guard fileManager.directoryExists(at: directoryUrl) else {
             throw Error.directoryDoesNotExist(directoryUrl)
         }
-        guard !name.isEmpty else {
+        guard !groupName.isEmpty else {
             throw Error.invalidDirectory
         }
         return (
-            name: name,
+            name: groupName.replacing(" ", with: ""),
+            groupName: groupName,
             directoryUrl: directoryUrl
         )
     }

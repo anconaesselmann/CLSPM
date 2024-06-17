@@ -219,7 +219,8 @@ struct Project {
             .groupPath(groupName, in: content)
             .split(separator: "/")
             .reduce(into: fileManager.currentDirectory.appending(path: appName)) {
-                $0 = $0.appending(path: $1)
+                let path = $1.trimmingQuotes()
+                $0 = $0.appending(path: path)
             }
     }
 
