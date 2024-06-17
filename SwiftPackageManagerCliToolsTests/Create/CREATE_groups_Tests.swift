@@ -2,6 +2,7 @@
 //
 
 import XCTest
+import XProjParser
 
 final class CREATE_groups_Tests: XCTestCase {
 
@@ -16,7 +17,6 @@ final class CREATE_groups_Tests: XCTestCase {
         service = TestService()
         myApp = MyApp(fileManager)
         Output.test_setup()
-        try myApp.moveProjectFile("groups")
     }
 
     override func tearDownWithError() throws {
@@ -25,18 +25,32 @@ final class CREATE_groups_Tests: XCTestCase {
         try fileManager.cleanup()
     }
 
-//    func testGroups() throws {
-//        let project = try Project(fileManager: fileManager)
-//            .remove(group: "MyPackage")
-//        print(project.content)
-//    }
+    func testGroups() throws {
+        try myApp.moveProjectFile("groups")
+        let packageName = "MyPackage"
+        let project = try Project(fileManager: fileManager)
+        let url = try project.url(forGroup: packageName)
+
+        try project.remove(group: packageName)
+            .save()
+
+        do {
+            let after = try Project(fileManager: fileManager).url(forGroup: packageName)
+        } catch XProjRoot.GroupError.missingGroup(let groupName) {
+            XCTAssertEqual(groupName, packageName)
+            return
+        }
+        XCTFail("Group \(packageName) should not exist any more")
+    }
 
     func testPathForGroup() throws {
+        try myApp.moveProjectFile("groups")
+        let packageName = "MyPackage"
         let url = try Project(fileManager: fileManager)
-            .url(forGroup: "MyPackage")
+            .url(forGroup: packageName)
         let expected = fileManager.currentDirectory
             .appending(path: "MyApp")
-            .appending(path: "MyPackage")
+            .appending(path: packageName)
         XCTAssertEqual(url, expected)
     }
 
