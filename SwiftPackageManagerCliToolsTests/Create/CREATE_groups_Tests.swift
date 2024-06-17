@@ -31,4 +31,13 @@ final class CREATE_groups_Tests: XCTestCase {
 //        print(project.content)
 //    }
 
+    func testPathForGroup() throws {
+        let url = try Project(fileManager: fileManager)
+            .url(forGroup: "MyPackage")
+        let expected = fileManager.currentDirectory
+            .appending(path: "MyApp")
+            .appending(path: "MyPackage")
+        XCTAssertEqual(url, expected)
+    }
+
 }

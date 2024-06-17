@@ -12,8 +12,9 @@ struct Create: AsyncParsableCommand {
         case noTargets
         case noLocalRoot
         case localPathDoesNotExist(String)
-        case directoryDoesNotExist(String)
+        case directoryDoesNotExist(URL)
         case invalidDirectory
+        case missingGroupNameOrDirectory
     }
 
 
@@ -31,7 +32,13 @@ struct Create: AsyncParsableCommand {
         name: .shortAndLong,
         help: "The source directory from which to create a Swift Package"
     )
-    var directory: String
+    var directory: String?
+
+    @Option(
+        name: .shortAndLong,
+        help: "The name of the Xcode group from which to create a Swift Package"
+    )
+    var group: String?
 
     @Option(
         name: .shortAndLong,
@@ -105,14 +112,12 @@ struct Create: AsyncParsableCommand {
         guard fileManager.directoryExists(atPath: localRoot) else {
             throw Error.localPathDoesNotExist(localRoot)
         }
-        guard fileManager.directoryExists(atPath: directory) else {
-            throw Error.directoryDoesNotExist(localRoot)
-        }
-        let directoryUrl = URL(fileURLWithPath: directory)
-        let name = directoryUrl.lastPathComponent
-        guard !name.isEmpty else {
-            throw Error.invalidDirectory
-        }
+        let (name, directoryUrl) = try getDirecotry(
+            from: directory,
+            group: group,
+            in: project,
+            fileManager: fileManager
+        )
         let packageUrl = localRootUrl.appending(path: name)
         try fileManager.createDirectory(at: packageUrl, withIntermediateDirectories: false)
 
@@ -181,5 +186,30 @@ struct Create: AsyncParsableCommand {
         installCommand.cloneToClspmDir = self.cloneToClspmDir
         installCommand.packageCacheDir = self.packageCacheDir
         try await installCommand.run(fileManager: fileManager, service: service)
+    }
+
+    private func getDirecotry(from directory: String?, group: String?, in project: Project, fileManager: FileManagerProtocol) throws -> (name: String, directoryUrl: URL) {
+        let directoryUrl: URL
+        let name: String
+        if let directory = directory {
+            directoryUrl = URL(fileURLWithPath: directory)
+            name = directoryUrl.lastPathComponent
+        } else if let group = group {
+            name = group
+            directoryUrl = try project.url(forGroup: group)
+
+        } else {
+            throw Error.missingGroupNameOrDirectory
+        }
+        guard fileManager.directoryExists(at: directoryUrl) else {
+            throw Error.directoryDoesNotExist(directoryUrl)
+        }
+        guard !name.isEmpty else {
+            throw Error.invalidDirectory
+        }
+        return (
+            name: name,
+            directoryUrl: directoryUrl
+        )
     }
 }

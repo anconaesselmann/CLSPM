@@ -6,6 +6,8 @@ import Foundation
 extension Create {
     func setup_testing() -> Self {
         var copy = self
+        copy.directory = nil
+        copy.group = nil
         copy.testTargets = false
         copy.target = []
         copy.verbose = false

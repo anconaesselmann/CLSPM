@@ -60,4 +60,10 @@ extension FileManagerProtocol {
         let exists = fileExists(atPath: path, isDirectory: &isDirectory)
         return exists && isDirectory.boolValue
     }
+
+    func directoryExists(at url: URL) -> Bool {
+        var isDirectory : ObjCBool = true
+        let exists = fileExists(atPath: url.path(), isDirectory: &isDirectory)
+        return exists && isDirectory.boolValue
+    }
 }

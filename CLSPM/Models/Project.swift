@@ -213,6 +213,16 @@ struct Project {
         try root().groups(in: content)
     }
 
+    func url(forGroup groupName: String) throws -> URL {
+        let appName = fileManager.currentDirectory.lastPathComponent
+        return try root()
+            .groupPath(groupName, in: content)
+            .split(separator: "/")
+            .reduce(into: fileManager.currentDirectory.appending(path: appName)) {
+                $0 = $0.appending(path: $1)
+            }
+    }
+
     @discardableResult
     func remove(group groupName: String) throws -> Self {
         var copy = self
