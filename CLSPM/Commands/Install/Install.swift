@@ -72,7 +72,8 @@ struct Install: AsyncParsableCommand {
 
         let localRoot = try configManager
             .combinedConfigFile()
-            .localRoot
+            .localRoot?
+            .appendedIfNecessary("/")
 
         view.installingPackages()
 

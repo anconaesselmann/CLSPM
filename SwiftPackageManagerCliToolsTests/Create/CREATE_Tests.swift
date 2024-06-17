@@ -22,7 +22,7 @@ final class CREATE_Tests: XCTestCase {
         Output.test_setup()
         sut = Create().setup_testing()
         sut.verbose = true
-        try myApp.moveProjectFile("d\(0)")
+        try myApp.moveProjectFile("groups")
         try myApp.moveConfigFile(isGlobal: true, localRootDirectoryName: "LocalSwiftPackages")
     }
 
@@ -32,24 +32,33 @@ final class CREATE_Tests: XCTestCase {
         try fileManager.cleanup()
     }
 
-//    func testCreate() throws {
-//        let dependencyNames = ["LoadableView"]
-//        try myApp.moveCsvSpmFile(with: dependencyNames)
-//        guard let localRoot = try fileManager.configFile(global: true)?.localRoot else {
-//            throw Error.noConfigFile
-//        }
-//        
-//        let myAppDir = URL(fileURLWithPath: fileManager.currentDirectoryPath).appending(path: "MyApp")
-//        let myPackageInProjectDir = myAppDir.appending(path: "MyPackage")
-//        try fileManager.copy("Hello World", to: "MyApp/MyPackage/HelloWorld.swift", in: .current)
-//        try fileManager.createDirectory(at: URL(fileURLWithPath: localRoot), withIntermediateDirectories: false)
-//
-//        sut.directory = myPackageInProjectDir.path()
-//        runAsyncTest {
-//            try await self.sut.run(
-//                fileManager: self.fileManager,
-//                service: self.service
-//            )
-//        }
-//    }
+    func testCreate() throws {
+        let dependencyNames: [String] = []
+        try myApp.moveCsvSpmFile(with: dependencyNames)
+        guard let localRoot = try fileManager.configFile(global: true)?.localRoot else {
+            throw Error.noConfigFile
+        }
+        
+        let myAppDir = URL(fileURLWithPath: fileManager.currentDirectoryPath).appending(path: "MyApp")
+        let myPackageInProjectDir = myAppDir.appending(path: "MyPackage")
+
+        try fileManager.copy("Hello World", to: "MyApp/MyPackage/HelloWorld.swift", in: .current)
+        try fileManager.createDirectory(at: URL(fileURLWithPath: localRoot), withIntermediateDirectories: false)
+
+        sut.group = "MyPackage"
+        runAsyncTest {
+            try await self.sut.run(
+                fileManager: self.fileManager,
+                service: self.service
+            )
+
+            let project = try ProjectInspector(self.fileManager)
+
+            try XCTAssertDependencies(
+                .local,
+                in: project,
+                ["MyPackage"]
+            )
+        }
+    }
 }

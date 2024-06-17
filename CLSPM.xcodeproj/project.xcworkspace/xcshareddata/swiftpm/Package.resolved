@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/anconaesselmann/XProjParser",
       "state" : {
-        "revision" : "53a26f2665f271fda4fa7eac9d8a8f790590160a",
-        "version" : "0.0.13"
+        "revision" : "38e9c451cebe9c96b23a0e513da7ea088aa0309f",
+        "version" : "0.0.14"
       }
     }
   ],
