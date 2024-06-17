@@ -29,13 +29,29 @@ final class CREATE_groups_Tests: XCTestCase {
         try myApp.moveProjectFile("groups")
         let packageName = "MyPackage"
         let project = try Project(fileManager: fileManager)
-        let url = try project.url(forGroup: packageName)
 
         try project.remove(group: packageName)
             .save()
 
         do {
-            let after = try Project(fileManager: fileManager).url(forGroup: packageName)
+            let _ = try Project(fileManager: fileManager).url(forGroup: packageName)
+        } catch XProjRoot.GroupError.missingGroup(let groupName) {
+            XCTAssertEqual(groupName, packageName)
+            return
+        }
+        XCTFail("Group \(packageName) should not exist any more")
+    }
+
+    func testGroups_whitespace() throws {
+        try myApp.moveProjectFile("groups_whitespace")
+        let packageName = "My Package"
+        let project = try Project(fileManager: fileManager)
+
+        try project.remove(group: packageName)
+            .save()
+
+        do {
+            let _ = try Project(fileManager: fileManager).url(forGroup: packageName)
         } catch XProjRoot.GroupError.missingGroup(let groupName) {
             XCTAssertEqual(groupName, packageName)
             return
