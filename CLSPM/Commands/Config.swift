@@ -16,6 +16,12 @@ struct Config: ParsableCommand {
     )
     var localRoot: String?
 
+    @Option(
+        name: .long,
+        help: "Launch browser on create with new github repo"
+    )
+    var setCreateGithubRepo: Bool?
+
     @Flag(
         name: .shortAndLong,
         help: "Show extra logging"
@@ -38,6 +44,17 @@ struct Config: ParsableCommand {
         
         let manager = ConfigManager(fileManager: fileManager)
         output.send("Setting configurations", .verbose)
-        try manager.setLocalRoot(localRoot, global: global)
+        if let localRoot = localRoot {
+            if localRoot == "nil" {
+                try manager.setLocalRoot(localRoot, global: global)
+            } else {
+                try manager.setLocalRoot(nil, global: global)
+            }
+        }
+        if let setCreateGithubRepo = setCreateGithubRepo {
+            output.send("Setting browser behavior after creating a local repo:", .verbose)
+            output.send("Open browser: \(setCreateGithubRepo ? "yes" : "no")".indented(), .verbose)
+            try manager.setCreateGithubRepo(setCreateGithubRepo, global: global)
+        }
     }
 }

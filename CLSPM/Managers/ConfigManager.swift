@@ -84,15 +84,25 @@ class ConfigManager {
 
     func setLocalRoot(_ localRoot: String?, global isGlobal: Bool) throws {
         var config = try configFile(global: isGlobal)
-        if var localRoot = localRoot, !localRoot.isEmpty {
-            if localRoot.last != "/" {
-                localRoot += "/"
-            }
-            config.localRoot = localRoot
+        if let localRoot = localRoot, !localRoot.isEmpty {
+            config.localRoot = localRoot.appendedIfNecessary("/")
         } else {
             config.localRoot = nil
         }
         try save(config, global: isGlobal)
+    }
+
+    func setCreateGithubRepo(_ shouldSet: Bool, global isGlobal: Bool) throws {
+        var config = try configFile(global: isGlobal)
+        if config.createConfig == nil {
+            config.createConfig = .init()
+        }
+        config.createConfig?.createGithubRepo = shouldSet
+        try save(config, global: isGlobal)
+    }
+
+    func willCreateGithubRepo() throws -> Bool {
+        try combinedConfigFile().createConfig?.createGithubRepo ?? false
     }
 
     func dependenciesUrl(create: Bool = true) throws -> URL {

@@ -186,6 +186,15 @@ struct Create: AsyncParsableCommand {
         installCommand.cloneToClspmDir = self.cloneToClspmDir
         installCommand.packageCacheDir = self.packageCacheDir
         try await installCommand.run(fileManager: fileManager, service: service)
+
+        if try configManager.willCreateGithubRepo() {
+            output.send("Opening github to create a \(name) repository", .verbose)
+            let result = shell("open \"https://github.com/new?name=\(name)\"")
+            output.send(result, .verbose)
+        } else {
+            output.send("Not creating a github repository.", .verbose)
+            output.send("To enable call `clspm config set-create-github-repo true`".indented(), .verbose)
+        }
     }
 
     private func getDirecotry(from directory: String?, group: String?, in project: Project, fileManager: FileManagerProtocol) throws -> (name: String, groupName: String, directoryUrl: URL) {
@@ -197,7 +206,6 @@ struct Create: AsyncParsableCommand {
         } else if let group = group {
             groupName = group
             directoryUrl = try project.url(forGroup: group)
-
         } else {
             throw Error.missingGroupNameOrDirectory
         }

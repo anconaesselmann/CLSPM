@@ -3,10 +3,15 @@
 
 import Foundation
 
+struct CreateConfig: Codable {
+    var createGithubRepo: Bool = false
+}
+
 struct ConfigFile: Codable {
     var localRoot: String?
     var orgs: [String]?
     var targetIds: [String: UUID]?
+    var createConfig: CreateConfig?
 
     func combined(with other: Self) -> Self {
         var combined = ConfigFile()
@@ -16,6 +21,7 @@ struct ConfigFile: Codable {
             .reduce(into: (other.targetIds ?? [:])) {
                 $0[$1.key] = $1.value
             }
+        combined.createConfig = self.createConfig ?? other.createConfig
         return combined
     }
 }

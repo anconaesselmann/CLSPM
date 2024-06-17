@@ -86,7 +86,6 @@
 		972438332C124B2E0011C5AE = {
 			isa = PBXGroup;
 			children = (
-				97C6E4432C209D9500CBC93B /* Turn into library */,
 				9724383E2C124B2E0011C5AE /* MyApp */,
 				9724385A2C124B310011C5AE /* MyAppTests */,
 				972438642C124B310011C5AE /* MyAppUITests */,
@@ -107,6 +106,7 @@
 		9724383E2C124B2E0011C5AE /* MyApp */ = {
 			isa = PBXGroup;
 			children = (
+				97C6E4432C209D9500CBC93B /* Turn into library */,
 				9724383F2C124B2E0011C5AE /* LoadableResult.swift */,
 				972438412C124B300011C5AE /* Constants */,
 				972438442C124B300011C5AE /* App */,
