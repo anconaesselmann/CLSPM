@@ -32,4 +32,4 @@ A simple parser for Xcode projects
 
 ---
 
-Generated with [clspm](https://github.com/anconaesselmann/CLSPM))
+Generated with [clspm](https://github.com/anconaesselmann/CLSPM)
