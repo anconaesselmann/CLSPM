@@ -13,8 +13,8 @@ class TempFileManager: FileManagerProtocol {
 
     fileprivate let uuid = UUID(uuidString: "4bfcdd0e-df3c-48df-b58e-1828a1189160")!
     fileprivate let uniqueId = UUID()
-    fileprivate let testDir: String
-    fileprivate let testUrl: URL
+    let testDir: String
+    let testUrl: URL
 
     init(home: String? = nil, current: String? = nil) throws {
         testDir = "/private/tmp/\(uuid.uuidString)/\(uniqueId.uuidString)"

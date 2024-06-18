@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C374E885534486EBA887A6F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0C374E88BA887A6FF0BD4B65 /* ArgumentParser */; };
+		0C374E885C404618B85D738B /* GithubApi in Frameworks */ = {isa = PBXBuildFile; productRef = 0C374E88B85D738BC0C9AEF9 /* GithubApi */; };
+		0C374E88926F46918F638660 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0C374E888F638660399476C2 /* XProjParser */; };
+		8E0E82DB5534486EBA887A6F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0E82DBBA887A6FF0BD4B65 /* ArgumentParser */; };
+		8E0E82DB5C404618B85D738B /* GithubApi in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0E82DBB85D738BC0C9AEF9 /* GithubApi */; };
+		8E0E82DB926F46918F638660 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0E82DB8F638660399476C2 /* XProjParser */; };
 		97044C7E2C0A3DE700D7424A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97044C7D2C0A3DE700D7424A /* Project.swift */; };
 		97192AB72C13C99400287B03 /* FileManagerProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97192AB62C13C99400287B03 /* FileManagerProtocol+Extensions.swift */; };
 		97192AB92C13C9BA00287B03 /* ProjectInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97192AB82C13C9BA00287B03 /* ProjectInspector.swift */; };
@@ -108,6 +114,8 @@
 		97C6E4292C1D58CA00CBC93B /* CREATE_groups_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C6E4282C1D58CA00CBC93B /* CREATE_groups_Tests.swift */; };
 		97C6E42B2C1D71AB00CBC93B /* MyAppProject_groups.test in Resources */ = {isa = PBXBuildFile; fileRef = 97C6E42A2C1D71AB00CBC93B /* MyAppProject_groups.test */; };
 		97C6E4452C209E7500CBC93B /* MyAppProject_groups_whitespace.test in Resources */ = {isa = PBXBuildFile; fileRef = 97C6E4442C209E7500CBC93B /* MyAppProject_groups_whitespace.test */; };
+		97C6E4C62C215E1A00CBC93B /* Config+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C6E4C52C215E1A00CBC93B /* Config+Tests.swift */; };
+		97C6E4C82C215E6200CBC93B /* CONFIG_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C6E4C72C215E6200CBC93B /* CONFIG_Tests.swift */; };
 		97CB2A4F2C16B076000B87B2 /* InitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB2A4E2C16B076000B87B2 /* InitView.swift */; };
 		97CB2A502C16B0BA000B87B2 /* InitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB2A4E2C16B076000B87B2 /* InitView.swift */; };
 		97CB2A522C16CDA3000B87B2 /* InitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB2A512C16CDA3000B87B2 /* InitError.swift */; };
@@ -117,12 +125,6 @@
 		97E7B2672C092CD600E33740 /* Install.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2662C092CD600E33740 /* Install.swift */; };
 		97E7B2692C093B9600E33740 /* Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B2682C093B9600E33740 /* Init.swift */; };
 		97E7B26B2C093BB600E33740 /* JsonSpmFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7B26A2C093BB600E33740 /* JsonSpmFile.swift */; };
-		0C374E885534486EBA887A6F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0C374E88BA887A6FF0BD4B65 /* ArgumentParser */; };
-		0C374E885C404618B85D738B /* GithubApi in Frameworks */ = {isa = PBXBuildFile; productRef = 0C374E88B85D738BC0C9AEF9 /* GithubApi */; };
-		0C374E88926F46918F638660 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 0C374E888F638660399476C2 /* XProjParser */; };
-		8E0E82DB5534486EBA887A6F /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0E82DBBA887A6FF0BD4B65 /* ArgumentParser */; };
-		8E0E82DB5C404618B85D738B /* GithubApi in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0E82DBB85D738BC0C9AEF9 /* GithubApi */; };
-		8E0E82DB926F46918F638660 /* XProjParser in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0E82DB8F638660399476C2 /* XProjParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -209,6 +211,8 @@
 		97C6E4282C1D58CA00CBC93B /* CREATE_groups_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CREATE_groups_Tests.swift; sourceTree = "<group>"; };
 		97C6E42A2C1D71AB00CBC93B /* MyAppProject_groups.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject_groups.test; sourceTree = "<group>"; };
 		97C6E4442C209E7500CBC93B /* MyAppProject_groups_whitespace.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject_groups_whitespace.test; sourceTree = "<group>"; };
+		97C6E4C52C215E1A00CBC93B /* Config+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Config+Tests.swift"; sourceTree = "<group>"; };
+		97C6E4C72C215E6200CBC93B /* CONFIG_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CONFIG_Tests.swift; sourceTree = "<group>"; };
 		97CB2A4E2C16B076000B87B2 /* InitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitView.swift; sourceTree = "<group>"; };
 		97CB2A512C16CDA3000B87B2 /* InitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitError.swift; sourceTree = "<group>"; };
 		97CB2A542C16D812000B87B2 /* INIT_edgeCasesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INIT_edgeCasesTests.swift; sourceTree = "<group>"; };
@@ -246,10 +250,11 @@
 		972437AF2C12354E0011C5AE /* SwiftPackageManagerCliToolsTests */ = {
 			isa = PBXGroup;
 			children = (
-				97C6E41B2C1CBCC500CBC93B /* Create */,
 				9724387E2C1267A30011C5AE /* Supporting */,
 				972438772C125FF60011C5AE /* Assertions */,
 				977FEDA02C18D44700FC7833 /* RestTests */,
+				97C6E4C32C215DE900CBC93B /* ConfigTests */,
+				97C6E41B2C1CBCC500CBC93B /* Create */,
 				976A0DA12C139B08008036D3 /* InstallTests */,
 				972437CE2C1243DE0011C5AE /* InitTests */,
 			);
@@ -486,6 +491,23 @@
 			path = supporting;
 			sourceTree = "<group>";
 		};
+		97C6E4C32C215DE900CBC93B /* ConfigTests */ = {
+			isa = PBXGroup;
+			children = (
+				97C6E4C42C215E0200CBC93B /* supporting */,
+				97C6E4C72C215E6200CBC93B /* CONFIG_Tests.swift */,
+			);
+			path = ConfigTests;
+			sourceTree = "<group>";
+		};
+		97C6E4C42C215E0200CBC93B /* supporting */ = {
+			isa = PBXGroup;
+			children = (
+				97C6E4C52C215E1A00CBC93B /* Config+Tests.swift */,
+			);
+			path = supporting;
+			sourceTree = "<group>";
+		};
 		97CB2A4D2C16B068000B87B2 /* Init */ = {
 			isa = PBXGroup;
 			children = (
@@ -603,7 +625,7 @@
 			);
 			mainGroup = 97E7B2362C09117A00E33740;
 			packageReferences = (
-				5534486EBA887A6FF0BD4B65 /* XCRemoteSwiftPackageReference "ArgumentParser" */,
+				5534486EBA887A6FF0BD4B65 /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 				5C404618B85D738BC0C9AEF9 /* XCRemoteSwiftPackageReference "GithubApi" */,
 				926F46918F638660399476C2 /* XCRemoteSwiftPackageReference "XProjParser" */,
 			);
@@ -676,6 +698,7 @@
 				977FEDC52C1BB5D200FC7833 /* JsonSpmDependency+Test.swift in Sources */,
 				97192AB72C13C99400287B03 /* FileManagerProtocol+Extensions.swift in Sources */,
 				976A0D8C2C12E52B008036D3 /* INIT_JSPM_T1_XPROJ_G_Tests.swift in Sources */,
+				97C6E4C82C215E6200CBC93B /* CONFIG_Tests.swift in Sources */,
 				977FEDB02C1B55FC00FC7833 /* InstallView.swift in Sources */,
 				976A0DA92C13A63A008036D3 /* XCTestCase+runAsyncTest.swift in Sources */,
 				972437C22C1235940011C5AE /* DependencyCache.swift in Sources */,
@@ -685,6 +708,7 @@
 				977FEDA32C18D49B00FC7833 /* Reset.swift in Sources */,
 				977FEDC02C1BB10C00FC7833 /* TestInput.swift in Sources */,
 				977FEDBE2C1BAEEE00FC7833 /* INST_userInputResolution_Tests.swift in Sources */,
+				97C6E4C62C215E1A00CBC93B /* Config+Tests.swift in Sources */,
 				97192AB92C13C9BA00287B03 /* ProjectInspector.swift in Sources */,
 				977FEDA62C18D4C100FC7833 /* Reset+Tests.swift in Sources */,
 				972437C52C1235940011C5AE /* RemoteDepenencyManager.swift in Sources */,
@@ -960,7 +984,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5534486EBA887A6FF0BD4B65 /* XCRemoteSwiftPackageReference "ArgumentParser" */ = {
+		5534486EBA887A6FF0BD4B65 /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-argument-parser";
 			requirement = {
@@ -987,35 +1011,35 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0C374E88BA887A6FF0BD4B65 /* ArgumentParser */ = {
+		0C374E888F638660399476C2 /* XProjParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5534486EBA887A6FF0BD4B65 /* XCRemoteSwiftPackageReference "ArgumentParser" */;
-			productName = ArgumentParser;
+			package = 926F46918F638660399476C2 /* XCRemoteSwiftPackageReference "XProjParser" */;
+			productName = XProjParser;
 		};
 		0C374E88B85D738BC0C9AEF9 /* GithubApi */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5C404618B85D738BC0C9AEF9 /* XCRemoteSwiftPackageReference "GithubApi" */;
 			productName = GithubApi;
 		};
-		0C374E888F638660399476C2 /* XProjParser */ = {
+		0C374E88BA887A6FF0BD4B65 /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5534486EBA887A6FF0BD4B65 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+		8E0E82DB8F638660399476C2 /* XProjParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 926F46918F638660399476C2 /* XCRemoteSwiftPackageReference "XProjParser" */;
 			productName = XProjParser;
-		};
-		8E0E82DBBA887A6FF0BD4B65 /* ArgumentParser */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5534486EBA887A6FF0BD4B65 /* XCRemoteSwiftPackageReference "ArgumentParser" */;
-			productName = ArgumentParser;
 		};
 		8E0E82DBB85D738BC0C9AEF9 /* GithubApi */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5C404618B85D738BC0C9AEF9 /* XCRemoteSwiftPackageReference "GithubApi" */;
 			productName = GithubApi;
 		};
-		8E0E82DB8F638660399476C2 /* XProjParser */ = {
+		8E0E82DBBA887A6FF0BD4B65 /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 926F46918F638660399476C2 /* XCRemoteSwiftPackageReference "XProjParser" */;
-			productName = XProjParser;
+			package = 5534486EBA887A6FF0BD4B65 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

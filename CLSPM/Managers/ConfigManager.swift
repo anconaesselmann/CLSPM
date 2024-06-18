@@ -200,4 +200,8 @@ class ConfigManager {
             return
         }
     }
+
+    func listConfig() throws -> ListConfig? {
+        try configFile(global: false).listConfig
+    }
 }

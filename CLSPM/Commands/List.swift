@@ -5,7 +5,7 @@ import Foundation
 import ArgumentParser
 import XProjParser
 
-struct List: AsyncParsableCommand {
+struct List: ParsableCommand {
 
     enum Error: Swift.Error {
         case invalidTargetNames([String])
