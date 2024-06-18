@@ -12,15 +12,15 @@ struct List: AsyncParsableCommand {
         case noTargets
     }
 
+    public static let configuration = CommandConfiguration(
+        abstract: "List dependencies in an Xcode project"
+    )
+
     @Flag(
         name: .shortAndLong,
         help: "Creates an spmfile that includes the project's test-targets"
     )
     var testTargets: Bool = false
-
-    public static let configuration = CommandConfiguration(
-        abstract: "List dependencies in an Xcode project"
-    )
 
     @Option(
         name: .shortAndLong,

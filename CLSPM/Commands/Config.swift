@@ -7,12 +7,12 @@ import ArgumentParser
 struct Config: ParsableCommand {
 
     public static let configuration = CommandConfiguration(
-        abstract: ""
+        abstract: "Set preferences in the project .swiftclpm directory or the global ~/.swiftclpm directory"
     )
 
     @Option(
         name: .shortAndLong,
-        help: ""
+        help: "A default directory for local Swift Packages"
     )
     var localRoot: String?
 

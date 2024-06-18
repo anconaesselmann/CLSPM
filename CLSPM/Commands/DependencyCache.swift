@@ -12,7 +12,7 @@ struct DependencyCache: ParsableCommand {
     }
 
     public static let configuration = CommandConfiguration(
-        abstract: ""
+        abstract: "Save/update dependencies to ~/.swiftclpm/dependencies"
     )
 
     @Flag(
