@@ -157,7 +157,7 @@ struct List: AsyncParsableCommand {
             }
             if let attributionLink = URL(string: "https://github.com/anconaesselmann/CLSPM") {
                 document.appendRule()
-                document.append("Generated with \("clspm".l(attributionLink)))")
+                document.append("Generated with \("clspm".l(attributionLink))")
             }
             output.send(document.content)
         }
