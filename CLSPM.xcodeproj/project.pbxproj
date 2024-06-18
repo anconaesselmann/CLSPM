@@ -116,6 +116,9 @@
 		97C6E4452C209E7500CBC93B /* MyAppProject_groups_whitespace.test in Resources */ = {isa = PBXBuildFile; fileRef = 97C6E4442C209E7500CBC93B /* MyAppProject_groups_whitespace.test */; };
 		97C6E4C62C215E1A00CBC93B /* Config+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C6E4C52C215E1A00CBC93B /* Config+Tests.swift */; };
 		97C6E4C82C215E6200CBC93B /* CONFIG_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C6E4C72C215E6200CBC93B /* CONFIG_Tests.swift */; };
+		97C6E4CC2C21763600CBC93B /* List+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C6E4CB2C21763600CBC93B /* List+Tests.swift */; };
+		97C6E4CE2C2176A000CBC93B /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977FEDD12C1C2A4400FC7833 /* List.swift */; };
+		97C6E4D02C2176B000CBC93B /* LIST_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C6E4CF2C2176B000CBC93B /* LIST_Tests.swift */; };
 		97CB2A4F2C16B076000B87B2 /* InitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB2A4E2C16B076000B87B2 /* InitView.swift */; };
 		97CB2A502C16B0BA000B87B2 /* InitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB2A4E2C16B076000B87B2 /* InitView.swift */; };
 		97CB2A522C16CDA3000B87B2 /* InitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CB2A512C16CDA3000B87B2 /* InitError.swift */; };
@@ -213,6 +216,8 @@
 		97C6E4442C209E7500CBC93B /* MyAppProject_groups_whitespace.test */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MyAppProject_groups_whitespace.test; sourceTree = "<group>"; };
 		97C6E4C52C215E1A00CBC93B /* Config+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Config+Tests.swift"; sourceTree = "<group>"; };
 		97C6E4C72C215E6200CBC93B /* CONFIG_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CONFIG_Tests.swift; sourceTree = "<group>"; };
+		97C6E4CB2C21763600CBC93B /* List+Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "List+Tests.swift"; sourceTree = "<group>"; };
+		97C6E4CF2C2176B000CBC93B /* LIST_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LIST_Tests.swift; sourceTree = "<group>"; };
 		97CB2A4E2C16B076000B87B2 /* InitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitView.swift; sourceTree = "<group>"; };
 		97CB2A512C16CDA3000B87B2 /* InitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitError.swift; sourceTree = "<group>"; };
 		97CB2A542C16D812000B87B2 /* INIT_edgeCasesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INIT_edgeCasesTests.swift; sourceTree = "<group>"; };
@@ -257,6 +262,7 @@
 				97C6E41B2C1CBCC500CBC93B /* Create */,
 				976A0DA12C139B08008036D3 /* InstallTests */,
 				972437CE2C1243DE0011C5AE /* InitTests */,
+				97C6E4C92C21760500CBC93B /* ListTests */,
 			);
 			path = SwiftPackageManagerCliToolsTests;
 			sourceTree = "<group>";
@@ -508,6 +514,23 @@
 			path = supporting;
 			sourceTree = "<group>";
 		};
+		97C6E4C92C21760500CBC93B /* ListTests */ = {
+			isa = PBXGroup;
+			children = (
+				97C6E4CA2C21761900CBC93B /* supporting */,
+				97C6E4CF2C2176B000CBC93B /* LIST_Tests.swift */,
+			);
+			path = ListTests;
+			sourceTree = "<group>";
+		};
+		97C6E4CA2C21761900CBC93B /* supporting */ = {
+			isa = PBXGroup;
+			children = (
+				97C6E4CB2C21763600CBC93B /* List+Tests.swift */,
+			);
+			path = supporting;
+			sourceTree = "<group>";
+		};
 		97CB2A4D2C16B068000B87B2 /* Init */ = {
 			isa = PBXGroup;
 			children = (
@@ -691,6 +714,7 @@
 				972437CD2C12427F0011C5AE /* InitMicroSpmFileTests.swift in Sources */,
 				97C6E4292C1D58CA00CBC93B /* CREATE_groups_Tests.swift in Sources */,
 				97C6E4202C1CBD8600CBC93B /* CREATE_Tests.swift in Sources */,
+				97C6E4D02C2176B000CBC93B /* LIST_Tests.swift in Sources */,
 				977FEDD02C1C1CE800FC7833 /* INST_cashedOrgsResolution_Tests.swift in Sources */,
 				972437C12C1235940011C5AE /* GithubRelease.swift in Sources */,
 				977FEDA82C18DA1A00FC7833 /* Rest_config_Tests.swift in Sources */,
@@ -708,11 +732,13 @@
 				977FEDA32C18D49B00FC7833 /* Reset.swift in Sources */,
 				977FEDC02C1BB10C00FC7833 /* TestInput.swift in Sources */,
 				977FEDBE2C1BAEEE00FC7833 /* INST_userInputResolution_Tests.swift in Sources */,
+				97C6E4CE2C2176A000CBC93B /* List.swift in Sources */,
 				97C6E4C62C215E1A00CBC93B /* Config+Tests.swift in Sources */,
 				97192AB92C13C9BA00287B03 /* ProjectInspector.swift in Sources */,
 				977FEDA62C18D4C100FC7833 /* Reset+Tests.swift in Sources */,
 				972437C52C1235940011C5AE /* RemoteDepenencyManager.swift in Sources */,
 				972438872C12796E0011C5AE /* INIT_JSON_OPT_T1_Tests.swift in Sources */,
+				97C6E4CC2C21763600CBC93B /* List+Tests.swift in Sources */,
 				972437C62C1235990011C5AE /* JsonSpmFile.swift in Sources */,
 				972437C72C1235990011C5AE /* JsonSpmDependency.swift in Sources */,
 				972438802C1267AB0011C5AE /* TestOutput.swift in Sources */,

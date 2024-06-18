@@ -10,6 +10,7 @@ struct List: ParsableCommand {
     enum Error: Swift.Error {
         case invalidTargetNames([String])
         case noTargets
+        case noOutput
     }
 
     public static let configuration = CommandConfiguration(
@@ -33,17 +34,17 @@ struct List: ParsableCommand {
         name: .shortAndLong,
         help: "Show extra logging"
     )
-    private var verbose: Bool = false
+    var verbose: Bool = false
 
     func run() throws {
         try self.run(fileManager: FileManager.default)
     }
 
     func run(fileManager: FileManagerProtocol) throws {
-        let output = Output.shared
+        let configManager = ConfigManager(fileManager: fileManager)
         let project = try Project(fileManager: fileManager)
         let root = try project.root()
-        var targetDependencies = try project.dependencies(in: root, verbose: verbose)
+        let targetDependencies = try project.dependencies(in: root, verbose: verbose)
         var targetNames = targetDependencies.keys.sorted()
         if !self.target.isEmpty {
             let allTargets = Set(targetNames)
@@ -61,6 +62,47 @@ struct List: ParsableCommand {
         guard !targetNames.isEmpty else {
             throw Error.noTargets
         }
+        if
+            let config = try configManager.listConfig(),
+            let outputFile = config.output,
+            let outputUrl = outputFile.path
+        {
+            try fileManager.createFileIfNotAFile(outputUrl)
+            switch outputFile.format {
+            case .simplePlainText:
+                try simplePlainTextOutput(targetNames, targetDependencies, file: outputUrl)
+            }
+        } else {
+            consoleSimpleOutput(targetNames, targetDependencies)
+        }
+    }
+
+    private func simplePlainTextOutput(_ targetNames: [String], _ targetDependencies: [String : [JsonSpmDependency]], file: URL) throws {
+        let output = TextOutput()
+        let dependencyIndent = targetNames.count > 1 ? 1 : 0
+        for target in targetNames {
+            if targetNames.count > 1 {
+                output.send("Target: \(target)")
+            }
+            guard let dependencies = targetDependencies[target] else {
+                continue
+            }
+            if dependencies.isEmpty {
+                output.send("No dependencies".indented(dependencyIndent))
+            }
+            for dependency in dependencies {
+                output.send(dependency.name.indented(dependencyIndent))
+            }
+        }
+        guard let data = output.output.data(using: .utf8) else {
+            throw Error.noOutput
+        }
+
+        try data.write(to: file)
+    }
+
+    private func consoleSimpleOutput(_ targetNames: [String], _ targetDependencies: [String : [JsonSpmDependency]]) {
+        let output = Output.shared
         let dependencyIndent = targetNames.count > 1 ? 1 : 0
         for target in targetNames {
             if targetNames.count > 1 {

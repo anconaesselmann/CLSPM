@@ -3,6 +3,10 @@
 
 import Foundation
 
+enum FileManagerError: Error {
+    case outputFileIsADirectory
+}
+
 protocol FileManagerProtocol {
     var homeDirectoryForCurrentUser: URL { get }
 
@@ -47,6 +51,11 @@ extension FileManagerProtocol {
         createFile(atPath: path, contents: data, attributes: nil)
     }
 
+    @discardableResult
+    func createFile(at url: URL, contents data: Data?) -> Bool {
+        createFile(atPath: url.path(percentEncoded: false), contents: data, attributes: nil)
+    }
+
     func fileExists(at url: URL) -> Bool {
         self.fileExists(atPath: url.path())
     }
@@ -65,5 +74,18 @@ extension FileManagerProtocol {
         var isDirectory : ObjCBool = true
         let exists = fileExists(atPath: url.path(percentEncoded: false), isDirectory: &isDirectory)
         return exists && isDirectory.boolValue
+    }
+
+    func createFileIfNotAFile(_ url: URL) throws {
+        var directory = url.deletingLastPathComponent()
+        if !directoryExists(at: directory) {
+            try createDirectory(at: directory, withIntermediateDirectories: true)
+        }
+        guard !directoryExists(at: url) else {
+            throw FileManagerError.outputFileIsADirectory
+        }
+        if !fileExists(at: url) {
+            createFile(at: url, contents: "".data(using: .utf8))
+        }
     }
 }

@@ -204,4 +204,15 @@ class ConfigManager {
     func listConfig() throws -> ListConfig? {
         try configFile(global: false).listConfig
     }
+
+    func setListOutputFile(_ path: String, fileManager: FileManagerProtocol) throws {
+        var config = try configFile(global: false)
+        var listConfig = config.listConfig ?? .init()
+        let root: URL? = path.hasPrefix("/") ? nil : fileManager.currentDirectory
+        var output = listConfig.output ?? .init()
+        output.path = URL(fileURLWithPath: path, isDirectory: false, relativeTo: root)
+        listConfig.output = output
+        config.listConfig = listConfig
+        try save(config, global: false)
+    }
 }

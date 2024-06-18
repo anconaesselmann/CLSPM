@@ -18,6 +18,19 @@ class ConsoleOutput: OutputKind {
     }
 }
 
+class TextOutput: OutputKind {
+
+    var output: String = ""
+
+    func send(_ content: String) {
+        output += content + "\n"
+    }
+
+    func send(_ error: Error) {
+        send(error.localizedDescription)
+    }
+}
+
 class Output {
 
     enum Granularity: Int, Hashable {

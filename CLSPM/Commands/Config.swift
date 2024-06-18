@@ -63,20 +63,10 @@ struct Config: ParsableCommand {
             try manager.setCreateGithubRepo(setCreateGithubRepo, global: global)
         }
         if let outputDir = listOutputFile {
-            try self._setListOutputFile(outputDir, fileManager: fileManager)
+            try manager.setListOutputFile(outputDir, fileManager: fileManager)
             return
         }
     }
 
-    private func _setListOutputFile(_ path: String, fileManager: FileManagerProtocol) throws {
-        let configManager = ConfigManager(fileManager: fileManager)
-        var config = try configManager.configFile(global: false)
-        var listConfig = config.listConfig ?? .init()
-        let root: URL? = path.hasPrefix("/") ? nil : fileManager.currentDirectory
-        var output = listConfig.output ?? .init()
-        output.path = URL(fileURLWithPath: path, isDirectory: false, relativeTo: root)
-        listConfig.output = output
-        config.listConfig = listConfig
-        try configManager.save(config, global: false)
-    }
+
 }
