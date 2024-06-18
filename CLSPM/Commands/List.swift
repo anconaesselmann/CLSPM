@@ -36,6 +36,12 @@ struct List: ParsableCommand {
     )
     var verbose: Bool = false
 
+    @Flag(
+        name: .shortAndLong,
+        help: "Output to console even when an output file is specified"
+    )
+    var console: Bool = false
+
     func run() throws {
         try self.run(fileManager: FileManager.default)
     }
@@ -70,14 +76,14 @@ struct List: ParsableCommand {
             try fileManager.createFileIfNotAFile(outputUrl)
             switch outputFile.format {
             case .simplePlainText:
-                try simplePlainTextOutput(targetNames, targetDependencies, file: outputUrl)
+                try simplePlainTextOutput(targetNames, targetDependencies, file: outputUrl, console: console)
             }
         } else {
             consoleSimpleOutput(targetNames, targetDependencies)
         }
     }
 
-    private func simplePlainTextOutput(_ targetNames: [String], _ targetDependencies: [String : [JsonSpmDependency]], file: URL) throws {
+    private func simplePlainTextOutput(_ targetNames: [String], _ targetDependencies: [String : [JsonSpmDependency]], file: URL, console: Bool) throws {
         let output = TextOutput()
         let dependencyIndent = targetNames.count > 1 ? 1 : 0
         for target in targetNames {
@@ -94,11 +100,15 @@ struct List: ParsableCommand {
                 output.send(dependency.name.indented(dependencyIndent))
             }
         }
-        guard let data = output.output.data(using: .utf8) else {
-            throw Error.noOutput
-        }
+        if console {
+            Output.shared.send(output.output)
+        } else {
+            guard let data = output.output.data(using: .utf8) else {
+                throw Error.noOutput
+            }
 
-        try data.write(to: file)
+            try data.write(to: file)
+        }
     }
 
     private func consoleSimpleOutput(_ targetNames: [String], _ targetDependencies: [String : [JsonSpmDependency]]) {

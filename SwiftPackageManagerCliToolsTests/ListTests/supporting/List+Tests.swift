@@ -9,6 +9,7 @@ extension List {
         copy.testTargets = false
         copy.target = []
         copy.verbose = false
+        copy.console = false
         return copy
     }
 }
