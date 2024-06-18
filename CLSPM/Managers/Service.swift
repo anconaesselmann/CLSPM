@@ -2,10 +2,12 @@
 //
 
 import Foundation
+import GithubApi
 
 protocol ServiceProtocol {
     func fetchVersion(forOrg org: String, dependencyName: String) async throws -> String
     func fetchVersion(forRepo url: URL) async throws -> String
+    func fetchRepoInfo(repoUrl: URL) async throws -> RepoResponse
 }
 
 struct Service: ServiceProtocol {
@@ -46,5 +48,15 @@ struct Service: ServiceProtocol {
             print("debug", Error.notAGithubReop(url))
             throw Error.notAGithubReop(url)
         }
+    }
+
+    func fetchRepoInfo(repoUrl: URL) async throws -> RepoResponse {
+        let repo = try repoUrl.githubRepo()
+        let apiUrl = try URL.githubProjectInfo(githubUserName: repo.org, repoName: repo.reop)
+        let (data, response) = try await URLSession.shared.data(from: apiUrl)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+        return try decoder.decode(RepoResponse.self, from: data)
     }
 }

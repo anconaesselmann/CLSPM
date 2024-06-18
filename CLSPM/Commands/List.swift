@@ -5,7 +5,7 @@ import Foundation
 import ArgumentParser
 import XProjParser
 
-struct List: ParsableCommand {
+struct List: AsyncParsableCommand {
 
     enum Error: Swift.Error {
         case invalidTargetNames([String])
@@ -42,11 +42,12 @@ struct List: ParsableCommand {
     )
     var console: Bool = false
 
-    func run() throws {
-        try self.run(fileManager: FileManager.default)
+    func run() async throws {
+        try await self.run(fileManager: FileManager.default)
     }
 
-    func run(fileManager: FileManagerProtocol) throws {
+    func run(fileManager: FileManagerProtocol) async throws {
+        let service: ServiceProtocol = Service()
         let configManager = ConfigManager(fileManager: fileManager)
         let project = try Project(fileManager: fileManager)
         let root = try project.root()
@@ -77,6 +78,14 @@ struct List: ParsableCommand {
             switch outputFile.format {
             case .simplePlainText:
                 try simplePlainTextOutput(targetNames, targetDependencies, file: outputUrl, console: console)
+            case .githubMD:
+                try await githubMDOutput(
+                    targetNames,
+                    targetDependencies,
+                    service: service,
+                    file: outputUrl,
+                    console: console
+                )
             }
         } else {
             consoleSimpleOutput(targetNames, targetDependencies)
@@ -107,6 +116,53 @@ struct List: ParsableCommand {
                 throw Error.noOutput
             }
 
+            try data.write(to: file)
+        }
+    }
+
+    private func githubMDOutput(
+        _ targetNames: [String],
+        _ targetDependencies: [String : [JsonSpmDependency]],
+        service: ServiceProtocol,
+        file: URL,
+        console: Bool
+    ) async throws {
+        let output = TextOutput()
+        for target in targetNames {
+            if targetNames.count > 1 {
+                output.send("Target: \(target)")
+            }
+            guard let dependencies = targetDependencies[target] else {
+                continue
+            }
+            var document = McDocument()
+            for dependency in dependencies {
+                guard
+                    let urlString = dependency.url,
+                    let url = URL(string: urlString)
+                else {
+                    continue
+                }
+                let repoInfo = try await service.fetchRepoInfo(repoUrl: url)
+                guard repoInfo.visibility == .public else {
+                    continue
+                }
+                document.append(repoInfo.name, .header(2))
+                if let description = repoInfo.description {
+                    document.append(description)
+                }
+            }
+            if let attributionLink = URL(string: "https://github.com/anconaesselmann/CLSPM") {
+                document.append("Generated with \("clspm".l(attributionLink)))")
+            }
+            output.send(document.content)
+        }
+        if console {
+            Output.shared.send(output.output)
+        } else {
+            guard let data = output.output.data(using: .utf8) else {
+                throw Error.noOutput
+            }
             try data.write(to: file)
         }
     }

@@ -12,6 +12,7 @@ struct ListConfig: Codable {
     struct OutputFile: Codable {
         enum Format: String, Codable {
             case simplePlainText
+            case githubMD
         }
 
         var path: URL?

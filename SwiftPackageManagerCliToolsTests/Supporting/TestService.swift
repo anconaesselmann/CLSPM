@@ -2,6 +2,7 @@
 //
 
 import Foundation
+import GithubApi
 
 struct TestService: ServiceProtocol {
 
@@ -21,5 +22,9 @@ struct TestService: ServiceProtocol {
 
     func fetchVersion(forRepo url: URL) async throws -> String {
         versionForRepoUrl[url] ?? "9.9.9"
+    }
+
+    func fetchRepoInfo(repoUrl: URL) async throws -> RepoResponse {
+        fatalError("not implemented")
     }
 }

@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/anconaesselmann/GithubApi",
       "state" : {
-        "revision" : "a9ba45120c80212cf6b78e49e75498c5b7a96fe9",
-        "version" : "0.0.1"
+        "revision" : "c44e00bd4dafb059df4882fa9a9be0ab21c16fab",
+        "version" : "0.0.2"
       }
     },
     {

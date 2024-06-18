@@ -30,13 +30,15 @@ final class LIST_Tests: XCTestCase {
     }
 
     func testOutputsSimpleTextToListOutputFile() throws {
-        try sut.run(fileManager: fileManager)
-        let expected = """
+        runAsyncTest {
+            try await self.sut.run(fileManager: self.fileManager)
+            let expected = """
 DebugSwiftUI
 LoadableView
 
 """
-        try XCTAssertEqual(fileManager.currentDirectory.appending(path: "listOutput"), expected)
+            try XCTAssertEqual(self.fileManager.currentDirectory.appending(path: "listOutput"), expected)
+        }
     }
 
 }
