@@ -4,6 +4,7 @@
 import Foundation
 import ArgumentParser
 import XProjParser
+import SwiftMD
 
 struct List: AsyncParsableCommand {
 
@@ -147,12 +148,15 @@ struct List: AsyncParsableCommand {
                 guard repoInfo.visibility == .public else {
                     continue
                 }
-                document.append(repoInfo.name, .header(2))
+                document.append(repoInfo.name.l(repoInfo.htmlUrl), .header(2))
+                document.append("by \(repoInfo.owner.login.l(repoInfo.owner.htmlUrl))")
+                document.append("repo owner icon", .image(repoInfo.owner.avatarUrl))
                 if let description = repoInfo.description {
                     document.append(description)
                 }
             }
             if let attributionLink = URL(string: "https://github.com/anconaesselmann/CLSPM") {
+                document.appendRule()
                 document.append("Generated with \("clspm".l(attributionLink)))")
             }
             output.send(document.content)

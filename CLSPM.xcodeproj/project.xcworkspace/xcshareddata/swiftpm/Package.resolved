@@ -1,13 +1,13 @@
 {
-  "originHash" : "7a0af49b528548c8816f957d481798c42e170a2f8b82e7b1c1b0f33adecc2d71",
+  "originHash" : "298b325d9488c44d6f6572be967f7e6c71f2ec2b7ec7178f3743bcc0857a9033",
   "pins" : [
     {
       "identity" : "githubapi",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/anconaesselmann/GithubApi",
       "state" : {
-        "revision" : "c44e00bd4dafb059df4882fa9a9be0ab21c16fab",
-        "version" : "0.0.2"
+        "revision" : "b6e1d3b52d7742cf51b6c139b5b4dec5af56e367",
+        "version" : "0.0.3"
       }
     },
     {
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "0fbc8848e389af3bb55c182bc19ca9d5dc2f255b",
         "version" : "1.4.0"
+      }
+    },
+    {
+      "identity" : "swiftmd",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anconaesselmann/SwiftMD",
+      "state" : {
+        "revision" : "faab87cb2d64397713fd8d37d03d2c829b942a7e",
+        "version" : "0.0.1"
       }
     },
     {

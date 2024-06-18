@@ -13,6 +13,12 @@
       "version" : "0.0.1"
     },
     {
+      "id" : "05F42671-5F2F-48EB-859D-B16FD97C9E8D",
+      "name" : "SwiftMD",
+      "url" : "https://github.com/anconaesselmann/SwiftMD",
+      "version" : "0.0.1"
+    },
+    {
       "id" : "EAA63037-926F-4691-8F63-8660399476C2",
       "name" : "XProjParser",
       "url" : "https://github.com/anconaesselmann/XProjParser",
@@ -24,6 +30,7 @@
       "dependencies" : [
         "ArgumentParser",
         "GithubApi",
+        "SwiftMD",
         "XProjParser"
       ],
       "id" : "8E0E82DB-1845-4BC5-A674-8C88A318F5B0",
@@ -33,6 +40,7 @@
       "dependencies" : [
         "ArgumentParser",
         "GithubApi",
+        "SwiftMD",
         "XProjParser"
       ],
       "id" : "0C374E88-C96B-4EA3-9D46-42638EBD03E2",
