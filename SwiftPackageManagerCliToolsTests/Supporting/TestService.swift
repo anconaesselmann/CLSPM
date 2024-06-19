@@ -24,7 +24,7 @@ struct TestService: ServiceProtocol {
         versionForRepoUrl[url] ?? "9.9.9"
     }
 
-    func fetchRepoInfo(repoUrl: URL) async throws -> RepoResponse {
+    func fetchRepoInfo(repoUrl: URL) async throws -> (RepoResponse, RateLimitResponse?, Int) {
         fatalError("not implemented")
     }
 }

@@ -128,6 +128,8 @@ struct List: AsyncParsableCommand {
         file: URL,
         console: Bool
     ) async throws {
+        let consoleOutput = Output.shared
+        consoleOutput.verboseFlagIsSet(verbose)
         let output = TextOutput()
         for target in targetNames {
             if targetNames.count > 1 {
@@ -144,15 +146,32 @@ struct List: AsyncParsableCommand {
                 else {
                     continue
                 }
-                let repoInfo = try await service.fetchRepoInfo(repoUrl: url)
-                guard repoInfo.visibility == .public else {
-                    continue
-                }
-                document.append(repoInfo.name.l(repoInfo.htmlUrl), .header(2))
-                document.append("by \(repoInfo.owner.login.l(repoInfo.owner.htmlUrl))")
-                document.append("repo owner icon", .image(repoInfo.owner.avatarUrl))
-                if let description = repoInfo.description {
-                    document.append(description)
+                do {
+                    let (repoInfo, rateLimit, status) = try await service.fetchRepoInfo(repoUrl: url)
+                    if let rateLimit = rateLimit {
+                        if
+                            rateLimit.remaining == 0,
+                            let remaining = rateLimit.formattedTimeRemaining
+                        {
+                            consoleOutput.send("Rate limit of \(rateLimit.limit) exhausted. Resetting in \(remaining)", .verbose)
+                        } else {
+                            consoleOutput.send("Rate limit: \(rateLimit.limit), remaining: \(rateLimit.remaining)", .verbose)
+                        }
+                    }
+                    guard repoInfo.visibility == .public else {
+                        continue
+                    }
+                    document.append(repoInfo.name.l(repoInfo.htmlUrl), .header(2))
+                    document.append("Starred: \(repoInfo.stargazersCount), Forks: \(repoInfo.forksCount)")
+                    document.append("by \(repoInfo.owner.login.l(repoInfo.owner.htmlUrl))")
+                    document.append("repo owner icon", .image(repoInfo.owner.avatarUrl))
+                    if let description = repoInfo.description {
+                        document.append(description)
+                    }
+                } catch {
+                    consoleOutput.send("Error fetching \(dependency.name)", .verbose)
+                    consoleOutput.send(error)
+                    throw error
                 }
             }
             if let attributionLink = URL(string: "https://github.com/anconaesselmann/CLSPM") {

@@ -7,7 +7,7 @@ import GithubApi
 protocol ServiceProtocol {
     func fetchVersion(forOrg org: String, dependencyName: String) async throws -> String
     func fetchVersion(forRepo url: URL) async throws -> String
-    func fetchRepoInfo(repoUrl: URL) async throws -> RepoResponse
+    func fetchRepoInfo(repoUrl: URL) async throws -> (RepoResponse, RateLimitResponse?, Int)
 }
 
 struct Service: ServiceProtocol {
@@ -15,6 +15,8 @@ struct Service: ServiceProtocol {
     enum Error: Swift.Error {
         case noReleaseVersionFound
         case notAGithubReop(URL)
+        case error(Swift.Error, rateLimit: RateLimitResponse?, statusCode: Int)
+        case notAnHttpUrlResponse
     }
 
     func fetchVersion(forOrg org: String, dependencyName: String) async throws -> String {
@@ -50,13 +52,71 @@ struct Service: ServiceProtocol {
         }
     }
 
-    func fetchRepoInfo(repoUrl: URL) async throws -> RepoResponse {
+    func fetchRepoInfo(repoUrl: URL) async throws -> (RepoResponse, RateLimitResponse?, Int) {
         let repo = try repoUrl.githubRepo()
         let apiUrl = try URL.githubProjectInfo(githubUserName: repo.org, repoName: repo.reop)
         let (data, response) = try await URLSession.shared.data(from: apiUrl)
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         decoder.dateDecodingStrategy = .iso8601
-        return try decoder.decode(RepoResponse.self, from: data)
+        guard let httpUrlResponse = (response as? HTTPURLResponse) else {
+            throw Error.notAnHttpUrlResponse
+        }
+        let statusCode = httpUrlResponse.statusCode
+        var rateLimitResponse: RateLimitResponse?
+        let headers = httpUrlResponse.allHeaderFields
+        if
+            let rateLimitString = headers["x-ratelimit-limit"] as? String,
+            let rateLimit = Int(rateLimitString),
+            let rateLimitRemainingString = headers["x-ratelimit-remaining"] as? String,
+            let rateLimitRemaining = Int(rateLimitRemainingString)
+        {
+            var rateLimitReset: Date?
+            if
+                let rateLimitResetString = headers["x-ratelimit-reset"] as? String,
+                let rateLimitResetEpoch = Double(rateLimitResetString)
+            {
+                rateLimitReset = Date(timeIntervalSince1970: rateLimitResetEpoch)
+            }
+            rateLimitResponse = RateLimitResponse(
+                limit: rateLimit,
+                remaining: rateLimitRemaining,
+                resets: rateLimitReset
+            )
+        }
+        do {
+            let repo = try decoder.decode(RepoResponse.self, from: data)
+            return (
+                repo,
+                rateLimitResponse,
+                statusCode
+            )
+        } catch {
+            throw Error.error(error, rateLimit: rateLimitResponse, statusCode: statusCode)
+        }
     }
+}
+
+struct RateLimitResponse {
+    let limit: Int
+    let remaining: Int
+    let resets: Date?
+
+    var resetSecondsRemaining: TimeInterval? {
+        guard let date = resets else {
+            return nil
+        }
+        return Date.now.distance(to: date)
+    }
+
+    var formattedTimeRemaining: String? {
+        guard let resetSecondsRemaining = resetSecondsRemaining else {
+            return nil
+        }
+        return Duration.seconds(resetSecondsRemaining).formatted()
+    }
+}
+
+enum GithubApiError: Error {
+    case rateLimmitError(RateLimitResponse)
 }

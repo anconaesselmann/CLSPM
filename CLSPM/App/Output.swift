@@ -63,4 +63,8 @@ class Output {
     func send(_ content: String) {
         output.send(content)
     }
+
+    func send(_ error: Swift.Error) {
+        output.send(error)
+    }
 }
