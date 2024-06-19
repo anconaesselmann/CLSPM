@@ -22,9 +22,11 @@ by [anconaesselmann](https://github.com/anconaesselmann)
 
 A simple library for creating MD text in Swift
 
-# ![repo owner icon](https://avatars.githubusercontent.com/u/5387946?v=4) [XProjParser](https://github.com/anconaesselmann/XProjParser)
+# [XProjParser](https://github.com/anconaesselmann/XProjParser)
 
 by [anconaesselmann](https://github.com/anconaesselmann)
+
+![repo owner icon](https://avatars.githubusercontent.com/u/5387946?v=4)
 
 A simple parser for Xcode projects
 
