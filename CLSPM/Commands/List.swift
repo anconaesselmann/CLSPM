@@ -31,6 +31,19 @@ struct List: AsyncParsableCommand {
     )
     var target: [String] = []
 
+    @Option(
+        name: .shortAndLong,
+        parsing: .upToNextOption,
+        help: "Dependency name(s) to be ignored when `list` is called."
+    )
+    var ignore: [String] = []
+
+    @Flag(
+        name: .shortAndLong,
+        help: "Dependencies passed in with `--ignore` will be stored in the local config file"
+    )
+    var persistIgnore: Bool = false
+
     @Flag(
         name: .shortAndLong,
         help: "Show extra logging"
@@ -52,7 +65,17 @@ struct List: AsyncParsableCommand {
         let configManager = ConfigManager(fileManager: fileManager)
         let project = try Project(fileManager: fileManager)
         let root = try project.root()
-        let targetDependencies = try project.dependencies(in: root, verbose: verbose)
+        let ignoredFromConfig = (try configManager.configFile(global: false).listConfig?.ignored) ?? []
+        let ignoredDependencyNames = Set(ignore)
+        let ignoredCombined = ignoredFromConfig.union(ignoredDependencyNames)
+        let targetDependencies = try project
+            .dependencies(in: root, verbose: verbose)
+            .reduce(into: [String : [JsonSpmDependency]]()) {
+                $0[$1.key] = $1.value.filter { !ignoredCombined.contains($0.name) }
+            }
+        if persistIgnore {
+            try configManager.setIngored(ignoredDependencyNames)
+        }
         var targetNames = targetDependencies.keys.sorted()
         if !self.target.isEmpty {
             let allTargets = Set(targetNames)

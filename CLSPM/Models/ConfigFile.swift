@@ -20,7 +20,7 @@ struct ListConfig: Codable {
     }
 
     var output: OutputFile?
-
+    var ignored: Set<String>?
 }
 
 struct GithubConfig: Codable {

@@ -228,4 +228,14 @@ class ConfigManager {
     func pat() throws -> String? {
         try configFile(global: true).githubConfig?.pat
     }
+
+    func setIngored(_ ignored: Set<String>) throws {
+        var configFile = try self.configFile(global: false)
+        if configFile.listConfig == nil {
+            configFile.listConfig = .init()
+        }
+        var fromFile = configFile.listConfig?.ignored ?? []
+        configFile.listConfig?.ignored = fromFile.union(ignored)
+        try save(configFile, global: false)
+    }
 }
