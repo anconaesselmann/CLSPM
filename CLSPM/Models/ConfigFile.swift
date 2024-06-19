@@ -23,12 +23,18 @@ struct ListConfig: Codable {
 
 }
 
+struct GithubConfig: Codable {
+    var pat: String?
+    var user: String?
+}
+
 struct ConfigFile: Codable {
     var localRoot: String?
     var orgs: [String]?
     var targetIds: [String: UUID]?
     var createConfig: CreateConfig?
     var listConfig: ListConfig?
+    var githubConfig: GithubConfig?
 
     func combined(with other: Self) -> Self {
         var combined = ConfigFile()
@@ -39,6 +45,7 @@ struct ConfigFile: Codable {
                 $0[$1.key] = $1.value
             }
         combined.createConfig = self.createConfig ?? other.createConfig
+        combined.githubConfig = self.githubConfig ?? other.githubConfig
         return combined
     }
 }

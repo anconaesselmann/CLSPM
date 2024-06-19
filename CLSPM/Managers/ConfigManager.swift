@@ -215,4 +215,17 @@ class ConfigManager {
         config.listConfig = listConfig
         try save(config, global: false)
     }
+
+    func setPat(_ pat: String) throws {
+        var config = try configFile(global: true)
+        if config.githubConfig == nil {
+            config.githubConfig = GithubConfig()
+        }
+        config.githubConfig?.pat = pat
+        try save(config, global: true)
+    }
+
+    func pat() throws -> String? {
+        try configFile(global: true).githubConfig?.pat
+    }
 }

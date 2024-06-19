@@ -11,6 +11,7 @@ extension Config {
         copy.verbose = false
         copy.global = false
         copy.listOutputFile = nil
+        copy.setPat = nil
         return copy
     }
 }

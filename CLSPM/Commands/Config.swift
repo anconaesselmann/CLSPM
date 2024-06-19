@@ -28,6 +28,12 @@ struct Config: ParsableCommand {
     )
     var listOutputFile: String?
 
+    @Option(
+        name: .long,
+        help: "Set personal access token for Github API"
+    )
+    var setPat: String?
+
     @Flag(
         name: .shortAndLong,
         help: "Show extra logging"
@@ -64,7 +70,9 @@ struct Config: ParsableCommand {
         }
         if let outputDir = listOutputFile {
             try manager.setListOutputFile(outputDir, fileManager: fileManager)
-            return
+        }
+        if let pat = setPat {
+            try manager.setPat(pat)
         }
     }
 

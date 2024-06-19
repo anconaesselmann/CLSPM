@@ -7,7 +7,7 @@ import GithubApi
 protocol ServiceProtocol {
     func fetchVersion(forOrg org: String, dependencyName: String) async throws -> String
     func fetchVersion(forRepo url: URL) async throws -> String
-    func fetchRepoInfo(repoUrl: URL) async throws -> (RepoResponse, RateLimitResponse?, Int)
+    func fetchRepoInfo(repoUrl: URL, pat: String?) async throws -> (RepoResponse, RateLimitResponse?, Int)
 }
 
 struct Service: ServiceProtocol {
@@ -52,10 +52,15 @@ struct Service: ServiceProtocol {
         }
     }
 
-    func fetchRepoInfo(repoUrl: URL) async throws -> (RepoResponse, RateLimitResponse?, Int) {
+    func fetchRepoInfo(repoUrl: URL, pat: String?) async throws -> (RepoResponse, RateLimitResponse?, Int) {
         let repo = try repoUrl.githubRepo()
         let apiUrl = try URL.githubProjectInfo(githubUserName: repo.org, repoName: repo.reop)
-        let (data, response) = try await URLSession.shared.data(from: apiUrl)
+
+        var request = URLRequest(url: apiUrl)
+        if let pat = pat {
+            request.setValue("Bearer \(pat)", forHTTPHeaderField: "Authorization")
+        }
+        let (data, response) = try await URLSession.shared.data(for: request)
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         decoder.dateDecodingStrategy = .iso8601

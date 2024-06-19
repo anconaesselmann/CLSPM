@@ -85,7 +85,8 @@ struct List: AsyncParsableCommand {
                     targetDependencies,
                     service: service,
                     file: outputUrl,
-                    console: console
+                    console: console,
+                    pat: try configManager.pat()
                 )
             }
         } else {
@@ -126,7 +127,8 @@ struct List: AsyncParsableCommand {
         _ targetDependencies: [String : [JsonSpmDependency]],
         service: ServiceProtocol,
         file: URL,
-        console: Bool
+        console: Bool,
+        pat: String?
     ) async throws {
         let consoleOutput = Output.shared
         consoleOutput.verboseFlagIsSet(verbose)
@@ -147,7 +149,8 @@ struct List: AsyncParsableCommand {
                     continue
                 }
                 do {
-                    let (repoInfo, rateLimit, status) = try await service.fetchRepoInfo(repoUrl: url)
+
+                    let (repoInfo, rateLimit, status) = try await service.fetchRepoInfo(repoUrl: url, pat: pat)
                     if let rateLimit = rateLimit {
                         if
                             rateLimit.remaining == 0,
