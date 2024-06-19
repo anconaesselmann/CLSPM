@@ -25,19 +25,9 @@ A simple library for creating MD text in Swift
 # [XProjParser](https://github.com/anconaesselmann/XProjParser)
 
 by [anconaesselmann](https://github.com/anconaesselmann)
-
 ![repo owner icon](https://avatars.githubusercontent.com/u/5387946?v=4)
-
 A simple parser for Xcode projects
 
 ---
 
 Generated with [clspm](https://github.com/anconaesselmann/CLSPM)
-
-test1
-test2
-
-test3
-
-
-test4
