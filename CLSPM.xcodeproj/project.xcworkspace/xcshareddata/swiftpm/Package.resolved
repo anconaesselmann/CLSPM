@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/anconaesselmann/SwiftMD",
       "state" : {
-        "revision" : "faab87cb2d64397713fd8d37d03d2c829b942a7e",
-        "version" : "0.0.1"
+        "revision" : "6efd615e816ba784c544318db39b4fc8ba0e5b70",
+        "version" : "0.0.2"
       }
     },
     {

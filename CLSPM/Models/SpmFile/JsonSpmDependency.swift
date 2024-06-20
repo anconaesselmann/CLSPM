@@ -27,4 +27,14 @@ extension JsonSpmDependency {
         copy.id = id
         return copy
     }
+
+    var htmlUrl: URL? {
+        guard
+            let urlString = url,
+            let url = URL(string: urlString)
+        else {
+            return nil
+        }
+        return url
+    }
 }

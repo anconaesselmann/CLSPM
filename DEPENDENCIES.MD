@@ -1,6 +1,6 @@
 # [swift-argument-parser](https://github.com/apple/swift-argument-parser)
 
-Starred: 3246, Forks: 307
+Starred: 3249, Forks: 307
 
 by [apple](https://github.com/apple)
 

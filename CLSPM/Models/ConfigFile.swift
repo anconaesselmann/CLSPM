@@ -13,6 +13,7 @@ struct ListConfig: Codable {
         enum Format: String, Codable {
             case simplePlainText
             case githubMD
+            case json
         }
 
         var path: URL?

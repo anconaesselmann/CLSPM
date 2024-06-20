@@ -111,6 +111,15 @@ struct List: AsyncParsableCommand {
                     console: console,
                     pat: try configManager.pat()
                 )
+            case .json:
+                try await json(
+                    targetNames,
+                    targetDependencies,
+                    service: service,
+                    file: outputUrl,
+                    console: console,
+                    pat: try configManager.pat()
+                )
             }
         } else {
             consoleSimpleOutput(targetNames, targetDependencies)
@@ -163,48 +172,88 @@ struct List: AsyncParsableCommand {
             guard let dependencies = targetDependencies[target] else {
                 continue
             }
-            var document = McDocument()
-            for dependency in dependencies {
-                guard
-                    let urlString = dependency.url,
-                    let url = URL(string: urlString)
-                else {
-                    continue
+            var errors: [Swift.Error] = []
+            let elements = try await dependencies
+                .asyncCompactMap(errors: &errors)
+            { dependency -> [MdElement]? in
+                guard let url = dependency.htmlUrl else {
+                    return nil
                 }
-                do {
-
-                    let (repoInfo, rateLimit, status) = try await service.fetchRepoInfo(repoUrl: url, pat: pat)
-                    if let rateLimit = rateLimit {
-                        if
-                            rateLimit.remaining == 0,
-                            let remaining = rateLimit.formattedTimeRemaining
-                        {
-                            consoleOutput.send("Rate limit of \(rateLimit.limit) exhausted. Resetting in \(remaining)", .verbose)
-                        } else {
-                            consoleOutput.send("Rate limit: \(rateLimit.limit), remaining: \(rateLimit.remaining)", .verbose)
-                        }
-                    }
-                    guard repoInfo.visibility == .public else {
-                        continue
-                    }
-                    document.append(repoInfo.name.l(repoInfo.htmlUrl), .header(2))
-                    document.append("Starred: \(repoInfo.stargazersCount), Forks: \(repoInfo.forksCount)")
-                    document.append("by \(repoInfo.owner.login.l(repoInfo.owner.htmlUrl))")
-                    document.append("repo owner icon", .image(repoInfo.owner.avatarUrl))
-                    if let description = repoInfo.description {
-                        document.append(description)
-                    }
-                } catch {
-                    consoleOutput.send("Error fetching \(dependency.name)", .verbose)
-                    consoleOutput.send(error)
-                    throw error
-                }
+                let (repoInfo, rateLimit, _) = try await service
+                    .fetchRepoInfo(
+                        repoUrl: url,
+                        pat: pat
+                    )
+                processRateLimitInfo(rateLimit, consoleOutput)
+                return RepoJson(repoInfo).md()
             }
+            for error in errors {
+                consoleOutput.send(error)
+            }
+            var document = MdDocument()
+            document.elements += elements.flatMap { $0 }
             if let attributionLink = URL(string: "https://github.com/anconaesselmann/CLSPM") {
                 document.appendRule()
                 document.append("Generated with \("clspm".l(attributionLink))")
             }
             output.send(document.content)
+        }
+        if console {
+            Output.shared.send(output.output)
+        } else {
+            guard let data = output.output.data(using: .utf8) else {
+                throw Error.noOutput
+            }
+            try data.write(to: file)
+        }
+    }
+
+    private func json(
+        _ targetNames: [String],
+        _ targetDependencies: [String : [JsonSpmDependency]],
+        service: ServiceProtocol,
+        file: URL,
+        console: Bool,
+        pat: String?
+    ) async throws {
+        let consoleOutput = Output.shared
+        consoleOutput.verboseFlagIsSet(verbose)
+        let output = TextOutput()
+        for target in targetNames {
+            if targetNames.count > 1 {
+                output.send("Target: \(target)")
+            }
+            guard let dependencies = targetDependencies[target] else {
+                continue
+            }
+            var errors: [Swift.Error] = []
+            let elements = try await dependencies
+                .asyncCompactMap(errors: &errors)
+            { dependency -> RepoJson? in
+                guard let url = dependency.htmlUrl else {
+                    return nil
+                }
+                let (repoInfo, rateLimit, _) = try await service
+                    .fetchRepoInfo(
+                        repoUrl: url,
+                        pat: pat
+                    )
+                processRateLimitInfo(rateLimit, consoleOutput)
+                return RepoJson(repoInfo)
+            }
+            for error in errors {
+                consoleOutput.send(error)
+            }
+            let content = try DependenciesJson(
+                elements: elements,
+                attribution: .init(
+                    name: "clspm",
+                    htmlUrl: URL(string: "https://github.com/anconaesselmann/CLSPM")!,
+                    creator: "Axel Ancona Esselmann",
+                    creatorHtmlUrl: URL(string: "https://github.com/anconaesselmann")!
+                )
+            ).string()
+            output.send(content)
         }
         if console {
             Output.shared.send(output.output)
@@ -233,6 +282,20 @@ struct List: AsyncParsableCommand {
                 output.send(dependency.name.indented(dependencyIndent), .normal)
             }
             output.send("")
+        }
+    }
+
+    private func processRateLimitInfo(_ rateLimit: RateLimitResponse?, _ output: Output) {
+        guard let rateLimit = rateLimit else {
+            return
+        }
+        if
+            rateLimit.remaining == 0,
+            let remaining = rateLimit.formattedTimeRemaining
+        {
+            output.send("Rate limit of \(rateLimit.limit) exhausted. Resetting in \(remaining)", .verbose)
+        } else {
+            output.send("Rate limit: \(rateLimit.limit), remaining: \(rateLimit.remaining)", .verbose)
         }
     }
 }

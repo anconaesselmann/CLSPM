@@ -256,3 +256,46 @@ struct SpmFileManager {
         return encoder
     }
 }
+
+import GithubApi
+import SwiftMD
+
+extension RepoJson {
+    init(_ repoInfo: RepoResponse) {
+        self = RepoJson(
+            name: repoInfo.name,
+            htmlUrl: repoInfo.htmlUrl,
+            language: repoInfo.language,
+            description: repoInfo.description,
+            topics: [],
+            archived: repoInfo.archived,
+            createdAt: repoInfo.createdAt,
+            updatedAt: repoInfo.updatedAt,
+            stargazersCount: repoInfo.stargazersCount,
+            forksCount: repoInfo.forksCount,
+            license: repoInfo.license != nil
+                ? .init(
+                    key: repoInfo.license!.key,
+                    name: repoInfo.license!.name,
+                    url: repoInfo.license?.url
+                ) : nil,
+            owner: .init(
+                login: repoInfo.owner.login,
+                htmlUrl: repoInfo.owner.htmlUrl,
+                avatarUrl: repoInfo.owner.avatarUrl
+            )
+        )
+    }
+
+    func md() -> [MdElement] {
+        var elements: [MdElement] = []
+        elements.append(name.l(htmlUrl), .header(2))
+        elements.append("Starred: \(stargazersCount), Forks: \(forksCount)")
+        elements.append("by \(owner.login.l(owner.htmlUrl))")
+        elements.append("repo owner icon", .image(owner.avatarUrl))
+        if let description = description {
+            elements.append(description)
+        }
+        return elements
+    }
+}

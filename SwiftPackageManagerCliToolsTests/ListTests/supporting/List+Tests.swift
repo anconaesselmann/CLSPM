@@ -10,6 +10,8 @@ extension List {
         copy.target = []
         copy.verbose = false
         copy.console = false
+        copy.ignore = []
+        copy.persistIgnore = false
         return copy
     }
 }
