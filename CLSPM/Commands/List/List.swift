@@ -5,6 +5,7 @@ import Foundation
 import ArgumentParser
 import XProjParser
 import SwiftMD
+import Sequenced
 
 struct List: AsyncParsableCommand {
 

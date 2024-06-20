@@ -13,6 +13,12 @@
       "version" : "0.0.1"
     },
     {
+      "id" : "F17886EE-7215-4769-8B61-2A3EA94662C5",
+      "name" : "Sequenced",
+      "url" : "https://github.com/anconaesselmann/Sequenced",
+      "version" : "0.0.1"
+    },
+    {
       "id" : "05F42671-5F2F-48EB-859D-B16FD97C9E8D",
       "name" : "SwiftMD",
       "url" : "https://github.com/anconaesselmann/SwiftMD",
@@ -30,6 +36,7 @@
       "dependencies" : [
         "ArgumentParser",
         "GithubApi",
+        "Sequenced",
         "SwiftMD",
         "XProjParser"
       ],
@@ -40,6 +47,7 @@
       "dependencies" : [
         "ArgumentParser",
         "GithubApi",
+        "Sequenced",
         "SwiftMD",
         "XProjParser"
       ],

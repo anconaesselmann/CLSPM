@@ -1,5 +1,5 @@
 {
-  "originHash" : "298b325d9488c44d6f6572be967f7e6c71f2ec2b7ec7178f3743bcc0857a9033",
+  "originHash" : "5efa3f3d649c2dcd821961077f87c22b349c4d41fe71c6eba1e21b5a1fe46e7c",
   "pins" : [
     {
       "identity" : "githubapi",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "7d788173a22bd2598aceeffa2eee93ddc65f87e7",
         "version" : "0.0.2"
+      }
+    },
+    {
+      "identity" : "sequenced",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anconaesselmann/Sequenced",
+      "state" : {
+        "revision" : "ce44d63b9e3387e38116e987ecee7c7589480baf",
+        "version" : "0.0.1"
       }
     },
     {
