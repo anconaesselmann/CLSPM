@@ -7,17 +7,30 @@ struct CreateConfig: Codable {
     var createGithubRepo: Bool = false
 }
 
+enum ListFormat: String, Codable {
+    init?(consoleString: String?) {
+        switch consoleString {
+        case "plain":
+            self = .simplePlainText
+        case "md":
+            self = .githubMD
+        case "json":
+            self = .json
+        default:
+            self = .simplePlainText
+        }
+    }
+
+    case simplePlainText
+    case githubMD
+    case json
+}
+
 struct ListConfig: Codable {
 
     struct OutputFile: Codable {
-        enum Format: String, Codable {
-            case simplePlainText
-            case githubMD
-            case json
-        }
-
         var path: URL?
-        var format: Format = .simplePlainText
+        var format: ListFormat = .simplePlainText
     }
 
     var output: OutputFile?

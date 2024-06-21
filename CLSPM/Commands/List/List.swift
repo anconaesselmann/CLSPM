@@ -39,6 +39,12 @@ struct List: AsyncParsableCommand {
     )
     var ignore: [String] = []
 
+    @Option(
+        name: .shortAndLong,
+        help: "List format. Options are md, json, plain"
+    )
+    var format: String?
+
     @Flag(
         name: .shortAndLong,
         help: "Dependencies passed in with `--ignore` will be stored in the local config file"
@@ -94,13 +100,14 @@ struct List: AsyncParsableCommand {
         guard !targetNames.isEmpty else {
             throw Error.noTargets
         }
+        let format: ListFormat? = .init(consoleString: self.format)
         if
             let config = try configManager.listConfig(),
             let outputFile = config.output,
             let outputUrl = outputFile.path
         {
             try fileManager.createFileIfNotAFile(outputUrl)
-            switch outputFile.format {
+            switch format ?? outputFile.format {
             case .simplePlainText:
                 try simplePlainTextOutput(targetNames, targetDependencies, file: outputUrl, console: console)
             case .githubMD:

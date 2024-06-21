@@ -12,6 +12,7 @@ extension List {
         copy.console = false
         copy.ignore = []
         copy.persistIgnore = false
+        copy.format = nil
         return copy
     }
 }
